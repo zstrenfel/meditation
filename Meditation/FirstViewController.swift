@@ -58,13 +58,16 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch tableCells[indexPath.row].type {
+        let tableCell = tableCells[indexPath.row]
+        switch tableCell.type {
         case .picker:
             var cell = tableView.dequeueReusableCell(withIdentifier: "pickerCell")
             return cell!
         default:
-            var cell = tableView.dequeueReusableCell(withIdentifier: "optionCell")
-            return cell!
+            var cell = tableView.dequeueReusableCell(withIdentifier: "optionCell") as! OptionTableViewCell
+            cell.optionLabel.text = tableCell.label
+            cell.valueLabel.text = (tableCell.value != nil) ? String(describing: tableCell.value!) : ""
+            return cell
         }
     }
     
@@ -75,7 +78,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func countDown() {
         guard time > 0 else {
-            stopTimer(clear: true)
+            _stopTimer(clear: true)
             return
         }
         time = time - 1
@@ -83,10 +86,10 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 
     @IBAction func stopTimer(_ sender: UIButton) {
-        stopTimer(clear: false)
+        _stopTimer(clear: false)
     }
     
-    func stopTimer(clear: Bool) {
+    func _stopTimer(clear: Bool) {
         timer.invalidate()
     }
 }

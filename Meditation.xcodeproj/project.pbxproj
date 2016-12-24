@@ -15,6 +15,8 @@
 		9230BE9C1E0E0B5A001A12CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9230BE9A1E0E0B5A001A12CE /* LaunchScreen.storyboard */; };
 		9230BEA71E0E0B5A001A12CE /* MeditationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BEA61E0E0B5A001A12CE /* MeditationTests.swift */; };
 		9230BEB21E0E0B5A001A12CE /* MeditationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BEB11E0E0B5A001A12CE /* MeditationUITests.swift */; };
+		92387A2A1E0E2D7E00C86A6D /* OptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92387A291E0E2D7E00C86A6D /* OptionTableViewCell.swift */; };
+		92387A2C1E0E2D9200C86A6D /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92387A2B1E0E2D9200C86A6D /* PickerTableViewCell.swift */; };
 		927BE5751E0E19B40073ABFE /* TableCellTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927BE5741E0E19B30073ABFE /* TableCellTypes.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +52,8 @@
 		9230BEAD1E0E0B5A001A12CE /* MeditationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeditationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9230BEB11E0E0B5A001A12CE /* MeditationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationUITests.swift; sourceTree = "<group>"; };
 		9230BEB31E0E0B5A001A12CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92387A291E0E2D7E00C86A6D /* OptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionTableViewCell.swift; sourceTree = "<group>"; };
+		92387A2B1E0E2D9200C86A6D /* PickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTableViewCell.swift; sourceTree = "<group>"; };
 		927BE5741E0E19B30073ABFE /* TableCellTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCellTypes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,6 +105,7 @@
 		9230BE8E1E0E0B5A001A12CE /* Meditation */ = {
 			isa = PBXGroup;
 			children = (
+				92387A281E0E2D5600C86A6D /* TableCells */,
 				927BE5731E0E19900073ABFE /* Utilities */,
 				9230BE8F1E0E0B5A001A12CE /* AppDelegate.swift */,
 				9230BE911E0E0B5A001A12CE /* FirstViewController.swift */,
@@ -129,6 +134,15 @@
 				9230BEB31E0E0B5A001A12CE /* Info.plist */,
 			);
 			path = MeditationUITests;
+			sourceTree = "<group>";
+		};
+		92387A281E0E2D5600C86A6D /* TableCells */ = {
+			isa = PBXGroup;
+			children = (
+				92387A291E0E2D7E00C86A6D /* OptionTableViewCell.swift */,
+				92387A2B1E0E2D9200C86A6D /* PickerTableViewCell.swift */,
+			);
+			name = TableCells;
 			sourceTree = "<group>";
 		};
 		927BE5731E0E19900073ABFE /* Utilities */ = {
@@ -274,8 +288,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				927BE5751E0E19B40073ABFE /* TableCellTypes.swift in Sources */,
+				92387A2C1E0E2D9200C86A6D /* PickerTableViewCell.swift in Sources */,
 				9230BE941E0E0B5A001A12CE /* SecondViewController.swift in Sources */,
 				9230BE901E0E0B5A001A12CE /* AppDelegate.swift in Sources */,
+				92387A2A1E0E2D7E00C86A6D /* OptionTableViewCell.swift in Sources */,
 				9230BE921E0E0B5A001A12CE /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
