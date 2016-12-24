@@ -15,6 +15,7 @@
 		9230BE9C1E0E0B5A001A12CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9230BE9A1E0E0B5A001A12CE /* LaunchScreen.storyboard */; };
 		9230BEA71E0E0B5A001A12CE /* MeditationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BEA61E0E0B5A001A12CE /* MeditationTests.swift */; };
 		9230BEB21E0E0B5A001A12CE /* MeditationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BEB11E0E0B5A001A12CE /* MeditationUITests.swift */; };
+		927BE5751E0E19B40073ABFE /* TableCellTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927BE5741E0E19B30073ABFE /* TableCellTypes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		9230BEAD1E0E0B5A001A12CE /* MeditationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeditationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9230BEB11E0E0B5A001A12CE /* MeditationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationUITests.swift; sourceTree = "<group>"; };
 		9230BEB31E0E0B5A001A12CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		927BE5741E0E19B30073ABFE /* TableCellTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCellTypes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		9230BE8E1E0E0B5A001A12CE /* Meditation */ = {
 			isa = PBXGroup;
 			children = (
+				927BE5731E0E19900073ABFE /* Utilities */,
 				9230BE8F1E0E0B5A001A12CE /* AppDelegate.swift */,
 				9230BE911E0E0B5A001A12CE /* FirstViewController.swift */,
 				9230BE931E0E0B5A001A12CE /* SecondViewController.swift */,
@@ -126,6 +129,14 @@
 				9230BEB31E0E0B5A001A12CE /* Info.plist */,
 			);
 			path = MeditationUITests;
+			sourceTree = "<group>";
+		};
+		927BE5731E0E19900073ABFE /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				927BE5741E0E19B30073ABFE /* TableCellTypes.swift */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,6 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				927BE5751E0E19B40073ABFE /* TableCellTypes.swift in Sources */,
 				9230BE941E0E0B5A001A12CE /* SecondViewController.swift in Sources */,
 				9230BE901E0E0B5A001A12CE /* AppDelegate.swift in Sources */,
 				9230BE921E0E0B5A001A12CE /* FirstViewController.swift in Sources */,
@@ -416,8 +428,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Meditation/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = Dack.Meditation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -428,8 +441,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Meditation/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = Dack.Meditation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -509,6 +523,7 @@
 				9230BEB81E0E0B5A001A12CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9230BEB91E0E0B5A001A12CE /* Build configuration list for PBXNativeTarget "MeditationTests" */ = {
 			isa = XCConfigurationList;
@@ -517,6 +532,7 @@
 				9230BEBB1E0E0B5A001A12CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9230BEBC1E0E0B5A001A12CE /* Build configuration list for PBXNativeTarget "MeditationUITests" */ = {
 			isa = XCConfigurationList;
@@ -525,6 +541,7 @@
 				9230BEBE1E0E0B5A001A12CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
