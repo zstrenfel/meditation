@@ -13,8 +13,10 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
-    @IBOutlet weak var timer: UILabel!
-    var time = 60.0 //in seconds
+    @IBOutlet weak var timerLabel: UILabel!
+    
+    var timer = Timer()
+    var time = 325.00 //in seconds
     
     var tableCells: [TableCell] = []
     
@@ -26,13 +28,19 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         tableCells = [timerCell, countdownCell]
         
+        updateTimer()
+    }
+    
+    func updateTimer() {
         //60 seconds in minute
-        var seconds = time.truncatingRemainder(dividingBy: 60.0)
-        var minutes = floor(time / 60)
-        var hours = floor(minutes / 60)
-        minutes = minutes.truncatingRemainder(dividingBy: 60.0)
+        var time = self.time
+        let hours = floor(time / 3600.00)
+        time = time.truncatingRemainder(dividingBy: 3600.00)
+        let minutes = floor(time / 60.00)
+        time = time.truncatingRemainder(dividingBy: 60.00)
+        let seconds = time
         
-        timer.text = "\(hours):\(minutes):\(seconds)"
+        timerLabel.text = "\(Int(hours)):\(Int(minutes)):\(Int(seconds))"
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,9 +70,24 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // MARK: - Actions
     @IBAction func startTimer(_ sender: UIButton) {
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(FirstViewController.countDown), userInfo: nil, repeats: true)
+    }
+    
+    func countDown() {
+        guard time > 0 else {
+            stopTimer(clear: true)
+            return
+        }
+        time = time - 1
+        updateTimer()
     }
 
     @IBAction func stopTimer(_ sender: UIButton) {
+        stopTimer(clear: false)
+    }
+    
+    func stopTimer(clear: Bool) {
+        timer.invalidate()
     }
 }
 
