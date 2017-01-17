@@ -16,7 +16,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var timerLabel: UILabel!
     
     var timer = Timer()
-    var time = 325.00 //in seconds
+    var time: Double = 325.00 //in seconds
     
     var tableCells: [TableCell] = []
     
@@ -33,14 +33,12 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func updateTimer() {
         //60 seconds in minute
-        var time = self.time
-        let hours = floor(time / 3600.00)
-        time = time.truncatingRemainder(dividingBy: 3600.00)
-        let minutes = floor(time / 60.00)
-        time = time.truncatingRemainder(dividingBy: 60.00)
-        let seconds = time
+        var time = self.time // don't mutate time
+        let hours = time.hours
+        let minutes = time.minutes
+        let seconds = time.seconds
         
-        timerLabel.text = "\(Int(hours)):\(Int(minutes)):\(Int(seconds))"
+        timerLabel.text = hours.timeFormat + ":" + minutes.timeFormat + ":" + seconds.timeFormat
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,6 +66,16 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             cell.optionLabel.text = tableCell.label
             cell.valueLabel.text = (tableCell.value != nil) ? String(describing: tableCell.value!) : ""
             return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let tableCell = tableCells[indexPath.row]
+        switch tableCell.type {
+        case .picker:
+            print("picker")
+        default:
+            print("other")
         }
     }
     
