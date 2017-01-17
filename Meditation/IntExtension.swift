@@ -41,4 +41,11 @@ extension Double {
         let intRepresentation = self.toInt()
         return String(format: "%02d", intRepresentation)
     }
+    
+    var timeString: String {
+        let hours = self.hours.timeFormat
+        let minutes = self.minutes.timeFormat
+        let seconds = self.seconds.timeFormat
+        return hours + ":" + minutes + ":" + seconds
+    }
 }

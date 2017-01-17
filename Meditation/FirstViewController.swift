@@ -17,28 +17,25 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var timer = Timer()
     var time: Double = 325.00 //in seconds
+    var remainingTime: Double = 0.0 //don't mutate user-inputed time
     
     var tableCells: [TableCell] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        remainingTime = time
         let timerCell = TableCell(type: .option, label: "Time", value: time)
         let countdownCell = TableCell(type: .option, label: "Countdown", value: 0.00)
         
         tableCells = [timerCell, countdownCell]
         
-        updateTimer()
+        updateTimer(with: remainingTime)
     }
     
-    func updateTimer() {
+    func updateTimer(with: Double) {
         //60 seconds in minute
-        var time = self.time // don't mutate time
-        let hours = time.hours
-        let minutes = time.minutes
-        let seconds = time.seconds
-        
-        timerLabel.text = hours.timeFormat + ":" + minutes.timeFormat + ":" + seconds.timeFormat
+        timerLabel.text = remainingTime.timeString
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,12 +56,18 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let tableCell = tableCells[indexPath.row]
         switch tableCell.type {
         case .picker:
-            var cell = tableView.dequeueReusableCell(withIdentifier: "pickerCell")
+            let cell = tableView.dequeueReusableCell(withIdentifier: "pickerCell")
             return cell!
         default:
-            var cell = tableView.dequeueReusableCell(withIdentifier: "optionCell") as! OptionTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "optionCell") as! OptionTableViewCell
             cell.optionLabel.text = tableCell.label
-            cell.valueLabel.text = (tableCell.value != nil) ? String(describing: tableCell.value!) : ""
+            switch tableCell.value {
+            case let value as Double:
+                cell.valueLabel.text = value.timeString
+            default:
+                cell.valueLabel.text = ""
+                
+            }
             return cell
         }
     }
@@ -85,12 +88,12 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func countDown() {
-        guard time > 0 else {
+        guard remainingTime > 0 else {
             _stopTimer(clear: true)
             return
         }
-        time = time - 1
-        updateTimer()
+        remainingTime = remainingTime - 1
+        updateTimer(with: remainingTime)
     }
 
     @IBAction func stopTimer(_ sender: UIButton) {
