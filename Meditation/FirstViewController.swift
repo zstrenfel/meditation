@@ -26,6 +26,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(PickerTableViewCell.self, forCellReuseIdentifier: "pickerCell")
         
         remainingTime = time
         let timerCell = TableCell(type: .option, label: "Meditation Time", value: time)
@@ -76,18 +77,30 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let tableCell = tableCells[indexPath.row]
+        switch tableCell.type {
+        case .picker:
+            return 100
+        default:
+            return 50
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tableCell = tableCells[indexPath.row]
         switch tableCell.type {
         case .picker:
             print("picker")
         default:
-            print("other")
+            _insertRow(at: indexPath.row + 1)
         }
     }
     
     func _insertRow(at index: Int) {
         tableView.beginUpdates()
+        let pickerTableCell = TableCell(type: .picker, label: "Picker", value: nil)
+        self.tableCells.insert(pickerTableCell, at: index)
         let indexPath = IndexPath(row: index, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
         tableView.endUpdates()
