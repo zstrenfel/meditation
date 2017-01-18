@@ -15,9 +15,12 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
     
-    var timer = Timer()
+    weak var timer: Timer?
     var time: Double = 325.00 //in seconds
     var remainingTime: Double = 0.0 //don't mutate user-inputed time
+    var countdownTime: Double = 10.0
+    var cooldownTime: Double = 0.0
+    var paused: Bool = false
     
     var tableCells: [TableCell] = []
     
@@ -25,10 +28,11 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         
         remainingTime = time
-        let timerCell = TableCell(type: .option, label: "Time", value: time)
-        let countdownCell = TableCell(type: .option, label: "Countdown", value: 0.00)
+        let timerCell = TableCell(type: .option, label: "Meditation Time", value: time)
+        let countdownCell = TableCell(type: .option, label: "Countdown", value: countdownTime)
+        let cooldownCell = TableCell(type: .option, label: "Cooldown", value: cooldownTime)
         
-        tableCells = [timerCell, countdownCell]
+        tableCells = [timerCell, countdownCell, cooldownCell]
         
         updateTimer(with: remainingTime)
     }
@@ -82,14 +86,35 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
+    func _insertRow(at index: Int) {
+        tableView.beginUpdates()
+        let indexPath = IndexPath(row: index, section: 0)
+        tableView.insertRows(at: [indexPath], with: .automatic)
+        tableView.endUpdates()
+    }
+    
+    func _removeRow(at index: Int) {
+        
+    }
+    
     // MARK: - Actions
     @IBAction func startTimer(_ sender: UIButton) {
+        //if timer is already running, don't do anything on start button press
+        guard timer == nil else {
+            print("timer start repeated press edge case")
+            return
+        }
+        if paused {
+            stopButton.setTitle("Pause", for: .normal)
+            paused = false
+        }
+        timer = Timer()
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(FirstViewController.countDown), userInfo: nil, repeats: true)
     }
     
     func countDown() {
         guard remainingTime > 0 else {
-            _stopTimer(clear: true)
+            _stopTimer(clear: false) //don't end session unless the user wants to
             return
         }
         remainingTime = remainingTime - 1
@@ -97,11 +122,31 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 
     @IBAction func stopTimer(_ sender: UIButton) {
-        _stopTimer(clear: false)
+        if paused {
+            stopButton.setTitle("Pause", for: .normal)
+            _stopTimer(clear: true)
+        } else {
+            stopButton.setTitle("Reset", for: .normal)
+          _stopTimer(clear: false)
+        }
+        
+        paused = !paused
     }
     
+    
     func _stopTimer(clear: Bool) {
-        timer.invalidate()
+        guard timer != nil else {
+            return
+        }
+        
+        timer!.invalidate()
+        
+        //if the session is ended, reset the timer
+        if clear {
+            self.remainingTime = self.time
+            updateTimer(with: self.remainingTime)
+            timer = nil
+        }
     }
 }
 
