@@ -81,7 +81,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let tableCell = tableCells[indexPath.row]
         switch tableCell.type {
         case .picker:
-            return 100
+            return 150
         default:
             return 50
         }

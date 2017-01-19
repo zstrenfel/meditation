@@ -72,12 +72,36 @@ class TimerPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSourc
         self.delegate = self
         self.dataSource = self
         
-        let label: UILabel = {
+        let hoursLabel: UILabel = {
             let label = UILabel()
-            label.text = "Hours"
+            label.frame = CGRect(x: 30, y: 0, width: self.frame.width/3, height: 150 - 16)
+            label.text = "hours"
+            label.font = UIFont(name: "Helvetica", size: 16)
+            label.textColor = .gray
             return label
         }()
         
+        let minutesLabel: UILabel = {
+            let label = UILabel()
+            label.frame = CGRect(x: (self.frame.width/3) + 30, y: 0, width: self.frame.width/3, height: 150 - 16)
+            label.text = "minutes"
+            label.font = UIFont(name: "Helvetica", size: 16)
+            label.textColor = .gray
+            return label
+        }()
+        
+        let secondsLabel: UILabel = {
+            let label = UILabel()
+            label.frame = CGRect(x: (self.frame.width/1.5) + 30, y: 0, width: self.frame.width/3, height: 150 - 16)
+            label.text = "seconds"
+            label.font = UIFont(name: "Helvetica", size: 16)
+            label.textColor = .gray
+            return label
+        }()
+        
+        self.insertSubview(hoursLabel, at: 999)
+        self.insertSubview(minutesLabel, at: 999)
+        self.insertSubview(secondsLabel, at: 999)
     }
     
     // MARK: UIPickerView Data Source / Delegate
@@ -85,17 +109,43 @@ class TimerPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSourc
         return 3
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        switch component {
+//        case 0:
+//            return "\(self.hours[row])"
+//        case 1:
+//            return "\(self.minutes[row])"
+//        case 2:
+//            return "\(seconds[row])"
+//        default:
+//            return nil
+//        }
+//    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        //16pt buffer
+        let width = (self.frame.width / 3) - 16
+        
+        let label = UILabel()
+        label.frame = CGRect(x: 16, y: 0, width: width, height: 30)
+        label.textAlignment = .left
+        label.font = UIFont(name: "Helvetica", size: 20)
         switch component {
         case 0:
-            return "\(self.hours[row])"
+            label.text = "\(self.hours[row])"
         case 1:
-            return "\(self.minutes[row])"
+            label.text = "\(self.minutes[row])"
         case 2:
-            return "\(seconds[row])"
+            label.text = "\(seconds[row])"
         default:
-            return nil
+            label.text = ""
         }
+        
+        return label
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 30
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -110,7 +160,6 @@ class TimerPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSourc
             return 0
         }
     }
-    
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let hour = self.selectedRow(inComponent: 0)
