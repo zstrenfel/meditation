@@ -72,6 +72,10 @@ class TimerPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSourc
         self.delegate = self
         self.dataSource = self
         
+        _createLabels()
+    }
+    
+    func _createLabels() {
         let hoursLabel: UILabel = {
             let label = UILabel()
             label.frame = CGRect(x: 30, y: 0, width: self.frame.width/3, height: 150 - 16)
@@ -108,19 +112,6 @@ class TimerPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSourc
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 3
     }
-    
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        switch component {
-//        case 0:
-//            return "\(self.hours[row])"
-//        case 1:
-//            return "\(self.minutes[row])"
-//        case 2:
-//            return "\(seconds[row])"
-//        default:
-//            return nil
-//        }
-//    }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         //16pt buffer

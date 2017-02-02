@@ -107,7 +107,11 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func _removeRow(at index: Int) {
-        
+        tableView.beginUpdates()
+        self.tableCells.remove(at: index)
+        let indexPath = IndexPath(row: index, section: 0)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        tableView.endUpdates()
     }
     
     // MARK: - Actions
