@@ -64,8 +64,15 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let tableCell = tableCells[indexPath.row]
         switch tableCell.type {
         case .picker:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "pickerCell")
-            return cell!
+            let cell = tableView.dequeueReusableCell(withIdentifier: "pickerCell") as! PickerTableViewCell
+            if tableCell.value is Double {
+                let value = tableCell.value as! Double
+                cell.hours = Int(value.hours)
+                cell.minutes = Int(value.minutes)
+                cell.seconds = Int(value.seconds)
+                cell.setTime()
+            }
+            return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "optionCell") as! OptionTableViewCell
             cell.optionLabel.text = tableCell.label
@@ -115,7 +122,8 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func _insertRow(at index: Int, delay: Double = 0.0) {
         tableView.beginUpdates()
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            let pickerTableCell = TableCell(type: .picker, label: "Picker", value: nil)
+            let parentValue = self.tableCells[index - 1].value
+            let pickerTableCell = TableCell(type: .picker, label: "Picker", value: parentValue)
             self.tableCells.insert(pickerTableCell, at: index)
             let indexPath = IndexPath(row: index, section: 0)
             self.tableView.insertRows(at: [indexPath], with: .top)
