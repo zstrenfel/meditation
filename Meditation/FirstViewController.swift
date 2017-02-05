@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Dollar
+import Cent
+
 
 class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // MARK: - Properties
@@ -93,16 +96,30 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         case .picker:
             print("picker")
         default:
-            _insertRow(at: indexPath.row + 1)
+            let pickerIndex = $.findIndex(tableCells) { $0.type == CellType.picker }
+            if pickerIndex != nil {
+                _removeRow(at: pickerIndex!)
+                if pickerIndex != indexPath.row + 1 {
+                    if pickerIndex! < indexPath.row {
+                        _insertRow(at: indexPath.row, delay: 0.25)
+                    } else {
+                        _insertRow(at: indexPath.row + 1, delay: 0.25)
+                    }
+                }
+            } else {
+                _insertRow(at: indexPath.row + 1)
+            }
         }
     }
     
-    func _insertRow(at index: Int) {
+    func _insertRow(at index: Int, delay: Double = 0.0) {
         tableView.beginUpdates()
-        let pickerTableCell = TableCell(type: .picker, label: "Picker", value: nil)
-        self.tableCells.insert(pickerTableCell, at: index)
-        let indexPath = IndexPath(row: index, section: 0)
-        tableView.insertRows(at: [indexPath], with: .automatic)
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            let pickerTableCell = TableCell(type: .picker, label: "Picker", value: nil)
+            self.tableCells.insert(pickerTableCell, at: index)
+            let indexPath = IndexPath(row: index, section: 0)
+            self.tableView.insertRows(at: [indexPath], with: .top)
+        }
         tableView.endUpdates()
     }
     
@@ -110,7 +127,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.beginUpdates()
         self.tableCells.remove(at: index)
         let indexPath = IndexPath(row: index, section: 0)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
+        tableView.deleteRows(at: [indexPath], with: .top)
         tableView.endUpdates()
     }
     

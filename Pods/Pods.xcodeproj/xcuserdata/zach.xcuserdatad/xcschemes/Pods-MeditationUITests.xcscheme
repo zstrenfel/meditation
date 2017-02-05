@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0810"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9230BE8B1E0E0B5A001A12CE"
-               BuildableName = "Meditation.app"
-               BlueprintName = "Meditation"
-               ReferencedContainer = "container:Meditation.xcodeproj">
+               BlueprintIdentifier = "279B48B14C3B35F711CD6B9676D40CFD"
+               BuildableName = "Pods_MeditationUITests.framework"
+               BlueprintName = "Pods-MeditationUITests"
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,15 +29,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9230BE8B1E0E0B5A001A12CE"
-            BuildableName = "Meditation.app"
-            BlueprintName = "Meditation"
-            ReferencedContainer = "container:Meditation.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -51,16 +42,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9230BE8B1E0E0B5A001A12CE"
-            BuildableName = "Meditation.app"
-            BlueprintName = "Meditation"
-            ReferencedContainer = "container:Meditation.xcodeproj">
+            BlueprintIdentifier = "279B48B14C3B35F711CD6B9676D40CFD"
+            BuildableName = "Pods_MeditationUITests.framework"
+            BlueprintName = "Pods-MeditationUITests"
+            ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -70,16 +60,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9230BE8B1E0E0B5A001A12CE"
-            BuildableName = "Meditation.app"
-            BlueprintName = "Meditation"
-            ReferencedContainer = "container:Meditation.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
