@@ -16,38 +16,52 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
+    
     @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var countdownLabel: UILabel!
+    @IBOutlet weak var cooldownLabel: UILabel!
     
-    weak var timer: Timer?
-    var time: Double = 325.00 //in seconds
-    var remainingTime: Double = 0.0 //don't mutate user-inputed time
-    var countdownTime: Double = 10.0
-    var cooldownTime: Double = 0.0
-    var paused: Bool = false
-    
+    var timers: [TimerClass] = []
     var tableCells: [TableCell] = []
+    
+    var currentTimerIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(PickerTableViewCell.self, forCellReuseIdentifier: "pickerCell")
         
-        remainingTime = time
-        let timerCell = TableCell(type: .option, label: "Meditation Time", value: time)
-        let countdownCell = TableCell(type: .option, label: "Countdown", value: countdownTime)
-        let cooldownCell = TableCell(type: .option, label: "Cooldown", value: cooldownTime)
+        let primaryTimer = TimerClass(with: 0, alert: nil, type: .primary, callback: updateTimerLabel)
+        let countdownTimer = TimerClass(with: 0, alert: nil, type: .countdown, callback: updateTimerLabel)
+        let cooldownTimer = TimerClass(with: 0, alert: nil, type: .cooldown, callback: updateTimerLabel)
+        
+        timers = [countdownTimer, primaryTimer, cooldownTimer]
+        
+        let timerCell = TableCell(type: .option, label: "Meditation Time", value: primaryTimer.time)
+        let countdownCell = TableCell(type: .option, label: "Countdown", value: countdownTimer.time)
+        let cooldownCell = TableCell(type: .option, label: "Cooldown", value: cooldownTimer.time)
         
         tableCells = [timerCell, countdownCell, cooldownCell]
         
-        updateTimer(with: remainingTime)
+        timerLabel.text = primaryTimer.remaining.timeString
+        countdownLabel.text = countdownTimer.remaining.timeString
+        cooldownLabel.text = cooldownTimer.remaining.timeString
     }
     
-    func updateTimer(with time: Double) {
-        timerLabel.text = time.timeString
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func updateTimerLabel(_ remaining: Double,_ type: TimerType) {
+        switch type {
+        case .countdown:
+            countdownLabel.text = remaining.timeString
+        case .primary:
+            timerLabel.text = remaining.timeString
+        case .cooldown:
+            cooldownLabel.text = remaining.timeString
+        }
     }
     
     //MARK: - UITableViewDelegate
@@ -152,9 +166,20 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         switch pickerCell.label {
         case "Meditation Time":
-            time = newTime
-            remainingTime = time
-            updateTimer(with: newTime)
+            if let index =  $.findIndex(timers, callback: { $0.timerType == TimerType.primary }) {
+                timers[index].update(with: newTime)
+            }
+            break
+        case "Countdown":
+            if let index =  $.findIndex(timers, callback: { $0.timerType == TimerType.countdown }) {
+                timers[index].update(with: newTime)
+            }
+            break
+        case "Cooldown":
+            if let index =  $.findIndex(timers, callback: { $0.timerType == TimerType.cooldown }) {
+                timers[index].update(with: newTime)
+            }
+            break
         default:
             break
         }
@@ -163,53 +188,30 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // MARK: - Actions
     @IBAction func startTimer(_ sender: UIButton) {
         //if timer is already running, don't do anything on start button press
-        guard timer == nil else {
-            print("timer start repeated press edge case")
+        guard currentTimerIndex < timers.count else {
+            print("timers are finished, can't start agin")
             return
         }
-        if paused {
+        
+        let currentTimer = timers[currentTimerIndex]
+        if currentTimer.isPaused() {
             stopButton.setTitle("Pause", for: .normal)
-            paused = false
+            currentTimer.togglePause()
         }
-        timer = Timer()
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(FirstViewController.countDown), userInfo: nil, repeats: true)
-    }
-    
-    func countDown() {
-        guard remainingTime > 0 else {
-            _stopTimer(clear: false) //don't end session unless the user wants to
-            return
-        }
-        remainingTime = remainingTime - 1
-        updateTimer(with: remainingTime)
+        currentTimer.startTimer()
     }
 
     @IBAction func stopTimer(_ sender: UIButton) {
-        if paused {
+        let currentTimer = timers[currentTimerIndex]
+        if currentTimer.isPaused() {
             stopButton.setTitle("Pause", for: .normal)
-            _stopTimer(clear: true)
+            currentTimer.stopTime(clear: true)
         } else {
             stopButton.setTitle("Reset", for: .normal)
-          _stopTimer(clear: false)
+            currentTimer.stopTime(clear: false)
         }
         
-        paused = !paused
-    }
-    
-    
-    func _stopTimer(clear: Bool) {
-        guard timer != nil else {
-            return
-        }
-        
-        timer!.invalidate()
-        
-        //if the session is ended, reset the timer
-        if clear {
-            self.remainingTime = self.time
-            updateTimer(with: self.remainingTime)
-            timer = nil
-        }
+        currentTimer.togglePause()
     }
 }
 

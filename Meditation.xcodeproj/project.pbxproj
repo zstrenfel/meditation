@@ -10,6 +10,7 @@
 		2BD135E8E7EE0B9DC90743DF /* Pods_MeditationUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A04F505CC8B3302D38D9A18 /* Pods_MeditationUITests.framework */; };
 		45B9590B87277EE487553D61 /* Pods_MeditationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99672B0E98ABE582C95FD1C7 /* Pods_MeditationTests.framework */; };
 		566ECED7B1505BC7E2181C9B /* Pods_Meditation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30D097C9E6F3846462DA3045 /* Pods_Meditation.framework */; };
+		920103951E4867240049A072 /* TimerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920103941E4867240049A072 /* TimerClass.swift */; };
 		9230BE901E0E0B5A001A12CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE8F1E0E0B5A001A12CE /* AppDelegate.swift */; };
 		9230BE921E0E0B5A001A12CE /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE911E0E0B5A001A12CE /* FirstViewController.swift */; };
 		9230BE941E0E0B5A001A12CE /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE931E0E0B5A001A12CE /* SecondViewController.swift */; };
@@ -49,6 +50,7 @@
 		30D097C9E6F3846462DA3045 /* Pods_Meditation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Meditation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		44665835D15A12F6671237B7 /* Pods-Meditation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meditation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Meditation/Pods-Meditation.debug.xcconfig"; sourceTree = "<group>"; };
 		6A04F505CC8B3302D38D9A18 /* Pods_MeditationUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MeditationUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		920103941E4867240049A072 /* TimerClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerClass.swift; sourceTree = "<group>"; };
 		9230BE8C1E0E0B5A001A12CE /* Meditation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meditation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9230BE8F1E0E0B5A001A12CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9230BE911E0E0B5A001A12CE /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				92AB37351E2E01BC004BCC3F /* IntExtension.swift */,
 				92C092C21E2F73E9006EBB01 /* TimerPickerView.swift */,
 				92974FD51E307FAF0056299D /* File.swift */,
+				920103941E4867240049A072 /* TimerClass.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -491,6 +494,7 @@
 				9230BE901E0E0B5A001A12CE /* AppDelegate.swift in Sources */,
 				92387A2A1E0E2D7E00C86A6D /* OptionTableViewCell.swift in Sources */,
 				92974FD61E307FAF0056299D /* File.swift in Sources */,
+				920103951E4867240049A072 /* TimerClass.swift in Sources */,
 				9230BE921E0E0B5A001A12CE /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -651,7 +655,10 @@
 					"\"$PODS_CONFIGURATION_BUILD_DIR/Dollar\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/Cent\"",
 				);
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited) @executable_path/Frameworks";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				INFOPLIST_FILE = Meditation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Dack.Meditation;
@@ -673,7 +680,10 @@
 					"\"$PODS_CONFIGURATION_BUILD_DIR/Dollar\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/Cent\"",
 				);
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited) @executable_path/Frameworks";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				INFOPLIST_FILE = Meditation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Dack.Meditation;
