@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Meditation/FirstViewController.swift"
-            timestampString = "508074580.991042"
+            timestampString = "508075142.04928"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
             landmarkName = "stopTimer(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Meditation/FirstViewController.swift"
-            timestampString = "508074582.851246"
+            timestampString = "508075142.04928"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
             landmarkName = "stopTimer(_:)"
             landmarkType = "7">
          </BreakpointContent>

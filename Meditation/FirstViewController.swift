@@ -40,7 +40,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let countdownCell = TableCell(type: .option, label: "Countdown", value: countdownTimer.time)
         let cooldownCell = TableCell(type: .option, label: "Cooldown", value: cooldownTimer.time)
         
-        tableCells = [timerCell, countdownCell, cooldownCell]
+        tableCells = [countdownCell, timerCell, cooldownCell]
         
         timerLabel.text = primaryTimer.remaining.timeString
         countdownLabel.text = countdownTimer.remaining.timeString
@@ -61,6 +61,11 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             timerLabel.text = remaining.timeString
         case .cooldown:
             cooldownLabel.text = remaining.timeString
+        }
+        
+        if remaining <= 0 {
+            currentTimerIndex += 1
+            _startTimer()
         }
     }
     
@@ -187,13 +192,19 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // MARK: - Actions
     @IBAction func startTimer(_ sender: UIButton) {
-        //if timer is already running, don't do anything on start button press
+        _startTimer()
+    }
+    
+    func _startTimer() {
         guard currentTimerIndex < timers.count else {
             print("timers are finished, can't start agin")
             return
         }
-        
         let currentTimer = timers[currentTimerIndex]
+        guard currentTimer.timer == nil else {
+            print("timer already running")
+            return
+        }
         if currentTimer.isPaused() {
             stopButton.setTitle("Pause", for: .normal)
             currentTimer.togglePause()
