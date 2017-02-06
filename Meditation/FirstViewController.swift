@@ -97,6 +97,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tableCell = tableCells[indexPath.row]
+        let cell = tableView.cellForRow(at: indexPath) as! OptionTableViewCell
         switch tableCell.type {
         case .picker:
             //do nothing
@@ -104,6 +105,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         default:
             let pickerIndex = $.findIndex(tableCells) { $0.type == CellType.picker }
             if pickerIndex != nil {
+                cell.valueLabel.textColor = .black
                 _removeRow(at: pickerIndex!)
                 if pickerIndex != indexPath.row + 1 {
                     if pickerIndex! < indexPath.row {
@@ -113,6 +115,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     }
                 }
             } else {
+                cell.valueLabel.textColor = .red
                 _insertRow(at: indexPath.row + 1)
             }
         }
@@ -149,7 +152,9 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         switch pickerCell.label {
         case "Meditation Time":
-           updateTimer(with: newTime)
+            time = newTime
+            remainingTime = time
+            updateTimer(with: newTime)
         default:
             break
         }
