@@ -9,9 +9,7 @@
 import UIKit
 
 class PickerTableViewCell: UITableViewCell {
-    var hours: Int = 0
-    var seconds: Int = 24
-    var minutes: Int = 0
+    var parent: UITableViewCell?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -34,11 +32,21 @@ class PickerTableViewCell: UITableViewCell {
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": timerPickerView]))
     }
     
-    func setTime() {
+    func setTime(hours: Int, minutes: Int, seconds: Int) {
+        print("setting time")
         //add default values if they exist
-        timerPickerView.hour = self.hours
-        timerPickerView.minute = self.minutes
-        timerPickerView.second = self.seconds
+        timerPickerView.hour = hours
+        timerPickerView.minute = minutes
+        timerPickerView.second = seconds
+    }
+    
+    func setPickerCallback(_ callback: @escaping (_ hour: Int, _ minute: Int, _ second: Int) -> Void) {
+        timerPickerView.onTimeSelected = callback
+    }
+    
+    
+    func getTimeValue() -> String {
+        return Double(timerPickerView.hour * 3600 + timerPickerView.minute * 60 + timerPickerView.second).timeString
     }
 
 }

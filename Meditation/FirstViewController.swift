@@ -41,9 +41,8 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         updateTimer(with: remainingTime)
     }
     
-    func updateTimer(with: Double) {
-        //60 seconds in minute
-        timerLabel.text = remainingTime.timeString
+    func updateTimer(with time: Double) {
+        timerLabel.text = time.timeString
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,12 +64,10 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         switch tableCell.type {
         case .picker:
             let cell = tableView.dequeueReusableCell(withIdentifier: "pickerCell") as! PickerTableViewCell
+            cell.setPickerCallback(handlePickerChange)
             if tableCell.value is Double {
                 let value = tableCell.value as! Double
-                cell.hours = Int(value.hours)
-                cell.minutes = Int(value.minutes)
-                cell.seconds = Int(value.seconds)
-                cell.setTime()
+                cell.setTime(hours: Int(value.hours), minutes: Int(value.minutes), seconds: Int(value.seconds))
             }
             return cell
         default:
@@ -79,9 +76,10 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             switch tableCell.value {
             case let value as Double:
                 cell.valueLabel.text = value.timeString
+            case let value as String:
+                cell.valueLabel.text = value
             default:
-                cell.valueLabel.text = ""
-                
+                cell.valueLabel.text = nil
             }
             return cell
         }
@@ -101,7 +99,8 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let tableCell = tableCells[indexPath.row]
         switch tableCell.type {
         case .picker:
-            print("picker")
+            //do nothing
+            break
         default:
             let pickerIndex = $.findIndex(tableCells) { $0.type == CellType.picker }
             if pickerIndex != nil {
@@ -122,8 +121,8 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func _insertRow(at index: Int, delay: Double = 0.0) {
         tableView.beginUpdates()
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            let parentValue = self.tableCells[index - 1].value
-            let pickerTableCell = TableCell(type: .picker, label: "Picker", value: parentValue)
+            let parent = self.tableCells[index - 1]
+            let pickerTableCell = TableCell(type: .picker, label: parent.label, value: parent.value)
             self.tableCells.insert(pickerTableCell, at: index)
             let indexPath = IndexPath(row: index, section: 0)
             self.tableView.insertRows(at: [indexPath], with: .top)
@@ -137,6 +136,23 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let indexPath = IndexPath(row: index, section: 0)
         tableView.deleteRows(at: [indexPath], with: .top)
         tableView.endUpdates()
+    }
+    
+    func handlePickerChange(_ hour: Int, _ minute: Int, _ second: Int) {
+        print("changing \(hour)")
+        let pickerIndex = $.findIndex(tableCells) { $0.type == CellType.picker }
+        let pickerCell = tableCells[pickerIndex!]
+        let newTime = Double(hour * 3600 + minute * 60 + second)
+        tableCells[pickerIndex! - 1].value = newTime
+        let parentIndexPath = IndexPath(row: pickerIndex! - 1 , section: 0)
+        tableView.reloadRows(at: [parentIndexPath], with: .none)
+        
+        switch pickerCell.label {
+        case "Meditation Time":
+           updateTimer(with: newTime)
+        default:
+            break
+        }
     }
     
     // MARK: - Actions

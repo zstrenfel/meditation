@@ -23,5 +23,9 @@ class OptionTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func updateValueLabel(with value: String) {
+        valueLabel.text = value
+    }
 
 }
