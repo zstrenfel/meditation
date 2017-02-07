@@ -8,10 +8,11 @@
 
 import UIKit
 
-enum TimerType {
-    case primary
-    case countdown
-    case cooldown
+enum TimerType: String {
+    case primary = "Meditation Time"
+    case countdown = "Countdown"
+    case cooldown = "Cooldown"
+    case interval = "Interval"
 }
 
 class TimerClass {

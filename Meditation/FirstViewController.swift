@@ -22,14 +22,20 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var cooldownLabel: UILabel!
     
     var timers: [TimerClass] = []
-    var tableCells: [TableCell] = []
+    var sections: [TimerType] = [.countdown, .primary, .cooldown, .interval]
+    var sectionMap: [TimerType: [TableCell]] = [:]
+    
+    var interval: Double = 0.0
+    
+    //what section has an active picker
+    var activePickerIndexPath: IndexPath? = nil
     
     var currentTimerIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
-        tableView.register(PickerTableViewCell.self, forCellReuseIdentifier: "pickerCell")
+        tableView.register(TimePickerTableViewCell.self, forCellReuseIdentifier: "timePickerCell")
         
         //create timer objects and array
         let primaryTimer = TimerClass(with: 0, alert: nil, type: .primary, callback: updateTimerLabel)
@@ -38,10 +44,22 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         timers = [countdownTimer, primaryTimer, cooldownTimer]
         
         //create tablecell objects and array
-        let countdownCell = TableCell(type: .option, label: "Countdown", value: countdownTimer.time)
-        let timerCell = TableCell(type: .option, label: "Meditation Time", value: primaryTimer.time)
-        let cooldownCell = TableCell(type: .option, label: "Cooldown", value: cooldownTimer.time)
-        tableCells = [countdownCell, timerCell, cooldownCell]
+        let countdownCell = TableCell(type: .option, label: TimerType.countdown.rawValue, value: countdownTimer.time)
+        let countdownPickerCell = TableCell(type: .timePicker, label: TimerType.countdown.rawValue, value: countdownTimer.time, hidden: true)
+        
+        let primaryCell = TableCell(type: .option, label: TimerType.primary.rawValue, value: primaryTimer.time)
+        let primaryPickerCell = TableCell(type: .timePicker, label: TimerType.primary.rawValue, value: primaryTimer.time, hidden: true)
+        
+        let cooldownCell = TableCell(type: .option, label: TimerType.cooldown.rawValue, value: cooldownTimer.time)
+        let cooldownPickerCell = TableCell(type: .timePicker, label: TimerType.cooldown.rawValue, value: cooldownTimer.time, hidden: true)
+        
+        let intervalCell = TableCell(type: .option, label: TimerType.interval.rawValue, value: interval)
+        let intervalPickerCell = TableCell(type: .timePicker, label: TimerType.interval.rawValue, value: interval, hidden: true)
+        
+        sectionMap[.countdown] = [countdownCell, countdownPickerCell]
+        sectionMap[.primary] = [primaryCell, primaryPickerCell]
+        sectionMap[.cooldown] = [cooldownCell, cooldownPickerCell]
+        sectionMap[.interval] = [intervalCell, intervalPickerCell]
         
         //update labels with the appropriate time
         timerLabel.text = primaryTimer.remaining.timeString
@@ -63,6 +81,9 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             timerLabel.text = remaining.timeString
         case .cooldown:
             cooldownLabel.text = remaining.timeString
+        case .interval:
+            //do nothing
+            break
         }
         
         if remaining <= 0 {
@@ -73,23 +94,26 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     //MARK: - UITableViewDelegate
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return sections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableCells.count
+        let sectionTableCells = getSection(section: section)
+        return sectionTableCells.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let tableCell = tableCells[indexPath.row]
+        let tableCell = getTableCell(indexPath: indexPath)
+        
         switch tableCell.type {
-        case .picker:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "pickerCell") as! PickerTableViewCell
+        case .timePicker:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "timePickerCell") as! TimePickerTableViewCell
             cell.setPickerCallback(handlePickerChange)
             if tableCell.value is Double {
                 let value = tableCell.value as! Double
                 cell.setTime(hours: Int(value.hours), minutes: Int(value.minutes), seconds: Int(value.seconds))
             }
+            cell.isHidden = tableCell.hidden
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "optionCell") as! OptionTableViewCell
@@ -107,9 +131,13 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let tableCell = tableCells[indexPath.row]
+        let sectionTableCells = getSection(section: indexPath.section)
+        let tableCell = sectionTableCells[indexPath.row]
         switch tableCell.type {
-        case .picker:
+        case .timePicker:
+            if tableCell.hidden {
+                return 0
+            }
             return 150
         default:
             return 50
@@ -117,82 +145,81 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let tableCell = tableCells[indexPath.row]
-        let cell = tableView.cellForRow(at: indexPath) as! OptionTableViewCell
+        let tableCell = getTableCell(indexPath: indexPath)
         switch tableCell.type {
+        case .timePicker:
+            //do nothing
+            break
         case .picker:
             //do nothing
             break
         default:
-            let pickerIndex = $.findIndex(tableCells) { $0.type == CellType.picker }
-            if pickerIndex != nil {
-                if pickerIndex != indexPath.row + 1 {
-                    cell.valueLabel.textColor = .black
-                    _removeRow(at: pickerIndex!)
-                    if pickerIndex! < indexPath.row {
-                        _insertRow(at: indexPath.row, delay: 0.25)
-                    } else {
-                        _insertRow(at: indexPath.row + 1, delay: 0.25)
-                    }
-                } else {
-                    cell.valueLabel.textColor = .black
-                    _removeRow(at: pickerIndex!)
-                }
-            } else {
-                cell.valueLabel.textColor = .red
-                _insertRow(at: indexPath.row + 1)
+            //show, hide functionality for the picker cells goes here
+            let pickerIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
+            guard activePickerIndexPath != nil else {
+                activePickerIndexPath = pickerIndexPath
+                showCell(indexPath: pickerIndexPath)
+                break
             }
+            if activePickerIndexPath == pickerIndexPath {
+                hideCell(indexPath: pickerIndexPath)
+                activePickerIndexPath = nil
+            } else {
+                hideCell(indexPath: activePickerIndexPath!)
+                activePickerIndexPath = pickerIndexPath
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                    self.showCell(indexPath: pickerIndexPath)
+                }
+                
+            }
+            break
         }
     }
     
-    func _insertRow(at index: Int, delay: Double = 0.0) {
-        tableView.beginUpdates()
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            let parent = self.tableCells[index - 1]
-            let pickerTableCell = TableCell(type: .picker, label: parent.label, value: parent.value)
-            self.tableCells.insert(pickerTableCell, at: index)
-            let indexPath = IndexPath(row: index, section: 0)
-            self.tableView.insertRows(at: [indexPath], with: .top)
-        }
-        tableView.endUpdates()
+    func showCell(indexPath: IndexPath) {
+        let sectionKey = sections[indexPath.section]
+        sectionMap[sectionKey]?[indexPath.row].hidden = false
+        tableView.reloadRows(at: [indexPath], with: .bottom)
     }
     
-    func _removeRow(at index: Int) {
-        tableView.beginUpdates()
-        self.tableCells.remove(at: index)
-        let indexPath = IndexPath(row: index, section: 0)
-        tableView.deleteRows(at: [indexPath], with: .top)
-        tableView.endUpdates()
+    func hideCell(indexPath: IndexPath) {
+        let sectionKey = sections[indexPath.section]
+        sectionMap[sectionKey]?[indexPath.row].hidden = true
+        tableView.reloadRows(at: [indexPath], with: .top)
+    }
+    func toggleCellVisibility(indexPath: IndexPath) {
+        
     }
     
     func handlePickerChange(_ hour: Int, _ minute: Int, _ second: Int) {
-        let pickerIndex = getPickerIndex()
-        let pickerCell = tableCells[pickerIndex!]
-        let newTime = Double(hour * 3600 + minute * 60 + second)
-        
-        tableCells[pickerIndex! - 1].value = newTime
-        let parentIndexPath = IndexPath(row: pickerIndex! - 1 , section: 0)
-        tableView.reloadRows(at: [parentIndexPath], with: .none)
-        
-        switch pickerCell.label {
-        case "Meditation Time":
-            if let index =  $.findIndex(timers, callback: { $0.timerType == TimerType.primary }) {
-                timers[index].update(with: newTime)
-            }
-            break
-        case "Countdown":
-            if let index =  $.findIndex(timers, callback: { $0.timerType == TimerType.countdown }) {
-                timers[index].update(with: newTime)
-            }
-            break
-        case "Cooldown":
-            if let index =  $.findIndex(timers, callback: { $0.timerType == TimerType.cooldown }) {
-                timers[index].update(with: newTime)
-            }
-            break
-        default:
-            break
-        }
+//        let pickerIndex = getPickerIndex()
+//        let timePickerCell = tableCells[pickerIndex!]
+//        let newTime = Double(hour * 3600 + minute * 60 + second)
+//        
+//        tableCells[pickerIndex! - 1].value = newTime
+//        let parentIndexPath = IndexPath(row: pickerIndex! - 1 , section: 0)
+//        tableView.reloadRows(at: [parentIndexPath], with: .none)
+//        
+//        switch timePickerCell.label {
+//        case "Meditation Time":
+//            if let index =  $.findIndex(timers, callback: { $0.timerType == TimerType.primary }) {
+//                timers[index].update(with: newTime)
+//            }
+//            break
+//        case "Countdown":
+//            if let index =  $.findIndex(timers, callback: { $0.timerType == TimerType.countdown }) {
+//                timers[index].update(with: newTime)
+//            }
+//            break
+//        case "Cooldown":
+//            if let index =  $.findIndex(timers, callback: { $0.timerType == TimerType.cooldown }) {
+//                timers[index].update(with: newTime)
+//            }
+//            break
+//        default:
+//            break
+//        }
+        print("picker change logic goes here")
     }
     
     // MARK: - Actions
@@ -234,8 +261,17 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     // MARK: - Utility Functions
-    func getPickerIndex() -> Int? {
-        return $.findIndex(tableCells) { $0.type == CellType.picker }
+    func getSection(section: Int) -> [TableCell] {
+        let sectionKey = sections[section]
+        if let tableCells = sectionMap[sectionKey] {
+            return tableCells
+        }
+        return []
+    }
+    
+    func getTableCell(indexPath: IndexPath) -> TableCell {
+        let sectionTableCells = getSection(section: indexPath.section)
+        return sectionTableCells[indexPath.row]
     }
 }
 

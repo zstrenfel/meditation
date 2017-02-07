@@ -2,52 +2,58 @@
 //  PickerTableViewCell.swift
 //  Meditation
 //
-//  Created by Zach Strenfel on 12/24/16.
-//  Copyright © 2016 Zach Strenfel. All rights reserved.
+//  Created by Zach Strenfel on 2/7/17.
+//  Copyright © 2017 Zach Strenfel. All rights reserved.
 //
 
 import UIKit
 
-class PickerTableViewCell: UITableViewCell {
-    var parent: UITableViewCell?
+class PickerTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDelegate {
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    let pickerOptions: [String] = ["One", "Two", "Three"]
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
         self.selectionStyle = .none
-        setupViews()
+        // Initialization code
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        // Configure the view for the selected state
     }
-    
-    let timerPickerView: TimerPickerView = {
-        let pickerView = TimerPickerView()
+
+    let pickerView: UIPickerView = {
+        let pickerView = UIPickerView()
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         return pickerView
     }()
     
     func setupViews() {
-        addSubview(timerPickerView)
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-32-[v0]-32-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": timerPickerView]))
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": timerPickerView]))
+        pickerView.dataSource = self
+        pickerView.delegate = self
+        
+        addSubview(pickerView)
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-32-[v0]-32-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": pickerView ]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": pickerView]))
     }
     
-    func setTime(hours: Int, minutes: Int, seconds: Int) {
-        print("setting time")
-        //add default values if they exist
-        timerPickerView.hour = hours
-        timerPickerView.minute = minutes
-        timerPickerView.second = seconds
+    // MARK: - PickerView DataSource
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
     }
     
-    func setPickerCallback(_ callback: @escaping (_ hour: Int, _ minute: Int, _ second: Int) -> Void) {
-        timerPickerView.onTimeSelected = callback
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerOptions.count
     }
     
-    
-    func getTimeValue() -> String {
-        return Double(timerPickerView.hour * 3600 + timerPickerView.minute * 60 + timerPickerView.second).timeString
+    // MARK: - PickerView Delegate
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerOptions[row]
     }
-
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print("something selected")
+    }
+    
 }
