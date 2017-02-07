@@ -28,30 +28,32 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.tableFooterView = UIView()
         tableView.register(PickerTableViewCell.self, forCellReuseIdentifier: "pickerCell")
         
+        //create timer objects and array
         let primaryTimer = TimerClass(with: 0, alert: nil, type: .primary, callback: updateTimerLabel)
         let countdownTimer = TimerClass(with: 0, alert: nil, type: .countdown, callback: updateTimerLabel)
         let cooldownTimer = TimerClass(with: 0, alert: nil, type: .cooldown, callback: updateTimerLabel)
-        
         timers = [countdownTimer, primaryTimer, cooldownTimer]
         
-        let timerCell = TableCell(type: .option, label: "Meditation Time", value: primaryTimer.time)
+        //create tablecell objects and array
         let countdownCell = TableCell(type: .option, label: "Countdown", value: countdownTimer.time)
+        let timerCell = TableCell(type: .option, label: "Meditation Time", value: primaryTimer.time)
         let cooldownCell = TableCell(type: .option, label: "Cooldown", value: cooldownTimer.time)
-        
         tableCells = [countdownCell, timerCell, cooldownCell]
         
+        //update labels with the appropriate time
         timerLabel.text = primaryTimer.remaining.timeString
         countdownLabel.text = countdownTimer.remaining.timeString
         cooldownLabel.text = cooldownTimer.remaining.timeString
     }
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     func updateTimerLabel(_ remaining: Double,_ type: TimerType) {
         switch type {
@@ -124,14 +126,17 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         default:
             let pickerIndex = $.findIndex(tableCells) { $0.type == CellType.picker }
             if pickerIndex != nil {
-                cell.valueLabel.textColor = .black
-                _removeRow(at: pickerIndex!)
                 if pickerIndex != indexPath.row + 1 {
+                    cell.valueLabel.textColor = .black
+                    _removeRow(at: pickerIndex!)
                     if pickerIndex! < indexPath.row {
                         _insertRow(at: indexPath.row, delay: 0.25)
                     } else {
                         _insertRow(at: indexPath.row + 1, delay: 0.25)
                     }
+                } else {
+                    cell.valueLabel.textColor = .black
+                    _removeRow(at: pickerIndex!)
                 }
             } else {
                 cell.valueLabel.textColor = .red
@@ -161,10 +166,10 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func handlePickerChange(_ hour: Int, _ minute: Int, _ second: Int) {
-        print("changing \(hour)")
-        let pickerIndex = $.findIndex(tableCells) { $0.type == CellType.picker }
+        let pickerIndex = getPickerIndex()
         let pickerCell = tableCells[pickerIndex!]
         let newTime = Double(hour * 3600 + minute * 60 + second)
+        
         tableCells[pickerIndex! - 1].value = newTime
         let parentIndexPath = IndexPath(row: pickerIndex! - 1 , section: 0)
         tableView.reloadRows(at: [parentIndexPath], with: .none)
@@ -205,6 +210,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             print("timer already running")
             return
         }
+        //if timer is paused, restart it
         if currentTimer.isPaused() {
             stopButton.setTitle("Pause", for: .normal)
             currentTimer.togglePause()
@@ -214,15 +220,22 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     @IBAction func stopTimer(_ sender: UIButton) {
         let currentTimer = timers[currentTimerIndex]
+        //if current timer already paused, then clear it and reset the button label
         if currentTimer.isPaused() {
             stopButton.setTitle("Pause", for: .normal)
             currentTimer.stopTime(clear: true)
+        //if timer is running, pause it
         } else {
             stopButton.setTitle("Reset", for: .normal)
             currentTimer.stopTime(clear: false)
         }
         
         currentTimer.togglePause()
+    }
+    
+    // MARK: - Utility Functions
+    func getPickerIndex() -> Int? {
+        return $.findIndex(tableCells) { $0.type == CellType.picker }
     }
 }
 

@@ -13,6 +13,8 @@ class OptionTableViewCell: UITableViewCell {
     @IBOutlet weak var optionLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     
+    var parent: Bool = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
