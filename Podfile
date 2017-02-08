@@ -8,6 +8,8 @@ target 'Meditation' do
   # Pods for Meditation
   pod 'Dollar'
   pod 'Cent'
+  pod 'XCGLogger', '~> 4.0.0'
+
 
   target 'MeditationTests' do
     inherit! :search_paths

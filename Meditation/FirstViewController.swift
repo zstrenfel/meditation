@@ -9,6 +9,7 @@
 import UIKit
 import Dollar
 import Cent
+import XCGLogger
 
 
 class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -25,7 +26,38 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var sections: [TimerType] = [.countdown, .primary, .cooldown, .interval]
     var sectionMap: [TimerType: [TableCell]] = [:]
     
-    var interval: Double = 0.0
+    var timerRunning: Bool = false
+    
+    var countDown: Double = 0.0 {
+        didSet {
+            //update logic goes here
+            updateTimers(value: countDown, timer: .countdown)
+            updateTimerLabel(value: countDown, type: .countdown)
+            updateTableCells(value: countDown, type: .countdown)
+        }
+    }
+    var primary: Double = 0.0 {
+        didSet {
+            //update logic goes here
+            updateTimers(value: primary, timer: .primary)
+            updateTimerLabel(value: primary, type: .primary)
+            updateTableCells(value: primary, type: .primary)
+        }
+    }
+    var coolDown: Double = 0.0 {
+        didSet {
+            //udpate logic goes here
+            updateTimers(value: coolDown, timer: .cooldown)
+            updateTimerLabel(value: coolDown, type: .cooldown)
+            updateTableCells(value: coolDown, type: .cooldown)
+        }
+    }
+    var interval: Double = 0.0 {
+        didSet {
+            //update logic goes here
+            log.debug("interval needs to be set here")
+        }
+    }
     
     //what section has an active picker
     var activePickerIndexPath: IndexPath? = nil
@@ -72,24 +104,41 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Dispose of any resources that can be recreated.
     }
     
+    func updateTimers(value: Double, timer: TimerType) {
+        switch timer {
+        case .countdown:
+            break
+        case .primary:
+            break
+        case .cooldown:
+            break
+        case .interval:
+            break
+        }
+    }
     
-    func updateTimerLabel(_ remaining: Double,_ type: TimerType) {
+    //this is the callback passed to timer picker table view cell
+    func updateTimerLabel(value: Double, type: TimerType) {
         switch type {
         case .countdown:
-            countdownLabel.text = remaining.timeString
+            countdownLabel.text = value.timeString
         case .primary:
-            timerLabel.text = remaining.timeString
+            timerLabel.text = value.timeString
         case .cooldown:
-            cooldownLabel.text = remaining.timeString
+            cooldownLabel.text = value.timeString
         case .interval:
             //do nothing
             break
         }
         
-        if remaining <= 0 {
+        if value <= 0 && timerRunning {
             currentTimerIndex += 1
             _startTimer()
         }
+    }
+    
+    func updateTableCells(value: Double, type: TimerType) {
+        sectionMap[type]?[0].value = value
     }
     
     //MARK: - UITableViewDelegate
@@ -192,12 +241,15 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func handlePickerChange(_ hour: Int, _ minute: Int, _ second: Int) {
-//        let pickerIndex = getPickerIndex()
-//        let timePickerCell = tableCells[pickerIndex!]
-//        let newTime = Double(hour * 3600 + minute * 60 + second)
-//        
-//        tableCells[pickerIndex! - 1].value = newTime
-//        let parentIndexPath = IndexPath(row: pickerIndex! - 1 , section: 0)
+        let newTime = Double(hour * 3600 + minute * 60 + second)
+        let sectionKey = sections[(activePickerIndexPath?.section)!]
+        log.debug(sectionKey)
+        sectionMap[sectionKey]?[0].value = newTime
+        let parentIndexPath = IndexPath(row: 0, section: (activePickerIndexPath?.section)!) //magic numbers should not be used, change later
+        tableView.reloadRows(at: [parentIndexPath], with: .none)
+//        sectionMap[sectionKey][activePickerIndexPath.row - 1].value = newTime
+//        let parentIndexPath = IndexPath(row: (activePickerIndexPath?.row)!
+//            - 1 , section: activePickerIndexPath?.section)
 //        tableView.reloadRows(at: [parentIndexPath], with: .none)
 //        
 //        switch timePickerCell.label {

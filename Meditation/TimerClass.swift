@@ -44,10 +44,6 @@ class TimerClass {
         }
         self.time = time
         self.remaining = self.time
-        
-        if let block = updateParent {
-            block(remaining, timerType)
-        }
     }
     
     func startTimer() {

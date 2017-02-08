@@ -2,15 +2,20 @@ PODS:
   - Cent (6.0.3):
     - Dollar (~> 6.1.0)
   - Dollar (6.1.0)
+  - XCGLogger (4.0.0):
+    - XCGLogger/Core (= 4.0.0)
+  - XCGLogger/Core (4.0.0)
 
 DEPENDENCIES:
   - Cent
   - Dollar
+  - XCGLogger (~> 4.0.0)
 
 SPEC CHECKSUMS:
   Cent: 2e2deb7ced0fc6c4c320075ddd4f63ed8defd8db
   Dollar: 0a9883680f2c1104adf0d19b827c3be71d3e3121
+  XCGLogger: 38063ea89b4c8b23232d18efd2e12eb0005f3ea4
 
-PODFILE CHECKSUM: f081419b897ca396087e89f4aae84819cd5da51c
+PODFILE CHECKSUM: 30045fca7d8652fe889ee2a835ecef3c6bd80c9e
 
 COCOAPODS: 1.1.1

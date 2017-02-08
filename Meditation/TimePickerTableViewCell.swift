@@ -8,9 +8,7 @@
 
 import UIKit
 
-class TimePickerTableViewCell: UITableViewCell {
-    var parent: UITableViewCell?
-    
+class TimePickerTableViewCell: UITableViewCell {    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
