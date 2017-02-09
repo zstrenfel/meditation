@@ -15,7 +15,7 @@ class TimePickerTableViewCell: UITableViewCell {
     var updateParent: ((_ value: Double, _ type: TimerType) -> Void)?
     var value: Double = 0.0 {
         didSet {
-            log.debug(self.value)
+            timerPickerView.update(value)
         }
     }
     
@@ -30,11 +30,9 @@ class TimePickerTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //must be a lazy variable in order to use self inside of the closure
-    lazy var timerPickerView: TimerPickerView = { [unowned self] in
+    var timerPickerView: TimerPickerView = {
         let pickerView = TimerPickerView()
         pickerView.translatesAutoresizingMaskIntoConstraints = false
-        pickerView.update(self.value)
         return pickerView
     }()
     
