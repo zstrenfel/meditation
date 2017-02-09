@@ -7,8 +7,18 @@
 //
 
 import UIKit
+import XCGLogger
 
-class TimePickerTableViewCell: UITableViewCell {    
+class TimePickerTableViewCell: UITableViewCell {
+    
+    var type: TimerType?
+    var updateParent: ((_ value: Double, _ type: TimerType) -> Void)?
+    var value: Double = 0.0 {
+        didSet {
+            log.debug(self.value)
+        }
+    }
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
@@ -20,33 +30,25 @@ class TimePickerTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let timerPickerView: TimerPickerView = {
+    //must be a lazy variable in order to use self inside of the closure
+    lazy var timerPickerView: TimerPickerView = { [unowned self] in
         let pickerView = TimerPickerView()
         pickerView.translatesAutoresizingMaskIntoConstraints = false
+        pickerView.update(self.value)
         return pickerView
     }()
     
     func setupViews() {
         addSubview(timerPickerView)
+        timerPickerView.onTimeSelected = handlePickerChange
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-32-[v0]-32-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": timerPickerView]))
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": timerPickerView]))
     }
     
-    func setTime(hours: Int, minutes: Int, seconds: Int) {
-        print("setting time")
-        //add default values if they exist
-        timerPickerView.hour = hours
-        timerPickerView.minute = minutes
-        timerPickerView.second = seconds
+    func handlePickerChange(_ hour: Int, _ minute: Int, _ second: Int) {
+        let condensedTime = Double(hour * 3600 + minute * 60 + second)
+        if let block = updateParent {
+            block(condensedTime, type!)
+        }
     }
-    
-    func setPickerCallback(_ callback: @escaping (_ hour: Int, _ minute: Int, _ second: Int) -> Void) {
-        timerPickerView.onTimeSelected = callback
-    }
-    
-    
-    func getTimeValue() -> String {
-        return Double(timerPickerView.hour * 3600 + timerPickerView.minute * 60 + timerPickerView.second).timeString
-    }
-
 }

@@ -22,34 +22,31 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var countdownLabel: UILabel!
     @IBOutlet weak var cooldownLabel: UILabel!
     
-    var timers: [TimerClass] = []
     var sections: [TimerType] = [.countdown, .primary, .cooldown, .interval]
     var sectionMap: [TimerType: [TableCell]] = [:]
     
     var timerRunning: Bool = false
     
-    var countDown: Double = 0.0 {
+    var countdown: Double = 0.0 {
         didSet {
             //update logic goes here
-            updateTimers(value: countDown, timer: .countdown)
-            updateTimerLabel(value: countDown, type: .countdown)
-            updateTableCells(value: countDown, type: .countdown)
+            updateTimerLabels(countdown, type: .countdown)
+            updateTableCells(value: countdown, type: .countdown)
         }
     }
     var primary: Double = 0.0 {
         didSet {
             //update logic goes here
-            updateTimers(value: primary, timer: .primary)
-            updateTimerLabel(value: primary, type: .primary)
+            updateTimerLabels(primary, type: .primary)
             updateTableCells(value: primary, type: .primary)
         }
     }
-    var coolDown: Double = 0.0 {
+    var cooldown: Double = 0.0 {
+        
         didSet {
             //udpate logic goes here
-            updateTimers(value: coolDown, timer: .cooldown)
-            updateTimerLabel(value: coolDown, type: .cooldown)
-            updateTableCells(value: coolDown, type: .cooldown)
+            updateTimerLabels(cooldown, type: .cooldown)
+            updateTableCells(value: cooldown, type: .cooldown)
         }
     }
     var interval: Double = 0.0 {
@@ -69,21 +66,15 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.tableFooterView = UIView()
         tableView.register(TimePickerTableViewCell.self, forCellReuseIdentifier: "timePickerCell")
         
-        //create timer objects and array
-        let primaryTimer = TimerClass(with: 0, alert: nil, type: .primary, callback: updateTimerLabel)
-        let countdownTimer = TimerClass(with: 0, alert: nil, type: .countdown, callback: updateTimerLabel)
-        let cooldownTimer = TimerClass(with: 0, alert: nil, type: .cooldown, callback: updateTimerLabel)
-        timers = [countdownTimer, primaryTimer, cooldownTimer]
-        
         //create tablecell objects and array
-        let countdownCell = TableCell(type: .option, label: TimerType.countdown.rawValue, value: countdownTimer.time)
-        let countdownPickerCell = TableCell(type: .timePicker, label: TimerType.countdown.rawValue, value: countdownTimer.time, hidden: true)
+        let countdownCell = TableCell(type: .option, label: TimerType.countdown.rawValue, value: countdown)
+        let countdownPickerCell = TableCell(type: .timePicker, label: TimerType.countdown.rawValue, value: countdown, hidden: true)
         
-        let primaryCell = TableCell(type: .option, label: TimerType.primary.rawValue, value: primaryTimer.time)
-        let primaryPickerCell = TableCell(type: .timePicker, label: TimerType.primary.rawValue, value: primaryTimer.time, hidden: true)
+        let primaryCell = TableCell(type: .option, label: TimerType.primary.rawValue, value: primary)
+        let primaryPickerCell = TableCell(type: .timePicker, label: TimerType.primary.rawValue, value: primary, hidden: true)
         
-        let cooldownCell = TableCell(type: .option, label: TimerType.cooldown.rawValue, value: cooldownTimer.time)
-        let cooldownPickerCell = TableCell(type: .timePicker, label: TimerType.cooldown.rawValue, value: cooldownTimer.time, hidden: true)
+        let cooldownCell = TableCell(type: .option, label: TimerType.cooldown.rawValue, value: cooldown)
+        let cooldownPickerCell = TableCell(type: .timePicker, label: TimerType.cooldown.rawValue, value: cooldown, hidden: true)
         
         let intervalCell = TableCell(type: .option, label: TimerType.interval.rawValue, value: interval)
         let intervalPickerCell = TableCell(type: .timePicker, label: TimerType.interval.rawValue, value: interval, hidden: true)
@@ -94,9 +85,10 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         sectionMap[.interval] = [intervalCell, intervalPickerCell]
         
         //update labels with the appropriate time
-        timerLabel.text = primaryTimer.remaining.timeString
-        countdownLabel.text = countdownTimer.remaining.timeString
-        cooldownLabel.text = cooldownTimer.remaining.timeString
+        //redundent????
+        timerLabel.text = primary.timeString
+        countdownLabel.text = countdown.timeString
+        cooldownLabel.text = cooldown.timeString
     }
     
     override func didReceiveMemoryWarning() {
@@ -104,21 +96,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Dispose of any resources that can be recreated.
     }
     
-    func updateTimers(value: Double, timer: TimerType) {
-        switch timer {
-        case .countdown:
-            break
-        case .primary:
-            break
-        case .cooldown:
-            break
-        case .interval:
-            break
-        }
-    }
-    
-    //this is the callback passed to timer picker table view cell
-    func updateTimerLabel(value: Double, type: TimerType) {
+    func updateTimerLabels(_ value: Double, type: TimerType) {
         switch type {
         case .countdown:
             countdownLabel.text = value.timeString
@@ -130,15 +108,38 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             //do nothing
             break
         }
-        
-        if value <= 0 && timerRunning {
-            currentTimerIndex += 1
-            _startTimer()
+    }
+    
+    //this is the callback passed to timer picker table view cell
+    func handlePickerChange(value: Double, type: TimerType) {
+        switch type {
+        case .countdown:
+            countdown = value
+        case .primary:
+            primary = value
+        case .cooldown:
+            cooldown = value
+        case .interval:
+            //do nothing
+            break
         }
     }
     
     func updateTableCells(value: Double, type: TimerType) {
-        sectionMap[type]?[0].value = value
+        if var section = sectionMap[type] {
+            for var i in 0..<section.count {
+                switch section[i].type {
+                case .toggle:
+                    break
+                default:
+                    section[i].value = value
+                }
+            }
+            log.debug(section)
+            self.sectionMap[type] = section
+        }
+        let index = sections.index(of: type)
+        tableView.reloadSections(NSIndexSet(index: index!) as IndexSet, with: .none)
     }
     
     //MARK: - UITableViewDelegate
@@ -151,17 +152,16 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return sectionTableCells.count
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tableCell = getTableCell(indexPath: indexPath)
         
         switch tableCell.type {
         case .timePicker:
             let cell = tableView.dequeueReusableCell(withIdentifier: "timePickerCell") as! TimePickerTableViewCell
-            cell.setPickerCallback(handlePickerChange)
-            if tableCell.value is Double {
-                let value = tableCell.value as! Double
-                cell.setTime(hours: Int(value.hours), minutes: Int(value.minutes), seconds: Int(value.seconds))
-            }
+            cell.updateParent = handlePickerChange
+            cell.value = tableCell.value as! Double
+            cell.type = TimerType(rawValue: tableCell.label)
             cell.isHidden = tableCell.hidden
             return cell
         default:
@@ -280,36 +280,36 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func _startTimer() {
-        guard currentTimerIndex < timers.count else {
-            print("timers are finished, can't start agin")
-            return
-        }
-        let currentTimer = timers[currentTimerIndex]
-        guard currentTimer.timer == nil else {
-            print("timer already running")
-            return
-        }
-        //if timer is paused, restart it
-        if currentTimer.isPaused() {
-            stopButton.setTitle("Pause", for: .normal)
-            currentTimer.togglePause()
-        }
-        currentTimer.startTimer()
+//        guard currentTimerIndex < timers.count else {
+//            print("timers are finished, can't start agin")
+//            return
+//        }
+//        let currentTimer = timers[currentTimerIndex]
+//        guard currentTimer.timer == nil else {
+//            print("timer already running")
+//            return
+//        }
+//        //if timer is paused, restart it
+//        if currentTimer.isPaused() {
+//            stopButton.setTitle("Pause", for: .normal)
+//            currentTimer.togglePause()
+//        }
+//        currentTimer.startTimer()
     }
 
     @IBAction func stopTimer(_ sender: UIButton) {
-        let currentTimer = timers[currentTimerIndex]
-        //if current timer already paused, then clear it and reset the button label
-        if currentTimer.isPaused() {
-            stopButton.setTitle("Pause", for: .normal)
-            currentTimer.stopTime(clear: true)
-        //if timer is running, pause it
-        } else {
-            stopButton.setTitle("Reset", for: .normal)
-            currentTimer.stopTime(clear: false)
-        }
-        
-        currentTimer.togglePause()
+//        let currentTimer = timers[currentTimerIndex]
+//        //if current timer already paused, then clear it and reset the button label
+//        if currentTimer.isPaused() {
+//            stopButton.setTitle("Pause", for: .normal)
+//            currentTimer.stopTime(clear: true)
+//        //if timer is running, pause it
+//        } else {
+//            stopButton.setTitle("Reset", for: .normal)
+//            currentTimer.stopTime(clear: false)
+//        }
+//        
+//        currentTimer.togglePause()
     }
     
     // MARK: - Utility Functions

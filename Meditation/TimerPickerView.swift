@@ -165,4 +165,11 @@ class TimerPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSourc
         self.minute = minute
         self.second = second
     }
+    
+    //update the picker on instantiation; is this necessary?
+    func update(_ value: Double) {
+        hour = Int(value.hours)
+        minute = Int(value.minutes)
+        second = Int(value.seconds)
+    }
 }

@@ -180,8 +180,8 @@
 			isa = PBXGroup;
 			children = (
 				92387A291E0E2D7E00C86A6D /* OptionTableViewCell.swift */,
-				92387A2B1E0E2D9200C86A6D /* TimePickerTableViewCell.swift */,
 				92E60FE51E4966AB00A2E994 /* PickerTableViewCell.swift */,
+				92387A2B1E0E2D9200C86A6D /* TimePickerTableViewCell.swift */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
