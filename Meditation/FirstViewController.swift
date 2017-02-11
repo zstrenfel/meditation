@@ -27,7 +27,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var sessionTimers: TimerWrapper?
     
-    var countdown: Double = 5.0 {
+    var countdown: Double = 2.0 {
         didSet {
             //update logic goes here
             updateTimerLabels(countdown, .countdown)
@@ -97,13 +97,21 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func updateTimerLabels(_ value: Double, _ type: TimerType, _ completed: Bool = false) {
+        //timer is completed, reset all labels
+        guard !completed else {
+            countdownLabel.text = countdown.timeString
+            timerLabel.text = primary.timeString
+            cooldownLabel.text = cooldown.timeString
+            return
+        }
+        
         switch type {
         case .countdown:
-            countdownLabel.text = completed ?  countdown.timeString : value.timeString
+            countdownLabel.text = value.timeString
         case .primary:
-            timerLabel.text = completed ? primary.timeString : value.timeString
+            timerLabel.text = value.timeString
         case .cooldown:
-            cooldownLabel.text = completed ? cooldown.timeString : value.timeString
+            cooldownLabel.text = value.timeString
         case .interval:
             //do nothing
             break
