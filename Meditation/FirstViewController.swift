@@ -96,15 +96,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Dispose of any resources that can be recreated.
     }
     
-    func updateTimerLabels(_ value: Double, _ type: TimerType, _ completed: Bool = false) {
-        //timer is completed, reset all labels
-        guard !completed else {
-            countdownLabel.text = countdown.timeString
-            timerLabel.text = primary.timeString
-            cooldownLabel.text = cooldown.timeString
-            return
-        }
-        
+    func updateTimerLabels(_ value: Double, _ type: TimerType) {
         switch type {
         case .countdown:
             countdownLabel.text = value.timeString
@@ -116,6 +108,13 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             //do nothing
             break
         }
+    }
+    
+    func resetTimerLabels() {
+        //timer is completed, reset all labels
+        countdownLabel.text = countdown.timeString
+        timerLabel.text = primary.timeString
+        cooldownLabel.text = cooldown.timeString
     }
     
     //this is the callback passed to timer picker table view cell
@@ -271,8 +270,11 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         if (sessionTimers?.isPaused())! {
             sessionTimers?.stopTimer(clear: true)
+            stopButton.setTitle("Pause", for: .normal)
+            resetTimerLabels()
         } else {
             sessionTimers?.stopTimer(clear: false)
+            stopButton.setTitle("Reset", for: .normal)
         }
     }
     

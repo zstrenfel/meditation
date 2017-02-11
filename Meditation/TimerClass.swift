@@ -32,7 +32,7 @@ class TimerWrapper {
     var interval: Double
     var intervalSound: String
     
-    var updateParent: ((_ remaining: Double,_ type: TimerType, _ completed: Bool) -> Void)?
+    var updateParent: ((_ remaining: Double,_ type: TimerType) -> Void)?
     
     var paused: Bool = true
     var completed: Bool = true
@@ -78,7 +78,7 @@ class TimerWrapper {
         }
         if !completed {
             if let block = updateParent {
-                block(timers[currentIndex].time - currentTime, timers[currentIndex].type, false)
+                block(timers[currentIndex].time - currentTime, timers[currentIndex].type)
             }
         }   
     }
@@ -98,7 +98,7 @@ class TimerWrapper {
             currentTimer = nil
             //update parent that timer is finished/reset
             if let block = updateParent {
-                block(timers[currentIndex].time - currentTime, timers[currentIndex].type, clear)
+                block(timers[currentIndex].time - currentTime, timers[currentIndex].type)
             }
         }
     }
