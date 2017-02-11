@@ -25,19 +25,19 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var sections: [TimerType] = [.countdown, .primary, .cooldown, .interval]
     var sectionMap: [TimerType: [TableCell]] = [:]
     
-    var timerRunning: Bool = false
+    var sessionTimers: TimerWrapper?
     
-    var countdown: Double = 0.0 {
+    var countdown: Double = 5.0 {
         didSet {
             //update logic goes here
-            updateTimerLabels(countdown, type: .countdown)
+            updateTimerLabels(countdown, .countdown)
             updateTableCells(value: countdown, type: .countdown)
         }
     }
-    var primary: Double = 0.0 {
+    var primary: Double = 5.0 {
         didSet {
             //update logic goes here
-            updateTimerLabels(primary, type: .primary)
+            updateTimerLabels(primary, .primary)
             updateTableCells(value: primary, type: .primary)
         }
     }
@@ -45,7 +45,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         didSet {
             //udpate logic goes here
-            updateTimerLabels(cooldown, type: .cooldown)
+            updateTimerLabels(cooldown, .cooldown)
             updateTableCells(value: cooldown, type: .cooldown)
         }
     }
@@ -96,14 +96,14 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Dispose of any resources that can be recreated.
     }
     
-    func updateTimerLabels(_ value: Double, type: TimerType) {
+    func updateTimerLabels(_ value: Double, _ type: TimerType, _ completed: Bool = false) {
         switch type {
         case .countdown:
-            countdownLabel.text = value.timeString
+            countdownLabel.text = completed ?  countdown.timeString : value.timeString
         case .primary:
-            timerLabel.text = value.timeString
+            timerLabel.text = completed ? primary.timeString : value.timeString
         case .cooldown:
-            cooldownLabel.text = value.timeString
+            cooldownLabel.text = completed ? cooldown.timeString : value.timeString
         case .interval:
             //do nothing
             break
@@ -236,43 +236,6 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         sectionMap[sectionKey]?[indexPath.row].hidden = true
         tableView.reloadRows(at: [indexPath], with: .top)
     }
-    func toggleCellVisibility(indexPath: IndexPath) {
-        
-    }
-    
-    func handlePickerChange(_ hour: Int, _ minute: Int, _ second: Int) {
-        let newTime = Double(hour * 3600 + minute * 60 + second)
-        let sectionKey = sections[(activePickerIndexPath?.section)!]
-        log.debug(sectionKey)
-        sectionMap[sectionKey]?[0].value = newTime
-        let parentIndexPath = IndexPath(row: 0, section: (activePickerIndexPath?.section)!) //magic numbers should not be used, change later
-        tableView.reloadRows(at: [parentIndexPath], with: .none)
-//        sectionMap[sectionKey][activePickerIndexPath.row - 1].value = newTime
-//        let parentIndexPath = IndexPath(row: (activePickerIndexPath?.row)!
-//            - 1 , section: activePickerIndexPath?.section)
-//        tableView.reloadRows(at: [parentIndexPath], with: .none)
-//        
-//        switch timePickerCell.label {
-//        case "Meditation Time":
-//            if let index =  $.findIndex(timers, callback: { $0.timerType == TimerType.primary }) {
-//                timers[index].update(with: newTime)
-//            }
-//            break
-//        case "Countdown":
-//            if let index =  $.findIndex(timers, callback: { $0.timerType == TimerType.countdown }) {
-//                timers[index].update(with: newTime)
-//            }
-//            break
-//        case "Cooldown":
-//            if let index =  $.findIndex(timers, callback: { $0.timerType == TimerType.cooldown }) {
-//                timers[index].update(with: newTime)
-//            }
-//            break
-//        default:
-//            break
-//        }
-        print("picker change logic goes here")
-    }
     
     // MARK: - Actions
     @IBAction func startTimer(_ sender: UIButton) {
@@ -280,36 +243,29 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func _startTimer() {
-//        guard currentTimerIndex < timers.count else {
-//            print("timers are finished, can't start agin")
-//            return
-//        }
-//        let currentTimer = timers[currentTimerIndex]
-//        guard currentTimer.timer == nil else {
-//            print("timer already running")
-//            return
-//        }
-//        //if timer is paused, restart it
-//        if currentTimer.isPaused() {
-//            stopButton.setTitle("Pause", for: .normal)
-//            currentTimer.togglePause()
-//        }
-//        currentTimer.startTimer()
+        var timers: [TimerInfo] = []
+        
+        let countdownTimer = TimerInfo(time: countdown, sound: "countdown sound", type: .countdown)
+        let primaryTimer = TimerInfo(time: primary, sound: "primary sound", type: .primary)
+        let cooldownTimer = TimerInfo(time: cooldown, sound: "cooldown sound", type: .cooldown)
+        
+        timers = [countdownTimer, cooldownTimer, primaryTimer]
+        sessionTimers = TimerWrapper(with: timers, interval: interval, intervalSound: "interval sound")
+        sessionTimers?.updateParent = updateTimerLabels
+        sessionTimers?.startTimer()
     }
 
     @IBAction func stopTimer(_ sender: UIButton) {
-//        let currentTimer = timers[currentTimerIndex]
-//        //if current timer already paused, then clear it and reset the button label
-//        if currentTimer.isPaused() {
-//            stopButton.setTitle("Pause", for: .normal)
-//            currentTimer.stopTime(clear: true)
-//        //if timer is running, pause it
-//        } else {
-//            stopButton.setTitle("Reset", for: .normal)
-//            currentTimer.stopTime(clear: false)
-//        }
-//        
-//        currentTimer.togglePause()
+        guard sessionTimers != nil else {
+            log.debug("no timers running so cannot stop them")
+            return
+        }
+        
+        if (sessionTimers?.isPaused())! {
+            sessionTimers?.stopTimer(clear: true)
+        } else {
+            sessionTimers?.stopTimer(clear: false)
+        }
     }
     
     // MARK: - Utility Functions

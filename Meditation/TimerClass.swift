@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import XCGLogger
 
 enum TimerType: String {
     case primary = "Meditation Time"
@@ -15,79 +16,95 @@ enum TimerType: String {
     case interval = "Interval"
 }
 
-class TimerClass {
+struct TimerInfo {
     var time: Double
-    var remaining: Double
-    var alert: String?
-    var timerType: TimerType
+    var sound: String
+    var type: TimerType
+}
+
+class TimerWrapper {
+    var timers: [TimerInfo]
+    var currentIndex: Int = 0
+    var currentCountdown: Double = 0.0
+    var currentTimer: Timer?
     
-    var paused: Bool = false
+    var interval: Double
+    var intervalSound: String
+    
+    var updateParent: ((_ remaining: Double,_ type: TimerType, _ completed: Bool) -> Void)?
+    
+    var paused: Bool = true
     var completed: Bool = true
     
-    var updateParent: ((_ remaining: Double,_ type: TimerType) -> Void)?
-
-    
-    weak var timer: Timer?
-    
-    init(with time: Double, alert: String? = nil, type: TimerType, callback: @escaping (_ remaining: Double,_ type: TimerType) -> Void ) {
-        self.time = time
-        self.remaining = time
-        self.alert = alert
-        self.timerType = type
-        self.updateParent = callback
+    init(with timers: [TimerInfo], interval: Double = 0.0, intervalSound: String = "") {
+        self.timers = timers.filter { $0.time > 0.0 }
+        self.interval = interval
+        self.intervalSound = intervalSound
+        setNextTimer()
     }
     
-    func update(with time: Double) {
-        guard completed == true else {
-            print("canot update timer while it is running")
-            return
+    func setNextTimer() -> Bool {
+        guard currentIndex < timers.count else {
+            log.debug("Index is out of range")
+            stopTimer(clear: true)
+            return false
         }
-        self.time = time
-        self.remaining = self.time
+        currentCountdown = timers[currentIndex].time
+        return true
     }
     
+    //do I need to accomodate for the base case of the timer value being 0?
     func startTimer() {
-        timer = Timer()
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(TimerClass.countdown), userInfo: nil, repeats: true)
+        paused = false
+        completed = false
+        currentTimer = Timer()
+        currentTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(TimerWrapper.countdown), userInfo: nil, repeats: true)
     }
     
     @objc func countdown() {
-        guard remaining > 0 else {
-            stopTime(clear: false) //don't end session unless the user wants to
+        guard currentCountdown > 0 else {
+//            makeSound(sound: timers[currentIndex].sound)
+            currentIndex += 1
+            if setNextTimer() {
+                startTimer()
+            }
             return
         }
-        remaining = remaining - 1
-        
+        currentCountdown = currentCountdown - 1
+        //alert user on correct intervals
+        if currentCountdown.truncatingRemainder(dividingBy: interval) == 0 {
+//            makeSound(sound: intervalSound)
+        }
         if let block = updateParent {
-            block(remaining, timerType)
+            block(currentCountdown, timers[currentIndex].type, false)
         }
     }
     
-    func stopTime(clear: Bool) {
-        if timer != nil {
-            timer!.invalidate()
+    func stopTimer(clear: Bool) {
+        paused = true
+        if currentTimer != nil {
+            currentTimer!.invalidate()
         }
         
         //if the session is ended, reset the timer
         if clear {
-            self.remaining = self.time
-            timer = nil
+            completed = true
+            self.currentCountdown = 0.0
+            self.currentIndex = 0
+            currentTimer = nil
+            //update parent that timer is finished/reset
             if let block = updateParent {
-                block(remaining, timerType)
+                block(currentCountdown, timers[currentIndex].type, clear)
             }
         }
     }
     
-    func togglePause() {
-        paused = !paused
+    func makeSound(sound: String) {
+        log.debug("making sound: " + sound)
     }
     
     func isPaused() -> Bool {
         return paused
-    }
-    
-    func toggleCompleted() {
-        completed = !completed
     }
     
     func isCompleted() -> Bool {
