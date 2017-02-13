@@ -26,6 +26,8 @@
 		92AB37361E2E01BC004BCC3F /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AB37351E2E01BC004BCC3F /* IntExtension.swift */; };
 		92C092C31E2F73E9006EBB01 /* TimerPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C092C21E2F73E9006EBB01 /* TimerPickerView.swift */; };
 		92E60FE61E4966AB00A2E994 /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E60FE51E4966AB00A2E994 /* PickerTableViewCell.swift */; };
+		92EB283E1E51494500AA5DA8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92EB283D1E51494500AA5DA8 /* AVFoundation.framework */; };
+		92EB28411E51498400AA5DA8 /* bells.wav in Resources */ = {isa = PBXBuildFile; fileRef = 92EB28401E51498400AA5DA8 /* bells.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,8 @@
 		92AB37351E2E01BC004BCC3F /* IntExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
 		92C092C21E2F73E9006EBB01 /* TimerPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerPickerView.swift; sourceTree = "<group>"; };
 		92E60FE51E4966AB00A2E994 /* PickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTableViewCell.swift; sourceTree = "<group>"; };
+		92EB283D1E51494500AA5DA8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		92EB28401E51498400AA5DA8 /* bells.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bells.wav; path = ../../../Downloads/bells.wav; sourceTree = "<group>"; };
 		99672B0E98ABE582C95FD1C7 /* Pods_MeditationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MeditationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC8804A14E13D0235D5A4054 /* Pods-Meditation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meditation.release.xcconfig"; path = "Pods/Target Support Files/Pods-Meditation/Pods-Meditation.release.xcconfig"; sourceTree = "<group>"; };
 		B4D4A9C2E875899CC21185B5 /* Pods-MeditationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeditationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeditationTests/Pods-MeditationTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -84,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92EB283E1E51494500AA5DA8 /* AVFoundation.framework in Frameworks */,
 				566ECED7B1505BC7E2181C9B /* Pods_Meditation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,6 +150,7 @@
 		9230BE8E1E0E0B5A001A12CE /* Meditation */ = {
 			isa = PBXGroup;
 			children = (
+				92EB283F1E51496200AA5DA8 /* Resources */,
 				92387A281E0E2D5600C86A6D /* TableCells */,
 				927BE5731E0E19900073ABFE /* Utilities */,
 				9230BE8F1E0E0B5A001A12CE /* AppDelegate.swift */,
@@ -198,9 +204,18 @@
 			name = Utilities;
 			sourceTree = "<group>";
 		};
+		92EB283F1E51496200AA5DA8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				92EB28401E51498400AA5DA8 /* bells.wav */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		B02D190436F0D34FC8908C00 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				92EB283D1E51494500AA5DA8 /* AVFoundation.framework */,
 				30D097C9E6F3846462DA3045 /* Pods_Meditation.framework */,
 				99672B0E98ABE582C95FD1C7 /* Pods_MeditationTests.framework */,
 				6A04F505CC8B3302D38D9A18 /* Pods_MeditationUITests.framework */,
@@ -327,6 +342,7 @@
 				9230BE9C1E0E0B5A001A12CE /* LaunchScreen.storyboard in Resources */,
 				9230BE991E0E0B5A001A12CE /* Assets.xcassets in Resources */,
 				9230BE971E0E0B5A001A12CE /* Main.storyboard in Resources */,
+				92EB28411E51498400AA5DA8 /* bells.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

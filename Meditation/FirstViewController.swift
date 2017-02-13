@@ -252,13 +252,14 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func _startTimer() {
         var timers: [TimerInfo] = []
         
-        let countdownTimer = TimerInfo(time: countdown, sound: "countdown sound", type: .countdown)
-        let primaryTimer = TimerInfo(time: primary, sound: "primary sound", type: .primary)
-        let cooldownTimer = TimerInfo(time: cooldown, sound: "cooldown sound", type: .cooldown)
+        let countdownTimer = TimerInfo(time: countdown, sound: "bells.wav", type: .countdown)
+        let primaryTimer = TimerInfo(time: primary, sound: "bells.wav", type: .primary)
+        let cooldownTimer = TimerInfo(time: cooldown, sound: "bells.wav", type: .cooldown)
         
         timers = [countdownTimer, cooldownTimer, primaryTimer]
-        sessionTimers = TimerWrapper(with: timers, interval: interval, intervalSound: "interval sound")
+        sessionTimers = TimerWrapper(with: timers, interval: interval, intervalSound: "bells.wav")
         sessionTimers?.updateParent = updateTimerLabels
+        sessionTimers?.onComplete = onComplete
         sessionTimers?.startTimer()
     }
 
@@ -276,6 +277,10 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             sessionTimers?.stopTimer(clear: false)
             stopButton.setTitle("Reset", for: .normal)
         }
+    }
+    
+    func onComplete() {
+        stopButton.setTitle("Reset", for: .normal)
     }
     
     // MARK: - Utility Functions

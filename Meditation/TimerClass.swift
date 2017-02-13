@@ -8,6 +8,7 @@
 
 import UIKit
 import XCGLogger
+import AVFoundation
 
 enum TimerType: String {
     case primary = "Meditation Time"
@@ -33,14 +34,22 @@ class TimerWrapper {
     var intervalSound: String
     
     var updateParent: ((_ remaining: Double,_ type: TimerType) -> Void)?
+    var onComplete: (() -> Void)?
     
     var paused: Bool = true
     var completed: Bool = true
+    
+    var sounds: [TimerType: AVAudioPlayer] = [:]
+    var soundQueue = DispatchQueue(label: "strenfel.zach.soundQ")
     
     init(with timers: [TimerInfo], interval: Double = 0.0, intervalSound: String = "") {
         self.timers = timers.filter { $0.time > 0.0 }
         self.interval = interval
         self.intervalSound = intervalSound
+        //load the appropriate sounds
+        for timer in timers {
+            loadSound(type: timer.type, path: timer.sound)
+        }
     }
     
     func setNextTimer() {
@@ -48,6 +57,10 @@ class TimerWrapper {
             log.debug("Index is out of range")
             stopTimer(clear: false)
             completed = true
+            //let parent know that the timer finished
+            if let block = onComplete {
+                block()
+            }
             return
         }
         currentIndex += 1
@@ -66,14 +79,14 @@ class TimerWrapper {
     
     @objc func countdown() {
         if currentTime >= timers[currentIndex].time {
-            makeSound(sound: timers[currentIndex].sound)
+            playSound(type: timers[currentIndex].type)
             currentTime = 1.0
             setNextTimer()
         } else {
             currentTime += 1
             //alert user on correct intervals
             if currentTime.truncatingRemainder(dividingBy: interval) == 0 {
-                makeSound(sound: intervalSound)
+                playSound(type: .interval)
             }
         }
         if !completed {
@@ -103,8 +116,32 @@ class TimerWrapper {
         }
     }
     
-    func makeSound(sound: String) {
-        log.debug("making sound: " + sound)
+    func loadSound(type: TimerType, path: String) {
+        soundQueue.sync {
+            let path = Bundle.main.path(forResource: path, ofType: nil)
+            let url = URL(fileURLWithPath: path!)
+            do {
+                let sound = try AVAudioPlayer(contentsOf: url)
+                sounds[type] = sound
+            } catch {
+                log.debug("could not find the allocated sound")
+            }
+        }
+    }
+    
+    func playSound(type: TimerType) {
+        log.debug("making sound for \(type)")
+        //should I stop all sounds here? 
+        guard sounds[type] != nil else {
+            log.debug("no sound was loaded for this timer")
+            return
+        }
+        sounds[type]!.play()
+        let playTime: DispatchTimeInterval = .seconds(5)
+        soundQueue.asyncAfter(deadline: .now() + playTime) {
+            self.sounds[type]?.stop()
+            self.sounds[type]?.currentTime = 0
+        }
     }
     
     func isPaused() -> Bool {
