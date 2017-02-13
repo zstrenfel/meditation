@@ -65,21 +65,25 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
         tableView.register(TimePickerTableViewCell.self, forCellReuseIdentifier: "timePickerCell")
+        tableView.register(DisplayTableViewCell.self, forCellReuseIdentifier: "displayCell")
+        
         
         //create tablecell objects and array
-        let countdownCell = TableCell(type: .option, label: TimerType.countdown.rawValue, value: countdown)
+        let countdownCell = TableCell(type: .display, label: TimerType.countdown.rawValue, value: countdown)
         let countdownPickerCell = TableCell(type: .timePicker, label: TimerType.countdown.rawValue, value: countdown, hidden: true)
+        let countdownSoundPickerCell = TableCell(type: .link, label: "Sound", value: "Bells")
         
-        let primaryCell = TableCell(type: .option, label: TimerType.primary.rawValue, value: primary)
+        let primaryCell = TableCell(type: .display, label: TimerType.primary.rawValue, value: primary)
         let primaryPickerCell = TableCell(type: .timePicker, label: TimerType.primary.rawValue, value: primary, hidden: true)
         
-        let cooldownCell = TableCell(type: .option, label: TimerType.cooldown.rawValue, value: cooldown)
+        let cooldownCell = TableCell(type: .display, label: TimerType.cooldown.rawValue, value: cooldown)
         let cooldownPickerCell = TableCell(type: .timePicker, label: TimerType.cooldown.rawValue, value: cooldown, hidden: true)
         
-        let intervalCell = TableCell(type: .option, label: TimerType.interval.rawValue, value: interval)
+        let intervalCell = TableCell(type: .display, label: TimerType.interval.rawValue, value: interval)
         let intervalPickerCell = TableCell(type: .timePicker, label: TimerType.interval.rawValue, value: interval, hidden: true)
         
-        sectionMap[.countdown] = [countdownCell, countdownPickerCell]
+        sectionMap[.countdown] = [countdownCell, countdownPickerCell, countdownSoundPickerCell
+        ]
         sectionMap[.primary] = [primaryCell, primaryPickerCell]
         sectionMap[.cooldown] = [cooldownCell, cooldownPickerCell]
         sectionMap[.interval] = [intervalCell, intervalPickerCell]
@@ -172,15 +176,15 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             cell.isHidden = tableCell.hidden
             return cell
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "optionCell") as! OptionTableViewCell
-            cell.optionLabel.text = tableCell.label
+            let cell = tableView.dequeueReusableCell(withIdentifier: "displayCell") as! DisplayTableViewCell
+            cell.titleLabel.text = tableCell.label
             switch tableCell.value {
             case let value as Double:
-                cell.valueLabel.text = value.timeString
+                cell.optionLabel.text = value.timeString
             case let value as String:
-                cell.valueLabel.text = value
+                cell.optionLabel.text = value
             default:
-                cell.valueLabel.text = nil
+                cell.optionLabel.text = nil
             }
             return cell
         }
@@ -208,6 +212,9 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             break
         case .picker:
             //do nothing
+            break
+        case .link:
+            performSegue(withIdentifier: "showSoundOptions", sender: self)
             break
         default:
             //show, hide functionality for the picker cells goes here

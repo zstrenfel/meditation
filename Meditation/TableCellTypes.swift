@@ -24,10 +24,11 @@ struct TableCell {
 }
 
 enum CellType {
-    case option
+    case display
     case picker
     case timePicker
     case toggle
     case input
+    case link 
 }
 
