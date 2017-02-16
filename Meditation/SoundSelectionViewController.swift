@@ -18,8 +18,6 @@ class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
-        tableView.register(DisplayTableViewCell.self, forCellReuseIdentifier: "displayCell")
-
         // Do any additional setup after loading the view.
     }
 
@@ -39,8 +37,8 @@ class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "displayCell") as! DisplayTableViewCell
-        cell.titleLabel.text = sounds[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "optionCell") as! OptionTableViewCell
+        cell.optionLabel.text = sounds[indexPath.row]
         return cell
     }
 }

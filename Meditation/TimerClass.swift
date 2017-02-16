@@ -21,6 +21,7 @@ struct TimerInfo {
     var time: Double
     var sound: String
     var type: TimerType
+    var shouldRepeat: Bool?
 }
 
 class TimerWrapper {
@@ -30,8 +31,7 @@ class TimerWrapper {
     
     var currentTime: Double = 0.0
     
-    var interval: Double
-    var intervalSound: String
+    var interval: TimerInfo
     
     var updateParent: ((_ remaining: Double,_ type: TimerType) -> Void)?
     var onComplete: (() -> Void)?
@@ -42,14 +42,15 @@ class TimerWrapper {
     var sounds: [TimerType: AVAudioPlayer] = [:]
     var soundQueue = DispatchQueue(label: "strenfel.zach.soundQ")
     
-    init(with timers: [TimerInfo], interval: Double = 0.0, intervalSound: String = "") {
+    init(with timers: [TimerInfo], interval: TimerInfo) {
         self.timers = timers.filter { $0.time > 0.0 }
         self.interval = interval
-        self.intervalSound = intervalSound
         //load the appropriate sounds
         for timer in timers {
             loadSound(type: timer.type, path: timer.sound)
         }
+        //load interval sound
+        loadSound(type: .interval, path: self.interval.sound)
     }
     
     func setNextTimer() {
@@ -85,7 +86,7 @@ class TimerWrapper {
         } else {
             currentTime += 1
             //alert user on correct intervals
-            if currentTime.truncatingRemainder(dividingBy: interval) == 0 {
+            if currentTime.truncatingRemainder(dividingBy: interval.time) == 0 {
                 playSound(type: .interval)
             }
         }

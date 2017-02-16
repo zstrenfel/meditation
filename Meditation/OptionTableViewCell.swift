@@ -2,8 +2,8 @@
 //  OptionTableViewCell.swift
 //  Meditation
 //
-//  Created by Zach Strenfel on 12/24/16.
-//  Copyright © 2016 Zach Strenfel. All rights reserved.
+//  Created by Zach Strenfel on 2/16/17.
+//  Copyright © 2017 Zach Strenfel. All rights reserved.
 //
 
 import UIKit
@@ -11,23 +11,16 @@ import UIKit
 class OptionTableViewCell: UITableViewCell {
 
     @IBOutlet weak var optionLabel: UILabel!
-    @IBOutlet weak var valueLabel: UILabel!
-    
-    var parent: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+
         // Configure the view for the selected state
-    }
-    
-    func updateValueLabel(with value: String) {
-        valueLabel.text = value
     }
 
 }

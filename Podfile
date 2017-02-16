@@ -8,6 +8,7 @@ target 'Meditation' do
   # Pods for Meditation
   pod 'Dollar'
   pod 'Cent'
+  pod 'Hex'
   pod 'XCGLogger', '~> 4.0.0'
 
 

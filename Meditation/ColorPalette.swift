@@ -7,9 +7,8 @@
 //
 
 import Foundation
+import Hex
 
 struct ColorPalette {
-    struct text {
-//        var primary: UIColor = .black
-    }
+    static var lightGray = UIColor(hex: "ECECEC")
 }
