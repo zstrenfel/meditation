@@ -12,6 +12,8 @@ class OptionTableViewCell: UITableViewCell {
 
     @IBOutlet weak var optionLabel: UILabel!
     
+    var value: String = ""
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

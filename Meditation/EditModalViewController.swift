@@ -16,7 +16,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     var sections: [TimerType] = [.countdown, .primary, .cooldown, .interval]
     var sectionMap: [TimerType: [TableCell]] = [:]
     
-    var updateParent: ((_ value: Double ,_ type: TimerType) -> Void)?
+    var updateParent: ((_ value: Double,_ type: TimerType) -> Void)?
     
     //what section has an active picker
     var activePickerIndexPath: IndexPath? = nil
@@ -209,5 +209,19 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     @IBAction func closeModal(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showSoundOptions" {
+            let destinationVC = segue.destination as! SoundSelectionViewController
+            destinationVC.type = sections[(self.tableView.indexPathForSelectedRow?.section)!]
+            destinationVC.updateParent = self.updateSound
+        }
+    }
+    
+    func updateSound(_ type: TimerType, _ path: String) {
+        timers[type]?.sound = path
+    }
+    
 
 }

@@ -32,6 +32,9 @@
 		92E60FE61E4966AB00A2E994 /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E60FE51E4966AB00A2E994 /* PickerTableViewCell.swift */; };
 		92EB283E1E51494500AA5DA8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92EB283D1E51494500AA5DA8 /* AVFoundation.framework */; };
 		92EB28411E51498400AA5DA8 /* bells.wav in Resources */ = {isa = PBXBuildFile; fileRef = 92EB28401E51498400AA5DA8 /* bells.wav */; };
+		92EFCD5A1E5AB6B000B8DC5C /* StringExt+TitleCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EFCD591E5AB6B000B8DC5C /* StringExt+TitleCase.swift */; };
+		92EFCD5D1E5ABC6600B8DC5C /* singing_bowl.wav in Resources */ = {isa = PBXBuildFile; fileRef = 92EFCD5B1E5ABC6600B8DC5C /* singing_bowl.wav */; };
+		92EFCD5E1E5ABC6600B8DC5C /* wind_chimes.wav in Resources */ = {isa = PBXBuildFile; fileRef = 92EFCD5C1E5ABC6600B8DC5C /* wind_chimes.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +88,9 @@
 		92E60FE51E4966AB00A2E994 /* PickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTableViewCell.swift; sourceTree = "<group>"; };
 		92EB283D1E51494500AA5DA8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		92EB28401E51498400AA5DA8 /* bells.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bells.wav; path = ../../../Downloads/bells.wav; sourceTree = "<group>"; };
+		92EFCD591E5AB6B000B8DC5C /* StringExt+TitleCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StringExt+TitleCase.swift"; sourceTree = "<group>"; };
+		92EFCD5B1E5ABC6600B8DC5C /* singing_bowl.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = singing_bowl.wav; path = ../../../Downloads/singing_bowl.wav; sourceTree = "<group>"; };
+		92EFCD5C1E5ABC6600B8DC5C /* wind_chimes.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = wind_chimes.wav; path = ../../../Downloads/wind_chimes.wav; sourceTree = "<group>"; };
 		99672B0E98ABE582C95FD1C7 /* Pods_MeditationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MeditationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC8804A14E13D0235D5A4054 /* Pods-Meditation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meditation.release.xcconfig"; path = "Pods/Target Support Files/Pods-Meditation/Pods-Meditation.release.xcconfig"; sourceTree = "<group>"; };
 		B4D4A9C2E875899CC21185B5 /* Pods-MeditationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeditationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeditationTests/Pods-MeditationTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -137,9 +143,9 @@
 			isa = PBXGroup;
 			children = (
 				9230BE911E0E0B5A001A12CE /* FirstViewController.swift */,
-				92C732BE1E519C4E0040C859 /* SoundSelectionViewController.swift */,
 				9230BE931E0E0B5A001A12CE /* SecondViewController.swift */,
 				921A90B31E5559C400F7F6AE /* EditModalViewController.swift */,
+				92C732BE1E519C4E0040C859 /* SoundSelectionViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -228,6 +234,7 @@
 				92C092C21E2F73E9006EBB01 /* TimerPickerView.swift */,
 				92974FD51E307FAF0056299D /* ColorPalette.swift */,
 				920103941E4867240049A072 /* TimerClass.swift */,
+				92EFCD591E5AB6B000B8DC5C /* StringExt+TitleCase.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -235,6 +242,8 @@
 		92EB283F1E51496200AA5DA8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				92EFCD5B1E5ABC6600B8DC5C /* singing_bowl.wav */,
+				92EFCD5C1E5ABC6600B8DC5C /* wind_chimes.wav */,
 				92EB28401E51498400AA5DA8 /* bells.wav */,
 			);
 			name = Resources;
@@ -369,7 +378,9 @@
 			files = (
 				9230BE9C1E0E0B5A001A12CE /* LaunchScreen.storyboard in Resources */,
 				9230BE991E0E0B5A001A12CE /* Assets.xcassets in Resources */,
+				92EFCD5D1E5ABC6600B8DC5C /* singing_bowl.wav in Resources */,
 				9230BE971E0E0B5A001A12CE /* Main.storyboard in Resources */,
+				92EFCD5E1E5ABC6600B8DC5C /* wind_chimes.wav in Resources */,
 				92EB28411E51498400AA5DA8 /* bells.wav in Resources */,
 				921A90AD1E55587100F7F6AE /* EditModal.storyboard in Resources */,
 			);
@@ -547,6 +558,7 @@
 				921A90AF1E55591200F7F6AE /* OptionTableViewCell.swift in Sources */,
 				92974FD61E307FAF0056299D /* ColorPalette.swift in Sources */,
 				920103951E4867240049A072 /* TimerClass.swift in Sources */,
+				92EFCD5A1E5AB6B000B8DC5C /* StringExt+TitleCase.swift in Sources */,
 				9230BE921E0E0B5A001A12CE /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

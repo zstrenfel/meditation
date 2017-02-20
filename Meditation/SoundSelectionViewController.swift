@@ -11,12 +11,20 @@
 import UIKit
 
 class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
-    var sounds: [String] = ["Bells"]
+    
+    var sounds: [String] = [
+        "bells.wav",
+        "wind_chimes.wav",
+        "singing_bowl.wav"
+    ]
+    
+    var type: TimerType?
+    var updateParent: ((_ type: TimerType, _ path: String) -> Void)?
     
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.automaticallyAdjustsScrollViewInsets = false
         tableView.tableFooterView = UIView()
         // Do any additional setup after loading the view.
     }
@@ -38,7 +46,21 @@ class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "optionCell") as! OptionTableViewCell
-        cell.optionLabel.text = sounds[indexPath.row]
+        cell.optionLabel.text = sounds[indexPath.row].titleCase()
+        cell.value = sounds[indexPath.row]
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! OptionTableViewCell
+        cell.accessoryType = .checkmark
+        if let block = updateParent {
+            block(type!, cell.value)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.accessoryType = .none
     }
 }
