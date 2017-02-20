@@ -105,7 +105,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
             case let value as Double:
                 cell.valueLabel.text = value.timeString
             case let value as String:
-                cell.valueLabel.text = value
+                cell.valueLabel.text = value.titleCase()
             default:
                 cell.valueLabel.text = nil
             }
@@ -231,11 +231,15 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     func updateSound(_ type: TimerType, _ path: String) {
         var timer = timers[type]
         timer?.sound = path
+        self.timers[type] = timer
+        
+        let sectionIndex = sections.index(of: type)
+        sectionMap[type]?[2].value = path
+        self.tableView.reloadRows(at: [IndexPath(row: 2, section: sectionIndex!)], with: .none)
+        
         if let block = updateParent {
             block(type, timer!)
         }
-        timers[type] = timer
-        updateSection(type: type)
     }
     
     func updateSection(type: TimerType) {
