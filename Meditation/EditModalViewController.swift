@@ -63,7 +63,13 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         var timer = timers[type]
         timer?.time = value
         self.timers[type] = timer
-        updateSection(type: type)
+        let sectionIndex = sections.index(of: type)
+        self.sectionMap[type]?[0].value = value
+        self.tableView.reloadRows(at: [IndexPath(row: 0, section: sectionIndex!)], with: .none)
+        
+        if let block = updateParent {
+            block(type, timer!)
+        }
     }
     
 
@@ -79,7 +85,10 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        log.debug("creating cell for \(indexPath)")
+        
         let tableCell = getTableCell(indexPath: indexPath)
+        log.debug(tableCell)
         
         switch tableCell.type {
         case .timePicker:
@@ -103,10 +112,13 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
             
             if tableCell.type == .link {
                 cell.accessoryType = .disclosureIndicator
+            } else {
+                cell.accessoryType = .none
             }
             return cell
         }
     }
+    
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
