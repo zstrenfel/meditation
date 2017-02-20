@@ -18,6 +18,8 @@ class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITab
         "singing_bowl.wav"
     ]
     
+    var selected: String?
+    
     var type: TimerType?
     var updateParent: ((_ type: TimerType, _ path: String) -> Void)?
     
@@ -26,6 +28,7 @@ class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITab
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         tableView.tableFooterView = UIView()
+        
         // Do any additional setup after loading the view.
     }
 
@@ -48,14 +51,23 @@ class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITab
         let cell = tableView.dequeueReusableCell(withIdentifier: "optionCell") as! OptionTableViewCell
         cell.optionLabel.text = sounds[indexPath.row].titleCase()
         cell.value = sounds[indexPath.row]
+        
+        if sounds[indexPath.row] == self.selected {
+            self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            cell.accessoryType = .checkmark
+            cell.selectionStyle = .none
+        }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! OptionTableViewCell
         cell.accessoryType = .checkmark
+        cell.selectionStyle = .none
+        
         if let block = updateParent {
-            block(type!, cell.value)
+            block(self.type!, cell.value!)
         }
     }
     
