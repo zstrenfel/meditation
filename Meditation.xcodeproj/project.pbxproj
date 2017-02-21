@@ -17,13 +17,13 @@
 		921A90B41E5559C400F7F6AE /* EditModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921A90B31E5559C400F7F6AE /* EditModalViewController.swift */; };
 		9230BE901E0E0B5A001A12CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE8F1E0E0B5A001A12CE /* AppDelegate.swift */; };
 		9230BE921E0E0B5A001A12CE /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE911E0E0B5A001A12CE /* FirstViewController.swift */; };
-		9230BE941E0E0B5A001A12CE /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE931E0E0B5A001A12CE /* SecondViewController.swift */; };
 		9230BE971E0E0B5A001A12CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9230BE951E0E0B5A001A12CE /* Main.storyboard */; };
 		9230BE991E0E0B5A001A12CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9230BE981E0E0B5A001A12CE /* Assets.xcassets */; };
 		9230BE9C1E0E0B5A001A12CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9230BE9A1E0E0B5A001A12CE /* LaunchScreen.storyboard */; };
 		9230BEA71E0E0B5A001A12CE /* MeditationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BEA61E0E0B5A001A12CE /* MeditationTests.swift */; };
 		9230BEB21E0E0B5A001A12CE /* MeditationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BEB11E0E0B5A001A12CE /* MeditationUITests.swift */; };
 		92387A2C1E0E2D9200C86A6D /* TimePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92387A2B1E0E2D9200C86A6D /* TimePickerTableViewCell.swift */; };
+		924521F91E5BDEB7005BC843 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924521F81E5BDEB7005BC843 /* RoundButton.swift */; };
 		927BE5751E0E19B40073ABFE /* TableCellTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927BE5741E0E19B30073ABFE /* TableCellTypes.swift */; };
 		92974FD61E307FAF0056299D /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92974FD51E307FAF0056299D /* ColorPalette.swift */; };
 		92AB37361E2E01BC004BCC3F /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AB37351E2E01BC004BCC3F /* IntExtension.swift */; };
@@ -68,7 +68,6 @@
 		9230BE8C1E0E0B5A001A12CE /* Meditation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meditation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9230BE8F1E0E0B5A001A12CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9230BE911E0E0B5A001A12CE /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		9230BE931E0E0B5A001A12CE /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		9230BE961E0E0B5A001A12CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9230BE981E0E0B5A001A12CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9230BE9B1E0E0B5A001A12CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -80,6 +79,7 @@
 		9230BEB11E0E0B5A001A12CE /* MeditationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationUITests.swift; sourceTree = "<group>"; };
 		9230BEB31E0E0B5A001A12CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92387A2B1E0E2D9200C86A6D /* TimePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePickerTableViewCell.swift; sourceTree = "<group>"; };
+		924521F81E5BDEB7005BC843 /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		927BE5741E0E19B30073ABFE /* TableCellTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCellTypes.swift; sourceTree = "<group>"; };
 		92974FD51E307FAF0056299D /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		92AB37351E2E01BC004BCC3F /* IntExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
@@ -143,7 +143,6 @@
 			isa = PBXGroup;
 			children = (
 				9230BE911E0E0B5A001A12CE /* FirstViewController.swift */,
-				9230BE931E0E0B5A001A12CE /* SecondViewController.swift */,
 				921A90B31E5559C400F7F6AE /* EditModalViewController.swift */,
 				92C732BE1E519C4E0040C859 /* SoundSelectionViewController.swift */,
 			);
@@ -235,6 +234,7 @@
 				92974FD51E307FAF0056299D /* ColorPalette.swift */,
 				920103941E4867240049A072 /* TimerClass.swift */,
 				92EFCD591E5AB6B000B8DC5C /* StringExt+TitleCase.swift */,
+				924521F81E5BDEB7005BC843 /* RoundButton.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -551,9 +551,9 @@
 				92387A2C1E0E2D9200C86A6D /* TimePickerTableViewCell.swift in Sources */,
 				921A90B41E5559C400F7F6AE /* EditModalViewController.swift in Sources */,
 				92E60FE61E4966AB00A2E994 /* PickerTableViewCell.swift in Sources */,
+				924521F91E5BDEB7005BC843 /* RoundButton.swift in Sources */,
 				92C092C31E2F73E9006EBB01 /* TimerPickerView.swift in Sources */,
 				92AB37361E2E01BC004BCC3F /* IntExtension.swift in Sources */,
-				9230BE941E0E0B5A001A12CE /* SecondViewController.swift in Sources */,
 				9230BE901E0E0B5A001A12CE /* AppDelegate.swift in Sources */,
 				921A90AF1E55591200F7F6AE /* OptionTableViewCell.swift in Sources */,
 				92974FD61E307FAF0056299D /* ColorPalette.swift in Sources */,

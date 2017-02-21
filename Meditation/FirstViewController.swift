@@ -52,6 +52,7 @@ class FirstViewController: UIViewController {
     func updateTimerLabels(_ value: Double, _ type: TimerType) {
         switch type {
         case .countdown:
+            
             countdownLabel.text = value.timeString
         case .primary:
             timerLabel.text = value.timeString
@@ -78,10 +79,13 @@ class FirstViewController: UIViewController {
     func _startTimer() {
         var timers = Array(self.timers.values)
         timers = timers.filter { $0.type != .interval }
-        sessionTimers = TimerWrapper(with: timers, interval: self.timers[.interval]!)
-        sessionTimers?.updateParent = updateTimerLabels
-        sessionTimers?.onComplete = onComplete
+        if sessionTimers == nil {
+            sessionTimers = TimerWrapper(with: timers, interval: self.timers[.interval]!)
+            sessionTimers?.updateParent = updateTimerLabels
+            sessionTimers?.onComplete = onComplete
+        }
         sessionTimers?.startTimer()
+        stopButton.setTitle("Pause", for: .normal)
     }
 
     @IBAction func stopTimer(_ sender: UIButton) {
