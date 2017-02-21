@@ -65,7 +65,8 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         self.timers[type] = timer
         let sectionIndex = sections.index(of: type)
         self.sectionMap[type]?[0].value = value
-        self.tableView.reloadRows(at: [IndexPath(row: 0, section: sectionIndex!)], with: .none)
+        self.sectionMap[type]?[1].value = value
+        self.tableView.reloadRows(at: [IndexPath(row: 0, section: sectionIndex!),IndexPath(row: 1, section: sectionIndex!)], with: .none)
         
         if let block = updateParent {
             block(type, timer!)
@@ -94,6 +95,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         case .timePicker:
             let cell = tableView.dequeueReusableCell(withIdentifier: "timePickerCell") as! TimePickerTableViewCell
             cell.updateParent = handlePickerChange
+            log.debug(tableCell.value)
             cell.value = tableCell.value as! Double
             cell.type = TimerType(rawValue: tableCell.label)
             cell.isHidden = tableCell.hidden

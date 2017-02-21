@@ -22,6 +22,7 @@ struct TimerInfo {
     var sound: String
     var type: TimerType
     var shouldRepeat: Bool?
+    var index: Int
 }
 
 class TimerWrapper {
@@ -44,6 +45,7 @@ class TimerWrapper {
     
     init(with timers: [TimerInfo], interval: TimerInfo) {
         self.timers = timers.filter { $0.time > 0.0 }
+        self.timers = self.timers.sorted { $0.index < $1.index }
         self.interval = interval
         //load the appropriate sounds
         for timer in timers {

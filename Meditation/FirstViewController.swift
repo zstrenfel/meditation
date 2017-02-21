@@ -31,10 +31,10 @@ class FirstViewController: UIViewController {
         
         if timers.values.count == 0 {
             log.debug("no current values for the timers, creating defaults now")
-            timers[.primary] = TimerInfo(time: 0.0, sound: "bells.wav", type: .primary, shouldRepeat: nil)
-            timers[.countdown] = TimerInfo(time: 0.0, sound: "bells.wav", type: .countdown, shouldRepeat: nil)
-            timers[.cooldown] = TimerInfo(time: 0.0, sound: "bells.wav", type: .cooldown, shouldRepeat: nil)
-            timers[.interval] = TimerInfo(time: 0.0, sound: "bells.wav", type: .interval, shouldRepeat: false)
+            timers[.countdown] = TimerInfo(time: 0.0, sound: "bells.wav", type: .countdown, shouldRepeat: nil, index: 0)
+            timers[.primary] = TimerInfo(time: 0.0, sound: "bells.wav", type: .primary, shouldRepeat: nil, index: 1)
+            timers[.cooldown] = TimerInfo(time: 0.0, sound: "bells.wav", type: .cooldown, shouldRepeat: nil, index: 2)
+            timers[.interval] = TimerInfo(time: 0.0, sound: "bells.wav", type: .interval, shouldRepeat: false, index: 3)
         }
         
         //update labels with the appropriate time
