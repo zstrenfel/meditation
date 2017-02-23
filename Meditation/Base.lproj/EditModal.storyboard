@@ -34,7 +34,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3v-0x-ydb">
-                                                    <rect key="frame" x="8" y="8" width="42" height="27.5"/>
+                                                    <rect key="frame" x="8" y="8" width="42" height="28"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -97,7 +97,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Anx-Z4-T41" id="LER-Vt-Qip">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AIh-4z-OD8">
@@ -125,6 +125,41 @@
                                         <connections>
                                             <outlet property="titleLabel" destination="AIh-4z-OD8" id="VT6-D3-R4y"/>
                                             <outlet property="valueLabel" destination="kdQ-wx-k0H" id="uF1-Kf-MCZ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="toggleCell" id="2vn-Fi-lR9" customClass="ToggleTableViewCell" customModule="Meditation" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2vn-Fi-lR9" id="p4a-Ma-3RK">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BfP-PE-Igf">
+                                                    <rect key="frame" x="8" y="8" width="294" height="27.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xRY-vZ-uGR">
+                                                    <rect key="frame" x="318" y="8" width="51" height="27.5"/>
+                                                    <connections>
+                                                        <action selector="toggleValue:" destination="2vn-Fi-lR9" eventType="valueChanged" id="Y6x-VP-ETs"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="xRY-vZ-uGR" firstAttribute="top" secondItem="p4a-Ma-3RK" secondAttribute="topMargin" id="2rE-6v-EFC"/>
+                                                <constraint firstItem="xRY-vZ-uGR" firstAttribute="leading" secondItem="BfP-PE-Igf" secondAttribute="trailing" constant="16" id="6cC-te-xOA"/>
+                                                <constraint firstItem="BfP-PE-Igf" firstAttribute="leading" secondItem="p4a-Ma-3RK" secondAttribute="leadingMargin" id="bGd-7f-zge"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="BfP-PE-Igf" secondAttribute="bottom" id="e5D-dJ-TMW"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="xRY-vZ-uGR" secondAttribute="trailing" id="jU1-ic-6D8"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="xRY-vZ-uGR" secondAttribute="bottom" id="thw-4M-NnN"/>
+                                                <constraint firstItem="BfP-PE-Igf" firstAttribute="top" secondItem="p4a-Ma-3RK" secondAttribute="topMargin" id="zs2-NA-XXL"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="optionLabel" destination="BfP-PE-Igf" id="eqT-9C-QHs"/>
+                                            <outlet property="toggle" destination="xRY-vZ-uGR" id="jhi-aR-sXQ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

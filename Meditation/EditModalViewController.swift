@@ -45,11 +45,12 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         let intervalCell = TableCell(type: .display, label: TimerType.interval.rawValue, value: timers[.interval]?.time)
         let intervalPickerCell = TableCell(type: .timePicker, label: TimerType.interval.rawValue, value: timers[.interval]?.time, hidden: true)
         let intervalSoundPickerCell = TableCell(type: .link, label: "Sound", value: timers[.interval]?.sound)
+        let intervalToggleCell = TableCell(type: .toggle, label: "Repeat", value: false)
         
         sectionMap[.countdown] = [countdownCell, countdownPickerCell, countdownSoundPickerCell]
         sectionMap[.primary] = [primaryCell, primaryPickerCell, primarySoundPickerCell]
         sectionMap[.cooldown] = [cooldownCell, cooldownPickerCell, cooldownSoundPickerCell]
-        sectionMap[.interval] = [intervalCell, intervalPickerCell, intervalSoundPickerCell]
+        sectionMap[.interval] = [intervalCell, intervalPickerCell, intervalSoundPickerCell, intervalToggleCell]
         // Do any additional setup after loading the view.
     }
 
@@ -99,6 +100,15 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
             cell.value = tableCell.value as! Double
             cell.type = TimerType(rawValue: tableCell.label)
             cell.isHidden = tableCell.hidden
+            return cell
+        case .toggle:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "toggleCell") as! ToggleTableViewCell
+            cell.updateParent = updateRepeat
+            cell.optionLabel.text = tableCell.label
+            
+            if let toggleValue = tableCell.value as? Bool {
+                cell.toggleValue = toggleValue
+            }
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "displayCell") as! DisplayTableViewCell
@@ -238,6 +248,16 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         let sectionIndex = sections.index(of: type)
         sectionMap[type]?[2].value = path
         self.tableView.reloadRows(at: [IndexPath(row: 2, section: sectionIndex!)], with: .none)
+        
+        if let block = updateParent {
+            block(type, timer!)
+        }
+    }
+    
+    func updateRepeat(_ value: Bool, _ type: TimerType) {
+        var timer = timers[type]
+        timer?.shouldRepeat = value
+        self.timers[type] = timer
         
         if let block = updateParent {
             block(type, timer!)

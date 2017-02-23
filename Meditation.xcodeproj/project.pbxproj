@@ -10,6 +10,7 @@
 		2BD135E8E7EE0B9DC90743DF /* Pods_MeditationUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A04F505CC8B3302D38D9A18 /* Pods_MeditationUITests.framework */; };
 		45B9590B87277EE487553D61 /* Pods_MeditationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99672B0E98ABE582C95FD1C7 /* Pods_MeditationTests.framework */; };
 		566ECED7B1505BC7E2181C9B /* Pods_Meditation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30D097C9E6F3846462DA3045 /* Pods_Meditation.framework */; };
+		92001A311E5F260E00E70A0C /* ToggleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92001A301E5F260E00E70A0C /* ToggleTableViewCell.swift */; };
 		920103951E4867240049A072 /* TimerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920103941E4867240049A072 /* TimerClass.swift */; };
 		921A90AD1E55587100F7F6AE /* EditModal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 921A90AB1E55587100F7F6AE /* EditModal.storyboard */; };
 		921A90AF1E55591200F7F6AE /* OptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921A90AE1E55591200F7F6AE /* OptionTableViewCell.swift */; };
@@ -60,6 +61,7 @@
 		30D097C9E6F3846462DA3045 /* Pods_Meditation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Meditation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		44665835D15A12F6671237B7 /* Pods-Meditation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meditation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Meditation/Pods-Meditation.debug.xcconfig"; sourceTree = "<group>"; };
 		6A04F505CC8B3302D38D9A18 /* Pods_MeditationUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MeditationUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		92001A301E5F260E00E70A0C /* ToggleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleTableViewCell.swift; sourceTree = "<group>"; };
 		920103941E4867240049A072 /* TimerClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerClass.swift; sourceTree = "<group>"; };
 		921A90AC1E55587100F7F6AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/EditModal.storyboard; sourceTree = "<group>"; };
 		921A90AE1E55591200F7F6AE /* OptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionTableViewCell.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				92387A2B1E0E2D9200C86A6D /* TimePickerTableViewCell.swift */,
 				921A90AE1E55591200F7F6AE /* OptionTableViewCell.swift */,
 				921A90B01E55591B00F7F6AE /* DisplayTableViewCell.swift */,
+				92001A301E5F260E00E70A0C /* ToggleTableViewCell.swift */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -554,6 +557,7 @@
 				924521F91E5BDEB7005BC843 /* RoundButton.swift in Sources */,
 				92C092C31E2F73E9006EBB01 /* TimerPickerView.swift in Sources */,
 				92AB37361E2E01BC004BCC3F /* IntExtension.swift in Sources */,
+				92001A311E5F260E00E70A0C /* ToggleTableViewCell.swift in Sources */,
 				9230BE901E0E0B5A001A12CE /* AppDelegate.swift in Sources */,
 				921A90AF1E55591200F7F6AE /* OptionTableViewCell.swift in Sources */,
 				92974FD61E307FAF0056299D /* ColorPalette.swift in Sources */,
