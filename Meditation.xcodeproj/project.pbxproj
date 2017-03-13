@@ -26,6 +26,8 @@
 		92387A2C1E0E2D9200C86A6D /* TimePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92387A2B1E0E2D9200C86A6D /* TimePickerTableViewCell.swift */; };
 		924521F91E5BDEB7005BC843 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924521F81E5BDEB7005BC843 /* RoundButton.swift */; };
 		927BE5751E0E19B40073ABFE /* TableCellTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927BE5741E0E19B30073ABFE /* TableCellTypes.swift */; };
+		928E32B21E770975006D6DB3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 928E32B11E770975006D6DB3 /* CoreData.framework */; };
+		928E32B51E770C87006D6DB3 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 928E32B31E770C87006D6DB3 /* Model.xcdatamodeld */; };
 		92974FD61E307FAF0056299D /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92974FD51E307FAF0056299D /* ColorPalette.swift */; };
 		92AB37361E2E01BC004BCC3F /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AB37351E2E01BC004BCC3F /* IntExtension.swift */; };
 		92C092C31E2F73E9006EBB01 /* TimerPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C092C21E2F73E9006EBB01 /* TimerPickerView.swift */; };
@@ -83,6 +85,8 @@
 		92387A2B1E0E2D9200C86A6D /* TimePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePickerTableViewCell.swift; sourceTree = "<group>"; };
 		924521F81E5BDEB7005BC843 /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		927BE5741E0E19B30073ABFE /* TableCellTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCellTypes.swift; sourceTree = "<group>"; };
+		928E32B11E770975006D6DB3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		928E32B41E770C87006D6DB3 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		92974FD51E307FAF0056299D /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		92AB37351E2E01BC004BCC3F /* IntExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
 		92C092C21E2F73E9006EBB01 /* TimerPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerPickerView.swift; sourceTree = "<group>"; };
@@ -104,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				928E32B21E770975006D6DB3 /* CoreData.framework in Frameworks */,
 				92EB283E1E51494500AA5DA8 /* AVFoundation.framework in Frameworks */,
 				566ECED7B1505BC7E2181C9B /* Pods_Meditation.framework in Frameworks */,
 			);
@@ -163,6 +168,7 @@
 		9230BE831E0E0B5A001A12CE = {
 			isa = PBXGroup;
 			children = (
+				928E32B31E770C87006D6DB3 /* Model.xcdatamodeld */,
 				9230BE8E1E0E0B5A001A12CE /* Meditation */,
 				9230BEA51E0E0B5A001A12CE /* MeditationTests */,
 				9230BEB01E0E0B5A001A12CE /* MeditationUITests */,
@@ -255,6 +261,7 @@
 		B02D190436F0D34FC8908C00 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				928E32B11E770975006D6DB3 /* CoreData.framework */,
 				92EB283D1E51494500AA5DA8 /* AVFoundation.framework */,
 				30D097C9E6F3846462DA3045 /* Pods_Meditation.framework */,
 				99672B0E98ABE582C95FD1C7 /* Pods_MeditationTests.framework */,
@@ -556,6 +563,7 @@
 				92E60FE61E4966AB00A2E994 /* PickerTableViewCell.swift in Sources */,
 				924521F91E5BDEB7005BC843 /* RoundButton.swift in Sources */,
 				92C092C31E2F73E9006EBB01 /* TimerPickerView.swift in Sources */,
+				928E32B51E770C87006D6DB3 /* Model.xcdatamodeld in Sources */,
 				92AB37361E2E01BC004BCC3F /* IntExtension.swift in Sources */,
 				92001A311E5F260E00E70A0C /* ToggleTableViewCell.swift in Sources */,
 				9230BE901E0E0B5A001A12CE /* AppDelegate.swift in Sources */,
@@ -865,6 +873,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		928E32B31E770C87006D6DB3 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				928E32B41E770C87006D6DB3 /* Model.xcdatamodel */,
+			);
+			currentVersion = 928E32B41E770C87006D6DB3 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 9230BE841E0E0B5A001A12CE /* Project object */;
 }
