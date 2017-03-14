@@ -137,12 +137,81 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="rootViewController" id="9lo-VI-qT8"/>
+                        <segue destination="TYV-Ft-9e2" kind="relationship" relationship="rootViewController" id="MD1-RP-Tr6"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sf9-mo-VBf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
+            <point key="canvasLocation" x="132" y="-322"/>
+        </scene>
+        <!--Timer Table View Controller-->
+        <scene sceneID="qb6-ES-kK1">
+            <objects>
+                <viewController id="TYV-Ft-9e2" customClass="TimerTableViewController" customModule="Meditation" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nh9-Tn-h36"/>
+                        <viewControllerLayoutGuide type="bottom" id="k6C-JM-PEP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UbM-el-JMU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CW2-vp-5Ka">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="optionCell" id="LZn-rl-QdR" customClass="OptionTableViewCell" customModule="Meditation" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LZn-rl-QdR" id="aGX-rj-GMi">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meditation Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kpb-s7-auv">
+                                                    <rect key="frame" x="16" y="8" width="343" height="27.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Kpb-s7-auv" firstAttribute="leading" secondItem="aGX-rj-GMi" secondAttribute="leadingMargin" constant="8" id="Qcn-Jv-odu"/>
+                                                <constraint firstItem="Kpb-s7-auv" firstAttribute="top" secondItem="aGX-rj-GMi" secondAttribute="topMargin" id="Zwq-Ql-wTx"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Kpb-s7-auv" secondAttribute="bottom" id="no8-oD-u6V"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Kpb-s7-auv" secondAttribute="trailing" constant="8" id="zBR-Ad-e4e"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="TYV-Ft-9e2" id="25s-4a-KLQ"/>
+                                    <outlet property="delegate" destination="TYV-Ft-9e2" id="Y5o-a4-eYq"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="CW2-vp-5Ka" secondAttribute="trailing" id="6n3-1Y-eMZ"/>
+                            <constraint firstItem="k6C-JM-PEP" firstAttribute="top" secondItem="CW2-vp-5Ka" secondAttribute="bottom" id="ITd-iZ-1Rc"/>
+                            <constraint firstItem="CW2-vp-5Ka" firstAttribute="leading" secondItem="UbM-el-JMU" secondAttribute="leading" id="eMV-yc-B2j"/>
+                            <constraint firstItem="CW2-vp-5Ka" firstAttribute="top" secondItem="nh9-Tn-h36" secondAttribute="bottom" id="jno-Bl-tmt"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="FRx-AX-c6A">
+                        <barButtonItem key="rightBarButtonItem" title="+" id="6Js-Cv-2SD">
+                            <connections>
+                                <segue destination="Zqf-0C-pSj" kind="presentation" id="5Au-2m-ArP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="CW2-vp-5Ka" id="9oy-LX-3Gp"/>
+                        <segue destination="9pv-A4-QxB" kind="show" id="xfm-iE-x0I"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mGZ-4V-OHE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="927" y="-321"/>
         </scene>
         <!--EditModal-->
         <scene sceneID="tvZ-Nv-hFl">
@@ -156,4 +225,7 @@
     <resources>
         <image name="first" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="5Au-2m-ArP"/>
+    </inferredMetricsTieBreakers>
 </document>

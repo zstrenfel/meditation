@@ -5,23 +5,25 @@
         <attribute name="created_at" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updated_at" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <relationship name="timer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Timer" inverseName="meditation" inverseEntity="Timer" syncable="YES"/>
+        <relationship name="timer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MeditationTimer" inverseName="meditation" inverseEntity="MeditationTimer" syncable="YES"/>
     </entity>
-    <entity name="Timer" representedClassName="Timer" syncable="YES" codeGenerationType="class">
+    <entity name="MeditationTimer" representedClassName="MeditationTimer" syncable="YES" codeGenerationType="class">
         <attribute name="cooldown" optional="YES" attributeType="Double" minValueString="0" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="cooldown_sound" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="countdown" optional="YES" attributeType="Double" minValueString="0" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="countdown_sound" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="created_at" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="interval" optional="YES" attributeType="Double" minValueString="0" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="interval_repeat" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="interval_sound" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="primary" optional="YES" attributeType="Double" minValueString="0" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="primary_sound" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updated_at" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="meditation" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Meditation" inverseName="timer" inverseEntity="Meditation" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Timer" positionX="-63" positionY="-18" width="128" height="210"/>
-        <element name="Meditation" positionX="-54" positionY="72" width="128" height="120"/>
+        <element name="Meditation" positionX="-54" positionY="72" width="128" height="118"/>
+        <element name="MeditationTimer" positionX="-236" positionY="-21" width="128" height="240"/>
     </elements>
 </model>

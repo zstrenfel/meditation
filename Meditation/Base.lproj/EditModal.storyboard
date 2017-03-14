@@ -97,7 +97,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Anx-Z4-T41" id="LER-Vt-Qip">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AIh-4z-OD8">
@@ -131,7 +131,7 @@
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2vn-Fi-lR9" id="p4a-Ma-3RK">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BfP-PE-Igf">
@@ -160,6 +160,68 @@
                                         <connections>
                                             <outlet property="optionLabel" destination="BfP-PE-Igf" id="eqT-9C-QHs"/>
                                             <outlet property="toggle" destination="xRY-vZ-uGR" id="jhi-aR-sXQ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="inputCell" id="Zu0-TL-Lap" customClass="ToggleTableViewCell" customModule="Meditation" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="116" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zu0-TL-Lap" id="oRp-Xd-2bV">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAh-Q9-tbh">
+                                                    <rect key="frame" x="8" y="8" width="79.5" height="27.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1k5-Pq-HnQ">
+                                                    <rect key="frame" x="119.5" y="8" width="247.5" height="27.5"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="1k5-Pq-HnQ" firstAttribute="leading" secondItem="iAh-Q9-tbh" secondAttribute="trailing" constant="32" id="7jR-Yv-kb3"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="iAh-Q9-tbh" secondAttribute="bottom" id="LMg-mB-wBg"/>
+                                                <constraint firstItem="1k5-Pq-HnQ" firstAttribute="top" secondItem="oRp-Xd-2bV" secondAttribute="topMargin" id="gKm-1f-NSk"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="1k5-Pq-HnQ" secondAttribute="trailing" id="iP6-ju-EAC"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="1k5-Pq-HnQ" secondAttribute="bottom" id="nnj-mr-pbM"/>
+                                                <constraint firstItem="iAh-Q9-tbh" firstAttribute="leading" secondItem="oRp-Xd-2bV" secondAttribute="leadingMargin" id="ojW-je-7NA"/>
+                                                <constraint firstItem="iAh-Q9-tbh" firstAttribute="top" secondItem="oRp-Xd-2bV" secondAttribute="topMargin" id="xbe-fb-Iom"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="optionLabel" destination="iAh-Q9-tbh" id="2fk-zO-cm3"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="deleteCell" id="h9f-a4-3cH" customClass="ButtonTableViewCell" customModule="Meditation" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="160" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h9f-a4-3cH" id="CZV-l6-fMZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Fg-DZ-UPb">
+                                                    <rect key="frame" x="8" y="8" width="359" height="27.5"/>
+                                                    <state key="normal" title="Delete">
+                                                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="buttonPressed:" destination="h9f-a4-3cH" eventType="touchUpInside" id="zcb-Xg-s56"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="3Fg-DZ-UPb" firstAttribute="leading" secondItem="CZV-l6-fMZ" secondAttribute="leadingMargin" id="EZq-4u-rAy"/>
+                                                <constraint firstItem="3Fg-DZ-UPb" firstAttribute="bottom" secondItem="CZV-l6-fMZ" secondAttribute="bottomMargin" id="LWh-37-rF8"/>
+                                                <constraint firstItem="3Fg-DZ-UPb" firstAttribute="top" secondItem="CZV-l6-fMZ" secondAttribute="topMargin" id="dWJ-UO-4rU"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="3Fg-DZ-UPb" secondAttribute="trailing" id="pKR-6d-bVD"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="button" destination="3Fg-DZ-UPb" id="JlC-ia-GFh"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

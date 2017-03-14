@@ -12,6 +12,8 @@
 		566ECED7B1505BC7E2181C9B /* Pods_Meditation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30D097C9E6F3846462DA3045 /* Pods_Meditation.framework */; };
 		92001A311E5F260E00E70A0C /* ToggleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92001A301E5F260E00E70A0C /* ToggleTableViewCell.swift */; };
 		920103951E4867240049A072 /* TimerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920103941E4867240049A072 /* TimerClass.swift */; };
+		920367B41E78672D004D7690 /* InputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920367B31E78672D004D7690 /* InputTableViewCell.swift */; };
+		920367B61E78673D004D7690 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920367B51E78673D004D7690 /* ButtonTableViewCell.swift */; };
 		921A90AD1E55587100F7F6AE /* EditModal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 921A90AB1E55587100F7F6AE /* EditModal.storyboard */; };
 		921A90AF1E55591200F7F6AE /* OptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921A90AE1E55591200F7F6AE /* OptionTableViewCell.swift */; };
 		921A90B11E55591B00F7F6AE /* DisplayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921A90B01E55591B00F7F6AE /* DisplayTableViewCell.swift */; };
@@ -28,6 +30,7 @@
 		927BE5751E0E19B40073ABFE /* TableCellTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927BE5741E0E19B30073ABFE /* TableCellTypes.swift */; };
 		928E32B21E770975006D6DB3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 928E32B11E770975006D6DB3 /* CoreData.framework */; };
 		928E32B51E770C87006D6DB3 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 928E32B31E770C87006D6DB3 /* Model.xcdatamodeld */; };
+		928E332E1E77126C006D6DB3 /* TimerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E332D1E77126C006D6DB3 /* TimerTableViewController.swift */; };
 		92974FD61E307FAF0056299D /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92974FD51E307FAF0056299D /* ColorPalette.swift */; };
 		92AB37361E2E01BC004BCC3F /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AB37351E2E01BC004BCC3F /* IntExtension.swift */; };
 		92C092C31E2F73E9006EBB01 /* TimerPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C092C21E2F73E9006EBB01 /* TimerPickerView.swift */; };
@@ -65,6 +68,8 @@
 		6A04F505CC8B3302D38D9A18 /* Pods_MeditationUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MeditationUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92001A301E5F260E00E70A0C /* ToggleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleTableViewCell.swift; sourceTree = "<group>"; };
 		920103941E4867240049A072 /* TimerClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerClass.swift; sourceTree = "<group>"; };
+		920367B31E78672D004D7690 /* InputTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputTableViewCell.swift; sourceTree = "<group>"; };
+		920367B51E78673D004D7690 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		921A90AC1E55587100F7F6AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/EditModal.storyboard; sourceTree = "<group>"; };
 		921A90AE1E55591200F7F6AE /* OptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionTableViewCell.swift; sourceTree = "<group>"; };
 		921A90B01E55591B00F7F6AE /* DisplayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayTableViewCell.swift; sourceTree = "<group>"; };
@@ -87,6 +92,7 @@
 		927BE5741E0E19B30073ABFE /* TableCellTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCellTypes.swift; sourceTree = "<group>"; };
 		928E32B11E770975006D6DB3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		928E32B41E770C87006D6DB3 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		928E332D1E77126C006D6DB3 /* TimerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerTableViewController.swift; sourceTree = "<group>"; };
 		92974FD51E307FAF0056299D /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		92AB37351E2E01BC004BCC3F /* IntExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
 		92C092C21E2F73E9006EBB01 /* TimerPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerPickerView.swift; sourceTree = "<group>"; };
@@ -149,6 +155,7 @@
 		921A90B21E5559A300F7F6AE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				928E332D1E77126C006D6DB3 /* TimerTableViewController.swift */,
 				9230BE911E0E0B5A001A12CE /* FirstViewController.swift */,
 				921A90B31E5559C400F7F6AE /* EditModalViewController.swift */,
 				92C732BE1E519C4E0040C859 /* SoundSelectionViewController.swift */,
@@ -230,6 +237,8 @@
 				921A90AE1E55591200F7F6AE /* OptionTableViewCell.swift */,
 				921A90B01E55591B00F7F6AE /* DisplayTableViewCell.swift */,
 				92001A301E5F260E00E70A0C /* ToggleTableViewCell.swift */,
+				920367B31E78672D004D7690 /* InputTableViewCell.swift */,
+				920367B51E78673D004D7690 /* ButtonTableViewCell.swift */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -562,8 +571,10 @@
 				921A90B41E5559C400F7F6AE /* EditModalViewController.swift in Sources */,
 				92E60FE61E4966AB00A2E994 /* PickerTableViewCell.swift in Sources */,
 				924521F91E5BDEB7005BC843 /* RoundButton.swift in Sources */,
+				920367B61E78673D004D7690 /* ButtonTableViewCell.swift in Sources */,
 				92C092C31E2F73E9006EBB01 /* TimerPickerView.swift in Sources */,
 				928E32B51E770C87006D6DB3 /* Model.xcdatamodeld in Sources */,
+				928E332E1E77126C006D6DB3 /* TimerTableViewController.swift in Sources */,
 				92AB37361E2E01BC004BCC3F /* IntExtension.swift in Sources */,
 				92001A311E5F260E00E70A0C /* ToggleTableViewCell.swift in Sources */,
 				9230BE901E0E0B5A001A12CE /* AppDelegate.swift in Sources */,
@@ -572,6 +583,7 @@
 				920103951E4867240049A072 /* TimerClass.swift in Sources */,
 				92EFCD5A1E5AB6B000B8DC5C /* StringExt+TitleCase.swift in Sources */,
 				9230BE921E0E0B5A001A12CE /* FirstViewController.swift in Sources */,
+				920367B41E78672D004D7690 /* InputTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

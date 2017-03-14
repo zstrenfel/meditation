@@ -2,6 +2,18 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Meditation+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:Meditation+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
+      location = "group:MeditationTimer+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:MeditationTimer+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
       location = "group:Meditation.xcodeproj">
    </FileRef>
    <FileRef

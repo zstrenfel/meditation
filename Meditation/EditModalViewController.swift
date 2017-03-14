@@ -12,7 +12,9 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
 
     @IBOutlet weak var tableView: UITableView!
     
-    var timers: [TimerType: TimerInfo] = [:]
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var timer: MeditationTimer?
+    
     var sections: [TimerType] = [.countdown, .primary, .cooldown, .interval]
     var sectionMap: [TimerType: [TableCell]] = [:]
     
@@ -30,17 +32,17 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         
         
         //create tablecell objects and array
-        let countdownCell = TableCell(type: .display, label: TimerType.countdown.rawValue, value: timers[.countdown]?.time)
-        let countdownPickerCell = TableCell(type: .timePicker, label: TimerType.countdown.rawValue, value: timers[.countdown]?.time, hidden: true)
-        let countdownSoundPickerCell = TableCell(type: .link, label: "Sound", value: timers[.countdown]?.sound)
+        let countdownCell = TableCell(type: .display, label: TimerType.countdown.rawValue, value: timer?.countdown)
+        let countdownPickerCell = TableCell(type: .timePicker, label: TimerType.countdown.rawValue, value: timer?.countdown, hidden: true)
+        let countdownSoundPickerCell = TableCell(type: .link, label: "Sound", value: timer?.countdown_sound)
         
-        let primaryCell = TableCell(type: .display, label: TimerType.primary.rawValue, value: timers[.primary]?.time)
-        let primaryPickerCell = TableCell(type: .timePicker, label: TimerType.primary.rawValue, value: timers[.primary]?.time, hidden: true)
-        let primarySoundPickerCell = TableCell(type: .link, label: "Sound", value: timers[.primary]?.sound)
+        let primaryCell = TableCell(type: .display, label: TimerType.primary.rawValue, value: timer?.primary)
+        let primaryPickerCell = TableCell(type: .timePicker, label: TimerType.primary.rawValue, value:  timer?.primary, hidden: true)
+        let primarySoundPickerCell = TableCell(type: .link, label: "Sound", value:  timer?.primary_sound)
         
-        let cooldownCell = TableCell(type: .display, label: TimerType.cooldown.rawValue, value: timers[.cooldown]?.time)
-        let cooldownPickerCell = TableCell(type: .timePicker, label: TimerType.cooldown.rawValue, value: timers[.cooldown]?.time, hidden: true)
-        let cooldownSoundPickerCell = TableCell(type: .link, label: "Sound", value: timers[.cooldown]?.sound)
+        let cooldownCell = TableCell(type: .display, label: TimerType.cooldown.rawValue, value: timer?.cooldown)
+        let cooldownPickerCell = TableCell(type: .timePicker, label: TimerType.cooldown.rawValue, value: timer?.cooldown, hidden: true)
+        let cooldownSoundPickerCell = TableCell(type: .link, label: "Sound", value: timer?.cooldown_sound)
         
         let intervalCell = TableCell(type: .display, label: TimerType.interval.rawValue, value: timers[.interval]?.time)
         let intervalPickerCell = TableCell(type: .timePicker, label: TimerType.interval.rawValue, value: timers[.interval]?.time, hidden: true)
@@ -53,6 +55,14 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         sectionMap[.interval] = [intervalCell, intervalPickerCell, intervalSoundPickerCell, intervalToggleCell]
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //if there is no timer passed in, create a new one
+        if timer == nil {
+            timer = MeditationTimer(context: context)
+        }
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -61,16 +71,27 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     
     //this is the callback passed to timer picker table view cell
     func handlePickerChange(value: Double, type: TimerType) {
-        var timer = timers[type]
-        timer?.time = value
-        self.timers[type] = timer
+        switch type {
+        case .countdown:
+            self.timer?.countdown = value
+            break
+        case .primary:
+            self.timer?.primary = value
+            break
+        case .cooldown:
+            self.timer?.cooldown = value
+            break
+        case .interval:
+            self.timer?.interval = value
+            break
+        }
         let sectionIndex = sections.index(of: type)
         self.sectionMap[type]?[0].value = value
         self.sectionMap[type]?[1].value = value
         self.tableView.reloadRows(at: [IndexPath(row: 0, section: sectionIndex!),IndexPath(row: 1, section: sectionIndex!)], with: .none)
         
         if let block = updateParent {
-            block(type, timer!)
+            block(type, self.timer!)
         }
     }
     
@@ -87,11 +108,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        log.debug("creating cell for \(indexPath)")
-        
         let tableCell = getTableCell(indexPath: indexPath)
-        log.debug(tableCell)
-        
         switch tableCell.type {
         case .timePicker:
             let cell = tableView.dequeueReusableCell(withIdentifier: "timePickerCell") as! TimePickerTableViewCell
@@ -226,6 +243,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     // MARK: - Actions
     
     @IBAction func closeModal(_ sender: UIBarButtonItem) {
+        self.saveChanges()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -236,37 +254,65 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
             let destinationVC = segue.destination as! SoundSelectionViewController
             destinationVC.type = section
             destinationVC.updateParent = self.updateSound
-            destinationVC.selected = timers[section]?.sound
+            
+            switch section {
+            case .countdown:
+                destinationVC.selected = timer?.countdown_sound
+                break
+            case .primary:
+                destinationVC.selected = timer?.primary_sound
+                break
+            case .cooldown:
+                destinationVC.selected = timer?.cooldown_sound
+                break
+            case .interval:
+                destinationVC.selected = timer?.interval_sound
+                break
+            }
         }
     }
     
     func updateSound(_ type: TimerType, _ path: String) {
-        var timer = timers[type]
-        timer?.sound = path
-        self.timers[type] = timer
-        
+        switch type {
+        case .countdown:
+            timer?.countdown_sound = path
+            break
+        case .primary:
+            timer?.primary_sound = path
+            break
+        case .cooldown:
+            timer?.cooldown_sound = path
+            break
+        case .interval:
+            timer?.interval_sound = path
+            break
+        }
         let sectionIndex = sections.index(of: type)
         sectionMap[type]?[2].value = path
         self.tableView.reloadRows(at: [IndexPath(row: 2, section: sectionIndex!)], with: .none)
         
         if let block = updateParent {
-            block(type, timer!)
+//            block(type, self.timer!)
         }
     }
     
     func updateRepeat(_ value: Bool, _ type: TimerType) {
-        var timer = timers[type]
-        timer?.shouldRepeat = value
-        self.timers[type] = timer
+        self.timer.interval_repeat = value
         
         if let block = updateParent {
-            block(type, timer!)
+//            block(type, timer!)
         }
     }
     
     func updateSection(type: TimerType) {
         let section = sections.index(of: type)
         self.tableView.reloadSections(NSIndexSet(index: section!) as IndexSet, with: .none)
+    }
+    
+    //save changes if changes were made
+    func saveChanges() {
+        //should be an if else case here
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
 
