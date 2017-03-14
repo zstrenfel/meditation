@@ -21,6 +21,13 @@ class FirstViewController: UIViewController {
     @IBOutlet weak var countdownLabel: UILabel!
     @IBOutlet weak var cooldownLabel: UILabel!
     
+    //should be passed in
+    var timer: MeditationTimer? = nil
+    
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
+    
     var timers: [TimerType: TimerInfo] = [:]
     var sessionTimers: TimerWrapper?
     
@@ -29,19 +36,16 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if timers.values.count == 0 {
-            log.debug("no current values for the timers, creating defaults now")
-            timers[.countdown] = TimerInfo(time: 0.0, sound: "bells.wav", type: .countdown, shouldRepeat: nil, index: 0)
-            timers[.primary] = TimerInfo(time: 0.0, sound: "bells.wav", type: .primary, shouldRepeat: nil, index: 1)
-            timers[.cooldown] = TimerInfo(time: 0.0, sound: "bells.wav", type: .cooldown, shouldRepeat: nil, index: 2)
-            timers[.interval] = TimerInfo(time: 0.0, sound: "bells.wav", type: .interval, shouldRepeat: false, index: 3)
+        guard timer != nil else {
+            log.error("timer is not set and this shouldn't happen")
+            return
         }
         
         //update labels with the appropriate time
         //redundent????
-        timerLabel.text = timers[.primary]?.time.timeString
-        countdownLabel.text = timers[.countdown]?.time.timeString
-        cooldownLabel.text = timers[.cooldown]?.time.timeString
+        timerLabel.text = timer?.primary.timeString
+        countdownLabel.text = timer?.countdown.timeString
+        cooldownLabel.text = timer?.cooldown.timeString
     }
     
     override func didReceiveMemoryWarning() {
@@ -52,7 +56,6 @@ class FirstViewController: UIViewController {
     func updateTimerLabels(_ value: Double, _ type: TimerType) {
         switch type {
         case .countdown:
-            
             countdownLabel.text = value.timeString
         case .primary:
             timerLabel.text = value.timeString
@@ -80,7 +83,7 @@ class FirstViewController: UIViewController {
         var timers = Array(self.timers.values)
         timers = timers.filter { $0.type != .interval }
         if sessionTimers == nil {
-            sessionTimers = TimerWrapper(with: timers, interval: self.timers[.interval]!)
+            sessionTimers = TimerWrapper(with: timer!)
             sessionTimers?.updateParent = updateTimerLabels
             sessionTimers?.onComplete = onComplete
         }
@@ -119,7 +122,7 @@ class FirstViewController: UIViewController {
 //            log.debug(segue.destination)
             let navigationController = segue.destination as! UINavigationController
             let targetVC = navigationController.topViewController as! EditModalViewController
-            targetVC.timers = self.timers
+            targetVC.timer = self.timer
             targetVC.updateParent = updateTimer
             break
         default:

@@ -70,6 +70,7 @@
 		920103941E4867240049A072 /* TimerClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerClass.swift; sourceTree = "<group>"; };
 		920367B31E78672D004D7690 /* InputTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputTableViewCell.swift; sourceTree = "<group>"; };
 		920367B51E78673D004D7690 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
+		920367B71E7895AF004D7690 /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
 		921A90AC1E55587100F7F6AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/EditModal.storyboard; sourceTree = "<group>"; };
 		921A90AE1E55591200F7F6AE /* OptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionTableViewCell.swift; sourceTree = "<group>"; };
 		921A90B01E55591B00F7F6AE /* DisplayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayTableViewCell.swift; sourceTree = "<group>"; };
@@ -890,9 +891,10 @@
 		928E32B31E770C87006D6DB3 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				920367B71E7895AF004D7690 /* Model 2.xcdatamodel */,
 				928E32B41E770C87006D6DB3 /* Model.xcdatamodel */,
 			);
-			currentVersion = 928E32B41E770C87006D6DB3 /* Model.xcdatamodel */;
+			currentVersion = 920367B71E7895AF004D7690 /* Model 2.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
