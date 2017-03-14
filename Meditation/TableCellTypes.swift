@@ -29,6 +29,7 @@ enum CellType {
     case timePicker
     case toggle
     case input
-    case link 
+    case link
+    case button
 }
 

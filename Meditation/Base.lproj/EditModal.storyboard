@@ -162,7 +162,7 @@
                                             <outlet property="toggle" destination="xRY-vZ-uGR" id="jhi-aR-sXQ"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="inputCell" id="Zu0-TL-Lap" customClass="ToggleTableViewCell" customModule="Meditation" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="inputCell" id="Zu0-TL-Lap" customClass="InputTableViewCell" customModule="Meditation" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="116" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zu0-TL-Lap" id="oRp-Xd-2bV">
@@ -180,6 +180,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="inputChange:" destination="Zu0-TL-Lap" eventType="editingDidEnd" id="zfx-BG-Q8V"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -194,6 +197,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="optionLabel" destination="iAh-Q9-tbh" id="2fk-zO-cm3"/>
+                                            <outlet property="titleLabel" destination="iAh-Q9-tbh" id="Wbf-Cz-xyG"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="deleteCell" id="h9f-a4-3cH" customClass="ButtonTableViewCell" customModule="Meditation" customModuleProvider="target">

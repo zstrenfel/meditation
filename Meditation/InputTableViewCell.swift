@@ -10,6 +10,7 @@ import UIKit
 
 class InputTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var titleLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,4 +22,6 @@ class InputTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func inputChange(_ sender: UITextField) {
+    }
 }

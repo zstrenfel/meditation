@@ -43,10 +43,17 @@ class TimerWrapper {
     var sounds: [TimerType: AVAudioPlayer] = [:]
     var soundQueue = DispatchQueue(label: "strenfel.zach.soundQ")
     
-    init(with timers: [TimerInfo], interval: TimerInfo) {
+    init(with timer: MeditationTimer) {
+        let countdownInfo = TimerInfo(time: timer.countdown, sound: timer.countdown_sound!, type: .countdown, shouldRepeat: nil, index: 0)
+        let primaryInfo = TimerInfo(time: timer.primary, sound: timer.primary_sound!, type: .primary, shouldRepeat: nil, index: 1)
+        let cooldownInfo = TimerInfo(time: timer.cooldown, sound: timer.cooldown_sound!, type: .cooldown, shouldRepeat: nil, index: 2)
+        
+        self.interval = TimerInfo(time: timer.interval, sound: timer.interval_sound!, type: .interval, shouldRepeat: timer.interval_repeat, index: 100)
+        
+        self.timers = [countdownInfo, primaryInfo, cooldownInfo]
         self.timers = timers.filter { $0.time > 0.0 }
         self.timers = self.timers.sorted { $0.index < $1.index }
-        self.interval = interval
+        
         //load the appropriate sounds
         for timer in timers {
             loadSound(type: timer.type, path: timer.sound)

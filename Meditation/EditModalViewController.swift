@@ -8,6 +8,15 @@
 
 import UIKit
 
+enum TableSections: String {
+    case title = "Title"
+    case primary = "Meditation Time"
+    case countdown = "Countdown"
+    case cooldown = "Cooldown"
+    case interval = "Interval"
+    case delete = "Delete"
+}
+
 class EditModalViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
@@ -15,10 +24,10 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var timer: MeditationTimer?
     
-    var sections: [TimerType] = [.countdown, .primary, .cooldown, .interval]
-    var sectionMap: [TimerType: [TableCell]] = [:]
+    var sections: [TableSections] = [.title, .countdown, .primary, .cooldown, .interval, .delete]
+    var sectionMap: [TableSections: [TableCell]] = [:]
     
-    var updateParent: ((_ type: TimerType, _ info: TimerInfo) -> Void)?
+    var updateParent: ((_ type: TableSections, _ info: TimerInfo) -> Void)?
     
     //what section has an active picker
     var activePickerIndexPath: IndexPath? = nil
@@ -30,29 +39,34 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.tableFooterView = UIView()
         tableView.register(TimePickerTableViewCell.self, forCellReuseIdentifier: "timePickerCell")
         
+        let titleCell = TableCell(type: .input, label: TableSections.title.rawValue, value: timer?.name)
         
         //create tablecell objects and array
-        let countdownCell = TableCell(type: .display, label: TimerType.countdown.rawValue, value: timer?.countdown)
-        let countdownPickerCell = TableCell(type: .timePicker, label: TimerType.countdown.rawValue, value: timer?.countdown, hidden: true)
+        let countdownCell = TableCell(type: .display, label: TableSections.countdown.rawValue, value: timer?.countdown)
+        let countdownPickerCell = TableCell(type: .timePicker, label: TableSections.countdown.rawValue, value: timer?.countdown, hidden: true)
         let countdownSoundPickerCell = TableCell(type: .link, label: "Sound", value: timer?.countdown_sound)
         
-        let primaryCell = TableCell(type: .display, label: TimerType.primary.rawValue, value: timer?.primary)
-        let primaryPickerCell = TableCell(type: .timePicker, label: TimerType.primary.rawValue, value:  timer?.primary, hidden: true)
+        let primaryCell = TableCell(type: .display, label: TableSections.primary.rawValue, value: timer?.primary)
+        let primaryPickerCell = TableCell(type: .timePicker, label: TableSections.primary.rawValue, value:  timer?.primary, hidden: true)
         let primarySoundPickerCell = TableCell(type: .link, label: "Sound", value:  timer?.primary_sound)
         
-        let cooldownCell = TableCell(type: .display, label: TimerType.cooldown.rawValue, value: timer?.cooldown)
-        let cooldownPickerCell = TableCell(type: .timePicker, label: TimerType.cooldown.rawValue, value: timer?.cooldown, hidden: true)
+        let cooldownCell = TableCell(type: .display, label: TableSections.cooldown.rawValue, value: timer?.cooldown)
+        let cooldownPickerCell = TableCell(type: .timePicker, label: TableSections.cooldown.rawValue, value: timer?.cooldown, hidden: true)
         let cooldownSoundPickerCell = TableCell(type: .link, label: "Sound", value: timer?.cooldown_sound)
         
-        let intervalCell = TableCell(type: .display, label: TimerType.interval.rawValue, value: timers[.interval]?.time)
-        let intervalPickerCell = TableCell(type: .timePicker, label: TimerType.interval.rawValue, value: timers[.interval]?.time, hidden: true)
-        let intervalSoundPickerCell = TableCell(type: .link, label: "Sound", value: timers[.interval]?.sound)
+        let intervalCell = TableCell(type: .display, label: TableSections.interval.rawValue, value: timer?.interval)
+        let intervalPickerCell = TableCell(type: .timePicker, label: TableSections.interval.rawValue, value: timer?.interval, hidden: true)
+        let intervalSoundPickerCell = TableCell(type: .link, label: "Sound", value: timer?.interval_sound)
         let intervalToggleCell = TableCell(type: .toggle, label: "Repeat", value: false)
         
+        let deleteCell = TableCell(type: .button, label: TableSections.delete.rawValue, value: nil)
+        
+        sectionMap[.title] = [titleCell]
         sectionMap[.countdown] = [countdownCell, countdownPickerCell, countdownSoundPickerCell]
         sectionMap[.primary] = [primaryCell, primaryPickerCell, primarySoundPickerCell]
         sectionMap[.cooldown] = [cooldownCell, cooldownPickerCell, cooldownSoundPickerCell]
         sectionMap[.interval] = [intervalCell, intervalPickerCell, intervalSoundPickerCell, intervalToggleCell]
+        sectionMap[.delete] = [deleteCell]
         // Do any additional setup after loading the view.
     }
     
@@ -91,7 +105,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         self.tableView.reloadRows(at: [IndexPath(row: 0, section: sectionIndex!),IndexPath(row: 1, section: sectionIndex!)], with: .none)
         
         if let block = updateParent {
-            block(type, self.timer!)
+//            block(type, self.timer!)
         }
     }
     
@@ -272,7 +286,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-    func updateSound(_ type: TimerType, _ path: String) {
+    func updateSound(_ type: TableSections, _ path: String) {
         switch type {
         case .countdown:
             timer?.countdown_sound = path
@@ -296,7 +310,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-    func updateRepeat(_ value: Bool, _ type: TimerType) {
+    func updateRepeat(_ value: Bool, _ type: TableSections) {
         self.timer.interval_repeat = value
         
         if let block = updateParent {
@@ -304,7 +318,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-    func updateSection(type: TimerType) {
+    func updateSection(type: TableSections) {
         let section = sections.index(of: type)
         self.tableView.reloadSections(NSIndexSet(index: section!) as IndexSet, with: .none)
     }
