@@ -11,13 +11,12 @@ import XCGLogger
 
 class TimePickerTableViewCell: UITableViewCell {
     
+    //do i even need the context here? 
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var type: TimerType?
-    var updateParent: ((_ value: Double, _ type: TimerType) -> Void)?
-    var value: Double = 0.0 {
-        didSet {
-            timerPickerView.update(value)
-        }
-    }
+    var timer: MeditationTimer?
+    
+    var value: Double = 0.0
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -45,8 +44,27 @@ class TimePickerTableViewCell: UITableViewCell {
     
     func handlePickerChange(_ hour: Int, _ minute: Int, _ second: Int) {
         let condensedTime = Double(hour * 3600 + minute * 60 + second)
-        if let block = updateParent {
-            block(condensedTime, type!)
+        var toUpdate = ""
+        
+        switch self.type! {
+        case .countdown:
+            toUpdate = "countdown"
+            break
+        case .primary:
+            toUpdate = "primary"
+            break
+        case .cooldown:
+            toUpdate = "cooldown"
+            break
+        case .interval:
+            toUpdate = "interval"
+        }
+        
+        if timer != nil {
+            //do I need to save this as well?
+            timer?.setValue(condensedTime, forKey: toUpdate)
+        } else {
+            log.error("timer shouldn't ever be nil here")
         }
     }
 }

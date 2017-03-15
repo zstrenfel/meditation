@@ -18,8 +18,6 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     var sections: [String] = ["Title", TimerType.countdown.rawValue, TimerType.primary.rawValue, TimerType.cooldown.rawValue, TimerType.interval.rawValue, "Delete"]
     var sectionMap: [String: [TableCell]] = [:]
     
-    var updateParent: ((_ type: TimerType, _ info: TimerInfo) -> Void)?
-    
     //what section has an active picker
     var activePickerIndexPath: IndexPath? = nil
     
@@ -96,10 +94,6 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         self.sectionMap[type.rawValue]?[0].value = value
         self.sectionMap[type.rawValue]?[1].value = value
         self.tableView.reloadRows(at: [IndexPath(row: 0, section: sectionIndex!),IndexPath(row: 1, section: sectionIndex!)], with: .none)
-        
-        if let block = updateParent {
-//            block(type, self.timer!)
-        }
     }
     
 
@@ -119,8 +113,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         switch tableCell.type {
         case .timePicker:
             let cell = tableView.dequeueReusableCell(withIdentifier: "timePickerCell") as! TimePickerTableViewCell
-            cell.updateParent = handlePickerChange
-            log.debug(tableCell.value)
+            cell.timer = self.timer
             cell.value = tableCell.value as! Double
             cell.type = TimerType(rawValue: tableCell.label)
             cell.isHidden = tableCell.hidden
@@ -133,6 +126,15 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
             if let toggleValue = tableCell.value as? Bool {
                 cell.toggleValue = toggleValue
             }
+            return cell
+        case .input:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "inputCell") as! InputTableViewCell
+            cell.timer = self.timer
+            cell.titleLabel.text = tableCell.label
+            return cell
+        case .button:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "buttonCell") as! ButtonTableViewCell
+            cell.timer = self.timer
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "displayCell") as! DisplayTableViewCell
@@ -299,18 +301,10 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         let sectionIndex = sections.index(of: type.rawValue)
         sectionMap[type.rawValue]?[2].value = path
         self.tableView.reloadRows(at: [IndexPath(row: 2, section: sectionIndex!)], with: .none)
-        
-        if let block = updateParent {
-//            block(type, self.timer!)
-        }
     }
     
     func updateRepeat(_ value: Bool, _ type: TimerType) {
         self.timer?.interval_repeat = value
-        
-        if let block = updateParent {
-//            block(type, timer!)
-        }
     }
     
     func updateSection(type: TimerType) {

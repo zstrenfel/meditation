@@ -11,6 +11,9 @@ import UIKit
 class ButtonTableViewCell: UITableViewCell {
 
     @IBOutlet weak var button: UIButton!
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var timer: MeditationTimer?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -23,5 +26,6 @@ class ButtonTableViewCell: UITableViewCell {
     }
 
     @IBAction func buttonPressed(_ sender: UIButton) {
+        log.debug("delete timer here")
     }
 }

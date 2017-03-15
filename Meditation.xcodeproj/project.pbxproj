@@ -41,6 +41,7 @@
 		92EFCD5A1E5AB6B000B8DC5C /* StringExt+TitleCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EFCD591E5AB6B000B8DC5C /* StringExt+TitleCase.swift */; };
 		92EFCD5D1E5ABC6600B8DC5C /* singing_bowl.wav in Resources */ = {isa = PBXBuildFile; fileRef = 92EFCD5B1E5ABC6600B8DC5C /* singing_bowl.wav */; };
 		92EFCD5E1E5ABC6600B8DC5C /* wind_chimes.wav in Resources */ = {isa = PBXBuildFile; fileRef = 92EFCD5C1E5ABC6600B8DC5C /* wind_chimes.wav */; };
+		92F9239C1E79A1500043476C /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92F9239B1E79A1500043476C /* View.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +105,7 @@
 		92EFCD591E5AB6B000B8DC5C /* StringExt+TitleCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StringExt+TitleCase.swift"; sourceTree = "<group>"; };
 		92EFCD5B1E5ABC6600B8DC5C /* singing_bowl.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = singing_bowl.wav; path = ../../../Downloads/singing_bowl.wav; sourceTree = "<group>"; };
 		92EFCD5C1E5ABC6600B8DC5C /* wind_chimes.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = wind_chimes.wav; path = ../../../Downloads/wind_chimes.wav; sourceTree = "<group>"; };
+		92F9239B1E79A1500043476C /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		99672B0E98ABE582C95FD1C7 /* Pods_MeditationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MeditationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC8804A14E13D0235D5A4054 /* Pods-Meditation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meditation.release.xcconfig"; path = "Pods/Target Support Files/Pods-Meditation/Pods-Meditation.release.xcconfig"; sourceTree = "<group>"; };
 		B4D4A9C2E875899CC21185B5 /* Pods-MeditationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeditationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeditationTests/Pods-MeditationTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -233,13 +235,11 @@
 		92387A281E0E2D5600C86A6D /* TableCells */ = {
 			isa = PBXGroup;
 			children = (
+				92F9239A1E7997FF0043476C /* EditModal */,
 				92E60FE51E4966AB00A2E994 /* PickerTableViewCell.swift */,
-				92387A2B1E0E2D9200C86A6D /* TimePickerTableViewCell.swift */,
 				921A90AE1E55591200F7F6AE /* OptionTableViewCell.swift */,
 				921A90B01E55591B00F7F6AE /* DisplayTableViewCell.swift */,
-				92001A301E5F260E00E70A0C /* ToggleTableViewCell.swift */,
-				920367B31E78672D004D7690 /* InputTableViewCell.swift */,
-				920367B51E78673D004D7690 /* ButtonTableViewCell.swift */,
+				92F9239B1E79A1500043476C /* View.xib */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -266,6 +266,17 @@
 				92EB28401E51498400AA5DA8 /* bells.wav */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		92F9239A1E7997FF0043476C /* EditModal */ = {
+			isa = PBXGroup;
+			children = (
+				92387A2B1E0E2D9200C86A6D /* TimePickerTableViewCell.swift */,
+				92001A301E5F260E00E70A0C /* ToggleTableViewCell.swift */,
+				920367B51E78673D004D7690 /* ButtonTableViewCell.swift */,
+				920367B31E78672D004D7690 /* InputTableViewCell.swift */,
+			);
+			name = EditModal;
 			sourceTree = "<group>";
 		};
 		B02D190436F0D34FC8908C00 /* Frameworks */ = {
@@ -400,6 +411,7 @@
 				9230BE991E0E0B5A001A12CE /* Assets.xcassets in Resources */,
 				92EFCD5D1E5ABC6600B8DC5C /* singing_bowl.wav in Resources */,
 				9230BE971E0E0B5A001A12CE /* Main.storyboard in Resources */,
+				92F9239C1E79A1500043476C /* View.xib in Resources */,
 				92EFCD5E1E5ABC6600B8DC5C /* wind_chimes.wav in Resources */,
 				92EB28411E51498400AA5DA8 /* bells.wav in Resources */,
 				921A90AD1E55587100F7F6AE /* EditModal.storyboard in Resources */,

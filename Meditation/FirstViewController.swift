@@ -119,11 +119,9 @@ class FirstViewController: UIViewController {
         }
         switch segue.identifier! {
         case "showEditModal":
-//            log.debug(segue.destination)
             let navigationController = segue.destination as! UINavigationController
             let targetVC = navigationController.topViewController as! EditModalViewController
             targetVC.timer = self.timer
-            targetVC.updateParent = updateTimer
             break
         default:
             //do nothing
