@@ -79,24 +79,9 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     
     //this is the callback passed to timer picker table view cell
     func handlePickerChange(value: Double, type: TimerType) {
-        switch type {
-        case .countdown:
-            self.timer?.countdown = value
-            break
-        case .primary:
-            self.timer?.primary = value
-            break
-        case .cooldown:
-            self.timer?.cooldown = value
-            break
-        case .interval:
-            self.timer?.interval = value
-            break
-        }
         let sectionIndex = sections.index(of: type.rawValue)
         self.sectionMap[type.rawValue]?[0].value = value
-        self.sectionMap[type.rawValue]?[1].value = value
-        self.tableView.reloadRows(at: [IndexPath(row: 0, section: sectionIndex!),IndexPath(row: 1, section: sectionIndex!)], with: .none)
+        self.tableView.reloadRows(at: [IndexPath(row: 0, section: sectionIndex!)], with: .none)
     }
     
 
@@ -116,10 +101,11 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         switch tableCell.type {
         case .timePicker:
             let cell = tableView.dequeueReusableCell(withIdentifier: "timePickerCell") as! TimePickerTableViewCell
-            cell.timer = self.timer
-            cell.value = tableCell.value as! Double
             cell.type = TimerType(rawValue: tableCell.label)
+            cell.timer = self.timer
+            cell.updateParent = handlePickerChange
             cell.isHidden = tableCell.hidden
+            cell.updateTimePickerView()
             return cell
         case .toggle:
             let cell = tableView.dequeueReusableCell(withIdentifier: "toggleCell") as! ToggleTableViewCell
@@ -194,16 +180,10 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         
         let tableCell = getTableCell(indexPath: indexPath)
         switch tableCell.type {
-        case .timePicker:
-            //do nothing
-            break
-        case .picker:
-            //do nothing
-            break
         case .link:
             performSegue(withIdentifier: "showSoundOptions", sender: self)
             break
-        default:
+        case .display:
             //show, hide functionality for the picker cells goes here
             let pickerIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
             guard activePickerIndexPath != nil else {
@@ -222,6 +202,8 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
                 }
                 
             }
+            break
+        default:
             break
         }
     }

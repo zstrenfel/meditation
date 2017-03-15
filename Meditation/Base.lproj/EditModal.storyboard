@@ -199,7 +199,7 @@
                                             <outlet property="titleLabel" destination="iAh-Q9-tbh" id="Wbf-Cz-xyG"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="deleteCell" id="h9f-a4-3cH" customClass="ButtonTableViewCell" customModule="Meditation" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="buttonCell" id="h9f-a4-3cH" customClass="ButtonTableViewCell" customModule="Meditation" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="160" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h9f-a4-3cH" id="CZV-l6-fMZ">

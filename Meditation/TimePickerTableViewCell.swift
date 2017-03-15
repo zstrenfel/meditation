@@ -16,7 +16,7 @@ class TimePickerTableViewCell: UITableViewCell {
     var type: TimerType?
     var timer: MeditationTimer?
     
-    var value: Double = 0.0
+    var updateParent: ((_ value: Double, _ type: TimerType) -> Void)?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -42,6 +42,29 @@ class TimePickerTableViewCell: UITableViewCell {
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": timerPickerView]))
     }
     
+    func updateTimePickerView() {
+        guard timer != nil && type != nil else {
+            log.error("timer and/or type is nil, and this function cannot be completed")
+            return
+        }
+        var time = 0.0
+        switch self.type! {
+        case .countdown:
+            time = (timer?.countdown)!
+            break
+        case .primary:
+            time = (timer?.primary)!
+            break
+        case .cooldown:
+            time = (timer?.cooldown)!
+            break
+        case .interval:
+            time = (timer?.interval)!
+        }
+        
+        self.timerPickerView.update(time)
+    }
+    
     func handlePickerChange(_ hour: Int, _ minute: Int, _ second: Int) {
         let condensedTime = Double(hour * 3600 + minute * 60 + second)
         var toUpdate = ""
@@ -65,6 +88,10 @@ class TimePickerTableViewCell: UITableViewCell {
             timer?.setValue(condensedTime, forKey: toUpdate)
         } else {
             log.error("timer shouldn't ever be nil here")
+        }
+        
+        if let block = updateParent {
+            block(condensedTime, type!)
         }
     }
 }
