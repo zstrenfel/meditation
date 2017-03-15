@@ -59,6 +59,11 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         return cell
     }
+    
+    // MARK: - Actions
+    override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
+        self.performSegue(withIdentifier: "showAdmin", sender: nil)
+    }
 
     /*
     // MARK: - Navigation

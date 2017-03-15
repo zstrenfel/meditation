@@ -14,6 +14,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var timer: MeditationTimer?
+    var isNewTimer: Bool = false
     
     var sections: [String] = ["Title", TimerType.countdown.rawValue, TimerType.primary.rawValue, TimerType.cooldown.rawValue, TimerType.interval.rawValue, "Delete"]
     var sectionMap: [String: [TableCell]] = [:]
@@ -33,7 +34,8 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         //if there is no timer passed in, create a new one
         if timer == nil {
             timer = MeditationTimer(context: context)
-            log.debug(self.timer)
+//            saveChanges()
+            isNewTimer = true
         }
         loadTableCells()
     }
@@ -257,6 +259,26 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         self.dismiss(animated: true, completion: nil)
     }
     
+    //save changes if changes were made
+    func saveChanges() {
+        //should be an if else case here
+        timer?.setValue(Date(), forKey: "updated_at")
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+    }
+    
+    @IBAction func cancelEdit(_ sender: UIBarButtonItem) {
+        log.debug("make sure that the changes aren't saved here")
+        log.debug(self.timer)
+        if isNewTimer {
+//            context.delete(timer!)
+            context.reset()
+            log.debug("should be deleted")
+        } else {
+            context.rollback()
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showSoundOptions" {
@@ -313,11 +335,4 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         self.tableView.reloadSections(NSIndexSet(index: section!) as IndexSet, with: .none)
     }
     
-    //save changes if changes were made
-    func saveChanges() {
-        //should be an if else case here
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-    }
-    
-
 }
