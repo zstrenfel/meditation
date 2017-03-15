@@ -38,6 +38,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
             isNewTimer = true
         }
         loadTableCells()
+        loadTableFooterView()
     }
     
     func loadTableCells() {
@@ -60,15 +61,29 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         let intervalPickerCell = TableCell(type: .timePicker, label: "Interval Bell", value: timer?.interval, hidden: true)
         let intervalSoundPickerCell = TableCell(type: .link, label: "Sound", value: timer?.interval_sound)
         let intervalToggleCell = TableCell(type: .toggle, label: "Repeat", value: false)
-        
-        let deleteCell = TableCell(type: .button, label: "Delete", value: nil)
-        
+                
         sectionMap["Title"] = [titleCell]
         sectionMap[TimerType.countdown.rawValue] = [countdownCell, countdownPickerCell, countdownSoundPickerCell]
         sectionMap[TimerType.primary.rawValue] = [primaryCell, primaryPickerCell, primarySoundPickerCell]
         sectionMap[TimerType.cooldown.rawValue] = [cooldownCell, cooldownPickerCell, cooldownSoundPickerCell]
         sectionMap[TimerType.interval.rawValue] = [intervalCell, intervalPickerCell, intervalSoundPickerCell, intervalToggleCell]
-        sectionMap["Delete"] = [deleteCell]
+    }
+    
+    func loadTableFooterView() {
+        let customView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 50))
+        customView.backgroundColor = UIColor.white
+        let button = UIButton(frame: CGRect(x: (self.tableView.frame.width - 200) / 2, y: 0, width: 200, height: 50))
+        button.setTitle("Delete", for: .normal)
+        button.setTitleColor(.red, for: .normal)
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        button.titleLabel?.textAlignment = .center
+        customView.addSubview(button)
+        
+        self.tableView.tableFooterView = customView
+    }
+    
+    func buttonAction() {
+        log.debug("button action")
     }
 
 
