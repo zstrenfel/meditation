@@ -70,23 +70,38 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func loadTableFooterView() {
+//        guard isNewTimer == false else {
+//            //no need to add the delete button if the object doesn't even exist
+//            return
+//        }
         let customView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 50))
         customView.backgroundColor = UIColor.white
         let button = UIButton(frame: CGRect(x: (self.tableView.frame.width - 200) / 2, y: 0, width: 200, height: 50))
         button.setTitle("Delete", for: .normal)
         button.setTitleColor(.red, for: .normal)
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(confirmDelete), for: .touchUpInside)
         button.titleLabel?.textAlignment = .center
         customView.addSubview(button)
         
         self.tableView.tableFooterView = customView
     }
     
-    func buttonAction() {
-        log.debug("button action")
+    func confirmDelete() {
+        let alertController = UIAlertController(title: "Delete Timer", message: "Are you sure you wan't to delete this timer?", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "Cancel", style: .default , handler: nil)
+        let delete = UIAlertAction(title: "Delete", style: .destructive, handler: deleteMeditationTimer)
+        
+        alertController.addAction(cancel)
+        alertController.addAction(delete)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
-
-
+    
+    func deleteMeditationTimer(sender: UIAlertAction) {
+        log.info("deleteing meditation timer")
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -267,7 +282,6 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         log.debug("make sure that the changes aren't saved here")
         log.debug(self.timer)
         if isNewTimer {
-//            context.delete(timer!)
             context.reset()
             log.debug("should be deleted")
         } else {
