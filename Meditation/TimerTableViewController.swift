@@ -31,6 +31,7 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
     func getData() {
         do {
             timers = try context.fetch(MeditationTimer.fetchRequest())
+            log.debug(self.timers)
         } catch {
             log.error("Fetching Failed")
         }

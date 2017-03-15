@@ -22,5 +22,12 @@ extension Meditation {
     @NSManaged public var completed: Bool
     @NSManaged public var notes: String?
     @NSManaged public var timer: MeditationTimer?
+}
 
+// 03/15/2017
+extension Meditation {
+    override func awakeFromInsert() {
+        super.awakeFromInsert()
+        setPrimitiveValue(now(), forKey: "created_at")
+    }
 }

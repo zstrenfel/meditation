@@ -196,7 +196,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="optionLabel" destination="iAh-Q9-tbh" id="2fk-zO-cm3"/>
                                             <outlet property="titleLabel" destination="iAh-Q9-tbh" id="Wbf-Cz-xyG"/>
                                         </connections>
                                     </tableViewCell>

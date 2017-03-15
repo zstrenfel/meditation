@@ -33,6 +33,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         //if there is no timer passed in, create a new one
         if timer == nil {
             timer = MeditationTimer(context: context)
+            log.debug(self.timer)
         }
         loadTableCells()
     }

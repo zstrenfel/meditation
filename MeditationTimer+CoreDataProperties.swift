@@ -29,7 +29,6 @@ extension MeditationTimer {
     @NSManaged public var updated_at: NSDate?
     @NSManaged public var name: String?
     @NSManaged public var meditation: NSOrderedSet?
-
 }
 
 // MARK: Generated accessors for meditation
@@ -64,5 +63,12 @@ extension MeditationTimer {
 
     @objc(removeMeditation:)
     @NSManaged public func removeFromMeditation(_ values: NSOrderedSet)
+}
 
+// 03/15/2017
+extension MeditationTimer {
+    override func awakeFromInsert() {
+        super.awakeFromInsert()
+        setPrimitiveValue(now(), forKey: "created_at")
+    }
 }
