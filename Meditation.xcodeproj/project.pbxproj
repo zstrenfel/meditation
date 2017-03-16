@@ -241,7 +241,6 @@
 			children = (
 				92F9239A1E7997FF0043476C /* EditModal */,
 				92E60FE51E4966AB00A2E994 /* PickerTableViewCell.swift */,
-				921A90AE1E55591200F7F6AE /* OptionTableViewCell.swift */,
 				921A90B01E55591B00F7F6AE /* DisplayTableViewCell.swift */,
 				92C3FC0B1E7AF5ED006FBB2A /* MeditationDisplayTableViewCell.swift */,
 			);
@@ -275,6 +274,7 @@
 		92F9239A1E7997FF0043476C /* EditModal */ = {
 			isa = PBXGroup;
 			children = (
+				921A90AE1E55591200F7F6AE /* OptionTableViewCell.swift */,
 				92387A2B1E0E2D9200C86A6D /* TimePickerTableViewCell.swift */,
 				92001A301E5F260E00E70A0C /* ToggleTableViewCell.swift */,
 				920367B51E78673D004D7690 /* ButtonTableViewCell.swift */,

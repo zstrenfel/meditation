@@ -34,7 +34,6 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         //if there is no timer passed in, create a new one
         if timer == nil {
             timer = MeditationTimer(context: context)
-//            saveChanges()
             isNewTimer = true
         }
         loadTableCells()
@@ -267,8 +266,8 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     // MARK: - Actions
-    
-    @IBAction func closeModal(_ sender: UIBarButtonItem) {
+    @IBAction func saveChanges(_ sender: UIBarButtonItem) {
+        saveChanges()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -278,7 +277,6 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         if !deleted {
             timer?.setValue(Date(), forKey: "updated_at")
         }
-        log.debug(self.timer)
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     

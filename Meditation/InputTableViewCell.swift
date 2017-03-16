@@ -11,10 +11,15 @@ import UIKit
 class InputTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var inputField: UITextField!
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var type: TimerType?
-    var timer: MeditationTimer?
+    var timer: MeditationTimer? = nil {
+        didSet {
+            updateInputFieldValue(timer: timer!)
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,6 +31,14 @@ class InputTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func updateInputFieldValue(timer: MeditationTimer) {
+        if let name = timer.name {
+            self.inputField.text = name
+        }
+    }
+    
+    //MARK: - Actions
 
     @IBAction func inputChange(_ sender: UITextField) {
         guard timer != nil else {
