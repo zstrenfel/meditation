@@ -37,6 +37,13 @@ class FirstViewController: UIViewController {
         setTimerLabels()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if sessionTimer != nil {
+            _stopTimer(clear: true)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -56,7 +63,11 @@ class FirstViewController: UIViewController {
         }
     }
     
-    func updateTimer(_ timer: MeditationTimer) {
+    func updateTimer(_ timer: MeditationTimer?) {
+        guard timer != nil else {
+            _ = navigationController?.popViewController(animated: true)
+            return
+        }
         self.timer = timer
         setTimerLabels()
     }
@@ -87,12 +98,12 @@ class FirstViewController: UIViewController {
         _stopTimer()
     }
     
-    func _stopTimer() {
+    func _stopTimer(clear: Bool = false) {
         guard sessionTimer != nil else {
             log.debug("no timers running so cannot stop them")
             return
         }
-        if (sessionTimer?.isPaused())! {
+        if ((sessionTimer?.isPaused())! || clear) {
             sessionTimer?.stopTimer(clear: true)
             stopButton.setTitle("Pause", for: .normal)
             setTimerLabels()
@@ -107,10 +118,7 @@ class FirstViewController: UIViewController {
     }
     
     // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //stop timer if it is running
-        _stopTimer()
-        
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {        
         switch segue.identifier! {
         case "showEditModal":
             let navigationController = segue.destination as! UINavigationController

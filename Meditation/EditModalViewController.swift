@@ -20,7 +20,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     var sectionMap: [String: [TableCell]] = [:]
     
     //callback to refresh parent on modal dismiss
-    var onDismiss: ((_ timer: MeditationTimer) -> Void)?
+    var onDismiss: ((_ timer: MeditationTimer?) -> Void)?
     
     //what section has an active picker
     var activePickerIndexPath: IndexPath? = nil
@@ -247,18 +247,17 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     //save changes if changes were made
     func saveChanges(deleted: Bool = false) {
         //should be an if else case here
-        if !deleted {
+        if isNewTimer {
+            timer?.setValue(Date(), forKey: "created_at")
+        } else if !deleted {
             timer?.setValue(Date(), forKey: "updated_at")
         }
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
     @IBAction func cancelEdit(_ sender: UIBarButtonItem) {
-        log.debug("make sure that the changes aren't saved here")
-        log.debug(self.timer)
         if isNewTimer {
             context.reset()
-            log.debug("should be deleted")
         } else {
             context.rollback()
         }
@@ -304,13 +303,14 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         log.info("deleteing meditation timer")
         context.delete(timer!)
         self.saveChanges(deleted: true)
+        self.timer = nil
         dismiss()
     }
     
     //refresh parent on modal close
     func dismiss() {
         if let block = onDismiss {
-            block(self.timer!)
+            block(self.timer)
         }
         self.dismiss(animated: true, completion: nil)
     }

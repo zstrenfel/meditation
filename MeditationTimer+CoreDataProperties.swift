@@ -69,6 +69,6 @@ extension MeditationTimer {
 extension MeditationTimer {
     override func awakeFromInsert() {
         super.awakeFromInsert()
-        setPrimitiveValue(now(), forKey: "created_at")
+        setPrimitiveValue(Date(), forKey: "created_at")
     }
 }
