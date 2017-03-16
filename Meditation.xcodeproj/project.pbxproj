@@ -34,6 +34,7 @@
 		92974FD61E307FAF0056299D /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92974FD51E307FAF0056299D /* ColorPalette.swift */; };
 		92AB37361E2E01BC004BCC3F /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AB37351E2E01BC004BCC3F /* IntExtension.swift */; };
 		92C092C31E2F73E9006EBB01 /* TimerPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C092C21E2F73E9006EBB01 /* TimerPickerView.swift */; };
+		92C3FC0C1E7AF5ED006FBB2A /* MeditationDisplayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C3FC0B1E7AF5ED006FBB2A /* MeditationDisplayTableViewCell.swift */; };
 		92C732BF1E519C4E0040C859 /* SoundSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C732BE1E519C4E0040C859 /* SoundSelectionViewController.swift */; };
 		92E60FE61E4966AB00A2E994 /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E60FE51E4966AB00A2E994 /* PickerTableViewCell.swift */; };
 		92EB283E1E51494500AA5DA8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92EB283D1E51494500AA5DA8 /* AVFoundation.framework */; };
@@ -98,6 +99,7 @@
 		92974FD51E307FAF0056299D /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		92AB37351E2E01BC004BCC3F /* IntExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
 		92C092C21E2F73E9006EBB01 /* TimerPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerPickerView.swift; sourceTree = "<group>"; };
+		92C3FC0B1E7AF5ED006FBB2A /* MeditationDisplayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationDisplayTableViewCell.swift; sourceTree = "<group>"; };
 		92C732BE1E519C4E0040C859 /* SoundSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundSelectionViewController.swift; sourceTree = "<group>"; };
 		92E60FE51E4966AB00A2E994 /* PickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTableViewCell.swift; sourceTree = "<group>"; };
 		92EB283D1E51494500AA5DA8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -241,6 +243,7 @@
 				92E60FE51E4966AB00A2E994 /* PickerTableViewCell.swift */,
 				921A90AE1E55591200F7F6AE /* OptionTableViewCell.swift */,
 				921A90B01E55591B00F7F6AE /* DisplayTableViewCell.swift */,
+				92C3FC0B1E7AF5ED006FBB2A /* MeditationDisplayTableViewCell.swift */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -595,6 +598,7 @@
 				92974FD61E307FAF0056299D /* ColorPalette.swift in Sources */,
 				920103951E4867240049A072 /* TimerClass.swift in Sources */,
 				92EFCD5A1E5AB6B000B8DC5C /* StringExt+TitleCase.swift in Sources */,
+				92C3FC0C1E7AF5ED006FBB2A /* MeditationDisplayTableViewCell.swift in Sources */,
 				92F923A01E79B9530043476C /* AdminViewController.swift in Sources */,
 				9230BE921E0E0B5A001A12CE /* FirstViewController.swift in Sources */,
 				920367B41E78672D004D7690 /* InputTableViewCell.swift in Sources */,

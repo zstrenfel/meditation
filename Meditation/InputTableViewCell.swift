@@ -33,6 +33,5 @@ class InputTableViewCell: UITableViewCell {
             return
         }
         timer!.setValue(sender.text, forKey: "name")
-        log.debug(self.timer)
     }
 }

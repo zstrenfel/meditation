@@ -70,10 +70,10 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func loadTableFooterView() {
-//        guard isNewTimer == false else {
-//            //no need to add the delete button if the object doesn't even exist
-//            return
-//        }
+        guard isNewTimer == false else {
+            //no need to add the delete button if the object doesn't even exist
+            return
+        }
         let customView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 50))
         customView.backgroundColor = UIColor.white
         let button = UIButton(frame: CGRect(x: (self.tableView.frame.width - 200) / 2, y: 0, width: 200, height: 50))
@@ -99,6 +99,8 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     
     func deleteMeditationTimer(sender: UIAlertAction) {
         log.info("deleteing meditation timer")
+        context.delete(timer!)
+        self.saveChanges(deleted: true)
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -267,14 +269,16 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     // MARK: - Actions
     
     @IBAction func closeModal(_ sender: UIBarButtonItem) {
-        self.saveChanges()
         self.dismiss(animated: true, completion: nil)
     }
     
     //save changes if changes were made
-    func saveChanges() {
+    func saveChanges(deleted: Bool = false) {
         //should be an if else case here
-        timer?.setValue(Date(), forKey: "updated_at")
+        if !deleted {
+            timer?.setValue(Date(), forKey: "updated_at")
+        }
+        log.debug(self.timer)
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     

@@ -52,27 +52,38 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "optionCell") as! OptionTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "meditationCell") as! MeditationDisplayTableViewCell
         let timer = timers[indexPath.row]
-        if let name = timer.name {
-            cell.value = name
-        }
+        cell.nameLabel.text = timer.name != nil ? timer.name : "My Meditation"
+        cell.timer = timer
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "showTimer", sender: nil)
     }
     
     // MARK: - Actions
     override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
         self.performSegue(withIdentifier: "showAdmin", sender: nil)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    //MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        guard segue.identifier != nil else {
+            //break and execute segue
+            return
+        }
+        switch segue.identifier! {
+        case "showTimer":
+            let selectedIndexPath = self.tableView.indexPathForSelectedRow
+            let cell = self.tableView.cellForRow(at: selectedIndexPath!) as! MeditationDisplayTableViewCell
+            let destinationVC = segue.destination as! FirstViewController
+            destinationVC.timer = cell.timer!
+            break
+        default:
+            break
+        }
     }
-    */
 
 }
