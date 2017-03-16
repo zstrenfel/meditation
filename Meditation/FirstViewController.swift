@@ -41,11 +41,7 @@ class FirstViewController: UIViewController {
             return
         }
         
-        //update labels with the appropriate time
-        //redundent????
-        timerLabel.text = timer?.primary.timeString
-        countdownLabel.text = timer?.countdown.timeString
-        cooldownLabel.text = timer?.cooldown.timeString
+        setTimerLabels()
     }
     
     override func didReceiveMemoryWarning() {
@@ -67,12 +63,18 @@ class FirstViewController: UIViewController {
         }
     }
     
-    func resetTimerLabels() {
-        //timer is completed, reset all labels
-        countdownLabel.text = timers[.countdown]?.time.timeString
-        timerLabel.text = timers[.primary]?.time.timeString
-        cooldownLabel.text = timers[.cooldown]?.time.timeString
+    func updateTimer(_ timer: MeditationTimer) {
+        self.timer = timer
+        setTimerLabels()
     }
+    
+    func setTimerLabels() {
+        //timer is completed, reset all labels
+        countdownLabel.text = self.timer?.countdown.timeString
+        timerLabel.text = self.timer?.primary.timeString
+        cooldownLabel.text = self.timer?.cooldown.timeString
+    }
+    
     
     // MARK: - Actions
     @IBAction func startTimer(_ sender: UIButton) {
@@ -100,7 +102,7 @@ class FirstViewController: UIViewController {
         if (sessionTimers?.isPaused())! {
             sessionTimers?.stopTimer(clear: true)
             stopButton.setTitle("Pause", for: .normal)
-            resetTimerLabels()
+            setTimerLabels()
         } else {
             sessionTimers?.stopTimer(clear: false)
             stopButton.setTitle("Reset", for: .normal)
@@ -122,17 +124,12 @@ class FirstViewController: UIViewController {
             let navigationController = segue.destination as! UINavigationController
             let targetVC = navigationController.topViewController as! EditModalViewController
             targetVC.timer = self.timer
+            targetVC.onDismiss = updateTimer
             break
         default:
             //do nothing
             break
         }
-    }
-    
-    func updateTimer(_ type: TimerType, _ info: TimerInfo) {
-        log.debug(type)
-        self.timers[type] = info
-        updateTimerLabels(info.time, type)
     }
 }
 

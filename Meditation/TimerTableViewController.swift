@@ -23,12 +23,12 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getData()
+        fetchTimers()
         tableView.reloadData()
     }
     
     //get timers from the store
-    func getData() {
+    func fetchTimers() {
         do {
             timers = try context.fetch(MeditationTimer.fetchRequest())
             log.debug(self.timers)
@@ -79,6 +79,7 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
             let selectedIndexPath = self.tableView.indexPathForSelectedRow
             let cell = self.tableView.cellForRow(at: selectedIndexPath!) as! MeditationDisplayTableViewCell
             let destinationVC = segue.destination as! FirstViewController
+            log.debug(cell.timer)
             destinationVC.timer = cell.timer!
             break
         default:

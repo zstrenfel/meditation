@@ -19,6 +19,9 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     var sections: [String] = ["Title", TimerType.countdown.rawValue, TimerType.primary.rawValue, TimerType.cooldown.rawValue, TimerType.interval.rawValue, "Delete"]
     var sectionMap: [String: [TableCell]] = [:]
     
+    //callback to refresh parent on modal dismiss
+    var onDismiss: ((_ timer: MeditationTimer) -> Void)?
+    
     //what section has an active picker
     var activePickerIndexPath: IndexPath? = nil
     
@@ -85,34 +88,9 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         self.tableView.tableFooterView = customView
     }
     
-    func confirmDelete() {
-        let alertController = UIAlertController(title: "Delete Timer", message: "Are you sure you wan't to delete this timer?", preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "Cancel", style: .default , handler: nil)
-        let delete = UIAlertAction(title: "Delete", style: .destructive, handler: deleteMeditationTimer)
-        
-        alertController.addAction(cancel)
-        alertController.addAction(delete)
-        
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
-    func deleteMeditationTimer(sender: UIAlertAction) {
-        log.info("deleteing meditation timer")
-        context.delete(timer!)
-        self.saveChanges(deleted: true)
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    //this is the callback passed to timer picker table view cell
-    func handlePickerChange(value: Double, type: TimerType) {
-        let sectionIndex = sections.index(of: type.rawValue)
-        self.sectionMap[type.rawValue]?[0].value = value
-        self.tableView.reloadRows(at: [IndexPath(row: 0, section: sectionIndex!)], with: .none)
     }
     
 
@@ -239,6 +217,15 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
+    //this is the callback passed to timer picker table view cell
+    func handlePickerChange(value: Double, type: TimerType) {
+        let sectionIndex = sections.index(of: type.rawValue)
+        self.sectionMap[type.rawValue]?[0].value = value
+        self.tableView.reloadRows(at: [IndexPath(row: 0, section: sectionIndex!)], with: .none)
+    }
+    
+    // MARK: - Cell Insertion/Deletion Logic
+    
     func showCell(indexPath: IndexPath) {
         let sectionKey = sections[indexPath.section]
         sectionMap[sectionKey]?[indexPath.row].hidden = false
@@ -251,24 +238,10 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.reloadRows(at: [indexPath], with: .top)
     }
     
-    // MARK: - Utility Functions
-    func getSection(section: Int) -> [TableCell] {
-        let sectionKey = sections[section]
-        if let tableCells = sectionMap[sectionKey] {
-            return tableCells
-        }
-        return []
-    }
-    
-    func getTableCell(indexPath: IndexPath) -> TableCell {
-        let sectionTableCells = getSection(section: indexPath.section)
-        return sectionTableCells[indexPath.row]
-    }
-    
-    // MARK: - Actions
+    // MARK: - Actions and Acessory Methods
     @IBAction func saveChanges(_ sender: UIBarButtonItem) {
         saveChanges()
-        self.dismiss(animated: true, completion: nil)
+        dismiss()
     }
     
     //save changes if changes were made
@@ -288,6 +261,56 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
             log.debug("should be deleted")
         } else {
             context.rollback()
+        }
+        dismiss()
+    }
+    
+    func updateSound(_ type: TimerType, _ path: String) {
+        switch type {
+        case .countdown:
+            timer?.countdown_sound = path
+            break
+        case .primary:
+            timer?.primary_sound = path
+            break
+        case .cooldown:
+            timer?.cooldown_sound = path
+            break
+        case .interval:
+            timer?.interval_sound = path
+            break
+        }
+        let sectionIndex = sections.index(of: type.rawValue)
+        sectionMap[type.rawValue]?[2].value = path
+        self.tableView.reloadRows(at: [IndexPath(row: 2, section: sectionIndex!)], with: .none)
+    }
+    
+    func updateRepeat(_ value: Bool, _ type: TimerType) {
+        self.timer?.interval_repeat = value
+    }
+    
+    func confirmDelete() {
+        let alertController = UIAlertController(title: "Delete Timer", message: "Are you sure you wan't to delete this timer?", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "Cancel", style: .default , handler: nil)
+        let delete = UIAlertAction(title: "Delete", style: .destructive, handler: deleteMeditationTimer)
+        
+        alertController.addAction(cancel)
+        alertController.addAction(delete)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func deleteMeditationTimer(sender: UIAlertAction) {
+        log.info("deleteing meditation timer")
+        context.delete(timer!)
+        self.saveChanges(deleted: true)
+        dismiss()
+    }
+    
+    //refresh parent on modal close
+    func dismiss() {
+        if let block = onDismiss {
+            block(self.timer!)
         }
         self.dismiss(animated: true, completion: nil)
     }
@@ -319,33 +342,17 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-    func updateSound(_ type: TimerType, _ path: String) {
-        switch type {
-        case .countdown:
-            timer?.countdown_sound = path
-            break
-        case .primary:
-            timer?.primary_sound = path
-            break
-        case .cooldown:
-            timer?.cooldown_sound = path
-            break
-        case .interval:
-            timer?.interval_sound = path
-            break
+    // MARK: - Utility Functions
+    func getSection(section: Int) -> [TableCell] {
+        let sectionKey = sections[section]
+        if let tableCells = sectionMap[sectionKey] {
+            return tableCells
         }
-        let sectionIndex = sections.index(of: type.rawValue)
-        sectionMap[type.rawValue]?[2].value = path
-        self.tableView.reloadRows(at: [IndexPath(row: 2, section: sectionIndex!)], with: .none)
+        return []
     }
     
-    func updateRepeat(_ value: Bool, _ type: TimerType) {
-        self.timer?.interval_repeat = value
+    func getTableCell(indexPath: IndexPath) -> TableCell {
+        let sectionTableCells = getSection(section: indexPath.section)
+        return sectionTableCells[indexPath.row]
     }
-    
-    func updateSection(type: TimerType) {
-        let section = sections.index(of: type.rawValue)
-        self.tableView.reloadSections(NSIndexSet(index: section!) as IndexSet, with: .none)
-    }
-    
 }
