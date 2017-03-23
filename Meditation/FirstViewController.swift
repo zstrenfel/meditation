@@ -25,7 +25,6 @@ class FirstViewController: UIViewController {
         didSet {
             if timer != nil {
                 log.debug(self.timer!)
-                visualTimer.updateTimer(with: self.timer!)
             }
         }
     }
@@ -37,6 +36,7 @@ class FirstViewController: UIViewController {
             log.error("timer is not set and this shouldn't happen")
             return
         }
+        visualTimer.updateTimer(with: self.timer!)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -30,6 +30,7 @@ class TimerWrapper {
     var currentIndex: Int = 0
     var currentTimer: Timer?
     
+    var startTime: Double = 0.0
     var currentTime: Double = 0.0
     
     var interval: TimerInfo
@@ -78,6 +79,7 @@ class TimerWrapper {
     
     //do I need to accomodate for the base case of the timer value being 0?
     func startTimer() {
+        startTime = CFAbsoluteTimeGetCurrent()
         if currentTimer != nil {
             currentTimer?.invalidate()
         }
@@ -88,12 +90,13 @@ class TimerWrapper {
     }
     
     @objc func countdown() {
-        if currentTime >= timers[currentIndex].time {
+        if currentTime >= timers[currentIndex].time - 1 {
             playSound(type: timers[currentIndex].type)
-            currentTime = 1.0
+            currentTime = 0.0
             setNextTimer()
         } else {
-            currentTime += 1
+            currentTime = round(CFAbsoluteTimeGetCurrent() - startTime)
+            log.debug(self.currentTime)
             //alert user on correct intervals
             if currentTime.truncatingRemainder(dividingBy: interval.time) == 0 {
                 playSound(type: .interval)
@@ -118,6 +121,7 @@ class TimerWrapper {
             completed = true
             self.currentTime = 0.0
             self.currentIndex = 0
+            self.startTime = 0.0
             currentTimer = nil
             //update parent that timer is finished/reset
             if let block = updateParent {
