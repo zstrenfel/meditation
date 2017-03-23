@@ -60,7 +60,7 @@ class TimerWrapper {
             loadSound(type: timer.type, path: timer.sound)
         }
         //load interval sound
-        loadSound(type: .interval, path: self.interval.sound)
+        loadSound(type: .interval, path: timer.interval_sound!)
     }
     
     func setNextTimer() {
@@ -90,23 +90,18 @@ class TimerWrapper {
     }
     
     @objc func countdown() {
+        //if the current timer is expired, make sound and start next timer
         if currentTime >= timers[currentIndex].time - 1 {
             playSound(type: timers[currentIndex].type)
             currentTime = 0.0
             setNextTimer()
         } else {
             currentTime = round(CFAbsoluteTimeGetCurrent() - startTime)
-            log.debug(self.currentTime)
             //alert user on correct intervals
             if currentTime.truncatingRemainder(dividingBy: interval.time) == 0 {
                 playSound(type: .interval)
             }
         }
-        if !completed {
-            if let block = updateParent {
-                block(timers[currentIndex].time - currentTime, timers[currentIndex].type)
-            }
-        }   
     }
     
     
@@ -114,6 +109,7 @@ class TimerWrapper {
         paused = true
         if currentTimer != nil {
             currentTimer!.invalidate()
+            startTime = CFAbsoluteTimeGetCurrent() - startTime
         }
         
         //if the session is ended, reset the timer

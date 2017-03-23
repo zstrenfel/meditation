@@ -36,6 +36,7 @@ class FirstViewController: UIViewController {
             log.error("timer is not set and this shouldn't happen")
             return
         }
+        stopButton.isEnabled = false
         visualTimer.updateTimer(with: self.timer!)
     }
     
@@ -75,6 +76,8 @@ class FirstViewController: UIViewController {
             visualTimer.beginAnimation()
         }
         stopButton.setTitle("Pause", for: .normal)
+        stopButton.isEnabled = true
+        startButton.isEnabled = false
     }
 
     @IBAction func stopTimer(_ sender: UIButton) {
@@ -95,10 +98,12 @@ class FirstViewController: UIViewController {
             visualTimer.pauseAnimation()
             stopButton.setTitle("Reset", for: .normal)
         }
+        startButton.isEnabled = true
     }
     
     func onComplete() {
         stopButton.setTitle("Reset", for: .normal)
+        startButton.isEnabled = true
     }
     
     // MARK: - Navigation
