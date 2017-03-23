@@ -12,30 +12,20 @@ import Cent
 import XCGLogger
 
 
-class FirstViewController: UIViewController {
+class FirstViewController: UIViewController, TimerDelegate {
     // MARK: - Properties
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
-    
     @IBOutlet weak var visualTimer: VisualTimer!
     
     //should be passed in
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var timer: MeditationTimer? = nil {
-        didSet {
-            if timer != nil {
-                log.debug(self.timer!)
-            }
-        }
-    }
+    var timer: MeditationTimer? = nil
+    
     var sessionTimer: TimerWrapper?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard timer != nil else {
-            log.error("timer is not set and this shouldn't happen")
-            return
-        }
         stopButton.isEnabled = false
         visualTimer.updateTimer(with: self.timer!)
     }
@@ -66,21 +56,18 @@ class FirstViewController: UIViewController {
     func _startTimer() {
         if sessionTimer == nil {
             sessionTimer = TimerWrapper(with: timer!)
-            sessionTimer?.onComplete = onComplete
+            sessionTimer?.delegate = self
         }
-        sessionTimer?.startTimer()
-        if (sessionTimer?.isPaused())! {
+        if (sessionTimer?.isActive())! {
+            sessionTimer?.resumeTimer()
             visualTimer.resumeAnimation()
         } else {
+            sessionTimer?.startTimer()
             visualTimer.beginAnimation()
         }
         stopButton.setTitle("Pause", for: .normal)
         stopButton.isEnabled = true
         startButton.isEnabled = false
-    }
-    
-    func _resumeTimer() {
-        
     }
 
     @IBAction func stopTimer(_ sender: UIButton) {
@@ -92,21 +79,26 @@ class FirstViewController: UIViewController {
             log.debug("no timers running so cannot stop them")
             return
         }
+        
         if ((sessionTimer?.isPaused())! || clear) {
-            sessionTimer?.stopTimer(clear: true)
+            sessionTimer?.clearTimer()
             visualTimer.clearAnimations()
             stopButton.setTitle("Pause", for: .normal)
         } else {
-            sessionTimer?.stopTimer(clear: false)
+            sessionTimer?.stopTimer()
             visualTimer.pauseAnimation()
             stopButton.setTitle("Reset", for: .normal)
         }
         startButton.isEnabled = true
     }
     
-    func onComplete() {
+    func handleTimerComplete(){
         stopButton.setTitle("Reset", for: .normal)
         startButton.isEnabled = true
+    }
+    
+    func handleTimerChange() {
+        log.debug("change has occurred")
     }
     
     // MARK: - Navigation
