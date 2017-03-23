@@ -26,6 +26,9 @@ struct TimerInfo {
 }
 
 class TimerWrapper {
+    
+    weak var delegate: TimerDelegate?
+    
     //Array of timers and their corresponding information
     private var timers: [TimerInfo]
     //Timer that is currently in use
@@ -39,7 +42,7 @@ class TimerWrapper {
     private var interval: TimerInfo
     
     private var active: Bool = false
-    private var paused: Bool = true
+    private var paused: Bool = false
     private var completed: Bool = false
     
     private var sounds: [TimerType: AVAudioPlayer] = [:]
@@ -92,23 +95,41 @@ class TimerWrapper {
     
     //do I need to accomodate for the base case of the timer value being 0?
     func startTimer() {
-        //set absolute start time of the timers
-        startTime = CFAbsoluteTimeGetCurrent()
-        
-        //if a timer is currently running, then invalidate it
-        if currentTimer != nil {
-            currentTimer?.invalidate()
+        guard currentTimer == nil else {
+            log.error("timer is already running")
+            return
         }
-        
         paused = false
         completed = false
         active = true
+        
+        //set absolute start time of the timers
+        startTime = CFAbsoluteTimeGetCurrent()
+        
         currentTimer = Timer()
         currentTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(TimerWrapper.countdown), userInfo: nil, repeats: true)
     }
     
-    func stopTimer(clear: Bool) {
+    func pauseTimer() {
         paused = true
+        if let curr = currentTimer {
+            curr.invalidate()
+            currentTimer = nil
+            
+            //set difference in start and pause time to be used later when restarting
+            startTime = CFAbsoluteTimeGetCurrent() - startTime
+        }
+    }
+    
+    func resumeTimer() {
+        paused = false
+        //start time should be moved back to accomodate the time that has already passed
+        startTime = CFAbsoluteTimeGetCurrent() - startTime
+        currentTimer = Timer()
+        currentTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(TimerWrapper.countdown), userInfo: nil, repeats: true)
+    }
+    
+    func stopTimer() {
         if let curr = currentTimer {
             curr.invalidate()
             currentTimer = nil
@@ -116,13 +137,7 @@ class TimerWrapper {
             startTime = CFAbsoluteTimeGetCurrent() - startTime
         }
         
-        //if the session is ended, reset the timer
-        if clear {
-            clearTimer()
-        }
-    }
-    
-    func clearTimer() {
+        paused = false
         completed = true
         active = false
         self.currentTime = 0.0
@@ -149,14 +164,13 @@ class TimerWrapper {
         //if this is the last timer, end
         guard currentTimerIndex < timers.count - 1 else {
             log.debug("Index is out of range")
-            stopTimer(clear: false)
+            pauseTimer()
             completed = true
-            //let parent know that the timer finished
-            if let block = onComplete {
-                block()
-            }
+            
+            delegate?.handleTimerComplete()
             return
         }
+        
         //else update the currentTimerIndex by one to set the next timer
         currentTimerIndex += 1
     }
