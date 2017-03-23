@@ -253,26 +253,26 @@
 			name = TableCells;
 			sourceTree = "<group>";
 		};
-		925A3E971E8431CC00D916D8 /* Timer */ = {
+		925A3E971E8431CC00D916D8 /* Timers */ = {
 			isa = PBXGroup;
 			children = (
+				925A3E951E83513100D916D8 /* VisualTimer.swift */,
 				920103941E4867240049A072 /* TimerClass.swift */,
 				925A3E981E8431DA00D916D8 /* TimerDelegate.swift */,
 			);
-			name = Timer;
+			name = Timers;
 			sourceTree = "<group>";
 		};
 		927BE5731E0E19900073ABFE /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				925A3E971E8431CC00D916D8 /* Timer */,
+				925A3E971E8431CC00D916D8 /* Timers */,
 				927BE5741E0E19B30073ABFE /* TableCellTypes.swift */,
 				92AB37351E2E01BC004BCC3F /* IntExtension.swift */,
 				92C092C21E2F73E9006EBB01 /* TimerPickerView.swift */,
 				92974FD51E307FAF0056299D /* ColorPalette.swift */,
 				92EFCD591E5AB6B000B8DC5C /* StringExt+TitleCase.swift */,
 				924521F81E5BDEB7005BC843 /* RoundButton.swift */,
-				925A3E951E83513100D916D8 /* VisualTimer.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";

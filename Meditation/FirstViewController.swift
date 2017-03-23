@@ -97,8 +97,12 @@ class FirstViewController: UIViewController, TimerDelegate {
         startButton.isEnabled = true
     }
     
-    func handleTimerChange() {
-        log.debug("change has occurred")
+    func handleTimerChange(value: Any) {
+        if value is Double {
+            visualTimer.updateTimeLabel(with: (value as! Double).timeString)
+        } else if value is String {
+            visualTimer.updateDescriptionLabel(with: value as! String)
+        }
     }
     
     // MARK: - Navigation

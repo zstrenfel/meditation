@@ -10,5 +10,5 @@ import UIKit
 
 protocol TimerDelegate: class {
     func handleTimerComplete()
-    func handleTimerChange()
+    func handleTimerChange(value: Any)
 }

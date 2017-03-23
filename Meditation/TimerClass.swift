@@ -30,6 +30,7 @@ class TimerWrapper {
     weak var delegate: TimerDelegate?
     
     var timer: Timer? = nil
+    var meditationTimer: MeditationTimer
     
     private var totalTime: Double = 0.0
     private var countdownEnd: Double = 0.0
@@ -37,6 +38,11 @@ class TimerWrapper {
     
     private var startTime: Double = 0.0
     private var currentTime: Double = 0.0
+    private var currentStatus: String = "Countdown" {
+        didSet {
+            delegate?.handleTimerChange(value: currentStatus)
+        }
+    }
     
     private var interval: Double = 0.0
     private var intervalRepeat: Bool = false
@@ -53,6 +59,7 @@ class TimerWrapper {
     var onComplete: (() -> Void)?
     
     init(with timer: MeditationTimer) {
+        self.meditationTimer = timer
         self.totalTime = timer.countdown + timer.primary + timer.cooldown
         self.countdownEnd = timer.countdown
         self.primaryEnd = timer.countdown + timer.primary
@@ -103,7 +110,7 @@ class TimerWrapper {
         paused = false
         completed = false
         active = true
-        
+        currentStatus = "Countdown"
         //set absolute start time of the timers
         startTime = CFAbsoluteTimeGetCurrent()
         
@@ -142,15 +149,22 @@ class TimerWrapper {
     
     @objc func countdown() {
         if currentTime >= totalTime {
-            playSound(type: .cooldown)
-            stopTimer()
+            currentStatus = "Completed"
+             stopTimer()
+            if meditationTimer.cooldown > 0.0 {
+                playSound(type: .cooldown)
+            } else {
+                playSound(type: .primary)
+            }
         } else {
             currentTime = round(CFAbsoluteTimeGetCurrent() - startTime)
-                
+            
             if currentTime == countdownEnd {
                 playSound(type: .countdown)
+                currentStatus = "Meditation"
             } else if currentTime == primaryEnd {
                 playSound(type: .primary)
+                currentStatus = "Cooldown"
             } else if interval > 0.0 {
                 let intervalTime = currentTime - countdownEnd
                 if intervalTime == interval {
@@ -160,6 +174,7 @@ class TimerWrapper {
                 }
             }
         }
+        delegate?.handleTimerChange(value: currentTime)
     }
     
     // MARK: - Outside Accessible
