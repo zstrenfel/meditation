@@ -26,30 +26,55 @@ struct TimerInfo {
 }
 
 class TimerWrapper {
-    var timers: [TimerInfo]
-    var currentIndex: Int = 0
-    var currentTimer: Timer?
+    //Array of timers and their corresponding information
+    private var timers: [TimerInfo]
+    //Timer that is currently in use
+    private var currentTimer: Timer?
+    //Index of current timer in use
+    private var currentTimerIndex: Int = 0
     
-    var startTime: Double = 0.0
-    var currentTime: Double = 0.0
+    private var startTime: Double = 0.0
+    private var currentTime: Double = 0.0
     
-    var interval: TimerInfo
+    private var interval: TimerInfo
+    
+    private var active: Bool = false
+    private var paused: Bool = true
+    private var completed: Bool = false
+    
+    private var sounds: [TimerType: AVAudioPlayer] = [:]
+    private var soundQueue = DispatchQueue(label: "strenfel.zach.soundQ")
+    private var maxPlayTime: DispatchTimeInterval = .seconds(5)
     
     var updateParent: ((_ remaining: Double,_ type: TimerType) -> Void)?
     var onComplete: (() -> Void)?
     
-    var paused: Bool = false
-    var completed: Bool = false
-    
-    var sounds: [TimerType: AVAudioPlayer] = [:]
-    var soundQueue = DispatchQueue(label: "strenfel.zach.soundQ")
-    
     init(with timer: MeditationTimer) {
-        let countdownInfo = TimerInfo(time: timer.countdown, sound: timer.countdown_sound!, type: .countdown, shouldRepeat: nil, index: 0)
-        let primaryInfo = TimerInfo(time: timer.primary, sound: timer.primary_sound!, type: .primary, shouldRepeat: nil, index: 1)
-        let cooldownInfo = TimerInfo(time: timer.cooldown, sound: timer.cooldown_sound!, type: .cooldown, shouldRepeat: nil, index: 2)
-        
-        self.interval = TimerInfo(time: timer.interval, sound: timer.interval_sound!, type: .interval, shouldRepeat: timer.interval_repeat, index: 100)
+        let countdownInfo = TimerInfo(
+            time: timer.countdown,
+            sound: timer.countdown_sound!,
+            type: .countdown,
+            shouldRepeat: nil,
+            index: 0)
+        let primaryInfo = TimerInfo(
+            time: timer.primary,
+            sound: timer.primary_sound!,
+            type: .primary,
+            shouldRepeat: nil,
+            index: 1)
+        let cooldownInfo = TimerInfo(time:
+            timer.cooldown,
+            sound: timer.cooldown_sound!,
+            type: .cooldown,
+            shouldRepeat: nil,
+            index: 2)
+        self.interval = TimerInfo(
+            time: timer.interval,
+            sound: timer.interval_sound!,
+            type: .interval,
+            shouldRepeat:
+            timer.interval_repeat,
+            index: 100)
         
         self.timers = [countdownInfo, primaryInfo, cooldownInfo]
         self.timers = timers.filter { $0.time > 0.0 }
@@ -63,57 +88,52 @@ class TimerWrapper {
         loadSound(type: .interval, path: timer.interval_sound!)
     }
     
-    func setNextTimer() {
-        guard currentIndex < timers.count - 1 else {
-            log.debug("Index is out of range")
-            stopTimer(clear: false)
-            completed = true
-            //let parent know that the timer finished
-            if let block = onComplete {
-                block()
-            }
-            return
-        }
-        currentIndex += 1
-    }
+    // MARK: - Timer
     
     //do I need to accomodate for the base case of the timer value being 0?
     func startTimer() {
+        //set absolute start time of the timers
         startTime = CFAbsoluteTimeGetCurrent()
+        
+        //if a timer is currently running, then invalidate it
         if currentTimer != nil {
             currentTimer?.invalidate()
         }
+        
         paused = false
         completed = false
+        active = true
         currentTimer = Timer()
         currentTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(TimerWrapper.countdown), userInfo: nil, repeats: true)
     }
     
     func stopTimer(clear: Bool) {
         paused = true
-        if currentTimer != nil {
-            currentTimer!.invalidate()
+        if let curr = currentTimer {
+            curr.invalidate()
+            currentTimer = nil
+            
             startTime = CFAbsoluteTimeGetCurrent() - startTime
         }
         
         //if the session is ended, reset the timer
         if clear {
-            completed = true
-            self.currentTime = 0.0
-            self.currentIndex = 0
-            self.startTime = 0.0
-            currentTimer = nil
-            //update parent that timer is finished/reset
-            if let block = updateParent {
-                block(timers[currentIndex].time - currentTime, timers[currentIndex].type)
-            }
+            clearTimer()
         }
+    }
+    
+    func clearTimer() {
+        completed = true
+        active = false
+        self.currentTime = 0.0
+        self.currentTimerIndex = 0
+        self.startTime = 0.0
     }
     
     @objc func countdown() {
         //if the current timer is expired, make sound and start next timer
-        if currentTime >= timers[currentIndex].time - 1 {
-            playSound(type: timers[currentIndex].type)
+        if currentTime >= timers[currentTimerIndex].time - 1 {
+            playSound(type: timers[currentTimerIndex].type)
             currentTime = 0.0
             setNextTimer()
         } else {
@@ -125,6 +145,23 @@ class TimerWrapper {
         }
     }
     
+    func setNextTimer() {
+        //if this is the last timer, end
+        guard currentTimerIndex < timers.count - 1 else {
+            log.debug("Index is out of range")
+            stopTimer(clear: false)
+            completed = true
+            //let parent know that the timer finished
+            if let block = onComplete {
+                block()
+            }
+            return
+        }
+        //else update the currentTimerIndex by one to set the next timer
+        currentTimerIndex += 1
+    }
+    
+    // MARK: - Sound
     
     func loadSound(type: TimerType, path: String) {
         soundQueue.sync {
@@ -140,25 +177,31 @@ class TimerWrapper {
     }
     
     func playSound(type: TimerType) {
-        log.debug("making sound for \(type)")
-        //should I stop all sounds here? 
         guard sounds[type] != nil else {
             log.debug("no sound was loaded for this timer")
             return
         }
         sounds[type]!.play()
-        let playTime: DispatchTimeInterval = .seconds(5)
-        soundQueue.asyncAfter(deadline: .now() + playTime) {
+        soundQueue.asyncAfter(deadline: .now() + maxPlayTime) {
             self.sounds[type]?.stop()
             self.sounds[type]?.currentTime = 0
         }
     }
     
+    // MARK: - Outside Accessible
+    
+    //Function that returns if the timer is paused
     func isPaused() -> Bool {
         return paused
     }
     
+    //Fn that returns whether the timer has completed
     func isCompleted() -> Bool {
         return completed
+    }
+    
+    //Fn that returns whether the timer is active (has begun)
+    func isActive() -> Bool {
+        return active
     }
 }
