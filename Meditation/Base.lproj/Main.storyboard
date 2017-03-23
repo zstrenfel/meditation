@@ -22,55 +22,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MYJ-T7-4O1">
-                                <rect key="frame" x="16" y="188" width="343" height="115"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o1A-Uf-CnA" customClass="VisualTimer" customModule="Meditation" customModuleProvider="target">
+                                <rect key="frame" x="47" y="154" width="280" height="280"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="280" id="XaS-67-b32"/>
+                                    <constraint firstAttribute="width" constant="280" id="tAa-Hq-6Q8"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="a0U-fY-sNh">
+                                <rect key="frame" x="62" y="556" width="250" height="75"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="tST-r0-2WE">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countdown" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LAV-yf-swQ">
-                                                <rect key="frame" x="0.0" y="0.0" width="166" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 seconds" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ueS-vp-9EX">
-                                                <rect key="frame" x="177" y="0.0" width="166" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8r-4W-eu9">
-                                        <rect key="frame" x="0.0" y="20.5" width="343" height="74"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="62"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="lGr-Ha-vMk">
-                                        <rect key="frame" x="0.0" y="94.5" width="343" height="20.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cooldown" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJr-V6-l9N">
-                                                <rect key="frame" x="0.0" y="0.0" width="166.5" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 seconds" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Szf-Cq-d0g">
-                                                <rect key="frame" x="176.5" y="0.0" width="166.5" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="a0U-fY-sNh">
-                                <rect key="frame" x="80.5" y="355" width="214" height="75"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ap-eI-AM6" customClass="RoundButton" customModule="Meditation" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ap-eI-AM6">
                                         <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="75" id="NAF-kl-lUX"/>
@@ -82,8 +45,8 @@
                                             <action selector="startTimer:" destination="9pv-A4-QxB" eventType="touchUpInside" id="byE-eD-550"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pq6-KU-vX3" customClass="RoundButton" customModule="Meditation" customModuleProvider="target">
-                                        <rect key="frame" x="139" y="0.0" width="75" height="75"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pq6-KU-vX3">
+                                        <rect key="frame" x="175" y="0.0" width="75" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="RBc-Pj-7mC"/>
                                             <constraint firstAttribute="width" constant="75" id="a2M-cM-TKP"/>
@@ -99,11 +62,10 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="a0U-fY-sNh" firstAttribute="top" secondItem="MYJ-T7-4O1" secondAttribute="bottom" constant="52" id="7lc-c1-1bE"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="MYJ-T7-4O1" secondAttribute="trailing" id="MMf-Cv-4sY"/>
-                            <constraint firstItem="MYJ-T7-4O1" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="124" id="ZP0-Nw-idz"/>
+                            <constraint firstItem="o1A-Uf-CnA" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="90" id="9PE-My-edx"/>
+                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="a0U-fY-sNh" secondAttribute="bottom" constant="36" id="Lm1-OE-Y6n"/>
                             <constraint firstItem="a0U-fY-sNh" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="ggI-PE-zmy"/>
-                            <constraint firstItem="MYJ-T7-4O1" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="vwX-XK-kZX"/>
+                            <constraint firstItem="o1A-Uf-CnA" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="go5-zg-HoL"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gTg-K3-v8z">
@@ -114,11 +76,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="cooldownLabel" destination="Szf-Cq-d0g" id="bRS-BN-kdA"/>
-                        <outlet property="countdownLabel" destination="ueS-vp-9EX" id="nSv-Q1-uAa"/>
                         <outlet property="startButton" destination="9ap-eI-AM6" id="KaX-kd-yla"/>
                         <outlet property="stopButton" destination="pq6-KU-vX3" id="PbX-hA-I33"/>
-                        <outlet property="timerLabel" destination="o8r-4W-eu9" id="NEq-oP-29F"/>
+                        <outlet property="visualTimer" destination="o1A-Uf-CnA" id="b6E-DR-HmB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
@@ -282,6 +242,6 @@
         <image name="first" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5Au-2m-ArP"/>
+        <segue reference="31d-nB-w3j"/>
     </inferredMetricsTieBreakers>
 </document>

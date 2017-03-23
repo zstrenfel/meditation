@@ -17,49 +17,33 @@ class FirstViewController: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
     
-    @IBOutlet weak var timerLabel: UILabel!
-    @IBOutlet weak var countdownLabel: UILabel!
-    @IBOutlet weak var cooldownLabel: UILabel!
+    @IBOutlet weak var visualTimer: VisualTimer!
     
     //should be passed in
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var timer: MeditationTimer? = nil
+    var timer: MeditationTimer? = nil {
+        didSet {
+            if timer != nil {
+                log.debug(self.timer!)
+                visualTimer.updateTimer(with: self.timer!)
+            }
+        }
+    }
     var sessionTimer: TimerWrapper?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         guard timer != nil else {
             log.error("timer is not set and this shouldn't happen")
             return
         }
-        
-        setTimerLabels()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if sessionTimer != nil {
             _stopTimer(clear: true)
-        }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func updateTimerLabels(_ value: Double, _ type: TimerType) {
-        switch type {
-        case .countdown:
-            countdownLabel.text = value.timeString
-        case .primary:
-            timerLabel.text = value.timeString
-        case .cooldown:
-            cooldownLabel.text = value.timeString
-        case .interval:
-            //do nothing
-            break
+            visualTimer.clearAnimations()
         }
     }
     
@@ -69,13 +53,7 @@ class FirstViewController: UIViewController {
             return
         }
         self.timer = timer
-        setTimerLabels()
-    }
-    
-    func setTimerLabels() {
-        countdownLabel.text = self.timer?.countdown.timeString
-        timerLabel.text = self.timer?.primary.timeString
-        cooldownLabel.text = self.timer?.cooldown.timeString
+        visualTimer.updateTimer(with: timer!)
     }
     
     
@@ -87,10 +65,15 @@ class FirstViewController: UIViewController {
     func _startTimer() {
         if sessionTimer == nil {
             sessionTimer = TimerWrapper(with: timer!)
-            sessionTimer?.updateParent = updateTimerLabels
             sessionTimer?.onComplete = onComplete
         }
+        
         sessionTimer?.startTimer()
+        if (sessionTimer?.paused)! {
+            visualTimer.resumeAnimation()
+        } else {
+            visualTimer.beginAnimation()
+        }
         stopButton.setTitle("Pause", for: .normal)
     }
 
@@ -105,10 +88,11 @@ class FirstViewController: UIViewController {
         }
         if ((sessionTimer?.isPaused())! || clear) {
             sessionTimer?.stopTimer(clear: true)
+            visualTimer.clearAnimations()
             stopButton.setTitle("Pause", for: .normal)
-            setTimerLabels()
         } else {
             sessionTimer?.stopTimer(clear: false)
+            visualTimer.pauseAnimation()
             stopButton.setTitle("Reset", for: .normal)
         }
     }
