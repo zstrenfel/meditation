@@ -92,6 +92,7 @@ class TimerWrapper {
             log.debug("no sound was loaded for this timer")
             return
         }
+        log.debug("playing sound for \(type)")
         sounds[type]!.play()
         soundQueue.asyncAfter(deadline: .now() + maxPlayTime) {
             self.sounds[type]?.stop()
@@ -148,6 +149,7 @@ class TimerWrapper {
     }
     
     @objc func countdown() {
+        currentTime = round(CFAbsoluteTimeGetCurrent() - startTime)
         if currentTime >= totalTime {
             currentStatus = "Completed"
              stopTimer()
@@ -157,8 +159,6 @@ class TimerWrapper {
                 playSound(type: .primary)
             }
         } else {
-            currentTime = round(CFAbsoluteTimeGetCurrent() - startTime)
-            
             if currentTime == countdownEnd {
                 playSound(type: .countdown)
                 currentStatus = "Meditation"
@@ -169,11 +169,14 @@ class TimerWrapper {
                 let intervalTime = currentTime - countdownEnd
                 if intervalTime == interval {
                     playSound(type: .interval)
-                } else if intervalTime > 0 && intervalTime.truncatingRemainder(dividingBy: interval) == 0 {
+                } else if intervalTime > 0 &&
+                    intervalRepeat &&
+                    intervalTime.truncatingRemainder(dividingBy: interval) == 0 {
                     playSound(type: .interval)
                 }
             }
         }
+        
         delegate?.handleTimerChange(value: totalTime - currentTime)
     }
     
