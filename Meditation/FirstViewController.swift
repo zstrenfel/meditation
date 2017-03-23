@@ -26,8 +26,13 @@ class FirstViewController: UIViewController, TimerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        stopButton.isEnabled = false
+        
         visualTimer.updateTimer(with: self.timer!)
+        
+        stopButton.isEnabled = false
+        if timer?.primary == 0.0 && timer?.countdown == 0.0 && timer?.cooldown == 0.0 {
+            startButton.isEnabled = false
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -46,6 +51,11 @@ class FirstViewController: UIViewController, TimerDelegate {
         self.timer = timer
         visualTimer.updateTimer(with: timer!)
         sessionTimer = nil
+        
+        if timer?.primary != 0.0 || timer?.countdown != 0.0 || timer?.cooldown != 0.0 {
+            self.startButton.isEnabled = true
+        }
+        
     }
     
     

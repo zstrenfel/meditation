@@ -108,10 +108,16 @@ class TimerWrapper {
             log.error("timer is already running")
             return
         }
+        
+        guard totalTime > 0.0 else {
+            log.error("no time added")
+            return
+        }
+        
         paused = false
         completed = false
         active = true
-        currentStatus = "Countdown"
+        currentStatus = countdownEnd > 0.0 ? "Countdown" : "Meditation"
         //set absolute start time of the timers
         startTime = CFAbsoluteTimeGetCurrent()
         
@@ -151,13 +157,15 @@ class TimerWrapper {
     @objc func countdown() {
         currentTime = round(CFAbsoluteTimeGetCurrent() - startTime)
         if currentTime >= totalTime {
-            currentStatus = "Completed"
-             stopTimer()
+            stopTimer()
             if meditationTimer.cooldown > 0.0 {
                 playSound(type: .cooldown)
             } else {
                 playSound(type: .primary)
             }
+            currentStatus = "Completed"
+            delegate?.handleTimerComplete()
+            
         } else {
             if currentTime == countdownEnd {
                 playSound(type: .countdown)
