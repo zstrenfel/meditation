@@ -170,6 +170,7 @@ class TimerWrapper {
                 if intervalTime == interval {
                     playSound(type: .interval)
                 } else if intervalTime > 0 &&
+                    (intervalTime + countdownEnd) < primaryEnd &&
                     intervalRepeat &&
                     intervalTime.truncatingRemainder(dividingBy: interval) == 0 {
                     playSound(type: .interval)
