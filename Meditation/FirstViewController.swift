@@ -45,6 +45,7 @@ class FirstViewController: UIViewController, TimerDelegate {
         }
         self.timer = timer
         visualTimer.updateTimer(with: timer!)
+        sessionTimer = nil
     }
     
     
