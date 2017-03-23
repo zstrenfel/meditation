@@ -41,6 +41,10 @@ class VisualTimer: UIView {
     @IBInspectable var indicatorColor: UIColor = UIColor(red: 82/255, green: 179/255, blue: 217/255, alpha: 1.0)
     @IBInspectable var timerFontColor: UIColor = .darkGray
     @IBInspectable var descriptionFontColor: UIColor = .gray
+    @IBInspectable var timerFontSize: Double = 28.0
+    @IBInspectable var descriptionFontSize: Double = 18.0
+    @IBInspectable var topLabelBuffer: Double = 16.0
+    @IBInspectable var middleLabelBuffer: Double = 24.0
     
     
     var inset: CGFloat = 8.0
@@ -88,6 +92,8 @@ class VisualTimer: UIView {
         self.intervalRepeat = timer.interval_repeat
         self.time = countdown + primary + cooldown
         
+        updateTimeLabel(with: self.time.timeString)
+        
         if interval != nil && interval! > 0.0 {
             createIntervalLayers()
         }
@@ -124,23 +130,19 @@ class VisualTimer: UIView {
     }
     
     func createLabels() {
-        timeLabel.frame = CGRect(x: 0, y: 0, width: bounds.width - 140, height: 50)
-        timeLabel.center = CGPoint(x: bounds.width/2, y: bounds.height/2 - 16)
+        timeLabel.frame = CGRect(x: 0, y: 0, width: bounds.width - 100, height: CGFloat(timerFontSize + 10))
+        timeLabel.center = CGPoint(x: bounds.width/2, y: bounds.height/2 - CGFloat(topLabelBuffer))
         timeLabel.textAlignment = .center
-        timeLabel.font = timeLabel.font.withSize(56.0)
-        timeLabel.adjustsFontSizeToFitWidth = true
-        timeLabel.minimumScaleFactor = 0.4
-        timeLabel.text = "00:00:00"
+        timeLabel.font = timeLabel.font.withSize(CGFloat(timerFontSize))
         timeLabel.textColor = timerFontColor
+        timeLabel.text = time.timeString
         self.addSubview(timeLabel)
         
         descriptionLabel.frame = CGRect(x: 0, y: 0, width: bounds.width - 140, height: 25)
-        descriptionLabel.center = CGPoint(x: bounds.width/2, y: (bounds.height/2) + (timeLabel.frame.height - 32))
+        descriptionLabel.center = CGPoint(x: bounds.width/2, y: (bounds.height/2) + CGFloat(timerFontSize - middleLabelBuffer))
         descriptionLabel.textAlignment = .center
-        descriptionLabel.font = timeLabel.font.withSize(18)
+        descriptionLabel.font = timeLabel.font.withSize(CGFloat(descriptionFontSize))
         descriptionLabel.textColor = descriptionFontColor
-        descriptionLabel.adjustsFontSizeToFitWidth = true
-        descriptionLabel.minimumScaleFactor = 0.5
         descriptionLabel.text = "Meditation"
         self.addSubview(descriptionLabel)
     }
@@ -261,6 +263,9 @@ class VisualTimer: UIView {
         clearLayerAnimation(layer: countdownLayer)
         clearLayerAnimation(layer: primaryLayer)
         clearLayerAnimation(layer: cooldownLayer)
+        
+        updateTimeLabel(with: self.time.timeString)
+        updateDescriptionLabel(with: "Meditation")
     }
     
     func clearLayerAnimation(layer: CAShapeLayer) {

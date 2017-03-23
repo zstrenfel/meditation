@@ -174,7 +174,7 @@ class TimerWrapper {
                 }
             }
         }
-        delegate?.handleTimerChange(value: currentTime)
+        delegate?.handleTimerChange(value: totalTime - currentTime)
     }
     
     // MARK: - Outside Accessible
