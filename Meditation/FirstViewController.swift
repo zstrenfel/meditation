@@ -60,7 +60,11 @@ class FirstViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func startTimer(_ sender: UIButton) {
-        _startTimer()
+        if sessionTimer?.paused {
+            _resumeTimer()
+        } else {
+            _startTimer()
+        }
     }
     
     func _startTimer() {
@@ -68,7 +72,7 @@ class FirstViewController: UIViewController {
             sessionTimer = TimerWrapper(with: timer!)
             sessionTimer?.onComplete = onComplete
         }
-        
+        let status = sessionTimer?.paused
         sessionTimer?.startTimer()
         if (sessionTimer?.paused)! {
             visualTimer.resumeAnimation()
@@ -78,6 +82,10 @@ class FirstViewController: UIViewController {
         stopButton.setTitle("Pause", for: .normal)
         stopButton.isEnabled = true
         startButton.isEnabled = false
+    }
+    
+    func _resumeTimer() {
+        
     }
 
     @IBAction func stopTimer(_ sender: UIButton) {

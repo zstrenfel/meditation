@@ -38,8 +38,8 @@ class TimerWrapper {
     var updateParent: ((_ remaining: Double,_ type: TimerType) -> Void)?
     var onComplete: (() -> Void)?
     
-    var paused: Bool = true
-    var completed: Bool = true
+    var paused: Bool = false
+    var completed: Bool = false
     
     var sounds: [TimerType: AVAudioPlayer] = [:]
     var soundQueue = DispatchQueue(label: "strenfel.zach.soundQ")
@@ -89,22 +89,6 @@ class TimerWrapper {
         currentTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(TimerWrapper.countdown), userInfo: nil, repeats: true)
     }
     
-    @objc func countdown() {
-        //if the current timer is expired, make sound and start next timer
-        if currentTime >= timers[currentIndex].time - 1 {
-            playSound(type: timers[currentIndex].type)
-            currentTime = 0.0
-            setNextTimer()
-        } else {
-            currentTime = round(CFAbsoluteTimeGetCurrent() - startTime)
-            //alert user on correct intervals
-            if currentTime.truncatingRemainder(dividingBy: interval.time) == 0 {
-                playSound(type: .interval)
-            }
-        }
-    }
-    
-    
     func stopTimer(clear: Bool) {
         paused = true
         if currentTimer != nil {
@@ -125,6 +109,22 @@ class TimerWrapper {
             }
         }
     }
+    
+    @objc func countdown() {
+        //if the current timer is expired, make sound and start next timer
+        if currentTime >= timers[currentIndex].time - 1 {
+            playSound(type: timers[currentIndex].type)
+            currentTime = 0.0
+            setNextTimer()
+        } else {
+            currentTime = round(CFAbsoluteTimeGetCurrent() - startTime)
+            //alert user on correct intervals
+            if currentTime.truncatingRemainder(dividingBy: interval.time) == 0 {
+                playSound(type: .interval)
+            }
+        }
+    }
+    
     
     func loadSound(type: TimerType, path: String) {
         soundQueue.sync {
