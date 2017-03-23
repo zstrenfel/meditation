@@ -59,8 +59,8 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         let cooldownPickerCell = TableCell(type: .timePicker, label: "Cooldown", value: timer?.cooldown, hidden: true)
         let cooldownSoundPickerCell = TableCell(type: .link, label: "Sound", value: timer?.cooldown_sound)
         
-        let intervalCell = TableCell(type: .display, label: "Interval Bell", value: timer?.interval)
-        let intervalPickerCell = TableCell(type: .timePicker, label: "Interval Bell", value: timer?.interval, hidden: true)
+        let intervalCell = TableCell(type: .display, label: "Interval", value: timer?.interval)
+        let intervalPickerCell = TableCell(type: .timePicker, label: "Interval", value: timer?.interval, hidden: true)
         let intervalSoundPickerCell = TableCell(type: .link, label: "Sound", value: timer?.interval_sound)
         let intervalToggleCell = TableCell(type: .toggle, label: "Repeat", value: false)
                 
