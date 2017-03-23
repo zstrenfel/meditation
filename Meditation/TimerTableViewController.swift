@@ -24,6 +24,7 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         fetchTimers()
+        timers = timers.sorted { $0.updated_at > $1.updated_at }
         tableView.reloadData()
     }
     
@@ -31,7 +32,6 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
     func fetchTimers() {
         do {
             timers = try context.fetch(MeditationTimer.fetchRequest())
-            log.debug(self.timers)
         } catch {
             log.error("Fetching Failed")
         }
@@ -81,9 +81,21 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
             let destinationVC = segue.destination as! FirstViewController
             destinationVC.timer = cell.timer!
             break
+        case "showEditModal":
+            let editModal = segue.destination as! EditModalViewController
+            editModal.onDismiss = handleNewMeditation
+            break
         default:
             break
         }
     }
+    
 
+    func handleNewMeditation(_ timer: MeditationTimer?) {
+        if let _ = timer {
+            let firstVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "firstVC") as! FirstViewController
+            firstVC.timer = timer
+            self.navigationController?.pushViewController(firstVC, animated: true)
+        }
+    }
 }

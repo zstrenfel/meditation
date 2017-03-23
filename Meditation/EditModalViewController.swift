@@ -247,9 +247,10 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     //save changes if changes were made
     func saveChanges(deleted: Bool = false) {
         //should be an if else case here
-        if isNewTimer {
-            timer?.setValue(Date(), forKey: "created_at")
-        } else if !deleted {
+        if !deleted {
+            if isNewTimer {
+                timer?.setValue(Date(), forKey: "created_at")
+            }
             timer?.setValue(Date(), forKey: "updated_at")
         }
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
