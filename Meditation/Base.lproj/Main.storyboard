@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -118,7 +119,7 @@
             </objects>
             <point key="canvasLocation" x="132" y="-322"/>
         </scene>
-        <!--Timer Table View Controller-->
+        <!--Meditations-->
         <scene sceneID="qb6-ES-kK1">
             <objects>
                 <viewController id="TYV-Ft-9e2" customClass="TimerTableViewController" customModule="Meditation" customModuleProvider="target" sceneMemberID="viewController">
@@ -130,33 +131,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CW2-vp-5Ka">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CW2-vp-5Ka">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="meditationCell" id="LZn-rl-QdR" customClass="MeditationDisplayTableViewCell" customModule="Meditation" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LZn-rl-QdR" id="aGX-rj-GMi">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meditation Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kpb-s7-auv">
-                                                    <rect key="frame" x="16" y="8" width="343" height="27.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Lj3-OX-Yfu">
+                                                    <rect key="frame" x="16" y="8" width="351" height="33.5"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fne-Zd-RBO" customClass="RoundView" customModule="Meditation" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="12" width="10" height="10"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="10" id="bsF-Pw-gIW"/>
+                                                                <constraint firstAttribute="width" secondItem="fne-Zd-RBO" secondAttribute="height" multiplier="1:1" id="hRJ-yd-Jly"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meditation Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kpb-s7-auv">
+                                                            <rect key="frame" x="20" y="6.5" width="331" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Kpb-s7-auv" firstAttribute="leading" secondItem="aGX-rj-GMi" secondAttribute="leadingMargin" constant="8" id="Qcn-Jv-odu"/>
-                                                <constraint firstItem="Kpb-s7-auv" firstAttribute="top" secondItem="aGX-rj-GMi" secondAttribute="topMargin" id="Zwq-Ql-wTx"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="Kpb-s7-auv" secondAttribute="bottom" id="no8-oD-u6V"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Kpb-s7-auv" secondAttribute="trailing" constant="8" id="zBR-Ad-e4e"/>
+                                                <constraint firstItem="Lj3-OX-Yfu" firstAttribute="leading" secondItem="aGX-rj-GMi" secondAttribute="leadingMargin" constant="8" id="FbP-AN-oWG"/>
+                                                <constraint firstItem="Lj3-OX-Yfu" firstAttribute="top" secondItem="aGX-rj-GMi" secondAttribute="topMargin" id="KgB-Uj-fDp"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Lj3-OX-Yfu" secondAttribute="bottom" id="Tpu-RQ-9wa"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Lj3-OX-Yfu" secondAttribute="trailing" id="hee-CZ-53b"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="nameLabel" destination="Kpb-s7-auv" id="ioV-4J-rp7"/>
+                                            <outlet property="roundView" destination="fne-Zd-RBO" id="AIa-BQ-ySE"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -174,8 +189,8 @@
                             <constraint firstItem="CW2-vp-5Ka" firstAttribute="top" secondItem="nh9-Tn-h36" secondAttribute="bottom" id="jno-Bl-tmt"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="FRx-AX-c6A">
-                        <barButtonItem key="rightBarButtonItem" title="+" id="6Js-Cv-2SD">
+                    <navigationItem key="navigationItem" title="Meditations" id="FRx-AX-c6A">
+                        <barButtonItem key="rightBarButtonItem" title="New" id="6Js-Cv-2SD">
                             <connections>
                                 <segue destination="Zqf-0C-pSj" kind="presentation" identifier="showEditModal" id="jD6-WG-BkU"/>
                             </connections>
@@ -256,6 +271,6 @@
         <image name="first" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="31d-nB-w3j"/>
+        <segue reference="jD6-WG-BkU"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -77,7 +77,7 @@
             </objects>
             <point key="canvasLocation" x="3308" y="442"/>
         </scene>
-        <!--Title-->
+        <!--Edit Modal View Controller-->
         <scene sceneID="w2K-vL-Zlw">
             <objects>
                 <viewController storyboardIdentifier="EditModalVC" id="bze-mU-Wxg" customClass="EditModalViewController" customModule="Meditation" customModuleProvider="target" sceneMemberID="viewController">
@@ -244,7 +244,7 @@
                             <constraint firstItem="7g8-6s-n4t" firstAttribute="top" secondItem="a0K-Mt-DXe" secondAttribute="bottom" id="uGa-Q3-iHw"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="Ip3-63-AlJ">
+                    <navigationItem key="navigationItem" id="Ip3-63-AlJ">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="Qse-bt-SCb">
                             <connections>
                                 <action selector="cancelEdit:" destination="bze-mU-Wxg" id="EH9-Uu-lum"/>

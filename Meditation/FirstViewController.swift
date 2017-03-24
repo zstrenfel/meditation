@@ -24,8 +24,13 @@ class FirstViewController: UIViewController, TimerDelegate {
     
     var sessionTimer: TimerWrapper?
     
+    // MARK: - Initialization
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let navBar = self.navigationController?.navigationBar
+        navBar?.clipsToBounds = true
+        
         
         visualTimer.updateTimer(with: self.timer!)
         
@@ -55,8 +60,9 @@ class FirstViewController: UIViewController, TimerDelegate {
         if timer?.primary != 0.0 || timer?.countdown != 0.0 || timer?.cooldown != 0.0 {
             self.startButton.isEnabled = true
         }
-        
     }
+    
+    
     
     
     // MARK: - Actions

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RandomColorSwift
 
 class TimerTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -22,13 +23,18 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         
-        // Do any additional setup after loading the view.
+        let navBar = self.navigationController?.navigationBar
+        navBar?.clipsToBounds = false
+        
+        tableView.tableFooterView = UIView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         fetchTimers()
         timers = timers.sorted { $0.updated_at?.compare($1.updated_at as! Date) == ComparisonResult.orderedAscending }
         tableView.reloadData()
+        
+        
     }
     
     //get timers from the store
@@ -49,11 +55,19 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
         return timers.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "meditationCell") as! MeditationDisplayTableViewCell
         let timer = timers[indexPath.row]
         cell.nameLabel.text = timer.name != nil ? timer.name : "My Meditation"
         cell.timer = timer
+        cell.color = randomColor(hue: .blue)
+        cell.preservesSuperviewLayoutMargins = false
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.layoutMargins = UIEdgeInsets.zero
         return cell
     }
     

@@ -10,6 +10,7 @@ target 'Meditation' do
   pod 'Cent'
   pod 'Hex'
   pod 'XCGLogger', '~> 4.0.0'
+  pod 'RandomColorSwift'
 
 
   target 'MeditationTests' do

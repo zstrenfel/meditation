@@ -21,6 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
+        
+        var navBarAppearance = UINavigationBar.appearance()
+        navBarAppearance.tintColor = UIColor.gray
+        navBarAppearance.barTintColor = UIColor.white
+
+        
         return true
     }
 

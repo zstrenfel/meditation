@@ -3,6 +3,7 @@ PODS:
     - Dollar (~> 6.1.0)
   - Dollar (6.1.0)
   - Hex (5.0.1)
+  - RandomColorSwift (1.0.0)
   - XCGLogger (4.0.0):
     - XCGLogger/Core (= 4.0.0)
   - XCGLogger/Core (4.0.0)
@@ -11,14 +12,16 @@ DEPENDENCIES:
   - Cent
   - Dollar
   - Hex
+  - RandomColorSwift
   - XCGLogger (~> 4.0.0)
 
 SPEC CHECKSUMS:
   Cent: 2e2deb7ced0fc6c4c320075ddd4f63ed8defd8db
   Dollar: 0a9883680f2c1104adf0d19b827c3be71d3e3121
   Hex: 2c757d81a2b4b6afc842458ce485c8c097ea1c79
+  RandomColorSwift: 9f85058b721665d52d239ca166a913e083506444
   XCGLogger: 38063ea89b4c8b23232d18efd2e12eb0005f3ea4
 
-PODFILE CHECKSUM: 16afc6c8d75ac82b01d05b62103185d66e5b7ba4
+PODFILE CHECKSUM: e47f27fec42521d604dfebc2cfff841edf0c07e7
 
 COCOAPODS: 1.1.1
