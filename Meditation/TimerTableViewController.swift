@@ -31,10 +31,8 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         fetchTimers()
-        timers = timers.sorted { $0.updated_at?.compare($1.updated_at as! Date) == ComparisonResult.orderedAscending }
+        timers = timers.sorted { $0.last_completed?.compare($1.last_completed as! Date) == ComparisonResult.orderedDescending }
         tableView.reloadData()
-        
-        
     }
     
     //get timers from the store

@@ -242,7 +242,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     // MARK: - Actions and Acessory Methods
     @IBAction func saveChanges(_ sender: UIBarButtonItem) {
         saveChanges()
-        dismiss()
+        dismiss(shouldUpdate: true)
     }
     
     //save changes if changes were made
@@ -269,7 +269,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         } else {
             context.rollback()
         }
-        dismiss()
+        dismiss(shouldUpdate: false)
     }
     
     func updateSound(_ type: TimerType, _ path: String) {
@@ -312,13 +312,15 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         context.delete(timer!)
         self.saveChanges(deleted: true)
         self.timer = nil
-        dismiss()
+        dismiss(shouldUpdate: false)
     }
     
     //refresh parent on modal close
-    func dismiss() {
-        if let block = onDismiss {
-            block(self.timer)
+    func dismiss(shouldUpdate: Bool) {
+        if shouldUpdate {
+            if let block = onDismiss {
+                block(self.timer)
+            }
         }
         self.dismiss(animated: true, completion: nil)
     }

@@ -112,6 +112,8 @@ class FirstViewController: UIViewController, TimerDelegate {
     func handleTimerComplete(){
         stopButton.setTitle("Reset", for: .normal)
         startButton.isEnabled = true
+        timer?.setValue(Date(), forKey: "last_completed")
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
     func handleTimerChange(value: Any) {
