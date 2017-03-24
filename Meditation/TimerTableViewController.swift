@@ -24,7 +24,7 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
         fetchTimers()
-        timers = timers.sorted { $0.updated_at > $1.updated_at }
+        timers = timers.sorted { $0.updated_at?.compare($1.updated_at as! Date) == ComparisonResult.orderedAscending }
         tableView.reloadData()
     }
     
@@ -82,7 +82,8 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
             destinationVC.timer = cell.timer!
             break
         case "showEditModal":
-            let editModal = segue.destination as! EditModalViewController
+            let navigationController = segue.destination as! UINavigationController
+            let editModal = navigationController.topViewController as! EditModalViewController
             editModal.onDismiss = handleNewMeditation
             break
         default:

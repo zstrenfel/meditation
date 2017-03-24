@@ -25,8 +25,8 @@ extension MeditationTimer {
     @NSManaged public var cooldown_sound: String?
     @NSManaged public var interval: Double
     @NSManaged public var interval_sound: String?
-    @NSManaged public var created_at: NSDate?
-    @NSManaged public var updated_at: NSDate?
+    @NSManaged public var created_at: NSDate
+    @NSManaged public var updated_at: NSDate
     @NSManaged public var name: String?
     @NSManaged public var meditation: NSOrderedSet?
 }
