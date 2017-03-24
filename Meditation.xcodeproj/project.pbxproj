@@ -105,6 +105,7 @@
 		92974FD51E307FAF0056299D /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		92AB37351E2E01BC004BCC3F /* IntExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
 		92B61B1C1E85A12A00672165 /* RoundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundView.swift; sourceTree = "<group>"; };
+		92B61B1E1E85E1AD00672165 /* Model 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 7.xcdatamodel"; sourceTree = "<group>"; };
 		92C092C21E2F73E9006EBB01 /* TimerPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerPickerView.swift; sourceTree = "<group>"; };
 		92C3FC0B1E7AF5ED006FBB2A /* MeditationDisplayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationDisplayTableViewCell.swift; sourceTree = "<group>"; };
 		92C732BE1E519C4E0040C859 /* SoundSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundSelectionViewController.swift; sourceTree = "<group>"; };
@@ -927,6 +928,7 @@
 		928E32B31E770C87006D6DB3 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				92B61B1E1E85E1AD00672165 /* Model 7.xcdatamodel */,
 				922464761E8471BE007CCE0E /* Model 6.xcdatamodel */,
 				9202B1AD1E7B0EAA0009B066 /* Model 5.xcdatamodel */,
 				9202B1AC1E7B09210009B066 /* Model 4.xcdatamodel */,
