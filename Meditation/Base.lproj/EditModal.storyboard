@@ -80,7 +80,7 @@
         <!--Title-->
         <scene sceneID="w2K-vL-Zlw">
             <objects>
-                <viewController id="bze-mU-Wxg" customClass="EditModalViewController" customModule="Meditation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditModalVC" id="bze-mU-Wxg" customClass="EditModalViewController" customModule="Meditation" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UDO-mx-4nJ"/>
                         <viewControllerLayoutGuide type="bottom" id="7g8-6s-n4t"/>
@@ -268,7 +268,7 @@
         <!--Navigation Controller-->
         <scene sceneID="o2I-zd-WMH">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aiF-er-9C0" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="EditModalNavigationVC" automaticallyAdjustsScrollViewInsets="NO" id="aiF-er-9C0" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5hi-oA-YPW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

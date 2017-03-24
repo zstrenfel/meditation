@@ -10,11 +10,14 @@ import UIKit
 
 class TimerTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    // MARK: - Properties
     @IBOutlet weak var tableView: UITableView!
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var timers: [MeditationTimer] = []
     
+    
+    // MARK: - Initialization
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
@@ -37,12 +40,7 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
+    // MARK: Table
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -61,6 +59,36 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "showTimer", sender: nil)
+    }
+    
+    // MARK: - Table Row Actions
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let edit = UITableViewRowAction(style: .normal, title: " Edit ", handler: editMeditation)
+        edit.backgroundColor = .blue
+        
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete", handler: deleteMeditation)
+        delete.backgroundColor = .red
+        
+        return [delete, edit]
+    }
+    
+    func editMeditation(action: UITableViewRowAction, indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! MeditationDisplayTableViewCell
+        let timer = cell.timer
+        let editModal = UIStoryboard(name: "EditModal", bundle: nil).instantiateViewController(withIdentifier: "EditModalVC") as! EditModalViewController
+        editModal.timer = timer
+        editModal.onDismiss = handleNewMeditation
+        
+        let navigationVC = UINavigationController(rootViewController: editModal)
+        self.navigationController?.present(navigationVC, animated: true, completion: nil)
+    }
+    
+    func deleteMeditation(action: UITableViewRowAction, indexPath: IndexPath) {
+        log.debug("deleteing meditation")
     }
     
     // MARK: - Actions
@@ -91,7 +119,6 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
-
     func handleNewMeditation(_ timer: MeditationTimer?) {
         if let _ = timer {
             let firstVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "firstVC") as! FirstViewController
