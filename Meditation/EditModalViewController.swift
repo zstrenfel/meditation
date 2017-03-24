@@ -15,6 +15,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var timer: MeditationTimer?
     var isNewTimer: Bool = false
+    var timerNumber: Int = 0
     
     var sections: [String] = ["Title", TimerType.countdown.rawValue, TimerType.primary.rawValue, TimerType.cooldown.rawValue, TimerType.interval.rawValue, "Delete"]
     var sectionMap: [String: [TableCell]] = [:]
@@ -248,10 +249,16 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     func saveChanges(deleted: Bool = false) {
         //should be an if else case here
         if !deleted {
+            timer?.setValue(Date(), forKey: "updated_at")
+            timer?.setValue(Date(), forKey: "last_completed")
+            //set name if one isn't given
+            if timer?.name == nil {
+                timer?.setValue("Meditation \(timerNumber + 1)", forKey: "name")
+            }
+            //set creation date if timer is new
             if isNewTimer {
                 timer?.setValue(Date(), forKey: "created_at")
             }
-            timer?.setValue(Date(), forKey: "updated_at")
         }
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }

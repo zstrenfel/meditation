@@ -142,6 +142,7 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
             let navigationController = segue.destination as! UINavigationController
             let editModal = navigationController.topViewController as! EditModalViewController
             editModal.onDismiss = handleNewMeditation
+            editModal.timerNumber = timers.count
             break
         default:
             break
