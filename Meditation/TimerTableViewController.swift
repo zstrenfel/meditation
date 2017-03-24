@@ -70,7 +70,7 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
         let edit = UITableViewRowAction(style: .normal, title: " Edit ", handler: editMeditation)
         edit.backgroundColor = .blue
         
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete", handler: deleteMeditation)
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete", handler: confirmDelete)
         delete.backgroundColor = .red
         
         return [delete, edit]
@@ -87,8 +87,23 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
         self.navigationController?.present(navigationVC, animated: true, completion: nil)
     }
     
-    func deleteMeditation(action: UITableViewRowAction, indexPath: IndexPath) {
-        log.debug("deleteing meditation")
+    func confirmDelete(action: UITableViewRowAction, indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! MeditationDisplayTableViewCell
+        let timer = cell.timer! as MeditationTimer
+        
+        let alertController = UIAlertController(title: "Delete Timer", message: "Are you sure you wan't to delete this timer?", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "Cancel", style: .default , handler: nil)
+        let delete = UIAlertAction(title: "Delete", style: .destructive, handler: { action in
+            self.context.delete(timer)
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            _ = self.timers.remove(value: timer)
+            self.tableView.deleteRows(at: [indexPath], with: .top)
+        })
+        
+        alertController.addAction(cancel)
+        alertController.addAction(delete)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     // MARK: - Actions
