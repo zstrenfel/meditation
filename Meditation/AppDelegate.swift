@@ -22,9 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
         
-        var navBarAppearance = UINavigationBar.appearance()
+        let navBarAppearance = UINavigationBar.appearance()
         navBarAppearance.tintColor = UIColor.gray
-        navBarAppearance.barTintColor = UIColor.white
+        navBarAppearance.barTintColor = UIColor.clear
 
         
         return true

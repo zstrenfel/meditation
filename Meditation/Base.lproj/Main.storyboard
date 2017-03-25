@@ -153,7 +153,7 @@
                                         </button>
                                         <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XbT-nP-4QU">
                                             <rect key="frame" x="67" y="0.0" width="240" height="128"/>
-                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" white="0.96655505952380938" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="GDU-7N-3cY"/>
                                             </constraints>
@@ -163,10 +163,10 @@
                                         <constraint firstAttribute="bottomMargin" secondItem="gwF-i7-zaB" secondAttribute="bottom" constant="8" id="1qf-fB-LjX"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="gwF-i7-zaB" secondAttribute="trailing" id="8SA-jA-Wp9"/>
                                         <constraint firstAttribute="bottom" secondItem="XbT-nP-4QU" secondAttribute="bottom" id="Ffs-LP-Isk"/>
-                                        <constraint firstItem="T8c-8c-WKc" firstAttribute="centerY" secondItem="L2e-BU-Fhz" secondAttribute="centerY" id="Gtw-2X-otD"/>
                                         <constraint firstItem="T8c-8c-WKc" firstAttribute="centerX" secondItem="L2e-BU-Fhz" secondAttribute="centerX" id="MCZ-wn-2As"/>
                                         <constraint firstItem="XbT-nP-4QU" firstAttribute="leading" secondItem="L2e-BU-Fhz" secondAttribute="leading" id="hRt-Xc-Ccf"/>
                                         <constraint firstAttribute="trailing" secondItem="XbT-nP-4QU" secondAttribute="trailing" id="wax-nP-JGk"/>
+                                        <constraint firstAttribute="bottom" secondItem="T8c-8c-WKc" secondAttribute="bottom" constant="34" id="zsy-FZ-hlc"/>
                                     </constraints>
                                 </view>
                                 <prototypes>

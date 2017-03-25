@@ -31,6 +31,10 @@ class FirstViewController: UIViewController, TimerDelegate {
         let navBar = self.navigationController?.navigationBar
         navBar?.clipsToBounds = true
         
+        let waveBG = UIImage(named: "white-wave")
+        let repeatingBG = UIColor(patternImage: waveBG!)
+        self.view.backgroundColor = repeatingBG
+        
         
         visualTimer.updateTimer(with: self.timer!)
         
