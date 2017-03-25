@@ -23,6 +23,9 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
         self.automaticallyAdjustsScrollViewInsets = false
         
         tableView.tableFooterView = UIView()
+        let waveBG = UIImage(named: "wave-small")
+        let repeatingBG = UIColor(patternImage: waveBG!).withAlphaComponent(0.5)
+        tableView.tableHeaderView?.backgroundColor = repeatingBG
     }
     
     override func viewWillAppear(_ animated: Bool) {
