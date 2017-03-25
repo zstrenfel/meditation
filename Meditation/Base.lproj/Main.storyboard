@@ -138,21 +138,14 @@
                                     <rect key="frame" x="0.0" y="64" width="375" height="128"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Meditations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T8c-8c-WKc">
-                                            <rect key="frame" x="159" y="15" width="90" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meditations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T8c-8c-WKc">
+                                            <rect key="frame" x="126" y="66" width="123" height="28"/>
                                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="24"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwF-i7-zaB">
-                                            <rect key="frame" x="-74" y="-88" width="732" height="226"/>
-                                            <state key="normal" title="New"/>
-                                            <connections>
-                                                <segue destination="Zqf-0C-pSj" kind="presentation" id="QZH-Md-mlq"/>
-                                            </connections>
-                                        </button>
-                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XbT-nP-4QU">
-                                            <rect key="frame" x="67" y="0.0" width="240" height="128"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XbT-nP-4QU">
+                                            <rect key="frame" x="0.0" y="127" width="375" height="1"/>
                                             <color key="backgroundColor" white="0.96655505952380938" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="GDU-7N-3cY"/>
@@ -160,8 +153,6 @@
                                         </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottomMargin" secondItem="gwF-i7-zaB" secondAttribute="bottom" constant="8" id="1qf-fB-LjX"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="gwF-i7-zaB" secondAttribute="trailing" id="8SA-jA-Wp9"/>
                                         <constraint firstAttribute="bottom" secondItem="XbT-nP-4QU" secondAttribute="bottom" id="Ffs-LP-Isk"/>
                                         <constraint firstItem="T8c-8c-WKc" firstAttribute="centerX" secondItem="L2e-BU-Fhz" secondAttribute="centerX" id="MCZ-wn-2As"/>
                                         <constraint firstItem="XbT-nP-4QU" firstAttribute="leading" secondItem="L2e-BU-Fhz" secondAttribute="leading" id="hRt-Xc-Ccf"/>
@@ -299,7 +290,4 @@
     <resources>
         <image name="first" width="30" height="30"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="31d-nB-w3j"/>
-    </inferredMetricsTieBreakers>
 </document>

@@ -789,7 +789,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 44665835D15A12F6671237B7 /* Pods-Meditation.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/LogKit\"",
@@ -813,7 +812,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AC8804A14E13D0235D5A4054 /* Pods-Meditation.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/LogKit\"",
