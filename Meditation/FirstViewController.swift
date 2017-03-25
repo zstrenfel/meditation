@@ -28,13 +28,12 @@ class FirstViewController: UIViewController, TimerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let navBar = self.navigationController?.navigationBar
-        navBar?.clipsToBounds = true
-        
         let waveBG = UIImage(named: "white-wave")
         let repeatingBG = UIColor(patternImage: waveBG!)
         self.view.backgroundColor = repeatingBG
         
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         
         visualTimer.updateTimer(with: self.timer!)
         

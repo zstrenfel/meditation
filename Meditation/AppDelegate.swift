@@ -24,7 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let navBarAppearance = UINavigationBar.appearance()
         navBarAppearance.tintColor = UIColor.gray
-        navBarAppearance.barTintColor = UIColor.clear
+        navBarAppearance.barTintColor = UIColor.white
+        UIApplication.shared.statusBarStyle = .default
 
         
         return true
