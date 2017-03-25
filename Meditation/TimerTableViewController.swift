@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RandomColorSwift
 
 class TimerTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -23,16 +22,20 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         
-        let navBar = self.navigationController?.navigationBar
-        navBar?.clipsToBounds = false
-        
         tableView.tableFooterView = UIView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         fetchTimers()
         timers = timers.sorted { $0.last_completed?.compare($1.last_completed as! Date) == ComparisonResult.orderedDescending }
         tableView.reloadData()
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     //get timers from the store
@@ -62,7 +65,6 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
         let timer = timers[indexPath.row]
         cell.nameLabel.text = timer.name != nil ? timer.name : "My Meditation"
         cell.timer = timer
-        cell.color = randomColor(hue: .blue)
         cell.preservesSuperviewLayoutMargins = false
         cell.separatorInset = UIEdgeInsets.zero
         cell.layoutMargins = UIEdgeInsets.zero

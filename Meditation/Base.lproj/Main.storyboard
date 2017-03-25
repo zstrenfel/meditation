@@ -134,12 +134,37 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CW2-vp-5Ka">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="L2e-BU-Fhz">
+                                    <rect key="frame" x="0.0" y="64" width="375" height="128"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Meditations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T8c-8c-WKc">
+                                            <rect key="frame" x="159" y="15" width="90" height="21"/>
+                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="24"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwF-i7-zaB">
+                                            <rect key="frame" x="-74" y="-88" width="732" height="226"/>
+                                            <state key="normal" title="New" backgroundImage="wave"/>
+                                            <connections>
+                                                <segue destination="Zqf-0C-pSj" kind="presentation" id="QZH-Md-mlq"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="gwF-i7-zaB" secondAttribute="bottom" constant="8" id="1qf-fB-LjX"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="gwF-i7-zaB" secondAttribute="trailing" id="8SA-jA-Wp9"/>
+                                        <constraint firstItem="T8c-8c-WKc" firstAttribute="centerY" secondItem="L2e-BU-Fhz" secondAttribute="centerY" id="Gtw-2X-otD"/>
+                                        <constraint firstItem="T8c-8c-WKc" firstAttribute="centerX" secondItem="L2e-BU-Fhz" secondAttribute="centerX" id="MCZ-wn-2As"/>
+                                    </constraints>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="meditationCell" id="LZn-rl-QdR" customClass="MeditationDisplayTableViewCell" customModule="Meditation" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="156" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LZn-rl-QdR" id="aGX-rj-GMi">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Lj3-OX-Yfu">
@@ -189,13 +214,7 @@
                             <constraint firstItem="CW2-vp-5Ka" firstAttribute="top" secondItem="nh9-Tn-h36" secondAttribute="bottom" id="jno-Bl-tmt"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Meditations" id="FRx-AX-c6A">
-                        <barButtonItem key="rightBarButtonItem" title="New" id="6Js-Cv-2SD">
-                            <connections>
-                                <segue destination="Zqf-0C-pSj" kind="presentation" identifier="showEditModal" id="jD6-WG-BkU"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Meditations" id="FRx-AX-c6A"/>
                     <connections>
                         <outlet property="tableView" destination="CW2-vp-5Ka" id="9oy-LX-3Gp"/>
                         <segue destination="9pv-A4-QxB" kind="show" identifier="showTimer" id="xfm-iE-x0I"/>
@@ -269,8 +288,9 @@
     </scenes>
     <resources>
         <image name="first" width="30" height="30"/>
+        <image name="wave" width="695" height="226"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jD6-WG-BkU"/>
+        <segue reference="QZH-Md-mlq"/>
     </inferredMetricsTieBreakers>
 </document>

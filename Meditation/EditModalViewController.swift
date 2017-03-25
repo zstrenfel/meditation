@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RandomColorSwift
 
 class EditModalViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -258,6 +259,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
             //set creation date if timer is new
             if isNewTimer {
                 timer?.setValue(Date(), forKey: "created_at")
+                timer?.setValue(randomColor(hue: .blue).toHexString(), forKey: "color")
             }
         }
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
@@ -312,7 +314,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         context.delete(timer!)
         self.saveChanges(deleted: true)
         self.timer = nil
-        dismiss(shouldUpdate: false)
+        dismiss(shouldUpdate: true)
     }
     
     //refresh parent on modal close

@@ -13,11 +13,10 @@ class MeditationDisplayTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var roundView: RoundView!
 
-    var timer: MeditationTimer?
-    
-    var color: UIColor = .black {
+    var timer: MeditationTimer? {
         didSet {
-            roundView.fillColor = color
+            log.debug(self.timer?.color)
+            roundView.fillColor =  UIColor(hexString: (timer?.color)!)
         }
     }
 
