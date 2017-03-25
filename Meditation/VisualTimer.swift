@@ -35,7 +35,7 @@ class VisualTimer: UIView {
     //Visual Design Variables
     
     //Colors
-    @IBInspectable var baseTrackColor: UIColor = UIColor.black.withAlphaComponent(0.03)
+    @IBInspectable var baseTrackColor: UIColor = UIColor.lightGray.withAlphaComponent(0.08)
     @IBInspectable var primaryTrackColor: UIColor = UIColor.darkGray
     @IBInspectable var secondaryTrackColor: UIColor = UIColor.lightGray
     @IBInspectable var indicatorColor: UIColor = UIColor(red: 82/255, green: 179/255, blue: 217/255, alpha: 1.0)
@@ -78,10 +78,13 @@ class VisualTimer: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        self.backgroundColor = .clear
     }
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
+        
+        
         layer.addSublayer(baseTrackLayer)
         layer.addSublayer(countdownLayer)
         layer.addSublayer(primaryLayer)

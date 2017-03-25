@@ -23,9 +23,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o1A-Uf-CnA" customClass="VisualTimer" customModule="Meditation" customModuleProvider="target">
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o1A-Uf-CnA" customClass="VisualTimer" customModule="Meditation" customModuleProvider="target">
                                 <rect key="frame" x="67" y="154" width="240" height="240"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.96655505949999998" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="240" id="XaS-67-b32"/>
                                     <constraint firstAttribute="width" constant="240" id="tAa-Hq-6Q8"/>
@@ -300,6 +300,6 @@
         <image name="first" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="QZH-Md-mlq"/>
+        <segue reference="31d-nB-w3j"/>
     </inferredMetricsTieBreakers>
 </document>
