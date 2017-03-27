@@ -28,6 +28,8 @@ class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITab
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         tableView.tableFooterView = UIView()
+        tableView.separatorInset = .zero
+        tableView.separatorColor = UIColor.lightGray.withAlphaComponent(0.3)
         
         // Do any additional setup after loading the view.
     }
@@ -56,6 +58,7 @@ class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITab
             self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
             cell.accessoryType = .checkmark
             cell.selectionStyle = .none
+            cell.optionLabel.textColor = UIColor.darkGray
         }
         
         return cell
@@ -72,7 +75,8 @@ class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
-        cell?.accessoryType = .none
+        let cell = tableView.cellForRow(at: indexPath) as! OptionTableViewCell
+        cell.accessoryType = .none
+        cell.optionLabel.textColor = UIColor.lightGray
     }
 }

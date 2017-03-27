@@ -17,6 +17,7 @@ class OptionTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        optionLabel.textColor = UIColor.lightGray
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

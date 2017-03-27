@@ -63,19 +63,19 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         //create tablecell objects and array
         let countdownCell = TableCell(type: .display, label: "Time", value: timer?.countdown)
         let countdownPickerCell = TableCell(type: .timePicker, label: "Countdown", value: timer?.countdown, hidden: true)
-        let countdownSoundPickerCell = TableCell(type: .link, label: "Sound", value: timer?.countdown_sound)
+        let countdownSoundPickerCell = TableCell(type: .link, label: "Alert", value: timer?.countdown_sound)
         
         let primaryCell = TableCell(type: .display, label: "Time", value: timer?.primary)
         let primaryPickerCell = TableCell(type: .timePicker, label: "Meditation Time", value:  timer?.primary, hidden: true)
-        let primarySoundPickerCell = TableCell(type: .link, label: "Sound", value:  timer?.primary_sound)
+        let primarySoundPickerCell = TableCell(type: .link, label: "Alert", value:  timer?.primary_sound)
         
         let cooldownCell = TableCell(type: .display, label: "Time", value: timer?.cooldown)
         let cooldownPickerCell = TableCell(type: .timePicker, label: "Cooldown", value: timer?.cooldown, hidden: true)
-        let cooldownSoundPickerCell = TableCell(type: .link, label: "Sound", value: timer?.cooldown_sound)
+        let cooldownSoundPickerCell = TableCell(type: .link, label: "Alert", value: timer?.cooldown_sound)
         
         let intervalCell = TableCell(type: .display, label: "At Time", value: timer?.interval)
         let intervalPickerCell = TableCell(type: .timePicker, label: "Interval", value: timer?.interval, hidden: true)
-        let intervalSoundPickerCell = TableCell(type: .link, label: "Sound", value: timer?.interval_sound)
+        let intervalSoundPickerCell = TableCell(type: .link, label: "Alert", value: timer?.interval_sound)
         let intervalToggleCell = TableCell(type: .toggle, label: "Repeat", value: false)
                 
         sectionMap["Title"] = [titleCell, displayTimeCell]
@@ -248,16 +248,13 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     // MARK: - Cell Insertion/Deletion Logic
     
     func showCell(indexPath: IndexPath) {
-//        let cell = tableView.cellForRow(at: indexPath) as! TimePickerTableViewCell
-//        cell.toggleConstraints()
+
         let sectionKey = sections[indexPath.section]
         sectionMap[sectionKey]?[indexPath.row].hidden = false
         tableView.reloadRows(at: [indexPath], with: .bottom)
     }
     
     func hideCell(indexPath: IndexPath) {
-//        let cell = tableView.cellForRow(at: indexPath) as! TimePickerTableViewCell
-//        cell.toggleConstraints()
         let sectionKey = sections[indexPath.section]
         sectionMap[sectionKey]?[indexPath.row].hidden = true
         tableView.reloadRows(at: [indexPath], with: .top)
