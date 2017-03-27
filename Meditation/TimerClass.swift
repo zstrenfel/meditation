@@ -11,7 +11,7 @@ import XCGLogger
 import AVFoundation
 
 enum TimerType: String {
-    case primary = "Meditation Time"
+    case primary = "Meditation"
     case countdown = "Countdown"
     case cooldown = "Cooldown"
     case interval = "Interval"

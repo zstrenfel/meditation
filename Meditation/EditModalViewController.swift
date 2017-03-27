@@ -58,7 +58,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     
     func loadTableCells() {
         let titleCell = TableCell(type: .input, label: "Title", value: timer?.name)
-        let displayTimeCell = TableCell(type: .toggle, label: "Display Time", value: timer?.display_time)
+        let displayTimeCell = TableCell(type: .toggle, label: "Show Time Remaining", value: timer?.display_time)
         
         //create tablecell objects and array
         let countdownCell = TableCell(type: .display, label: "Time", value: timer?.countdown)
@@ -73,7 +73,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         let cooldownPickerCell = TableCell(type: .timePicker, label: "Cooldown", value: timer?.cooldown, hidden: true)
         let cooldownSoundPickerCell = TableCell(type: .link, label: "Sound", value: timer?.cooldown_sound)
         
-        let intervalCell = TableCell(type: .display, label: "Time", value: timer?.interval)
+        let intervalCell = TableCell(type: .display, label: "At Time", value: timer?.interval)
         let intervalPickerCell = TableCell(type: .timePicker, label: "Interval", value: timer?.interval, hidden: true)
         let intervalSoundPickerCell = TableCell(type: .link, label: "Sound", value: timer?.interval_sound)
         let intervalToggleCell = TableCell(type: .toggle, label: "Repeat", value: false)
@@ -118,6 +118,20 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         return sectionTableCells.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let sectionTableCells = getSection(section: indexPath.section)
+        let tableCell = sectionTableCells[indexPath.row]
+        switch tableCell.type {
+        case .timePicker:
+            if tableCell.hidden {
+                return 0
+            }
+            return 150
+        default:
+            return 50
+        }
+    }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tableCell = getTableCell(indexPath: indexPath)
@@ -129,6 +143,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
             cell.updateParent = handlePickerChange
             cell.isHidden = tableCell.hidden
             cell.updateTimePickerView()
+            cell.setupViews()
             return cell
         case .toggle:
             let cell = tableView.dequeueReusableCell(withIdentifier: "toggleCell") as! ToggleTableViewCell
@@ -182,23 +197,12 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
             return nil
         }
         let header = tableView.dequeueReusableCell(withIdentifier: "headerCell") as! CustomHeaderCell
+        let containerView = UIView(frame:header.frame)
+        header.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         header.backgroundColor = UIColor(hex: "F2F2F2")
         header.label.text =  section == (sections.count - 1) ? "" : sections[section]
-        return header
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let sectionTableCells = getSection(section: indexPath.section)
-        let tableCell = sectionTableCells[indexPath.row]
-        switch tableCell.type {
-        case .timePicker:
-            if tableCell.hidden {
-                return 0
-            }
-            return 150
-        default:
-            return 50
-        }
+        containerView.addSubview(header)
+        return containerView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -245,12 +249,16 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     // MARK: - Cell Insertion/Deletion Logic
     
     func showCell(indexPath: IndexPath) {
+//        let cell = tableView.cellForRow(at: indexPath) as! TimePickerTableViewCell
+//        cell.toggleConstraints()
         let sectionKey = sections[indexPath.section]
         sectionMap[sectionKey]?[indexPath.row].hidden = false
         tableView.reloadRows(at: [indexPath], with: .bottom)
     }
     
     func hideCell(indexPath: IndexPath) {
+//        let cell = tableView.cellForRow(at: indexPath) as! TimePickerTableViewCell
+//        cell.toggleConstraints()
         let sectionKey = sections[indexPath.section]
         sectionMap[sectionKey]?[indexPath.row].hidden = true
         tableView.reloadRows(at: [indexPath], with: .top)
