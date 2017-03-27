@@ -40,7 +40,7 @@ class TimePickerTableViewCell: UITableViewCell {
         timerPickerView.onTimeSelected = handlePickerChange
         
         let horizontalVisibleConstraint: [NSLayoutConstraint] = NSLayoutConstraint.constraints(withVisualFormat: "H:|-32-[v0]-32-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": timerPickerView])
-        let verticalVisibleConstraint: [NSLayoutConstraint] = NSLayoutConstraint.constraints(withVisualFormat: "V:|-(8@250)-[v0]-(8@250)-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": timerPickerView])
+        let verticalVisibleConstraint: [NSLayoutConstraint] = NSLayoutConstraint.constraints(withVisualFormat: "V:|-(8@750)-[v0]-(8@750)-|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": timerPickerView])
         NSLayoutConstraint.activate(horizontalVisibleConstraint)
         NSLayoutConstraint.activate(verticalVisibleConstraint)
     }

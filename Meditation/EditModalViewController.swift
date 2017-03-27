@@ -143,7 +143,6 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
             cell.updateParent = handlePickerChange
             cell.isHidden = tableCell.hidden
             cell.updateTimePickerView()
-            cell.setupViews()
             return cell
         case .toggle:
             let cell = tableView.dequeueReusableCell(withIdentifier: "toggleCell") as! ToggleTableViewCell
