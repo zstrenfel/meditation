@@ -31,6 +31,8 @@ class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITab
         tableView.separatorInset = .zero
         tableView.separatorColor = UIColor.lightGray.withAlphaComponent(0.3)
         
+        self.title = "Sounds"
+        
         // Do any additional setup after loading the view.
     }
 
@@ -68,7 +70,9 @@ class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITab
         let cell = tableView.cellForRow(at: indexPath) as! OptionTableViewCell
         cell.accessoryType = .checkmark
         cell.selectionStyle = .none
-        
+        cell.optionLabel.textColor = UIColor.darkGray
+        self.tableView.separatorStyle = .none
+        self.tableView.separatorStyle = .singleLine
         if let block = updateParent {
             block(self.type!, cell.value!)
         }
@@ -77,6 +81,7 @@ class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! OptionTableViewCell
         cell.accessoryType = .none
+        cell.selectionStyle = .none
         cell.optionLabel.textColor = UIColor.lightGray
     }
 }

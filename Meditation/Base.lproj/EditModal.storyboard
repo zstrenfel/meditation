@@ -23,14 +23,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5lG-bc-Emg">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="359" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="optionCell" id="bTp-Mu-H7N" customClass="OptionTableViewCell" customModule="Meditation" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="359" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bTp-Mu-H7N" id="aXq-y5-Jak">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="359" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3v-0x-ydb">
@@ -66,12 +66,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="5lG-bc-Emg" firstAttribute="leading" secondItem="eth-Bc-fdO" secondAttribute="leadingMargin" id="FL6-o8-1bJ"/>
                             <constraint firstItem="LgK-oL-mCj" firstAttribute="top" secondItem="5lG-bc-Emg" secondAttribute="bottom" id="HVU-EA-RwD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5lG-bc-Emg" secondAttribute="trailing" id="JzI-oI-84h"/>
                             <constraint firstItem="LgK-oL-mCj" firstAttribute="top" secondItem="5lG-bc-Emg" secondAttribute="bottom" id="Pc6-d1-Hwv"/>
                             <constraint firstItem="5lG-bc-Emg" firstAttribute="top" secondItem="7Of-rK-FMO" secondAttribute="bottom" id="TYA-hx-28y"/>
-                            <constraint firstAttribute="trailing" secondItem="5lG-bc-Emg" secondAttribute="trailing" id="cty-eL-Bhx"/>
                             <constraint firstItem="5lG-bc-Emg" firstAttribute="top" secondItem="7Of-rK-FMO" secondAttribute="bottom" id="mm5-JH-q1P"/>
                             <constraint firstItem="5lG-bc-Emg" firstAttribute="leading" secondItem="eth-Bc-fdO" secondAttribute="leading" id="u6V-B0-oFy"/>
                         </constraints>
