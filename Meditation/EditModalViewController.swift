@@ -31,8 +31,12 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         
+        tableView.separatorInset = .zero
+        tableView.separatorColor = UIColor.lightGray.withAlphaComponent(0.3)
+
         tableView.tableFooterView = UIView()
         tableView.register(TimePickerTableViewCell.self, forCellReuseIdentifier: "timePickerCell")
+        tableView.register(CustomHeaderCell.self, forCellReuseIdentifier: "headerCell")
         
         let cancelButton = UIButton.init(type: .custom)
         cancelButton.setImage(UIImage.init(named: "cancel"), for: UIControlState.normal)
@@ -57,19 +61,19 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         let displayTimeCell = TableCell(type: .toggle, label: "Display Time", value: timer?.display_time)
         
         //create tablecell objects and array
-        let countdownCell = TableCell(type: .display, label: "Countdown", value: timer?.countdown)
+        let countdownCell = TableCell(type: .display, label: "Time", value: timer?.countdown)
         let countdownPickerCell = TableCell(type: .timePicker, label: "Countdown", value: timer?.countdown, hidden: true)
         let countdownSoundPickerCell = TableCell(type: .link, label: "Sound", value: timer?.countdown_sound)
         
-        let primaryCell = TableCell(type: .display, label: "Meditation Timer", value: timer?.primary)
+        let primaryCell = TableCell(type: .display, label: "Time", value: timer?.primary)
         let primaryPickerCell = TableCell(type: .timePicker, label: "Meditation Time", value:  timer?.primary, hidden: true)
         let primarySoundPickerCell = TableCell(type: .link, label: "Sound", value:  timer?.primary_sound)
         
-        let cooldownCell = TableCell(type: .display, label: "Cooldown", value: timer?.cooldown)
+        let cooldownCell = TableCell(type: .display, label: "Time", value: timer?.cooldown)
         let cooldownPickerCell = TableCell(type: .timePicker, label: "Cooldown", value: timer?.cooldown, hidden: true)
         let cooldownSoundPickerCell = TableCell(type: .link, label: "Sound", value: timer?.cooldown_sound)
         
-        let intervalCell = TableCell(type: .display, label: "Interval", value: timer?.interval)
+        let intervalCell = TableCell(type: .display, label: "Time", value: timer?.interval)
         let intervalPickerCell = TableCell(type: .timePicker, label: "Interval", value: timer?.interval, hidden: true)
         let intervalSoundPickerCell = TableCell(type: .link, label: "Sound", value: timer?.interval_sound)
         let intervalToggleCell = TableCell(type: .toggle, label: "Repeat", value: false)
@@ -170,12 +174,16 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         if section == 0 {
             return 0
         }
-        return 35
+        return 25
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width , height: 35))
-        header.backgroundColor = ColorPalette.lightGray
+        if section == 0 {
+            return nil
+        }
+        let header = tableView.dequeueReusableCell(withIdentifier: "headerCell") as! CustomHeaderCell
+        header.backgroundColor = UIColor(hex: "F2F2F2")
+        header.label.text =  section == (sections.count - 1) ? "" : sections[section]
         return header
     }
     

@@ -14,6 +14,7 @@
 		920103951E4867240049A072 /* TimerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920103941E4867240049A072 /* TimerClass.swift */; };
 		920367B41E78672D004D7690 /* InputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920367B31E78672D004D7690 /* InputTableViewCell.swift */; };
 		920367B61E78673D004D7690 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920367B51E78673D004D7690 /* ButtonTableViewCell.swift */; };
+		920B85821E89792D00894029 /* CustomHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B85811E89792D00894029 /* CustomHeaderCell.swift */; };
 		921A90AD1E55587100F7F6AE /* EditModal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 921A90AB1E55587100F7F6AE /* EditModal.storyboard */; };
 		921A90AF1E55591200F7F6AE /* OptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921A90AE1E55591200F7F6AE /* OptionTableViewCell.swift */; };
 		921A90B11E55591B00F7F6AE /* DisplayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921A90B01E55591B00F7F6AE /* DisplayTableViewCell.swift */; };
@@ -82,6 +83,7 @@
 		920B857E1E896DDF00894029 /* Model 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 8.xcdatamodel"; sourceTree = "<group>"; };
 		920B857F1E896E4600894029 /* Model 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 9.xcdatamodel"; sourceTree = "<group>"; };
 		920B85801E896FA200894029 /* Model 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 10.xcdatamodel"; sourceTree = "<group>"; };
+		920B85811E89792D00894029 /* CustomHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomHeaderCell.swift; sourceTree = "<group>"; };
 		921A90AC1E55587100F7F6AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/EditModal.storyboard; sourceTree = "<group>"; };
 		921A90AE1E55591200F7F6AE /* OptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionTableViewCell.swift; sourceTree = "<group>"; };
 		921A90B01E55591B00F7F6AE /* DisplayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayTableViewCell.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 		92F9239A1E7997FF0043476C /* EditModal */ = {
 			isa = PBXGroup;
 			children = (
+				920B85811E89792D00894029 /* CustomHeaderCell.swift */,
 				921A90AE1E55591200F7F6AE /* OptionTableViewCell.swift */,
 				92387A2B1E0E2D9200C86A6D /* TimePickerTableViewCell.swift */,
 				92001A301E5F260E00E70A0C /* ToggleTableViewCell.swift */,
@@ -616,6 +619,7 @@
 				925A3E961E83513100D916D8 /* VisualTimer.swift in Sources */,
 				921A90B41E5559C400F7F6AE /* EditModalViewController.swift in Sources */,
 				92E60FE61E4966AB00A2E994 /* PickerTableViewCell.swift in Sources */,
+				920B85821E89792D00894029 /* CustomHeaderCell.swift in Sources */,
 				920367B61E78673D004D7690 /* ButtonTableViewCell.swift in Sources */,
 				92C092C31E2F73E9006EBB01 /* TimerPickerView.swift in Sources */,
 				928E32B51E770C87006D6DB3 /* Model.xcdatamodeld in Sources */,
