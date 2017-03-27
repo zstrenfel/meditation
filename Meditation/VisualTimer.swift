@@ -145,12 +145,10 @@ class VisualTimer: UIView {
         drawIndicator(position: positionForValue(value: countdown), color: indicatorColor.cgColor, layer: countdownIndicator)
         drawIndicator(position: positionForValue(value: primary + countdown), color: indicatorColor.cgColor, layer: primaryIndicator)
         
-        if interval != nil {
-            for i in 0..<intervalLayers.count {
-                let intervalVal = interval * Double(i + 1)
-                if intervalVal != primary {
-                    drawInterval(midpoint: positionForValue(value: intervalVal + countdown), value: intervalVal + countdown, color: intervalColor.cgColor, layer: intervalLayers[i])
-                }
+        for i in 0..<intervalLayers.count {
+            let intervalVal = interval * Double(i + 1)
+            if intervalVal != primary {
+                drawInterval(midpoint: positionForValue(value: intervalVal + countdown), value: intervalVal + countdown, color: intervalColor.cgColor, layer: intervalLayers[i])
             }
         }
     }

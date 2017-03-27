@@ -30,7 +30,7 @@ class AdminViewController: UIViewController {
         let request = NSBatchDeleteRequest(fetchRequest: fetch)
 //        request.resultType = NSBatchDeleteRequestResultType.resultTypeObjectIDs
         do {
-            let result = try context.execute(request)
+            let _ = try context.execute(request)
         } catch {
             log.error("could not execute request \(error)")
         }
