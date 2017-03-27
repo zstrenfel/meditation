@@ -23,9 +23,7 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
         self.automaticallyAdjustsScrollViewInsets = false
         
         tableView.tableFooterView = UIView()
-        let waveBG = UIImage(named: "wave-small")
-        let repeatingBG = UIColor(patternImage: waveBG!).withAlphaComponent(0.5)
-        tableView.tableHeaderView?.backgroundColor = repeatingBG
+        tableView.separatorColor = UIColor.lightGray.withAlphaComponent(0.3)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,12 +31,10 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
         fetchTimers()
         timers = timers.sorted { $0.last_completed?.compare($1.last_completed as! Date) == ComparisonResult.orderedDescending }
         tableView.reloadData()
-        self.navigationController?.isNavigationBarHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.isNavigationBarHidden = false
     }
     
     //get timers from the store
@@ -66,7 +62,9 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "meditationCell") as! MeditationDisplayTableViewCell
         let timer = timers[indexPath.row]
-        cell.nameLabel.text = timer.name != nil ? timer.name : "My Meditation"
+        cell.nameLabel.text = timer.name
+        cell.durationLabel.text = Double(timer.countdown + timer.primary + timer.cooldown).longTimeString
+
         cell.timer = timer
         cell.preservesSuperviewLayoutMargins = false
         cell.separatorInset = UIEdgeInsets.zero

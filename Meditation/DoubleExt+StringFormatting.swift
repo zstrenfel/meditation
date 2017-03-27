@@ -48,4 +48,36 @@ extension Double {
         let seconds = self.seconds.timeFormat
         return hours + ":" + minutes + ":" + seconds
     }
+    
+    var longTimeString: String {
+        let hours = self.hours
+        let minutes = self.minutes
+        let seconds = self.seconds
+        var returnString = ""
+        
+        if hours > 0.0 {
+            if hours > 1.0 {
+                returnString += "\(Int(hours)) hours"
+            } else {
+                returnString += "1 hour"
+            }
+        }
+        
+        if minutes > 0.0 {
+            if minutes > 1.0 {
+                returnString += "\(Int(minutes)) minutes"
+            } else {
+                returnString += "1 minute"
+            }
+        }
+        
+        if seconds > 0.0 {
+            if seconds > 1.0 {
+                returnString += "\(Int(seconds)) seconds"
+            } else {
+                returnString += "1 second"
+            }
+        }
+        return returnString
+    }
 }

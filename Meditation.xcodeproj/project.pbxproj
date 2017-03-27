@@ -33,7 +33,7 @@
 		928E32B51E770C87006D6DB3 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 928E32B31E770C87006D6DB3 /* Model.xcdatamodeld */; };
 		928E332E1E77126C006D6DB3 /* TimerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E332D1E77126C006D6DB3 /* TimerTableViewController.swift */; };
 		92974FD61E307FAF0056299D /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92974FD51E307FAF0056299D /* ColorPalette.swift */; };
-		92AB37361E2E01BC004BCC3F /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AB37351E2E01BC004BCC3F /* IntExtension.swift */; };
+		92AB37361E2E01BC004BCC3F /* DoubleExt+StringFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AB37351E2E01BC004BCC3F /* DoubleExt+StringFormatting.swift */; };
 		92B61B1D1E85A12A00672165 /* RoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B61B1C1E85A12A00672165 /* RoundView.swift */; };
 		92B61B201E85E6CF00672165 /* UIColor+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B61B1F1E85E6CF00672165 /* UIColor+HexString.swift */; };
 		92B61B221E85F5CC00672165 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92B61B211E85F5CC00672165 /* Media.xcassets */; };
@@ -105,7 +105,7 @@
 		928E32B41E770C87006D6DB3 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		928E332D1E77126C006D6DB3 /* TimerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerTableViewController.swift; sourceTree = "<group>"; };
 		92974FD51E307FAF0056299D /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
-		92AB37351E2E01BC004BCC3F /* IntExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
+		92AB37351E2E01BC004BCC3F /* DoubleExt+StringFormatting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DoubleExt+StringFormatting.swift"; sourceTree = "<group>"; };
 		92B61B1C1E85A12A00672165 /* RoundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundView.swift; sourceTree = "<group>"; };
 		92B61B1E1E85E1AD00672165 /* Model 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 7.xcdatamodel"; sourceTree = "<group>"; };
 		92B61B1F1E85E6CF00672165 /* UIColor+HexString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+HexString.swift"; sourceTree = "<group>"; };
@@ -275,7 +275,7 @@
 			children = (
 				925A3E971E8431CC00D916D8 /* Timers */,
 				927BE5741E0E19B30073ABFE /* TableCellTypes.swift */,
-				92AB37351E2E01BC004BCC3F /* IntExtension.swift */,
+				92AB37351E2E01BC004BCC3F /* DoubleExt+StringFormatting.swift */,
 				92C092C21E2F73E9006EBB01 /* TimerPickerView.swift */,
 				92974FD51E307FAF0056299D /* ColorPalette.swift */,
 				92EFCD591E5AB6B000B8DC5C /* StringExt+TitleCase.swift */,
@@ -617,7 +617,7 @@
 				92C092C31E2F73E9006EBB01 /* TimerPickerView.swift in Sources */,
 				928E32B51E770C87006D6DB3 /* Model.xcdatamodeld in Sources */,
 				928E332E1E77126C006D6DB3 /* TimerTableViewController.swift in Sources */,
-				92AB37361E2E01BC004BCC3F /* IntExtension.swift in Sources */,
+				92AB37361E2E01BC004BCC3F /* DoubleExt+StringFormatting.swift in Sources */,
 				92001A311E5F260E00E70A0C /* ToggleTableViewCell.swift in Sources */,
 				92B61B1D1E85A12A00672165 /* RoundView.swift in Sources */,
 				9230BE901E0E0B5A001A12CE /* AppDelegate.swift in Sources */,

@@ -11,14 +11,9 @@ import UIKit
 class MeditationDisplayTableViewCell: UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var roundView: RoundView!
+    @IBOutlet weak var durationLabel: UILabel!
 
-    var timer: MeditationTimer? {
-        didSet {
-            log.debug(self.timer?.color)
-            roundView.fillColor =  UIColor(hexString: (timer?.color)!)
-        }
-    }
+    var timer: MeditationTimer?
 
     override func awakeFromNib() {
         super.awakeFromNib()
