@@ -191,6 +191,7 @@
                         <outlet property="tableView" destination="CW2-vp-5Ka" id="9oy-LX-3Gp"/>
                         <segue destination="9pv-A4-QxB" kind="show" identifier="showTimer" id="xfm-iE-x0I"/>
                         <segue destination="XEG-CD-esb" kind="presentation" identifier="showAdmin" id="syV-iG-AbY"/>
+                        <segue destination="Zqf-0C-pSj" kind="presentation" identifier="showEditModal" id="Ytw-Q3-8E3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mGZ-4V-OHE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -261,4 +262,7 @@
     <resources>
         <image name="first" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Ytw-Q3-8E3"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aiF-er-9C0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aiF-er-9C0">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -245,11 +245,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Ip3-63-AlJ">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Qse-bt-SCb">
-                            <connections>
-                                <action selector="cancelEdit:" destination="bze-mU-Wxg" id="EH9-Uu-lum"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Save" id="83d-vK-ZI1">
                             <connections>
                                 <action selector="saveChanges:" destination="bze-mU-Wxg" id="hK5-Pk-Uo0"/>

@@ -24,6 +24,13 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
         tableView.tableFooterView = UIView()
         tableView.separatorColor = UIColor.lightGray.withAlphaComponent(0.3)
+        
+        let addButton = UIButton.init(type: .custom)
+        addButton.setImage(UIImage.init(named: "plus"), for: UIControlState.normal)
+        addButton.addTarget(self, action:#selector(createNewMeditation), for: UIControlEvents.touchUpInside)
+        addButton.frame = CGRect.init(x: 0, y: 0, width: 15, height: 15)
+        let barButton = UIBarButtonItem.init(customView: addButton)
+        self.navigationItem.rightBarButtonItem = barButton
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -148,6 +155,10 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
         default:
             break
         }
+    }
+    
+    func createNewMeditation() {
+        performSegue(withIdentifier: "showEditModal", sender: nil)
     }
     
     func handleNewMeditation(_ timer: MeditationTimer?) {

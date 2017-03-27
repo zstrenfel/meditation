@@ -14,7 +14,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var tableView: UITableView!
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var timer: MeditationTimer?
+    var timer: MeditationTimer? 
     var isNewTimer: Bool = false
     var timerNumber: Int = 0
     
@@ -33,6 +33,13 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         
         tableView.tableFooterView = UIView()
         tableView.register(TimePickerTableViewCell.self, forCellReuseIdentifier: "timePickerCell")
+        
+        let cancelButton = UIButton.init(type: .custom)
+        cancelButton.setImage(UIImage.init(named: "cancel"), for: UIControlState.normal)
+        cancelButton.addTarget(self, action:#selector(cancelEdit), for: UIControlEvents.touchUpInside)
+        cancelButton.frame = CGRect.init(x: 0, y: 0, width: 13, height: 13)
+        let barButton = UIBarButtonItem.init(customView: cancelButton)
+        self.navigationItem.leftBarButtonItem = barButton
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,7 +54,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     
     func loadTableCells() {
         let titleCell = TableCell(type: .input, label: "Title", value: timer?.name)
-        let displayTimeCell = TableCell(type: .toggle, label: "Display Time", value: timer?.displayTime)
+        let displayTimeCell = TableCell(type: .toggle, label: "Display Time", value: timer?.display_time)
         
         //create tablecell objects and array
         let countdownCell = TableCell(type: .display, label: "Countdown", value: timer?.countdown)
@@ -266,7 +273,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
-    @IBAction func cancelEdit(_ sender: UIBarButtonItem) {
+    func cancelEdit() {
         if isNewTimer {
             context.reset()
         } else {
