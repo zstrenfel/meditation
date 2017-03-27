@@ -55,24 +55,21 @@ class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITab
         let cell = tableView.dequeueReusableCell(withIdentifier: "optionCell") as! OptionTableViewCell
         cell.optionLabel.text = sounds[indexPath.row].titleCase()
         cell.value = sounds[indexPath.row]
+        cell.selectionStyle = .none
         
         if sounds[indexPath.row] == self.selected {
             self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
             cell.accessoryType = .checkmark
-            cell.selectionStyle = .none
             cell.optionLabel.textColor = UIColor.darkGray
         }
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! OptionTableViewCell
         cell.accessoryType = .checkmark
-        cell.selectionStyle = .none
         cell.optionLabel.textColor = UIColor.darkGray
-        self.tableView.separatorStyle = .none
-        self.tableView.separatorStyle = .singleLine
+//        cell.selectionStyle = .none
         if let block = updateParent {
             block(self.type!, cell.value!)
         }
@@ -81,7 +78,6 @@ class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! OptionTableViewCell
         cell.accessoryType = .none
-        cell.selectionStyle = .none
         cell.optionLabel.textColor = UIColor.lightGray
     }
 }
