@@ -13,6 +13,8 @@ class ToggleTableViewCell: UITableViewCell {
     @IBOutlet weak var optionLabel: UILabel!
     @IBOutlet weak var toggle: UISwitch!
     
+    var type: TimerType?
+    
     var updateParent: ((_ value: Bool, _ label: String) -> Void)?
     var toggleValue: Bool = false {
         didSet {

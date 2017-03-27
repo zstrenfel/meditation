@@ -57,26 +57,26 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func loadTableCells() {
-        let titleCell = TableCell(type: .input, label: "Title", value: timer?.name)
-        let displayTimeCell = TableCell(type: .toggle, label: "Show Time Remaining", value: timer?.display_time)
+        let titleCell = TableCell(cellType: .input, timerType: nil, label: "Title", value: timer?.name)
+        let displayTimeCell = TableCell(cellType: .toggle, timerType: nil, label: "Show Time Remaining", value: timer?.display_time)
         
         //create tablecell objects and array
-        let countdownCell = TableCell(type: .display, label: "Time", value: timer?.countdown)
-        let countdownPickerCell = TableCell(type: .timePicker, label: "Countdown", value: timer?.countdown, hidden: true)
-        let countdownSoundPickerCell = TableCell(type: .link, label: "Alert", value: timer?.countdown_sound)
+        let countdownCell = TableCell(cellType: .display, timerType: .countdown, label: "Time", value: timer?.countdown)
+        let countdownPickerCell = TableCell(cellType: .timePicker, timerType: .countdown, label: "Countdown", value: timer?.countdown, hidden: true)
+        let countdownSoundPickerCell = TableCell(cellType: .link, timerType: .countdown, label: "Alert", value: timer?.countdown_sound)
         
-        let primaryCell = TableCell(type: .display, label: "Time", value: timer?.primary)
-        let primaryPickerCell = TableCell(type: .timePicker, label: "Meditation Time", value:  timer?.primary, hidden: true)
-        let primarySoundPickerCell = TableCell(type: .link, label: "Alert", value:  timer?.primary_sound)
+        let primaryCell = TableCell(cellType: .display, timerType: .primary, label: "Time", value: timer?.primary)
+        let primaryPickerCell = TableCell(cellType: .timePicker, timerType: .primary, label: "Meditation Time", value:  timer?.primary, hidden: true)
+        let primarySoundPickerCell = TableCell(cellType: .link, timerType: .primary,  label: "Alert", value:  timer?.primary_sound)
         
-        let cooldownCell = TableCell(type: .display, label: "Time", value: timer?.cooldown)
-        let cooldownPickerCell = TableCell(type: .timePicker, label: "Cooldown", value: timer?.cooldown, hidden: true)
-        let cooldownSoundPickerCell = TableCell(type: .link, label: "Alert", value: timer?.cooldown_sound)
+        let cooldownCell = TableCell(cellType: .display, timerType: .cooldown, label: "Time", value: timer?.cooldown)
+        let cooldownPickerCell = TableCell(cellType: .timePicker, timerType: .cooldown, label: "Cooldown", value: timer?.cooldown, hidden: true)
+        let cooldownSoundPickerCell = TableCell(cellType: .link, timerType: .cooldown, label: "Alert", value: timer?.cooldown_sound)
         
-        let intervalCell = TableCell(type: .display, label: "At Time", value: timer?.interval)
-        let intervalPickerCell = TableCell(type: .timePicker, label: "Interval", value: timer?.interval, hidden: true)
-        let intervalSoundPickerCell = TableCell(type: .link, label: "Alert", value: timer?.interval_sound)
-        let intervalToggleCell = TableCell(type: .toggle, label: "Repeat", value: false)
+        let intervalCell = TableCell(cellType: .display, timerType: .interval, label: "At Time", value: timer?.interval)
+        let intervalPickerCell = TableCell(cellType: .timePicker, timerType: .interval, label: "Interval", value: timer?.interval, hidden: true)
+        let intervalSoundPickerCell = TableCell(cellType: .link, timerType: .interval, label: "Alert", value: timer?.interval_sound)
+        let intervalToggleCell = TableCell(cellType: .toggle, timerType: .interval, label: "Repeat", value: false)
                 
         sectionMap["Title"] = [titleCell, displayTimeCell]
         sectionMap[TimerType.countdown.rawValue] = [countdownCell, countdownPickerCell, countdownSoundPickerCell]
@@ -121,7 +121,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let sectionTableCells = getSection(section: indexPath.section)
         let tableCell = sectionTableCells[indexPath.row]
-        switch tableCell.type {
+        switch tableCell.cellType {
         case .timePicker:
             if tableCell.hidden {
                 return 0
@@ -135,10 +135,10 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tableCell = getTableCell(indexPath: indexPath)
-        switch tableCell.type {
+        switch tableCell.cellType {
         case .timePicker:
             let cell = tableView.dequeueReusableCell(withIdentifier: "timePickerCell") as! TimePickerTableViewCell
-            cell.type = TimerType(rawValue: tableCell.label)
+            cell.type = tableCell.timerType
             cell.timer = self.timer
             cell.updateParent = handlePickerChange
             cell.isHidden = tableCell.hidden
@@ -174,7 +174,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
                 cell.valueLabel.text = nil
             }
             
-            if tableCell.type == .link {
+            if tableCell.cellType == .link {
                 cell.accessoryType = .disclosureIndicator
             } else {
                 cell.accessoryType = .none
@@ -209,7 +209,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         self.tableView.cellForRow(at: indexPath)?.selectionStyle = .none
         
         let tableCell = getTableCell(indexPath: indexPath)
-        switch tableCell.type {
+        switch tableCell.cellType {
         case .link:
             performSegue(withIdentifier: "showSoundOptions", sender: self)
             break
@@ -316,7 +316,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     
     func handleToggleChange(_ value: Bool,_ label: String) {
         switch label {
-        case "Display Time":
+        case "Show Time Remaining":
             self.timer?.display_time = value
             break
         case "Repeat":

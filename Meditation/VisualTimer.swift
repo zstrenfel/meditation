@@ -32,6 +32,8 @@ class VisualTimer: UIView {
     var interval: Double = 0.0
     var intervalRepeat: Bool = true
     
+    var displayTime: Bool = true
+    
     //Visual Design Variables
     
     //Colors
@@ -108,6 +110,7 @@ class VisualTimer: UIView {
             self.cooldown = t.cooldown
             self.intervalRepeat = t.interval_repeat
             self.time = countdown + primary + cooldown
+            self.displayTime = t.display_time
             
             updateTimeLabel(with: self.time.timeString)
         
@@ -155,16 +158,22 @@ class VisualTimer: UIView {
     
     
     func createLabels() {
-        timeLabel.frame = CGRect(x: 0, y: 0, width: bounds.width - 100, height: CGFloat(timerFontSize + 10))
-        timeLabel.center = CGPoint(x: bounds.width/2, y: bounds.height/2 - CGFloat(topLabelBuffer))
-        timeLabel.textAlignment = .center
-        timeLabel.font = timeLabel.font.withSize(CGFloat(timerFontSize))
-        timeLabel.textColor = timerFontColor
-        timeLabel.text = time.timeString
-        self.addSubview(timeLabel)
+        if (displayTime) {
+            timeLabel.frame = CGRect(x: 0, y: 0, width: bounds.width - 100, height: CGFloat(timerFontSize + 10))
+            timeLabel.center = CGPoint(x: bounds.width/2, y: bounds.height/2 - CGFloat(topLabelBuffer))
+            timeLabel.textAlignment = .center
+            timeLabel.font = timeLabel.font.withSize(CGFloat(timerFontSize))
+            timeLabel.textColor = timerFontColor
+            timeLabel.text = time.timeString
+            self.addSubview(timeLabel)
+        }
         
         descriptionLabel.frame = CGRect(x: 0, y: 0, width: bounds.width - 140, height: 25)
-        descriptionLabel.center = CGPoint(x: bounds.width/2, y: (bounds.height/2) + CGFloat(timerFontSize - middleLabelBuffer))
+        
+        //dependent on whether time is visible or not
+        let yValue = displayTime ? (bounds.height/2) + CGFloat(timerFontSize - middleLabelBuffer) : (bounds.height/2 - CGFloat(topLabelBuffer))
+        
+        descriptionLabel.center = CGPoint(x: bounds.width/2, y: yValue)
         descriptionLabel.textAlignment = .center
         descriptionLabel.font = timeLabel.font.withSize(CGFloat(descriptionFontSize))
         descriptionLabel.textColor = descriptionFontColor

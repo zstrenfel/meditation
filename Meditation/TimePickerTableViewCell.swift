@@ -46,26 +46,25 @@ class TimePickerTableViewCell: UITableViewCell {
     }
     
     func updateTimePickerView() {
-        guard timer != nil && type != nil else {
-            log.error("timer and/or type is nil, and this function cannot be completed")
-            return
-        }
-        var time = 0.0
-        switch self.type! {
-        case .countdown:
-            time = (timer?.countdown)!
-            break
-        case .primary:
-            time = (timer?.primary)!
-            break
-        case .cooldown:
-            time = (timer?.cooldown)!
-            break
-        case .interval:
-            time = (timer?.interval)!
+        if let t = timer {
+            var time = 0.0
+            switch self.type! {
+            case .countdown:
+                time = t.countdown
+                break
+            case .primary:
+                time = t.primary
+                break
+            case .cooldown:
+                time = t.cooldown
+                break
+            case .interval:
+                time = t.interval
+            }
+            self.timerPickerView.update(time)
         }
         
-        self.timerPickerView.update(time)
+        
     }
     
     func handlePickerChange(_ hour: Int, _ minute: Int, _ second: Int) {

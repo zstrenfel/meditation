@@ -116,7 +116,7 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
         let alertController = UIAlertController(title: "Delete Timer", message: "Are you sure you wan't to delete this timer?", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "Cancel", style: .default , handler: nil)
         let delete = UIAlertAction(title: "Delete", style: .destructive, handler: { action in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
                 self.context.delete(timer)
                 (UIApplication.shared.delegate as! AppDelegate).saveContext()
                 _ = self.timers.remove(value: timer)

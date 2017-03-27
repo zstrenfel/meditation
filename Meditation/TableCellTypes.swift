@@ -10,13 +10,15 @@ import Foundation
 
 
 struct TableCell {
-    var type: CellType
+    var cellType: CellType
+    var timerType: TimerType?
     var label: String
     var value: Any?
     var hidden: Bool
     
-    init(type: CellType, label: String, value: Any?, hidden: Bool = false) {
-        self.type = type
+    init(cellType: CellType, timerType: TimerType?, label: String, value: Any?, hidden: Bool = false) {
+        self.cellType = cellType
+        self.timerType = timerType
         self.label = label
         self.value = value
         self.hidden = hidden
