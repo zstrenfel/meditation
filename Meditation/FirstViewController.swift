@@ -31,10 +31,7 @@ class FirstViewController: UIViewController, TimerDelegate {
         let waveBG = UIImage(named: "white-wave")
         let repeatingBG = UIColor(patternImage: waveBG!)
         self.view.backgroundColor = repeatingBG
-        
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        
+                
         visualTimer.updateTimer(with: self.timer!)
         
         stopButton.isEnabled = false
@@ -104,6 +101,7 @@ class FirstViewController: UIViewController, TimerDelegate {
             sessionTimer?.clearTimer()
             visualTimer.clearAnimations()
             stopButton.setTitle("Pause", for: .normal)
+            stopButton.isEnabled = false
         } else {
             sessionTimer?.stopTimer()
             visualTimer.pauseAnimation()
