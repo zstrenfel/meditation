@@ -128,7 +128,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
             return cell
         case .toggle:
             let cell = tableView.dequeueReusableCell(withIdentifier: "toggleCell") as! ToggleTableViewCell
-            cell.updateParent = updateRepeat
+            cell.updateParent = handleToggleChange
             cell.optionLabel.text = tableCell.label
             
             if let toggleValue = tableCell.value as? Bool {
@@ -302,8 +302,17 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         self.tableView.reloadRows(at: [IndexPath(row: 2, section: sectionIndex!)], with: .none)
     }
     
-    func updateRepeat(_ value: Bool, _ type: TimerType) {
-        self.timer?.interval_repeat = value
+    func handleToggleChange(_ value: Bool,_ label: String) {
+        switch label {
+        case "Display Time":
+            self.timer?.display_time = value
+            break
+        case "Repeat":
+            self.timer?.interval_repeat = value
+            break
+        default:
+            break
+        }
     }
     
     func confirmDelete() {
