@@ -32,15 +32,7 @@ class VisualTimer: UIView {
     var interval: Double = 0.0
     var intervalRepeat: Bool = true
     
-    var displayTime: Bool = true {
-        didSet {
-            if displayTime == true {
-                showTimeLabel()
-            } else {
-                hideTimeLabel()
-            }
-        }
-    }
+    var displayTime: Bool = true 
     //Visual Design Variables
     
     //Colors
@@ -93,7 +85,6 @@ class VisualTimer: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-        
         layer.addSublayer(baseTrackLayer)
         layer.addSublayer(countdownLayer)
         layer.addSublayer(primaryLayer)
@@ -102,7 +93,10 @@ class VisualTimer: UIView {
         layer.addSublayer(countdownIndicator)
         layer.addSublayer(primaryIndicator)
         
-        createLabels()
+        self.addSubview(timeLabel)
+        self.addSubview(descriptionLabel)
+        
+        updateLabels()
         updateLayerFrames()
     }
     
@@ -115,19 +109,22 @@ class VisualTimer: UIView {
             self.countdown = t.countdown
             self.primary = t.primary
             self.cooldown = t.cooldown
-            self.intervalRepeat = t.interval_repeat
             self.time = countdown + primary + cooldown
             self.displayTime = t.display_time
             
-            updateTimeLabel(with: self.time.timeString)
-        
-            
-            if (intervalLayers.count == 0 && interval > 0.0) || interval != t.interval {
+            log.debug(t.interval)
+            if (intervalLayers.count == 0 && t.interval > 0.0) ||
+                interval != t.interval ||
+                intervalRepeat != t.interval_repeat {
                 self.interval = t.interval
+                self.intervalRepeat = t.interval_repeat
+                
                 intervalLayers.forEach { $0.removeFromSuperlayer() }
                 intervalLayers = []
                 createIntervalLayers()
             }
+            
+            updateLabels()
             updateLayerFrames()
         }
         
@@ -139,11 +136,9 @@ class VisualTimer: UIView {
             for _ in 0..<intervalCount {
                 let intervalLayer = CAShapeLayer()
                 intervalLayers.append(intervalLayer)
-                layer.addSublayer(intervalLayer)
             }
         }
     }
-    
 
     func updateLayerFrames() {
         drawTrack(startAngle: 0.0, endAngle: CGFloat(2 * M_PI), width: trackWidth + 5.0, visible: true, color: baseTrackColor.cgColor, layer: baseTrackLayer)
@@ -164,7 +159,7 @@ class VisualTimer: UIView {
     }
     
     
-    func createLabels() {
+    func updateLabels() {
         timeLabel.frame = CGRect(x: 0, y: 0, width: bounds.width - 100, height: CGFloat(timerFontSize + 10))
         timeLabel.center = CGPoint(x: bounds.width/2, y: bounds.height/2 - CGFloat(topLabelBuffer))
         timeLabel.textAlignment = .center
@@ -172,7 +167,6 @@ class VisualTimer: UIView {
         timeLabel.textColor = timerFontColor
         timeLabel.text = time.timeString
         timeLabel.isHidden = !displayTime
-        self.addSubview(timeLabel)
         
         
         descriptionLabel.frame = CGRect(x: 0, y: 0, width: bounds.width - 140, height: 25)
@@ -185,7 +179,7 @@ class VisualTimer: UIView {
         descriptionLabel.font = timeLabel.font.withSize(CGFloat(descriptionFontSize))
         descriptionLabel.textColor = descriptionFontColor
         descriptionLabel.text = "Meditation"
-        self.addSubview(descriptionLabel)
+        
     }
     
     func showTimeLabel() {
@@ -239,6 +233,7 @@ class VisualTimer: UIView {
             layer.lineWidth = 2.0
             layer.lineCap = kCALineCapRound
             
+            self.layer.addSublayer(layer)
             layer.setNeedsDisplay()
         }
     }

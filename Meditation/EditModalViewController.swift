@@ -76,7 +76,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         let intervalCell = TableCell(cellType: .display, timerType: .interval, label: "At Time", value: timer?.interval)
         let intervalPickerCell = TableCell(cellType: .timePicker, timerType: .interval, label: "Interval", value: timer?.interval, hidden: true)
         let intervalSoundPickerCell = TableCell(cellType: .link, timerType: .interval, label: "Alert", value: timer?.interval_sound)
-        let intervalToggleCell = TableCell(cellType: .toggle, timerType: .interval, label: "Repeat", value: false)
+        let intervalToggleCell = TableCell(cellType: .toggle, timerType: .interval, label: "Repeat", value: timer?.interval_repeat)
                 
         sectionMap["Title"] = [titleCell, displayTimeCell]
         sectionMap[TimerType.countdown.rawValue] = [countdownCell, countdownPickerCell, countdownSoundPickerCell]
@@ -271,17 +271,19 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         //should be an if else case here
         if !deleted {
             timer?.setValue(Date(), forKey: "updated_at")
-            timer?.setValue(Date(), forKey: "last_completed")
             //set name if one isn't given
             if timer?.name == nil {
                 timer?.setValue("Meditation \(timerNumber + 1)", forKey: "name")
             }
             //set creation date if timer is new
             if isNewTimer {
+                //will float to top of list
+                timer?.setValue(Date(), forKey: "last_completed")
                 timer?.setValue(Date(), forKey: "created_at")
                 timer?.setValue(randomColor(hue: .blue).toHexString(), forKey: "color")
             }
         }
+        log.debug(self.timer)
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
