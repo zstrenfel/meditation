@@ -32,8 +32,15 @@ class VisualTimer: UIView {
     var interval: Double = 0.0
     var intervalRepeat: Bool = true
     
-    var displayTime: Bool = true
-    
+    var displayTime: Bool = true {
+        didSet {
+            if displayTime == true {
+                showTimeLabel()
+            } else {
+                hideTimeLabel()
+            }
+        }
+    }
     //Visual Design Variables
     
     //Colors
@@ -158,15 +165,15 @@ class VisualTimer: UIView {
     
     
     func createLabels() {
-        if (displayTime) {
-            timeLabel.frame = CGRect(x: 0, y: 0, width: bounds.width - 100, height: CGFloat(timerFontSize + 10))
-            timeLabel.center = CGPoint(x: bounds.width/2, y: bounds.height/2 - CGFloat(topLabelBuffer))
-            timeLabel.textAlignment = .center
-            timeLabel.font = timeLabel.font.withSize(CGFloat(timerFontSize))
-            timeLabel.textColor = timerFontColor
-            timeLabel.text = time.timeString
-            self.addSubview(timeLabel)
-        }
+        timeLabel.frame = CGRect(x: 0, y: 0, width: bounds.width - 100, height: CGFloat(timerFontSize + 10))
+        timeLabel.center = CGPoint(x: bounds.width/2, y: bounds.height/2 - CGFloat(topLabelBuffer))
+        timeLabel.textAlignment = .center
+        timeLabel.font = timeLabel.font.withSize(CGFloat(timerFontSize))
+        timeLabel.textColor = timerFontColor
+        timeLabel.text = time.timeString
+        timeLabel.isHidden = !displayTime
+        self.addSubview(timeLabel)
+        
         
         descriptionLabel.frame = CGRect(x: 0, y: 0, width: bounds.width - 140, height: 25)
         
@@ -179,6 +186,16 @@ class VisualTimer: UIView {
         descriptionLabel.textColor = descriptionFontColor
         descriptionLabel.text = "Meditation"
         self.addSubview(descriptionLabel)
+    }
+    
+    func showTimeLabel() {
+        timeLabel.isHidden = false
+        descriptionLabel.center = CGPoint(x: bounds.width/2, y: (bounds.height/2) + CGFloat(timerFontSize - middleLabelBuffer))
+    }
+    
+    func hideTimeLabel() {
+        timeLabel.isHidden = true
+        descriptionLabel.center = CGPoint(x: bounds.width/2, y: bounds.height/2 - CGFloat(topLabelBuffer))
     }
     
     // MARK: - Drawing Functions

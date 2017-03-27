@@ -67,7 +67,7 @@ extension Double {
             if minutes > 1.0 {
                 returnString += " \(Int(minutes)) minutes"
             } else {
-                returnString += "1 minute"
+                returnString += " 1 minute"
             }
         }
         
@@ -75,7 +75,7 @@ extension Double {
             if seconds > 1.0 {
                 returnString += " \(Int(seconds)) seconds"
             } else {
-                returnString += "1 second"
+                returnString += " 1 second"
             }
         }
         return returnString
