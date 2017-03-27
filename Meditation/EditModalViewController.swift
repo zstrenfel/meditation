@@ -47,6 +47,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     
     func loadTableCells() {
         let titleCell = TableCell(type: .input, label: "Title", value: timer?.name)
+        let displayTimeCell = TableCell(type: .toggle, label: "Display Time", value: timer?.displayTime)
         
         //create tablecell objects and array
         let countdownCell = TableCell(type: .display, label: "Countdown", value: timer?.countdown)
@@ -66,7 +67,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         let intervalSoundPickerCell = TableCell(type: .link, label: "Sound", value: timer?.interval_sound)
         let intervalToggleCell = TableCell(type: .toggle, label: "Repeat", value: false)
                 
-        sectionMap["Title"] = [titleCell]
+        sectionMap["Title"] = [titleCell, displayTimeCell]
         sectionMap[TimerType.countdown.rawValue] = [countdownCell, countdownPickerCell, countdownSoundPickerCell]
         sectionMap[TimerType.primary.rawValue] = [primaryCell, primaryPickerCell, primarySoundPickerCell]
         sectionMap[TimerType.cooldown.rawValue] = [cooldownCell, cooldownPickerCell, cooldownSoundPickerCell]

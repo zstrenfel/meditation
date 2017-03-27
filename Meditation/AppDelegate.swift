@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.setup(level: .debug, showThreadName: true, showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLevel: .debug)
         
         let navBarAppearance = UINavigationBar.appearance()
-        navBarAppearance.tintColor = UIColor.darkGray
+        navBarAppearance.tintColor = UIColor(hex: "B2B2B2")
         navBarAppearance.barTintColor = UIColor(hex: "F9F9F9")
         UIApplication.shared.statusBarStyle = .default
 

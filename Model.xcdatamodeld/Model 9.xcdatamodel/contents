@@ -14,8 +14,9 @@
         <attribute name="countdown" optional="YES" attributeType="Double" minValueString="0" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="countdown_sound" optional="YES" attributeType="String" defaultValueString="bells.wav" syncable="YES"/>
         <attribute name="created_at" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="displayTime" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="interval" optional="YES" attributeType="Double" minValueString="0" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="interval_repeat" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="interval_repeat" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="interval_sound" optional="YES" attributeType="String" defaultValueString="bells.wav" syncable="YES"/>
         <attribute name="last_completed" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -26,6 +27,6 @@
     </entity>
     <elements>
         <element name="Meditation" positionX="-54" positionY="72" width="128" height="118"/>
-        <element name="MeditationTimer" positionX="-236" positionY="-21" width="128" height="270"/>
+        <element name="MeditationTimer" positionX="-236" positionY="-21" width="128" height="285"/>
     </elements>
 </model>
