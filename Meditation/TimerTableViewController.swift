@@ -25,6 +25,7 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
         tableView.tableFooterView = UIView()
         tableView.separatorInset = .zero
         tableView.separatorColor = UIColor.lightGray.withAlphaComponent(0.3)
+        tableView.alwaysBounceVertical = false
         
         let addButton = UIButton.init(type: .custom)
         addButton.setImage(UIImage.init(named: "plus"), for: UIControlState.normal)
@@ -83,6 +84,7 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "meditationCell") as! MeditationDisplayTableViewCell
             let timer = timers[indexPath.row]
+            cell.selectionStyle = .none
             cell.nameLabel.text = timer.name
             cell.durationLabel.text = Double(timer.countdown + timer.primary + timer.cooldown).longTimeString
             
@@ -92,7 +94,7 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 2 {
+        if placeholder == 0 {
             self.performSegue(withIdentifier: "showTimer", sender: nil)
         }
     }
