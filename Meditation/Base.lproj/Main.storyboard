@@ -333,4 +333,5 @@
     <inferredMetricsTieBreakers>
         <segue reference="31d-nB-w3j"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" red="0.0" green="0.70588235294117641" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

@@ -158,35 +158,34 @@ class TimerWrapper {
         currentTime = round(CFAbsoluteTimeGetCurrent() - startTime)
         if currentTime >= totalTime {
             stopTimer()
-            if meditationTimer.cooldown > 0.0 {
-                playSound(type: .cooldown)
-            } else {
-                playSound(type: .primary)
-            }
             currentStatus = "Completed"
+            delegate?.handleTimerChange(value: totalTime - currentTime)
             delegate?.handleTimerComplete()
-            
         } else {
-            if currentTime == countdownEnd {
-                playSound(type: .countdown)
-                currentStatus = "Meditation"
-            } else if currentTime == primaryEnd {
-                playSound(type: .primary)
-                currentStatus = "Cooldown"
-            } else if interval > 0.0 {
-                let intervalTime = currentTime - countdownEnd
-                if intervalTime == interval {
-                    playSound(type: .interval)
-                } else if intervalTime > 0 &&
-                    (intervalTime + countdownEnd) < primaryEnd &&
-                    intervalRepeat &&
-                    intervalTime.truncatingRemainder(dividingBy: interval) == 0 {
-                    playSound(type: .interval)
-                }
+            delegate?.handleTimerChange(value: totalTime - currentTime)
+        }
+        
+        
+        if currentTime == countdownEnd {
+            playSound(type: .countdown)
+            currentStatus = "Meditation"
+        } else if currentTime == primaryEnd {
+            playSound(type: .primary)
+            currentStatus = "Cooldown"
+        } else if currentTime == totalTime {
+            playSound(type: .cooldown)
+        } else if interval > 0.0 {
+            let intervalTime = currentTime - countdownEnd
+            if intervalTime == interval {
+                playSound(type: .interval)
+            } else if intervalTime > 0 &&
+                (intervalTime + countdownEnd) < primaryEnd &&
+                intervalRepeat &&
+                intervalTime.truncatingRemainder(dividingBy: interval) == 0 {
+                playSound(type: .interval)
             }
         }
         
-        delegate?.handleTimerChange(value: totalTime - currentTime)
     }
     
     // MARK: - Outside Accessible

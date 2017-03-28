@@ -44,7 +44,7 @@ class FirstViewController: UIViewController, TimerDelegate {
         super.viewWillDisappear(animated)
         if sessionTimer != nil {
             _stopTimer(clear: true)
-            visualTimer.clearAnimations()
+            visualTimer.clearVisualTimer()
         }
     }
     
@@ -92,8 +92,8 @@ class FirstViewController: UIViewController, TimerDelegate {
             sessionTimer?.resumeTimer()
             visualTimer.resumeAnimation()
         } else {
-            sessionTimer?.startTimer()
             visualTimer.beginAnimation()
+            sessionTimer?.startTimer()
         }
         stopButton.setTitle("Pause", for: .normal)
         stopButton.isEnabled = true
@@ -112,7 +112,7 @@ class FirstViewController: UIViewController, TimerDelegate {
         
         if ((sessionTimer?.isPaused())! || clear) {
             sessionTimer?.clearTimer()
-            visualTimer.clearAnimations()
+            visualTimer.clearVisualTimer()
             stopButton.setTitle("Pause", for: .normal)
             stopButton.isEnabled = false
         } else {

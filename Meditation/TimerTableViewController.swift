@@ -109,10 +109,10 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .normal, title: " Edit ", handler: editMeditation)
-        edit.backgroundColor = ColorPalette.gray.medium
+        edit.backgroundColor = ColorPalette.pink.tertiary.withAlphaComponent(0.3)
         
         let delete = UITableViewRowAction(style: .destructive, title: "Delete", handler: confirmDelete)
-        delete.backgroundColor = ColorPalette.gray.dark
+        delete.backgroundColor = ColorPalette.pink.primary.withAlphaComponent(0.5)
         
         return [delete, edit]
     }
@@ -165,7 +165,7 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
     func addPlaceholder() {
         placeholder = 1
         let indexPath = NSIndexPath(row: 0, section: 1)
-        self.tableView.insertRows(at: [indexPath as IndexPath], with: .top)
+        self.tableView.insertRows(at: [indexPath as IndexPath], with: .fade)
     }
     
     // MARK: - Actions

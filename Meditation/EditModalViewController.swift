@@ -44,6 +44,8 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         cancelButton.frame = CGRect.init(x: 0, y: 0, width: 13, height: 13)
         let barButton = UIBarButtonItem.init(customView: cancelButton)
         self.navigationItem.leftBarButtonItem = barButton
+        
+        self.navigationItem.rightBarButtonItem?.tintColor = ColorPalette.blue.light
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -283,7 +285,6 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
                 timer?.setValue(randomColor(hue: .blue).toHexString(), forKey: "color")
             }
         }
-        log.debug(self.timer)
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
