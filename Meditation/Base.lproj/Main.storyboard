@@ -73,13 +73,22 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GiV-WS-gSq">
+                                <rect key="frame" x="24" y="80" width="327" height="21.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="o1A-Uf-CnA" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="90" id="9PE-My-edx"/>
+                            <constraint firstItem="GiV-WS-gSq" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="8" id="DwD-Rs-ZiQ"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="a0U-fY-sNh" secondAttribute="bottom" constant="36" id="Lm1-OE-Y6n"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="GiV-WS-gSq" secondAttribute="trailing" constant="8" id="WDK-t8-2Th"/>
                             <constraint firstItem="a0U-fY-sNh" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="ggI-PE-zmy"/>
                             <constraint firstItem="o1A-Uf-CnA" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="go5-zg-HoL"/>
+                            <constraint firstItem="GiV-WS-gSq" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="16" id="rUQ-eh-m65"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gTg-K3-v8z">
@@ -92,6 +101,7 @@
                     <connections>
                         <outlet property="startButton" destination="9ap-eI-AM6" id="KaX-kd-yla"/>
                         <outlet property="stopButton" destination="pq6-KU-vX3" id="PbX-hA-I33"/>
+                        <outlet property="titleLabel" destination="GiV-WS-gSq" id="FuB-dw-Pu2"/>
                         <outlet property="visualTimer" destination="o1A-Uf-CnA" id="b6E-DR-HmB"/>
                     </connections>
                 </viewController>
@@ -321,6 +331,6 @@
         <image name="first" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ytw-Q3-8E3"/>
+        <segue reference="31d-nB-w3j"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -17,6 +17,7 @@ class FirstViewController: UIViewController, TimerDelegate {
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var visualTimer: VisualTimer!
+    @IBOutlet weak var titleLabel: UILabel!
     
     //should be passed in
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -31,7 +32,7 @@ class FirstViewController: UIViewController, TimerDelegate {
         let waveBG = UIImage(named: "white-wave")
         let repeatingBG = UIColor(patternImage: waveBG!)
         self.view.backgroundColor = repeatingBG
-                
+        
         visualTimer.updateTimer(with: self.timer!)
         
         stopButton.isEnabled = false
@@ -54,6 +55,7 @@ class FirstViewController: UIViewController, TimerDelegate {
             return
         }
         self.timer = timer
+        titleLabel.text = timer?.name
         visualTimer.updateTimer(with: timer!)
         sessionTimer = nil
         
