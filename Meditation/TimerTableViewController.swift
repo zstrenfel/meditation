@@ -90,10 +90,10 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .normal, title: " Edit ", handler: editMeditation)
-        edit.backgroundColor = .blue
+        edit.backgroundColor = ColorPalette.gray.medium
         
         let delete = UITableViewRowAction(style: .destructive, title: "Delete", handler: confirmDelete)
-        delete.backgroundColor = .red
+        delete.backgroundColor = ColorPalette.gray.dark
         
         return [delete, edit]
     }
