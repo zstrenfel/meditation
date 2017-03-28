@@ -144,13 +144,13 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Lj3-OX-Yfu">
                                                     <rect key="frame" x="16" y="8" width="351" height="34"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" ambiguous="YES" text="Meditation Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kpb-s7-auv">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Meditation Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kpb-s7-auv">
                                                             <rect key="frame" x="0.0" y="7" width="275.5" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="0.20392156859999999" green="0.21960784310000001" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Duration" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jFK-hu-K93">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jFK-hu-K93">
                                                             <rect key="frame" x="285.5" y="7" width="65.5" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="0.59215686274509804" green="0.62745098039215685" blue="0.62745098039215685" alpha="1" colorSpace="calibratedRGB"/>
@@ -170,6 +170,54 @@
                                             <outlet property="durationLabel" destination="jFK-hu-K93" id="60V-aK-blJ"/>
                                             <outlet property="nameLabel" destination="Kpb-s7-auv" id="ioV-4J-rp7"/>
                                         </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="placeholderCell" rowHeight="170" id="MJ7-JN-04v" customClass="PlaceholderTableViewCell" customModule="Meditation" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="78" width="375" height="170"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MJ7-JN-04v" id="jyO-Kg-WEm">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="169"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uZO-EO-iRj">
+                                                    <rect key="frame" x="16" y="121" width="343" height="30"/>
+                                                    <state key="normal" title="Create Meditation Timer"/>
+                                                    <connections>
+                                                        <action selector="createNewMeditation:" destination="MJ7-JN-04v" eventType="touchUpInside" id="Ije-RI-2ze"/>
+                                                    </connections>
+                                                </button>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="zDt-t7-xX0">
+                                                    <rect key="frame" x="16" y="32" width="343" height="65"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🍃" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Dj-Ff-P9c">
+                                                            <rect key="frame" x="160" y="0.0" width="23" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No meditation timers yet..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f0i-Pb-8Ry">
+                                                            <rect key="frame" x="70.5" y="24.5" width="202" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.20392156859999999" green="0.21960784310000001" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click below to start your path towards enlightenment!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BU1-4b-ayB">
+                                                            <rect key="frame" x="9.5" y="49" width="324.5" height="16"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <color key="textColor" white="0.53379991319999998" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="zDt-t7-xX0" firstAttribute="leading" secondItem="jyO-Kg-WEm" secondAttribute="leadingMargin" constant="8" id="8g9-Dd-xTP"/>
+                                                <constraint firstItem="uZO-EO-iRj" firstAttribute="top" secondItem="zDt-t7-xX0" secondAttribute="bottom" constant="24" id="Msx-Gt-OGD"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="uZO-EO-iRj" secondAttribute="trailing" constant="8" id="UMe-7J-X60"/>
+                                                <constraint firstItem="uZO-EO-iRj" firstAttribute="leading" secondItem="jyO-Kg-WEm" secondAttribute="leadingMargin" constant="8" id="kE3-oZ-J0A"/>
+                                                <constraint firstItem="zDt-t7-xX0" firstAttribute="top" secondItem="jyO-Kg-WEm" secondAttribute="topMargin" constant="24" id="qH7-Jr-N2A"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="zDt-t7-xX0" secondAttribute="trailing" constant="8" id="viI-8i-bUP"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -196,7 +244,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mGZ-4V-OHE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="927" y="-321"/>
+            <point key="canvasLocation" x="925.60000000000002" y="-321.58920539730138"/>
         </scene>
         <!--Admin View Controller-->
         <scene sceneID="Ibu-ek-1vj">

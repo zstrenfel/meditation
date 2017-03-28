@@ -15,6 +15,7 @@
 		920367B41E78672D004D7690 /* InputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920367B31E78672D004D7690 /* InputTableViewCell.swift */; };
 		920367B61E78673D004D7690 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920367B51E78673D004D7690 /* ButtonTableViewCell.swift */; };
 		920B85821E89792D00894029 /* CustomHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B85811E89792D00894029 /* CustomHeaderCell.swift */; };
+		920B85861E89E80100894029 /* PlaceholderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B85851E89E80100894029 /* PlaceholderTableViewCell.swift */; };
 		921A90AD1E55587100F7F6AE /* EditModal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 921A90AB1E55587100F7F6AE /* EditModal.storyboard */; };
 		921A90AF1E55591200F7F6AE /* OptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921A90AE1E55591200F7F6AE /* OptionTableViewCell.swift */; };
 		921A90B11E55591B00F7F6AE /* DisplayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921A90B01E55591B00F7F6AE /* DisplayTableViewCell.swift */; };
@@ -84,6 +85,7 @@
 		920B857F1E896E4600894029 /* Model 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 9.xcdatamodel"; sourceTree = "<group>"; };
 		920B85801E896FA200894029 /* Model 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 10.xcdatamodel"; sourceTree = "<group>"; };
 		920B85811E89792D00894029 /* CustomHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomHeaderCell.swift; sourceTree = "<group>"; };
+		920B85851E89E80100894029 /* PlaceholderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderTableViewCell.swift; sourceTree = "<group>"; };
 		921A90AC1E55587100F7F6AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/EditModal.storyboard; sourceTree = "<group>"; };
 		921A90AE1E55591200F7F6AE /* OptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionTableViewCell.swift; sourceTree = "<group>"; };
 		921A90B01E55591B00F7F6AE /* DisplayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayTableViewCell.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				92E60FE51E4966AB00A2E994 /* PickerTableViewCell.swift */,
 				921A90B01E55591B00F7F6AE /* DisplayTableViewCell.swift */,
 				92C3FC0B1E7AF5ED006FBB2A /* MeditationDisplayTableViewCell.swift */,
+				920B85851E89E80100894029 /* PlaceholderTableViewCell.swift */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -629,6 +632,7 @@
 				92B61B1D1E85A12A00672165 /* RoundView.swift in Sources */,
 				9230BE901E0E0B5A001A12CE /* AppDelegate.swift in Sources */,
 				921A90AF1E55591200F7F6AE /* OptionTableViewCell.swift in Sources */,
+				920B85861E89E80100894029 /* PlaceholderTableViewCell.swift in Sources */,
 				92974FD61E307FAF0056299D /* ColorPalette.swift in Sources */,
 				920103951E4867240049A072 /* TimerClass.swift in Sources */,
 				925A3E991E8431DA00D916D8 /* TimerDelegate.swift in Sources */,

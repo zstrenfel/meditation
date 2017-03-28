@@ -15,7 +15,7 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var timers: [MeditationTimer] = []
-    
+    var placeholder: Int = 0
     
     // MARK: - Initialization
     override func viewDidLoad() {
@@ -23,6 +23,7 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
         self.automaticallyAdjustsScrollViewInsets = false
         
         tableView.tableFooterView = UIView()
+        tableView.separatorInset = .zero
         tableView.separatorColor = UIColor.lightGray.withAlphaComponent(0.3)
         
         let addButton = UIButton.init(type: .custom)
@@ -48,6 +49,7 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
     func fetchTimers() {
         do {
             timers = try context.fetch(MeditationTimer.fetchRequest())
+            shouldShowPlaceholder()
         } catch {
             log.error("Fetching Failed")
         }
@@ -55,36 +57,51 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
 
     // MARK: Table
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 1 {
+            return placeholder
+        }
         return timers.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 1 {
+            return 170
+        }
         return 50
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "meditationCell") as! MeditationDisplayTableViewCell
-        let timer = timers[indexPath.row]
-        cell.nameLabel.text = timer.name
-        cell.durationLabel.text = Double(timer.countdown + timer.primary + timer.cooldown).longTimeString
-
-        cell.timer = timer
-        cell.preservesSuperviewLayoutMargins = false
-        cell.separatorInset = UIEdgeInsets.zero
-        cell.layoutMargins = UIEdgeInsets.zero
-        return cell
+        if indexPath.section == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "placeholderCell") as! PlaceholderTableViewCell
+            cell.handleNewMeditation = createNewMeditation
+            cell.selectionStyle = .none
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "meditationCell") as! MeditationDisplayTableViewCell
+            let timer = timers[indexPath.row]
+            cell.nameLabel.text = timer.name
+            cell.durationLabel.text = Double(timer.countdown + timer.primary + timer.cooldown).longTimeString
+            
+            cell.timer = timer
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "showTimer", sender: nil)
+        if indexPath.section == 2 {
+            self.performSegue(withIdentifier: "showTimer", sender: nil)
+        }
     }
     
     // MARK: - Table Row Actions
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.section == 1 {
+            return false
+        }
         return true
     }
     
@@ -121,6 +138,10 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
                 (UIApplication.shared.delegate as! AppDelegate).saveContext()
                 _ = self.timers.remove(value: timer)
                 self.tableView.deleteRows(at: [indexPath], with: .top)
+                self.shouldShowPlaceholder()
+                if self.placeholder == 1 {
+                    self.addPlaceholder()
+                }
             }
         })
         
@@ -128,6 +149,21 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
         alertController.addAction(delete)
         
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    // MARK: - Placeholder
+    func shouldShowPlaceholder() {
+        if timers.count == 0 {
+            placeholder = 1
+        } else {
+            placeholder = 0
+        }
+    }
+    
+    func addPlaceholder() {
+        placeholder = 1
+        let indexPath = NSIndexPath(row: 0, section: 1)
+        self.tableView.insertRows(at: [indexPath as IndexPath], with: .top)
     }
     
     // MARK: - Actions
