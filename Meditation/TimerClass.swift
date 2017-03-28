@@ -76,13 +76,13 @@ class TimerWrapper {
     
     func loadSound(type: TimerType, path: String) {
         soundQueue.sync {
-            let path = Bundle.main.path(forResource: path, ofType: nil)
-            let url = URL(fileURLWithPath: path!)
-            do {
-                let sound = try AVAudioPlayer(contentsOf: url)
-                sounds[type] = sound
-            } catch {
-                log.debug("could not find the allocated sound")
+            if let sound = NSDataAsset(name: path) {
+                do {
+                    let sound = try AVAudioPlayer(data: sound.data, fileTypeHint: AVFileTypeWAVE)
+                    sounds[type] = sound
+                } catch {
+                    log.debug("could not find the allocated sound")
+                }
             }
         }
     }

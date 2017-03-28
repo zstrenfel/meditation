@@ -13,9 +13,11 @@ import UIKit
 class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var sounds: [String] = [
-        "bells.wav",
-        "wind_chimes.wav",
-        "singing_bowl.wav"
+        "none",
+        "singing_bowl",
+        "temple_bell",
+        "two_bells",
+        "zymbel"
     ]
     
     var selected: String?
