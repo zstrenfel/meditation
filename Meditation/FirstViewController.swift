@@ -33,12 +33,11 @@ class FirstViewController: UIViewController, TimerDelegate {
         let repeatingBG = UIColor(patternImage: waveBG!)
         self.view.backgroundColor = repeatingBG
         
+        titleLabel.text = timer?.name
+        
         visualTimer.updateTimer(with: self.timer!)
         
         stopButton.isEnabled = false
-        if timer?.primary == 0.0 && timer?.countdown == 0.0 && timer?.cooldown == 0.0 {
-            startButton.isEnabled = false
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -58,10 +57,6 @@ class FirstViewController: UIViewController, TimerDelegate {
         titleLabel.text = timer?.name
         visualTimer.updateTimer(with: timer!)
         sessionTimer = nil
-        
-        if timer?.primary != 0.0 || timer?.countdown != 0.0 || timer?.cooldown != 0.0 {
-            self.startButton.isEnabled = true
-        }
     }
     
     
@@ -69,7 +64,23 @@ class FirstViewController: UIViewController, TimerDelegate {
     
     // MARK: - Actions
     @IBAction func startTimer(_ sender: UIButton) {
-        _startTimer()
+        if let t = timer {
+            if t.primary <= 0.0 &&
+                t.countdown <= 0.0 &&
+                t.cooldown <= 0.0 {
+                showTimeAlert()
+            } else {
+                _startTimer()
+            }
+        }
+    }
+    
+    func showTimeAlert() {
+        let alertController = UIAlertController(title: "That Was Fast!", message: "Oh no, you forgot to add any time! Edit your timer to begin your meditation.", preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "Okay", style: .default , handler: nil)
+        alertController.addAction(confirm)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func _startTimer() {

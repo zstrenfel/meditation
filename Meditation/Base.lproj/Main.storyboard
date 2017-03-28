@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o1A-Uf-CnA" customClass="VisualTimer" customModule="Meditation" customModuleProvider="target">
-                                <rect key="frame" x="67" y="154" width="240" height="240"/>
+                                <rect key="frame" x="67" y="139" width="240" height="240"/>
                                 <color key="backgroundColor" white="0.96655505949999998" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="240" id="XaS-67-b32"/>
@@ -74,21 +74,21 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GiV-WS-gSq">
-                                <rect key="frame" x="24" y="80" width="327" height="21.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="24" y="395" width="327" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.72941176470000002" green="0.72941176470000002" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="o1A-Uf-CnA" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="90" id="9PE-My-edx"/>
+                            <constraint firstItem="o1A-Uf-CnA" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="75" id="9PE-My-edx"/>
                             <constraint firstItem="GiV-WS-gSq" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="8" id="DwD-Rs-ZiQ"/>
+                            <constraint firstItem="GiV-WS-gSq" firstAttribute="top" secondItem="o1A-Uf-CnA" secondAttribute="bottom" constant="16" id="I9T-8g-8sW"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="a0U-fY-sNh" secondAttribute="bottom" constant="36" id="Lm1-OE-Y6n"/>
                             <constraint firstAttribute="trailingMargin" secondItem="GiV-WS-gSq" secondAttribute="trailing" constant="8" id="WDK-t8-2Th"/>
                             <constraint firstItem="a0U-fY-sNh" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="ggI-PE-zmy"/>
                             <constraint firstItem="o1A-Uf-CnA" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="go5-zg-HoL"/>
-                            <constraint firstItem="GiV-WS-gSq" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="16" id="rUQ-eh-m65"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gTg-K3-v8z">

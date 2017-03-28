@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Meditation" representedClassName="Meditation" syncable="YES" codeGenerationType="class">
+        <attribute name="completed" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="created_at" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updated_at" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="timer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MeditationTimer" inverseName="meditation" inverseEntity="MeditationTimer" syncable="YES"/>
+    </entity>
+    <entity name="MeditationTimer" representedClassName="MeditationTimer" syncable="YES" codeGenerationType="class">
+        <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cooldown" attributeType="Double" minValueString="0" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="cooldown_sound" attributeType="String" defaultValueString="bells.wav" syncable="YES"/>
+        <attribute name="countdown" attributeType="Double" minValueString="0" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="countdown_sound" attributeType="String" defaultValueString="bells.wav" syncable="YES"/>
+        <attribute name="created_at" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="display_time" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="interval" attributeType="Double" minValueString="0" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="interval_repeat" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="interval_sound" attributeType="String" defaultValueString="bells.wav" syncable="YES"/>
+        <attribute name="last_completed" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="primary" attributeType="Double" minValueString="0" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="primary_sound" attributeType="String" defaultValueString="bells.wav" syncable="YES"/>
+        <attribute name="updated_at" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="meditation" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Meditation" inverseName="timer" inverseEntity="Meditation" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Meditation" positionX="-54" positionY="72" width="128" height="120"/>
+        <element name="MeditationTimer" positionX="-236" positionY="-21" width="128" height="285"/>
+    </elements>
+</model>
