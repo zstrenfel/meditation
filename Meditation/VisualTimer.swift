@@ -355,6 +355,9 @@ class VisualTimer: UIView {
         let xCord = (radius - trackWidth/2) * cos(r) + Double(bounds.size.width/2)
         let yCord = (radius - trackWidth/2) * sin(r) + Double(bounds.size.height/2)
         
+        if xCord.isNaN || yCord.isNaN {
+            return nil
+        }
         return CGPoint(x: xCord, y: yCord)
     }
     
