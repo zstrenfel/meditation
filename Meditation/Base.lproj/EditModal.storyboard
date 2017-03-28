@@ -174,31 +174,32 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAh-Q9-tbh">
-                                                    <rect key="frame" x="8" y="8" width="79.5" height="27.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="0.53379991319999998" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1k5-Pq-HnQ">
-                                                    <rect key="frame" x="119.5" y="8" width="247.5" height="27.5"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <action selector="inputChange:" destination="Zu0-TL-Lap" eventType="editingChanged" id="SRi-0y-4oq"/>
-                                                        <action selector="inputChange:" destination="Zu0-TL-Lap" eventType="editingDidEnd" id="zfx-BG-Q8V"/>
-                                                    </connections>
-                                                </textField>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="vOP-7U-axW">
+                                                    <rect key="frame" x="8" y="11" width="359" height="22"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAh-Q9-tbh">
+                                                            <rect key="frame" x="0.0" y="0.0" width="179.5" height="22"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" white="0.53379991319999998" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1k5-Pq-HnQ">
+                                                            <rect key="frame" x="179.5" y="0.0" width="179.5" height="22"/>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                            <connections>
+                                                                <action selector="inputChange:" destination="Zu0-TL-Lap" eventType="editingChanged" id="SRi-0y-4oq"/>
+                                                                <action selector="inputChange:" destination="Zu0-TL-Lap" eventType="editingDidEnd" id="zfx-BG-Q8V"/>
+                                                            </connections>
+                                                        </textField>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="1k5-Pq-HnQ" firstAttribute="leading" secondItem="iAh-Q9-tbh" secondAttribute="trailing" constant="32" id="7jR-Yv-kb3"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="iAh-Q9-tbh" secondAttribute="bottom" id="LMg-mB-wBg"/>
-                                                <constraint firstItem="1k5-Pq-HnQ" firstAttribute="top" secondItem="oRp-Xd-2bV" secondAttribute="topMargin" id="gKm-1f-NSk"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="1k5-Pq-HnQ" secondAttribute="trailing" id="iP6-ju-EAC"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="1k5-Pq-HnQ" secondAttribute="bottom" id="nnj-mr-pbM"/>
-                                                <constraint firstItem="iAh-Q9-tbh" firstAttribute="leading" secondItem="oRp-Xd-2bV" secondAttribute="leadingMargin" id="ojW-je-7NA"/>
-                                                <constraint firstItem="iAh-Q9-tbh" firstAttribute="top" secondItem="oRp-Xd-2bV" secondAttribute="topMargin" id="xbe-fb-Iom"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="vOP-7U-axW" secondAttribute="leading" id="17f-1o-qyK"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="vOP-7U-axW" secondAttribute="trailing" id="bmK-Xg-mwh"/>
+                                                <constraint firstItem="vOP-7U-axW" firstAttribute="centerY" secondItem="oRp-Xd-2bV" secondAttribute="centerY" id="gZm-Fi-BcC"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
