@@ -263,14 +263,12 @@ class VisualTimer: UIView {
         
         clearAnimations()
         
-        log.debug(self.cooldownLayer.timeOffset)
-        animateCircle(duration: countdown, beginTime: CACurrentMediaTime(), layer: countdownLayer, callback: nil)
-        animateCircle(duration: primary, beginTime:  CACurrentMediaTime() + countdown, layer: primaryLayer, callback: nil)
-        animateCircle(duration: cooldown, beginTime:  CACurrentMediaTime() + primary + countdown, layer: cooldownLayer, callback: nil)
+        animateCircle(duration: countdown, delay: 0.0, layer: countdownLayer, callback: nil)
+        animateCircle(duration: primary, delay:  countdown, layer: primaryLayer, callback: nil)
+        animateCircle(duration: cooldown, delay: primary + countdown, layer: cooldownLayer, callback: nil)
     }
     
     func pauseAnimation() {
-        log.debug("pausing animations")
         paused = true
         let pausedTime = CACurrentMediaTime() - countdownLayer.beginTime
         
@@ -285,7 +283,6 @@ class VisualTimer: UIView {
     }
     
     func resumeAnimation() {
-        log.debug("resuming animations")
         paused = false
         let pausedTime = countdownLayer.timeOffset
         var timeSincePaused: CFTimeInterval
@@ -308,7 +305,6 @@ class VisualTimer: UIView {
     }
     
     func clearVisualTimer() {
-        log.debug("clearing the visual timer")
         started = false
         paused = false
         updateTimeLabel(with: self.time.timeString)
@@ -329,10 +325,10 @@ class VisualTimer: UIView {
         layer.needsLayout()
     }
     
-    func animateCircle(duration: Double, beginTime: Double, layer: CAShapeLayer, callback: (() -> Void)?) {
-        log.debug("animating with beginning time: \(beginTime)")
+    func animateCircle(duration: Double, delay: Double, layer: CAShapeLayer, callback: (() -> Void)?) {
+        let syncTime = layer.convertTime(CACurrentMediaTime(), from: self.layer)
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.beginTime = beginTime
+        animation.beginTime = syncTime + delay
         animation.duration = duration
         animation.fromValue = 0.0
         animation.toValue = 1.0
