@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="w93-4V-mJz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="w93-4V-mJz">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -47,20 +47,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="a0U-fY-sNh">
                                 <rect key="frame" x="62" y="556" width="250" height="75"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ap-eI-AM6">
-                                        <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="75" id="NAF-kl-lUX"/>
-                                            <constraint firstAttribute="height" constant="75" id="YHD-77-phf"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
-                                        <state key="normal" title="Start"/>
-                                        <connections>
-                                            <action selector="startTimer:" destination="9pv-A4-QxB" eventType="touchUpInside" id="byE-eD-550"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pq6-KU-vX3">
-                                        <rect key="frame" x="175" y="0.0" width="75" height="75"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="RBc-Pj-7mC"/>
                                             <constraint firstAttribute="width" constant="75" id="a2M-cM-TKP"/>
@@ -69,6 +57,18 @@
                                         <state key="normal" title="Pause"/>
                                         <connections>
                                             <action selector="stopTimer:" destination="9pv-A4-QxB" eventType="touchUpInside" id="Jo0-NH-byh"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ap-eI-AM6">
+                                        <rect key="frame" x="175" y="0.0" width="75" height="75"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="75" id="NAF-kl-lUX"/>
+                                            <constraint firstAttribute="height" constant="75" id="YHD-77-phf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
+                                        <state key="normal" title="Start"/>
+                                        <connections>
+                                            <action selector="startTimer:" destination="9pv-A4-QxB" eventType="touchUpInside" id="byE-eD-550"/>
                                         </connections>
                                     </button>
                                 </subviews>

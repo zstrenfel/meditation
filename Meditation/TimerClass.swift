@@ -51,7 +51,7 @@ class TimerWrapper {
     private var paused: Bool = false
     private var completed: Bool = false
     
-    private var sounds: [TimerType: AVAudioPlayer] = [:]
+    private var sounds: [TimerType: AVAudioPlayer?] = [:]
     private var soundQueue = DispatchQueue(label: "strenfel.zach.soundQ")
     private var maxPlayTime: DispatchTimeInterval = .seconds(5)
     
@@ -66,17 +66,32 @@ class TimerWrapper {
         self.interval = timer.interval
         self.intervalRepeat = timer.interval_repeat
         
-        loadSound(type: .countdown, path: timer.countdown_sound!)
-        loadSound(type: .primary, path: timer.primary_sound!)
-        loadSound(type: .cooldown, path: timer.cooldown_sound!)
-        loadSound(type: .interval, path: timer.interval_sound!)
+        configureAudioSession()
+        
+        loadSound(type: .countdown, sound: timer.countdown_sound!)
+        loadSound(type: .primary, sound: timer.primary_sound!)
+        loadSound(type: .cooldown, sound: timer.cooldown_sound!)
+        loadSound(type: .interval, sound: timer.interval_sound!)
     }
     
     // MARK: - Sounds
+    //enables sounds for silent mode
+    func configureAudioSession() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: AVAudioSessionCategoryOptions.mixWithOthers)
+        }
+        catch {
+            log.error("could not configure audio session")
+        }
+    }
     
-    func loadSound(type: TimerType, path: String) {
+    func loadSound(type: TimerType, sound: String) {
+        guard sound != "none" else {
+            sounds[type] = nil
+            return
+        }
         soundQueue.sync {
-            if let sound = NSDataAsset(name: path) {
+            if let sound = NSDataAsset(name: sound) {
                 do {
                     let sound = try AVAudioPlayer(data: sound.data, fileTypeHint: AVFileTypeWAVE)
                     sounds[type] = sound
@@ -93,11 +108,7 @@ class TimerWrapper {
             return
         }
         log.debug("playing sound for \(type)")
-        sounds[type]!.play()
-        soundQueue.asyncAfter(deadline: .now() + maxPlayTime) {
-            self.sounds[type]?.stop()
-            self.sounds[type]?.currentTime = 0
-        }
+        sounds[type]!?.play()
     }
     
     // MARK: - Timer
@@ -159,6 +170,8 @@ class TimerWrapper {
         if currentTime >= totalTime {
             stopTimer()
             currentStatus = "Completed"
+            active = false
+            completed = true
             delegate?.handleTimerChange(value: totalTime - currentTime)
             delegate?.handleTimerComplete()
         } else {

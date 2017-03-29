@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -19,6 +20,7 @@ class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITab
         "two_bells",
         "zymbel"
     ]
+    var soundPlayer: AVAudioPlayer?
     
     var selected: String?
     
@@ -35,7 +37,7 @@ class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITab
         
         self.title = "Sounds"
         
-        // Do any additional setup after loading the view.
+        configureAudioSession()
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,10 +70,10 @@ class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        playSound(sound: sounds[indexPath.row])
         let cell = tableView.cellForRow(at: indexPath) as! OptionTableViewCell
         cell.accessoryType = .checkmark
         cell.optionLabel.textColor = UIColor.darkGray
-//        cell.selectionStyle = .none
         if let block = updateParent {
             block(self.type!, cell.value!)
         }
@@ -81,5 +83,37 @@ class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITab
         let cell = tableView.cellForRow(at: indexPath) as! OptionTableViewCell
         cell.accessoryType = .none
         cell.optionLabel.textColor = UIColor.lightGray
+    }
+    
+    // MARK: - Sound Preview
+    //enables sounds for silent mode
+    func configureAudioSession() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: AVAudioSessionCategoryOptions.mixWithOthers)
+        }
+        catch {
+            log.error("could not configure audio session")
+        }
+    }
+    
+    func playSound(sound: String) {
+        //reset sound player
+        if soundPlayer != nil {
+            soundPlayer?.stop()
+            soundPlayer = nil
+        }
+        //no preview for none
+        if sound == "none" {
+            return
+        }
+        
+        if let sound = NSDataAsset(name: sound) {
+            do {
+                soundPlayer = try AVAudioPlayer(data: sound.data, fileTypeHint: AVFileTypeWAVE)
+                soundPlayer?.play()
+            } catch {
+                log.debug("could not find the allocated sound")
+            }
+        }
     }
 }

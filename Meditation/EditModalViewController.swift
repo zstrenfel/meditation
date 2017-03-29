@@ -211,6 +211,9 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
         self.tableView.cellForRow(at: indexPath)?.selectionStyle = .none
         
         let tableCell = getTableCell(indexPath: indexPath)
+        if tableCell.cellType != .input {
+            dismissKeyboard()
+        }
         switch tableCell.cellType {
         case .link:
             performSegue(withIdentifier: "showSoundOptions", sender: self)
@@ -331,7 +334,7 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func confirmDelete() {
-        let alertController = UIAlertController(title: "Delete Timer", message: "Are you sure you wan't to delete this timer?", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Delete Timer", message: "Are you sure you want to delete this timer?", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "Cancel", style: .default , handler: nil)
         let delete = UIAlertAction(title: "Delete", style: .destructive, handler: deleteMeditationTimer)
         
@@ -387,6 +390,10 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     // MARK: - Utility Functions
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
     func getSection(section: Int) -> [TableCell] {
         let sectionKey = sections[section]
         if let tableCells = sectionMap[sectionKey] {

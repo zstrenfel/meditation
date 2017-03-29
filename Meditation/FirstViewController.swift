@@ -76,7 +76,7 @@ class FirstViewController: UIViewController, TimerDelegate {
     }
     
     func showTimeAlert() {
-        let alertController = UIAlertController(title: "That Was Fast!", message: "Oh no, you forgot to add any time! Edit your timer to begin your meditation.", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "That Was Fast!", message: "Oh no, you didn't add any time! Edit your timer to begin your meditation.", preferredStyle: .alert)
         let confirm = UIAlertAction(title: "Okay", style: .default , handler: nil)
         alertController.addAction(confirm)
         
@@ -113,8 +113,10 @@ class FirstViewController: UIViewController, TimerDelegate {
         if ((sessionTimer?.isPaused())! || clear) {
             //create new meditation entity with uncompleted status
             let remaining = sessionTimer?.timeRemaining()
-            createMeditationHistoryEntity(completed: false, totalTime: remaining!)
-            saveContext()
+            if remaining! > 0.0 {
+                createMeditationHistoryEntity(completed: false, totalTime: remaining!)
+                saveContext()
+            }
             
             sessionTimer?.clearTimer()
             visualTimer.clearVisualTimer()

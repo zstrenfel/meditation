@@ -38,7 +38,7 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchTimers()
-        timers = timers.sorted { $0.last_completed?.compare($1.last_completed as! Date) == ComparisonResult.orderedDescending }
+        timers = timers.sorted { $0.last_completed?.compare($1.last_completed! as Date) == ComparisonResult.orderedDescending }
         tableView.reloadData()
     }
     
@@ -132,7 +132,7 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell = tableView.cellForRow(at: indexPath) as! MeditationDisplayTableViewCell
         let timer = cell.timer! as MeditationTimer
         
-        let alertController = UIAlertController(title: "Delete Timer", message: "Are you sure you wan't to delete this timer?", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Delete Timer", message: "Are you sure you want to delete this timer?", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "Cancel", style: .default , handler: nil)
         let delete = UIAlertAction(title: "Delete", style: .destructive, handler: { action in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {

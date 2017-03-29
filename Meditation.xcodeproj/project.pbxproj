@@ -403,11 +403,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Zach Strenfel";
 				TargetAttributes = {
 					9230BE8B1E0E0B5A001A12CE = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 3M52FD8V47;
 						ProvisioningStyle = Automatic;
 					};
 					9230BEA11E0E0B5A001A12CE = {
@@ -808,6 +809,8 @@
 			baseConfigurationReference = 44665835D15A12F6671237B7 /* Pods-Meditation.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 3M52FD8V47;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/LogKit\"",
@@ -819,8 +822,9 @@
 					"@executable_path/Frameworks",
 				);
 				INFOPLIST_FILE = Meditation/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Dack.Meditation;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zachstrenfel.LotusTimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REEXPORTED_FRAMEWORK_NAMES = "";
 				SWIFT_VERSION = 3.0;
@@ -832,6 +836,8 @@
 			baseConfigurationReference = AC8804A14E13D0235D5A4054 /* Pods-Meditation.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 3M52FD8V47;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/LogKit\"",
@@ -843,8 +849,9 @@
 					"@executable_path/Frameworks",
 				);
 				INFOPLIST_FILE = Meditation/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Dack.Meditation;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zachstrenfel.LotusTimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REEXPORTED_FRAMEWORK_NAMES = "";
 				SWIFT_VERSION = 3.0;

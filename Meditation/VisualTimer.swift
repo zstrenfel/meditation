@@ -53,7 +53,7 @@ class VisualTimer: UIView {
     
     var inset: CGFloat = 8.0
     var trackWidth: Double = 12.0
-    var degreeOfRotation: Double = M_PI_2
+    var degreeOfRotation: Double = Double.pi / 2
     
     //CoreGraphics Layers
     let baseTrackLayer = CAShapeLayer()
@@ -142,7 +142,7 @@ class VisualTimer: UIView {
     }
 
     func updateLayerFrames() {
-        drawTrack(startAngle: 0.0, endAngle: CGFloat(2 * M_PI), width: trackWidth + 6.0, visible: true, color: baseTrackColor.cgColor, layer: baseTrackLayer)
+        drawTrack(startAngle: 0.0, endAngle: CGFloat(2 * Double.pi), width: trackWidth + 6.0, visible: true, color: baseTrackColor.cgColor, layer: baseTrackLayer)
         drawTrack(startAngle: CGFloat(valueToRadians(0.0)), endAngle:  CGFloat(valueToRadians(countdown)), width: trackWidth, color: secondaryTrackColor.cgColor, layer: countdownLayer)
         drawTrack(startAngle: CGFloat(valueToRadians(countdown)), endAngle:  CGFloat(valueToRadians(primary + countdown)), width: trackWidth, color: primaryTrackColor.cgColor, layer: primaryLayer)
         drawTrack(startAngle: CGFloat(valueToRadians(primary + countdown)), endAngle:  CGFloat(valueToRadians(time)), width: trackWidth, color: secondaryTrackColor.cgColor, layer: cooldownLayer)
@@ -245,7 +245,7 @@ class VisualTimer: UIView {
                 arcCenter: CGPoint(x: pos.x, y: pos.y),
                 radius: CGFloat(indicatorRadius),
                 startAngle: 0,
-                endAngle: CGFloat(2 * M_PI),
+                endAngle: CGFloat(2 * Double.pi),
                 clockwise: true)
             layer.path = indicator.cgPath
             layer.fillColor = color
@@ -257,6 +257,7 @@ class VisualTimer: UIView {
     
     // MARK: - Animation Functions
     func beginAnimation() {
+        log.debug("beginning animations")
         started = true
         paused = false
         
@@ -269,6 +270,7 @@ class VisualTimer: UIView {
     }
     
     func pauseAnimation() {
+        log.debug("pausing animations")
         paused = true
         let pausedTime = CACurrentMediaTime() - countdownLayer.beginTime
         
@@ -283,6 +285,7 @@ class VisualTimer: UIView {
     }
     
     func resumeAnimation() {
+        log.debug("resuming animations")
         paused = false
         let pausedTime = countdownLayer.timeOffset
         var timeSincePaused: CFTimeInterval
@@ -305,6 +308,7 @@ class VisualTimer: UIView {
     }
     
     func clearVisualTimer() {
+        log.debug("clearing the visual timer")
         started = false
         paused = false
         updateTimeLabel(with: self.time.timeString)
@@ -326,6 +330,7 @@ class VisualTimer: UIView {
     }
     
     func animateCircle(duration: Double, beginTime: Double, layer: CAShapeLayer, callback: (() -> Void)?) {
+        log.debug("animating with beginning time: \(beginTime)")
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.beginTime = beginTime
         animation.duration = duration
@@ -363,7 +368,7 @@ class VisualTimer: UIView {
     
     //Converts a value to it's corresponding radian value as compared to total time
     func valueToRadians(_ value: Double) -> Double {
-        let angle = (2 * M_PI) * (value / time)
+        let angle = (2 * Double.pi) * (value / time)
         let translatedAngle = angle + degreeOfRotation
         return translatedAngle
     }
