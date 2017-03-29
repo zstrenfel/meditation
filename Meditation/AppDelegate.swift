@@ -26,8 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navBarAppearance.tintColor = UIColor(hex: "B2B2B2")
         navBarAppearance.barTintColor = UIColor(hex: "F9F9F9")
         UIApplication.shared.statusBarStyle = .default
-
         
+        //app will run continuously without locking
+        UIApplication.shared.isIdleTimerDisabled = true
         return true
     }
 
