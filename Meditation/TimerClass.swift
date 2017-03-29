@@ -189,6 +189,10 @@ class TimerWrapper {
     }
     
     // MARK: - Outside Accessible
+    //returns total amount of time remaining
+    func timeRemaining() -> Double {
+        return totalTime - currentTime
+    }
     
     //Function that returns if the timer is paused
     func isPaused() -> Bool {

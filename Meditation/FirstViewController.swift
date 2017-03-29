@@ -111,6 +111,11 @@ class FirstViewController: UIViewController, TimerDelegate {
         }
         
         if ((sessionTimer?.isPaused())! || clear) {
+            //create new meditation entity with uncompleted status
+            let remaining = sessionTimer?.timeRemaining()
+            createMeditationHistoryEntity(completed: false, totalTime: remaining!)
+            saveContext()
+            
             sessionTimer?.clearTimer()
             visualTimer.clearVisualTimer()
             stopButton.setTitle("Pause", for: .normal)
@@ -127,6 +132,23 @@ class FirstViewController: UIViewController, TimerDelegate {
         stopButton.setTitle("Reset", for: .normal)
         startButton.isEnabled = true
         timer?.setValue(Date(), forKey: "last_completed")
+        
+        //create new meditation entity with completed status
+        let totalTime = (timer?.countdown)! + (timer?.primary)! + (timer?.cooldown)!
+        createMeditationHistoryEntity(completed: true, totalTime: totalTime)
+        saveContext()
+    }
+    
+    //creates a new
+    func createMeditationHistoryEntity(completed: Bool, totalTime: Double) {
+        let meditation: Meditation = Meditation(context: context)
+        meditation.setValue(Date(), forKey: "created_at")
+        meditation.setValue(Date(), forKey: "updated_at")
+        meditation.setValue(completed, forKey: "completed")
+        meditation.setValue(totalTime, forKey: "time_completed")
+    }
+    
+    func saveContext() {
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
