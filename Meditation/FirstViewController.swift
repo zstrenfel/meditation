@@ -8,6 +8,7 @@
 
 import UIKit
 import XCGLogger
+import CoreData
 
 
 class FirstViewController: UIViewController, TimerDelegate {
@@ -31,9 +32,10 @@ class FirstViewController: UIViewController, TimerDelegate {
         let repeatingBG = UIColor(patternImage: waveBG!)
         self.view.backgroundColor = repeatingBG
         
-        titleLabel.text = timer?.name
-        
-        visualTimer.updateTimer(with: self.timer!)
+        if let t = timer {
+            titleLabel.text = t.name
+            visualTimer.updateTimer(with: t)
+        }
         
         stopButton.isEnabled = false
     }
@@ -57,7 +59,37 @@ class FirstViewController: UIViewController, TimerDelegate {
         sessionTimer = nil
     }
     
+    // MARK: - State Restoration
+    override func encodeRestorableState(with coder: NSCoder) {
+        if let t = timer {
+            let timerURI = t.objectID.uriRepresentation()
+            log.debug(timerURI)
+            coder.encode(timerURI, forKey: "timer_uri")
+        }
+        
+        super.encodeRestorableState(with: coder)
+    }
     
+    override func decodeRestorableState(with coder: NSCoder) {
+        let timerURI = coder.decodeObject(forKey: "timer_uri") as! URL
+        let timerID = context.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: timerURI)
+        if let timer = fetchTimerWithID(timerID!) {
+            self.timer = timer
+            self.updateTimer(timer)
+        }
+        
+        super.decodeRestorableState(with: coder)
+    }
+    
+    func fetchTimerWithID(_ objectID: NSManagedObjectID) -> MeditationTimer? {
+        do {
+            let timer = try context.existingObject(with: objectID)
+            return timer as? MeditationTimer
+        } catch {
+            log.error("couldn't find timer with ID \(objectID)")
+            return nil
+        }
+    }
     
     
     // MARK: - Actions

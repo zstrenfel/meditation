@@ -13,7 +13,7 @@
         <!--First View Controller-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController storyboardIdentifier="firstVC" id="9pv-A4-QxB" customClass="FirstViewController" customModule="Meditation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="firstVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9pv-A4-QxB" customClass="FirstViewController" customModule="Meditation" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
@@ -112,7 +112,7 @@
         <!--First-->
         <scene sceneID="7xb-CR-OG1">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="w93-4V-mJz" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TimerNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="w93-4V-mJz" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZIx-Ok-rmL">
@@ -131,7 +131,7 @@
         <!--Meditations-->
         <scene sceneID="qb6-ES-kK1">
             <objects>
-                <viewController id="TYV-Ft-9e2" customClass="TimerTableViewController" customModule="Meditation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TimerTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TYV-Ft-9e2" customClass="TimerTableViewController" customModule="Meditation" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nh9-Tn-h36"/>
                         <viewControllerLayoutGuide type="bottom" id="k6C-JM-PEP"/>
@@ -331,7 +331,7 @@
         <image name="first" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="31d-nB-w3j"/>
+        <segue reference="Ytw-Q3-8E3"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.70588235294117641" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
