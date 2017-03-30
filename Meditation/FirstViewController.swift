@@ -42,13 +42,14 @@ class FirstViewController: UIViewController, TimerDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if sessionTimer != nil {
+        log.debug("view will disappear")
+        if sessionTimer != nil  && (sessionTimer?.isActive())! {
             _stopTimer(clear: true)
-            visualTimer.clearVisualTimer()
         }
     }
     
     func updateTimer(_ timer: MeditationTimer?) {
+        log.debug("timer will udpate")
         guard timer != nil else {
             _ = navigationController?.popViewController(animated: true)
             return
@@ -63,8 +64,12 @@ class FirstViewController: UIViewController, TimerDelegate {
     override func encodeRestorableState(with coder: NSCoder) {
         if let t = timer {
             let timerURI = t.objectID.uriRepresentation()
-            log.debug(timerURI)
             coder.encode(timerURI, forKey: "timer_uri")
+        }
+        
+        if let session = sessionTimer {
+            let timeRemaining = session.timeRemaining()
+            coder.encode(timeRemaining, forKey: "time_remaining")
         }
         
         super.encodeRestorableState(with: coder)
@@ -77,6 +82,9 @@ class FirstViewController: UIViewController, TimerDelegate {
             self.timer = timer
             self.updateTimer(timer)
         }
+        
+        let timeRemaining = coder.decodeObject(forKey: "time_remaining")
+        log.debug(timeRemaining)
         
         super.decodeRestorableState(with: coder)
     }

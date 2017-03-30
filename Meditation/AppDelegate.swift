@@ -52,11 +52,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        log.debug("application entering background")
         if let session = sessionTimer {
             if session.isActive() && !session.isPaused() {
                 visualTimer?.pauseAnimation()
                 session.stopTimer()
-                notificationCenter.scheduleNotification(title: "Lotus Timer is Paused", body: "Reopen the app to resume your meditation. 😌")
+                notificationCenter.scheduleNotification(title: "Lotus Timer Has Been Stopped", body: "Reopen the app to restart your meditation. 😌")
             }
         }
     }
