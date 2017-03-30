@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if session.isActive() && !session.isPaused() {
                 visualTimer?.pauseAnimation()
                 session.stopTimer()
-                notificationCenter.scheduleNotification(title: "Lotus Timer is Paused", body: nil)
+                notificationCenter.scheduleNotification(title: "Lotus Timer is Paused", body: "Reopen the app to resume your meditation 😌")
             }
         }
         

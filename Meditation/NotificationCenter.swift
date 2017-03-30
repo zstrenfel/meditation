@@ -13,23 +13,21 @@ class NotificationCenter {
     
     private var authorized: Bool = false
     
-    func scheduleNotification(title: String, body: String?, timeInterval: TimeInterval = 2.0, repeats: Bool = false) {
+    func scheduleNotification(title: String, body: String, timeInterval: TimeInterval = 5.0, repeats: Bool = false) {
         if authorized {
             let content = UNMutableNotificationContent()
             content.title = title
             content.sound = UNNotificationSound.default()
-            
-            if let text = body {
-                content.body = text
-            }
+            content.body = body
             
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: repeats)
-            let request = UNNotificationRequest.init(identifier: "Pause Warning", content: content, trigger: trigger)
+            let request = UNNotificationRequest.init(identifier: title, content: content, trigger: trigger)
             
             let center = UNUserNotificationCenter.current()
             center.add(request) { error in
                 log.error(error)
             }
+            log.debug("should send notification")
         }
     }
     
