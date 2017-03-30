@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 import XCGLogger
 
@@ -17,6 +18,9 @@ let log = XCGLogger.default
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var sessionTimer: TimerWrapper?
+    var visualTimer: VisualTimer?
+    var notificationCenter: NotificationCenter!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -29,12 +33,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //app will run continuously without locking
         UIApplication.shared.isIdleTimerDisabled = true
+        
+        self.notificationCenter = NotificationCenter()
+        
+        //register notifications
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+            self.notificationCenter.updateAuthorization(granted: granted)
+        }
         return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+        if let session = sessionTimer {
+            if session.isActive() && !session.isPaused() {
+                visualTimer?.pauseAnimation()
+                session.stopTimer()
+                notificationCenter.scheduleNotification(title: "Lotus Timer is Paused", body: nil)
+            }
+        }
+        
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {

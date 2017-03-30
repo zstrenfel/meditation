@@ -87,6 +87,9 @@ class FirstViewController: UIViewController, TimerDelegate {
         if sessionTimer == nil {
             sessionTimer = TimerWrapper(with: timer!)
             sessionTimer?.delegate = self
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.sessionTimer = sessionTimer
+            appDelegate.visualTimer = visualTimer
         }
         if (sessionTimer?.isActive())! {
             sessionTimer?.resumeTimer()
