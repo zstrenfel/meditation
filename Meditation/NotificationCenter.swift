@@ -13,7 +13,7 @@ class NotificationCenter {
     
     private var authorized: Bool = false
     
-    func scheduleNotification(title: String, body: String, timeInterval: TimeInterval = 5.0, repeats: Bool = false) {
+    func scheduleNotification(title: String, body: String, timeInterval: TimeInterval = 3.0, repeats: Bool = false) {
         if authorized {
             let content = UNMutableNotificationContent()
             content.title = title
