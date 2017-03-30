@@ -43,12 +43,10 @@
 		92C3FC0C1E7AF5ED006FBB2A /* MeditationDisplayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C3FC0B1E7AF5ED006FBB2A /* MeditationDisplayTableViewCell.swift */; };
 		92C732BF1E519C4E0040C859 /* SoundSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C732BE1E519C4E0040C859 /* SoundSelectionViewController.swift */; };
 		92CB01541E8C598000A13139 /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CB01531E8C598000A13139 /* NotificationCenter.swift */; };
+		92CB01551E8D603400A13139 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9230BEB31E0E0B5A001A12CE /* Info.plist */; };
 		92E60FE61E4966AB00A2E994 /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E60FE51E4966AB00A2E994 /* PickerTableViewCell.swift */; };
 		92EB283E1E51494500AA5DA8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92EB283D1E51494500AA5DA8 /* AVFoundation.framework */; };
-		92EB28411E51498400AA5DA8 /* bells.wav in Resources */ = {isa = PBXBuildFile; fileRef = 92EB28401E51498400AA5DA8 /* bells.wav */; };
 		92EFCD5A1E5AB6B000B8DC5C /* StringExt+TitleCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EFCD591E5AB6B000B8DC5C /* StringExt+TitleCase.swift */; };
-		92EFCD5D1E5ABC6600B8DC5C /* singing_bowl.wav in Resources */ = {isa = PBXBuildFile; fileRef = 92EFCD5B1E5ABC6600B8DC5C /* singing_bowl.wav */; };
-		92EFCD5E1E5ABC6600B8DC5C /* wind_chimes.wav in Resources */ = {isa = PBXBuildFile; fileRef = 92EFCD5C1E5ABC6600B8DC5C /* wind_chimes.wav */; };
 		92F923A01E79B9530043476C /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F9239F1E79B9530043476C /* AdminViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -127,10 +125,7 @@
 		92DD5FFB1E8AFC6400AF3815 /* Model 12.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 12.xcdatamodel"; sourceTree = "<group>"; };
 		92E60FE51E4966AB00A2E994 /* PickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTableViewCell.swift; sourceTree = "<group>"; };
 		92EB283D1E51494500AA5DA8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		92EB28401E51498400AA5DA8 /* bells.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bells.wav; path = ../../../Downloads/bells.wav; sourceTree = "<group>"; };
 		92EFCD591E5AB6B000B8DC5C /* StringExt+TitleCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StringExt+TitleCase.swift"; sourceTree = "<group>"; };
-		92EFCD5B1E5ABC6600B8DC5C /* singing_bowl.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = singing_bowl.wav; path = ../../../Downloads/singing_bowl.wav; sourceTree = "<group>"; };
-		92EFCD5C1E5ABC6600B8DC5C /* wind_chimes.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = wind_chimes.wav; path = ../../../Downloads/wind_chimes.wav; sourceTree = "<group>"; };
 		92F9239E1E79A4430043476C /* Model 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 3.xcdatamodel"; sourceTree = "<group>"; };
 		92F9239F1E79B9530043476C /* AdminViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
 		99672B0E98ABE582C95FD1C7 /* Pods_MeditationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MeditationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -232,7 +227,6 @@
 			children = (
 				921A90B51E555A9300F7F6AE /* Storyboards */,
 				921A90B21E5559A300F7F6AE /* Controllers */,
-				92EB283F1E51496200AA5DA8 /* Resources */,
 				92387A281E0E2D5600C86A6D /* TableCells */,
 				927BE5731E0E19900073ABFE /* Utilities */,
 				9230BE8F1E0E0B5A001A12CE /* AppDelegate.swift */,
@@ -297,16 +291,6 @@
 				92CB01531E8C598000A13139 /* NotificationCenter.swift */,
 			);
 			name = Utilities;
-			sourceTree = "<group>";
-		};
-		92EB283F1E51496200AA5DA8 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				92EFCD5B1E5ABC6600B8DC5C /* singing_bowl.wav */,
-				92EFCD5C1E5ABC6600B8DC5C /* wind_chimes.wav */,
-				92EB28401E51498400AA5DA8 /* bells.wav */,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		92F9239A1E7997FF0043476C /* EditModal */ = {
@@ -451,13 +435,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92CB01551E8D603400A13139 /* Info.plist in Resources */,
 				9230BE9C1E0E0B5A001A12CE /* LaunchScreen.storyboard in Resources */,
 				9230BE991E0E0B5A001A12CE /* Assets.xcassets in Resources */,
 				92B61B221E85F5CC00672165 /* Media.xcassets in Resources */,
-				92EFCD5D1E5ABC6600B8DC5C /* singing_bowl.wav in Resources */,
 				9230BE971E0E0B5A001A12CE /* Main.storyboard in Resources */,
-				92EFCD5E1E5ABC6600B8DC5C /* wind_chimes.wav in Resources */,
-				92EB28411E51498400AA5DA8 /* bells.wav in Resources */,
 				921A90AD1E55587100F7F6AE /* EditModal.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -835,6 +817,7 @@
 				REEXPORTED_FRAMEWORK_NAMES = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Debug;
 		};
@@ -863,6 +846,7 @@
 				REEXPORTED_FRAMEWORK_NAMES = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Release;
 		};

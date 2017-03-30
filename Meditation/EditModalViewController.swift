@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RandomColorSwift
 
 class EditModalViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -285,7 +284,6 @@ class EditModalViewController: UIViewController, UITableViewDataSource, UITableV
                 //will float to top of list
                 timer?.setValue(Date(), forKey: "last_completed")
                 timer?.setValue(Date(), forKey: "created_at")
-                timer?.setValue(randomColor(hue: .blue).toHexString(), forKey: "color")
             }
         }
         (UIApplication.shared.delegate as! AppDelegate).saveContext()

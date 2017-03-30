@@ -6,11 +6,9 @@ target 'Meditation' do
   use_frameworks!
 
   # Pods for Meditation
-  pod 'Dollar'
   pod 'Cent'
   pod 'Hex'
   pod 'XCGLogger', '~> 4.0.0'
-  pod 'RandomColorSwift'
 
 
   target 'MeditationTests' do

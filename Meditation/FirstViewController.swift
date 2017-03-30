@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Dollar
-import Cent
 import XCGLogger
 
 
