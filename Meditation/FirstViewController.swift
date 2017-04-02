@@ -199,7 +199,8 @@ class FirstViewController: UIViewController, TimerDelegate {
         if value is Double {
             visualTimer.updateTimeLabel(with: (value as! Double).timeString)
             if !visualTimer.animationsActive() {
-                visualTimer.setTime(with: value as! Double, animate: true)
+                let time = ((timer?.countdown)! + (timer?.primary)! + (timer?.cooldown)!) - (value as! Double)
+                visualTimer.setTime(with: time , animate: true)
             }
         } else if value is String {
             visualTimer.updateDescriptionLabel(with: value as! String)
@@ -219,5 +220,6 @@ class FirstViewController: UIViewController, TimerDelegate {
             break
         }
     }
+    
 }
 

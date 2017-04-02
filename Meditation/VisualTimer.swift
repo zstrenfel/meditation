@@ -292,20 +292,23 @@ class VisualTimer: UIView {
         var primaryDuration = 0.0
         var cooldownDuration = 0.0
         var countdownDuration = 0.0
+        var fromValue = 0.0
         
         if !countdownCompleted {
-            countdownDuration = countdown * (countdown / time)
-            animateCircle(duration: countdownDuration, delay: 0.0, layer: countdownLayer, callback: nil)
+            countdownDuration = countdown * (1 - (time / countdown))
+            animateCircle(duration: countdownDuration, delay: 0.0, fromValue: (time / countdown) , layer: countdownLayer, callback: nil)
         }
         
         if !primaryCompleted {
-            primaryDuration = primary * (primary / (time - countdown))
-            animateCircle(duration: primaryDuration, delay: countdownDuration, layer: primaryLayer, callback: nil)
+            fromValue = time - countdown > 0 ? ((time - countdown) / primary) : 0
+            primaryDuration = time - countdown > 0 ? primary * ( 1 - ((time - countdown) / primary)) : primary
+            animateCircle(duration: primaryDuration, delay: countdownDuration, fromValue: fromValue, layer: primaryLayer, callback: nil)
         }
         
         if !cooldownCompleted {
-            cooldownDuration = cooldown * (cooldown / (time - primary - countdown))
-            animateCircle(duration: cooldownDuration, delay: countdownDuration + primaryDuration, layer: cooldownLayer, callback: nil)
+            fromValue = time - countdown - primary > 0 ? ((time - countdown - primary) / cooldown) : 0
+            cooldownDuration = time - countdown - primary > 0 ? cooldown * ( 1 - ((time - countdown - primary) / cooldown)) : cooldown
+            animateCircle(duration: cooldownDuration, delay: countdownDuration + primaryDuration, fromValue: fromValue, layer: cooldownLayer, callback: nil)
         }
     }
     
@@ -366,12 +369,12 @@ class VisualTimer: UIView {
         layer.needsLayout()
     }
     
-    func animateCircle(duration: Double, delay: Double, layer: CAShapeLayer, callback: (() -> Void)?) {
+    func animateCircle(duration: Double, delay: Double, fromValue: Double = 0.0, layer: CAShapeLayer, callback: (() -> Void)?) {
         let syncTime = layer.convertTime(CACurrentMediaTime(), from: self.layer)
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.beginTime = syncTime + delay
         animation.duration = duration
-        animation.fromValue = 0.0
+        animation.fromValue = fromValue
         animation.toValue = 1.0
         animation.timingFunction = CAMediaTimingFunction(name: "linear")
         animation.fillMode = kCAFillModeForwards

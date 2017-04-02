@@ -79,21 +79,14 @@
                                 <color key="textColor" red="0.72941176470000002" green="0.72941176470000002" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FXA-F9-KWi">
-                                <rect key="frame" x="16" y="492" width="343" height="30"/>
-                                <state key="normal" title="Stop Animation"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="FXA-F9-KWi" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="1sa-xD-WVj"/>
                             <constraint firstItem="GiV-WS-gSq" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="40" id="8i4-Uy-jWy"/>
                             <constraint firstItem="o1A-Uf-CnA" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="90" id="9PE-My-edx"/>
                             <constraint firstItem="GiV-WS-gSq" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="8" id="DwD-Rs-ZiQ"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="a0U-fY-sNh" secondAttribute="bottom" constant="36" id="Lm1-OE-Y6n"/>
                             <constraint firstAttribute="trailingMargin" secondItem="GiV-WS-gSq" secondAttribute="trailing" constant="8" id="WDK-t8-2Th"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="FXA-F9-KWi" secondAttribute="trailing" id="a8B-NO-ynk"/>
-                            <constraint firstItem="a0U-fY-sNh" firstAttribute="top" secondItem="FXA-F9-KWi" secondAttribute="bottom" constant="34" id="am4-WP-iM0"/>
                             <constraint firstItem="a0U-fY-sNh" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="ggI-PE-zmy"/>
                             <constraint firstItem="o1A-Uf-CnA" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="go5-zg-HoL"/>
                         </constraints>
