@@ -268,14 +268,44 @@ class VisualTimer: UIView {
         animateCircle(duration: cooldown, delay: primary + countdown, layer: cooldownLayer, callback: nil)
     }
     
-    func beginAnimation(from time: Double) {
+    func setTime(with time: Double, animate: Bool) {
         log.debug("beginning animations from \(time)")
-        var countdownCompleted = false
-        var primaryCompleted = false
-        var cooldownCompleted = false
+        let countdownStrokeEnd = (time / countdown) >= 1 ? 1.0 : (time / countdown)
+        let primaryStrokeEnd = countdownStrokeEnd == 1.0  ? (time - countdown) / primary : 0.0
+        let cooldownStrokeEnd = primaryStrokeEnd == 1.0 ? (time - countdown - primary) / cooldown : 0.0
         
-        //take a time value and figure out which timer is running and which are finished
-        if time > countdo
+        drawTrack(startAngle: CGFloat(valueToRadians(0.0)), endAngle:  CGFloat(valueToRadians(countdown)), width: trackWidth, strokeEnd: countdownStrokeEnd, color: secondaryTrackColor.cgColor, layer: countdownLayer)
+        drawTrack(startAngle: CGFloat(valueToRadians(countdown)), endAngle:  CGFloat(valueToRadians(primary + countdown)), width: trackWidth, strokeEnd: primaryStrokeEnd,  color: primaryTrackColor.cgColor, layer: primaryLayer)
+        drawTrack(startAngle: CGFloat(valueToRadians(primary + countdown)), endAngle:  CGFloat(valueToRadians(time)), width: trackWidth, strokeEnd: cooldownStrokeEnd, color: secondaryTrackColor.cgColor, layer: cooldownLayer)
+        
+        if animate {
+            beginAnimation(from: time)
+        }
+    }
+    
+    func beginAnimation(from time: Double) {
+        let countdownCompleted = (time / countdown) >= 1 ? true : false
+        let primaryCompleted = (time - countdown) / primary >= 1 ? true : false
+        let cooldownCompleted = (time - countdown - primary) / cooldown >= 1 ? true : false
+        
+        var primaryDuration = 0.0
+        var cooldownDuration = 0.0
+        var countdownDuration = 0.0
+        
+        if !countdownCompleted {
+            countdownDuration = countdown * (countdown / time)
+            animateCircle(duration: countdownDuration, delay: 0.0, layer: countdownLayer, callback: nil)
+        }
+        
+        if !primaryCompleted {
+            primaryDuration = primary * (primary / (time - countdown))
+            animateCircle(duration: primaryDuration, delay: countdownDuration, layer: primaryLayer, callback: nil)
+        }
+        
+        if !cooldownCompleted {
+            cooldownDuration = cooldown * (cooldown / (time - primary - countdown))
+            animateCircle(duration: cooldownDuration, delay: countdownDuration + primaryDuration, layer: cooldownLayer, callback: nil)
+        }
     }
     
     func pauseAnimation() {
