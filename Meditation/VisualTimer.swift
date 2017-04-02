@@ -193,6 +193,22 @@ class VisualTimer: UIView {
         descriptionLabel.center = CGPoint(x: bounds.width/2, y: bounds.height/2 - CGFloat(topLabelBuffer))
     }
     
+    
+    func setTime(with time: Double, animate: Bool) {
+        log.debug("beginning animations from \(time)")
+        let countdownStrokeEnd = (time / countdown) >= 1 ? 1.0 : (time / countdown)
+        let primaryStrokeEnd = countdownStrokeEnd == 1.0  ? (time - countdown) / primary : 0.0
+        let cooldownStrokeEnd = primaryStrokeEnd == 1.0 ? (time - countdown - primary) / cooldown : 0.0
+        
+        drawTrack(startAngle: CGFloat(valueToRadians(0.0)), endAngle:  CGFloat(valueToRadians(countdown)), width: trackWidth, strokeEnd: countdownStrokeEnd, color: secondaryTrackColor.cgColor, layer: countdownLayer)
+        drawTrack(startAngle: CGFloat(valueToRadians(countdown)), endAngle:  CGFloat(valueToRadians(primary + countdown)), width: trackWidth, strokeEnd: primaryStrokeEnd,  color: primaryTrackColor.cgColor, layer: primaryLayer)
+        drawTrack(startAngle: CGFloat(valueToRadians(primary + countdown)), endAngle:  CGFloat(valueToRadians(time)), width: trackWidth, strokeEnd: cooldownStrokeEnd, color: secondaryTrackColor.cgColor, layer: cooldownLayer)
+        
+        if animate {
+            beginAnimation(from: time)
+        }
+    }
+    
     // MARK: - Drawing Functions
     func drawTrack(startAngle: CGFloat, endAngle: CGFloat, width: Double, strokeEnd: Double = 0.0, color: CGColor, layer: CAShapeLayer) {
         let radius: CGFloat = min(bounds.size.width/2 - inset, bounds.size.height/2 - inset)
@@ -266,21 +282,6 @@ class VisualTimer: UIView {
         animateCircle(duration: countdown, delay: 0.0, layer: countdownLayer, callback: nil)
         animateCircle(duration: primary, delay:  countdown, layer: primaryLayer, callback: nil)
         animateCircle(duration: cooldown, delay: primary + countdown, layer: cooldownLayer, callback: nil)
-    }
-    
-    func setTime(with time: Double, animate: Bool) {
-        log.debug("beginning animations from \(time)")
-        let countdownStrokeEnd = (time / countdown) >= 1 ? 1.0 : (time / countdown)
-        let primaryStrokeEnd = countdownStrokeEnd == 1.0  ? (time - countdown) / primary : 0.0
-        let cooldownStrokeEnd = primaryStrokeEnd == 1.0 ? (time - countdown - primary) / cooldown : 0.0
-        
-        drawTrack(startAngle: CGFloat(valueToRadians(0.0)), endAngle:  CGFloat(valueToRadians(countdown)), width: trackWidth, strokeEnd: countdownStrokeEnd, color: secondaryTrackColor.cgColor, layer: countdownLayer)
-        drawTrack(startAngle: CGFloat(valueToRadians(countdown)), endAngle:  CGFloat(valueToRadians(primary + countdown)), width: trackWidth, strokeEnd: primaryStrokeEnd,  color: primaryTrackColor.cgColor, layer: primaryLayer)
-        drawTrack(startAngle: CGFloat(valueToRadians(primary + countdown)), endAngle:  CGFloat(valueToRadians(time)), width: trackWidth, strokeEnd: cooldownStrokeEnd, color: secondaryTrackColor.cgColor, layer: cooldownLayer)
-        
-        if animate {
-            beginAnimation(from: time)
-        }
     }
     
     func beginAnimation(from time: Double) {

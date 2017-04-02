@@ -60,11 +60,11 @@ class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITab
         cell.optionLabel.text = sounds[indexPath.row].titleCase()
         cell.value = sounds[indexPath.row]
         cell.selectionStyle = .none
+        cell.optionLabel.textColor = UIColor.darkGray
         
         if sounds[indexPath.row] == self.selected {
             self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
             cell.accessoryType = .checkmark
-            cell.optionLabel.textColor = UIColor.darkGray
         }
         return cell
     }
@@ -73,7 +73,6 @@ class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITab
         playSound(sound: sounds[indexPath.row])
         let cell = tableView.cellForRow(at: indexPath) as! OptionTableViewCell
         cell.accessoryType = .checkmark
-        cell.optionLabel.textColor = UIColor.darkGray
         if let block = updateParent {
             block(self.type!, cell.value!)
         }
