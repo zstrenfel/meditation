@@ -142,7 +142,7 @@ class VisualTimer: UIView {
     }
 
     func updateLayerFrames() {
-        drawTrack(startAngle: 0.0, endAngle: CGFloat(2 * Double.pi), width: trackWidth + 6.0, visible: true, color: baseTrackColor.cgColor, layer: baseTrackLayer)
+        drawTrack(startAngle: 0.0, endAngle: CGFloat(2 * Double.pi), width: trackWidth + 6.0, strokeEnd: 1.0, color: baseTrackColor.cgColor, layer: baseTrackLayer)
         drawTrack(startAngle: CGFloat(valueToRadians(0.0)), endAngle:  CGFloat(valueToRadians(countdown)), width: trackWidth, color: secondaryTrackColor.cgColor, layer: countdownLayer)
         drawTrack(startAngle: CGFloat(valueToRadians(countdown)), endAngle:  CGFloat(valueToRadians(primary + countdown)), width: trackWidth, color: primaryTrackColor.cgColor, layer: primaryLayer)
         drawTrack(startAngle: CGFloat(valueToRadians(primary + countdown)), endAngle:  CGFloat(valueToRadians(time)), width: trackWidth, color: secondaryTrackColor.cgColor, layer: cooldownLayer)
@@ -194,7 +194,7 @@ class VisualTimer: UIView {
     }
     
     // MARK: - Drawing Functions
-    func drawTrack(startAngle: CGFloat, endAngle: CGFloat, width: Double, visible: Bool = false, color: CGColor, layer: CAShapeLayer) {
+    func drawTrack(startAngle: CGFloat, endAngle: CGFloat, width: Double, strokeEnd: Double = 0.0, color: CGColor, layer: CAShapeLayer) {
         let radius: CGFloat = min(bounds.size.width/2 - inset, bounds.size.height/2 - inset)
         let circleTrack = UIBezierPath(
             arcCenter: CGPoint(x: bounds.size.width/2, y: bounds.size.height/2),
@@ -207,7 +207,7 @@ class VisualTimer: UIView {
         layer.fillColor = UIColor.clear.cgColor
         layer.strokeColor = color
         layer.lineWidth = CGFloat(width)
-        layer.strokeEnd = visible ? 1.0 : 0.0
+        layer.strokeEnd = CGFloat(strokeEnd)
         layer.lineCap = kCALineCapRound
         
         layer.setNeedsDisplay()
@@ -266,6 +266,16 @@ class VisualTimer: UIView {
         animateCircle(duration: countdown, delay: 0.0, layer: countdownLayer, callback: nil)
         animateCircle(duration: primary, delay:  countdown, layer: primaryLayer, callback: nil)
         animateCircle(duration: cooldown, delay: primary + countdown, layer: cooldownLayer, callback: nil)
+    }
+    
+    func beginAnimation(from time: Double) {
+        log.debug("beginning animations from \(time)")
+        var countdownCompleted = false
+        var primaryCompleted = false
+        var cooldownCompleted = false
+        
+        //take a time value and figure out which timer is running and which are finished
+        if time > countdo
     }
     
     func pauseAnimation() {

@@ -82,7 +82,6 @@ class SoundSelectionViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! OptionTableViewCell
         cell.accessoryType = .none
-        cell.optionLabel.textColor = UIColor.lightGray
     }
     
     // MARK: - Sound Preview
