@@ -380,6 +380,11 @@ class VisualTimer: UIView {
         layer.add(animation, forKey: "animateCircle")
     }
     
+    func animationsActive() -> Bool {
+        //countdown is the last one to run
+        return countdownLayer.animationKeys() != nil
+    }
+    
     //Label Functions
     func updateTimeLabel(with value: String) {
         timeLabel.text = value

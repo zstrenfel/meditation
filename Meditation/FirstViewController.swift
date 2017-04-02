@@ -198,6 +198,9 @@ class FirstViewController: UIViewController, TimerDelegate {
     func handleTimerChange(value: Any) {
         if value is Double {
             visualTimer.updateTimeLabel(with: (value as! Double).timeString)
+            if !visualTimer.animationsActive() {
+                visualTimer.setTime(with: value as! Double, animate: true)
+            }
         } else if value is String {
             visualTimer.updateDescriptionLabel(with: value as! String)
         }
