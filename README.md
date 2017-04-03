@@ -22,8 +22,9 @@ Built with Swift and love :)
 ## Screen Shots
 
 ![ScreenShot 1](./ScreenShots/TableEmpty.png)
+![ScreenShot 4](./ScreenShots/Edit.png)
 ![ScreenShot 2](./ScreenShots/TableFull.png)
 ![ScreenShot 3](./ScreenShots/Timer.png)
-![ScreenShot 4](./ScreenShots/Edit.png)
+
 
 
