@@ -16,11 +16,7 @@ class VisualTimer: UIView {
     //    weak var delegate: VisualTimerDelegate? = nil
     
     //Time Variables
-    var timer: MeditationTimer? = nil {
-        didSet {
-            updateValues()
-        }
-    }
+    private var timer: MeditationTimer? = nil
     
     var started: Bool = false
     var paused: Bool = false
@@ -104,6 +100,7 @@ class VisualTimer: UIView {
     
     func updateTimer(with timer: MeditationTimer) {
         self.timer = timer
+        updateValues()
     }
     
     func updateValues() {
@@ -194,6 +191,7 @@ class VisualTimer: UIView {
     }
     
     
+    // Set the timer to display a given time that is not 0
     func setTime(with time: Double, animate: Bool) {
         log.debug("beginning animations from \(time)")
         let countdownStrokeEnd = (time / countdown) >= 1 ? 1.0 : (time / countdown)
@@ -203,10 +201,6 @@ class VisualTimer: UIView {
         drawTrack(startAngle: CGFloat(valueToRadians(0.0)), endAngle:  CGFloat(valueToRadians(countdown)), width: trackWidth, strokeEnd: countdownStrokeEnd, color: secondaryTrackColor.cgColor, layer: countdownLayer)
         drawTrack(startAngle: CGFloat(valueToRadians(countdown)), endAngle:  CGFloat(valueToRadians(primary + countdown)), width: trackWidth, strokeEnd: primaryStrokeEnd,  color: primaryTrackColor.cgColor, layer: primaryLayer)
         drawTrack(startAngle: CGFloat(valueToRadians(primary + countdown)), endAngle:  CGFloat(valueToRadians(time)), width: trackWidth, strokeEnd: cooldownStrokeEnd, color: secondaryTrackColor.cgColor, layer: cooldownLayer)
-        
-        if animate {
-            beginAnimation(from: time)
-        }
     }
     
     // MARK: - Drawing Functions
@@ -272,80 +266,18 @@ class VisualTimer: UIView {
     
     
     // MARK: - Animation Functions
-    func beginAnimation() {
-        log.debug("beginning animations")
-        started = true
-        paused = false
-        
-        clearAnimations()
-        
-        animateCircle(duration: countdown, delay: 0.0, layer: countdownLayer, callback: nil)
-        animateCircle(duration: primary, delay:  countdown, layer: primaryLayer, callback: nil)
-        animateCircle(duration: cooldown, delay: primary + countdown, layer: cooldownLayer, callback: nil)
-    }
-    
     func beginAnimation(from time: Double) {
-        let countdownCompleted = (time / countdown) >= 1 ? true : false
-        let primaryCompleted = (time - countdown) / primary >= 1 ? true : false
-        let cooldownCompleted = (time - countdown - primary) / cooldown >= 1 ? true : false
+        let countdownStrokeEnd = (time / countdown) >= 1 ? 1.0 : (time / countdown)
+        let primaryStrokeEnd = countdownStrokeEnd == 1.0  ? (time - countdown) / primary : 0.0
+        let cooldownStrokeEnd = primaryStrokeEnd == 1.0 ? (time - countdown - primary) / cooldown : 0.0
         
-        var primaryDuration = 0.0
-        var cooldownDuration = 0.0
-        var countdownDuration = 0.0
-        var fromValue = 0.0
-        
-        if !countdownCompleted {
-            countdownDuration = countdown * (1 - (time / countdown))
-            animateCircle(duration: countdownDuration, delay: 0.0, fromValue: (time / countdown) , layer: countdownLayer, callback: nil)
+        if countdownStrokeEnd < 1.0 {
+            animateCircle(fromValue: countdownStrokeEnd - (1 / countdown), toValue: countdownStrokeEnd, layer: countdownLayer)
+        } else if primaryStrokeEnd < 1.0 {
+            animateCircle(fromValue: primaryStrokeEnd - (1 / primary), toValue: primaryStrokeEnd, layer: primaryLayer)
+        } else if cooldownStrokeEnd < 1.0 {
+            animateCircle(fromValue: primaryStrokeEnd - (1 / cooldown), toValue: cooldownStrokeEnd, layer: cooldownLayer)
         }
-        
-        if !primaryCompleted {
-            fromValue = time - countdown > 0 ? ((time - countdown) / primary) : 0
-            primaryDuration = time - countdown > 0 ? primary * ( 1 - ((time - countdown) / primary)) : primary
-            animateCircle(duration: primaryDuration, delay: countdownDuration, fromValue: fromValue, layer: primaryLayer, callback: nil)
-        }
-        
-        if !cooldownCompleted {
-            fromValue = time - countdown - primary > 0 ? ((time - countdown - primary) / cooldown) : 0
-            cooldownDuration = time - countdown - primary > 0 ? cooldown * ( 1 - ((time - countdown - primary) / cooldown)) : cooldown
-            animateCircle(duration: cooldownDuration, delay: countdownDuration + primaryDuration, fromValue: fromValue, layer: cooldownLayer, callback: nil)
-        }
-    }
-    
-    func pauseAnimation() {
-        paused = true
-        let pausedTime = CACurrentMediaTime() - countdownLayer.beginTime
-        
-        countdownLayer.speed = 0.0
-        countdownLayer.timeOffset = pausedTime
-        
-        primaryLayer.speed = 0.0
-        primaryLayer.timeOffset = pausedTime
-        
-        cooldownLayer.speed = 0.0
-        cooldownLayer.timeOffset = pausedTime
-    }
-    
-    func resumeAnimation() {
-        paused = false
-        let pausedTime = countdownLayer.timeOffset
-        var timeSincePaused: CFTimeInterval
-        
-        countdownLayer.speed = 1.0
-        countdownLayer.timeOffset = 0.0
-        countdownLayer.beginTime = 0.0
-        timeSincePaused = countdownLayer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
-        countdownLayer.beginTime = timeSincePaused
-        
-        primaryLayer.speed = 1.0
-        primaryLayer.timeOffset = 0.0
-        primaryLayer.beginTime = 0.0
-        primaryLayer.beginTime = timeSincePaused
-        
-        cooldownLayer.speed = 1.0
-        cooldownLayer.timeOffset = 0.0
-        cooldownLayer.beginTime = 0.0
-        cooldownLayer.beginTime = timeSincePaused
     }
     
     func clearVisualTimer() {
@@ -369,13 +301,13 @@ class VisualTimer: UIView {
         layer.needsLayout()
     }
     
-    func animateCircle(duration: Double, delay: Double, fromValue: Double = 0.0, layer: CAShapeLayer, callback: (() -> Void)?) {
+    func animateCircle(duration: Double = 1.0, delay: Double = 0.0, fromValue: Double = 0.0, toValue: Double = 1.0, layer: CAShapeLayer) {
         let syncTime = layer.convertTime(CACurrentMediaTime(), from: self.layer)
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.beginTime = syncTime + delay
         animation.duration = duration
         animation.fromValue = fromValue
-        animation.toValue = 1.0
+        animation.toValue = toValue
         animation.timingFunction = CAMediaTimingFunction(name: "linear")
         animation.fillMode = kCAFillModeForwards
         animation.isRemovedOnCompletion = false
