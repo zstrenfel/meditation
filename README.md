@@ -12,6 +12,7 @@ Future iterations will (hopefully) include:
 * Calendar/Tracking functionality with alerts
 * More alert sounds
 * More customizable UI
+* Tests
 
 ... and more!
 
