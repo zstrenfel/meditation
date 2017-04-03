@@ -42,14 +42,12 @@ class FirstViewController: UIViewController, TimerDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        log.debug("view will disappear")
         if sessionTimer != nil  && (sessionTimer?.isActive())! {
             _stopTimer(clear: true)
         }
     }
     
     func updateTimer(_ timer: MeditationTimer?) {
-        log.debug("timer will udpate")
         guard timer != nil else {
             _ = navigationController?.popViewController(animated: true)
             return
@@ -83,8 +81,7 @@ class FirstViewController: UIViewController, TimerDelegate {
             self.updateTimer(timer)
         }
         
-        let timeRemaining = coder.decodeObject(forKey: "time_remaining")
-        log.debug(timeRemaining)
+//        let timeRemaining = coder.decodeObject(forKey: "time_remaining")
         
         super.decodeRestorableState(with: coder)
     }
@@ -131,9 +128,7 @@ class FirstViewController: UIViewController, TimerDelegate {
         }
         if (sessionTimer?.isActive())! {
             sessionTimer?.resumeTimer()
-//            visualTimer.resumeAnimation()
         } else {
-//            visualTimer.beginAnimation()
             sessionTimer?.startTimer()
         }
         stopButton.setTitle("Pause", for: .normal)
@@ -165,7 +160,6 @@ class FirstViewController: UIViewController, TimerDelegate {
             stopButton.isEnabled = false
         } else {
             sessionTimer?.stopTimer()
-            visualTimer.pauseAnimation()
             stopButton.setTitle("Reset", for: .normal)
         }
         startButton.isEnabled = true
@@ -199,7 +193,7 @@ class FirstViewController: UIViewController, TimerDelegate {
         if value is Double {
             visualTimer.updateTimeLabel(with: (value as! Double).timeString)
             let time = ((timer?.countdown)! + (timer?.primary)! + (timer?.cooldown)!) - (value as! Double)
-            visualTimer.beginAnimation(from: time)
+            visualTimer.animate(with: time)
         } else if value is String {
             visualTimer.updateDescriptionLabel(with: value as! String)
         }

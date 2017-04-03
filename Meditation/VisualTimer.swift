@@ -18,17 +18,15 @@ class VisualTimer: UIView {
     //Time Variables
     private var timer: MeditationTimer? = nil
     
-    var started: Bool = false
-    var paused: Bool = false
-    var countdown: Double = 0.0
-    var primary: Double = 0.0
-    var cooldown: Double = 0.0
-    var time: Double = 0.0
+    private var countdown: Double = 0.0
+    private var primary: Double = 0.0
+    private var cooldown: Double = 0.0
+    private var time: Double = 0.0
     
-    var interval: Double = 0.0
-    var intervalRepeat: Bool = true
+    private var interval: Double = 0.0
+    private var intervalRepeat: Bool = true
     
-    var displayTime: Bool = true 
+    private var displayTime: Bool = true
     //Visual Design Variables
     
     //Colors
@@ -47,29 +45,29 @@ class VisualTimer: UIView {
     @IBInspectable var middleLabelBuffer: Double = 24.0
     
     
-    var inset: CGFloat = 8.0
-    var trackWidth: Double = 12.0
-    var degreeOfRotation: Double = Double.pi / 2
+    private var inset: CGFloat = 8.0
+    private var trackWidth: Double = 12.0
+    private var degreeOfRotation: Double = Double.pi / 2
     
     //CoreGraphics Layers
-    let baseTrackLayer = CAShapeLayer()
-    let startIndicator = CAShapeLayer()
+    private let baseTrackLayer = CAShapeLayer()
+    private let startIndicator = CAShapeLayer()
     
-    let countdownLayer = CAShapeLayer()
-    let countdownIndicator = CAShapeLayer()
+    private let countdownLayer = CAShapeLayer()
+    private let countdownIndicator = CAShapeLayer()
     
-    let primaryLayer = CAShapeLayer()
-    let primaryIndicator = CAShapeLayer()
+    private let primaryLayer = CAShapeLayer()
+    private let primaryIndicator = CAShapeLayer()
     
-    let cooldownLayer = CAShapeLayer()
+    private let cooldownLayer = CAShapeLayer()
     
-    let indicatorLayer = CALayer()
-    var indicatorRadius: CGFloat = 5.0
-    var intervalLayers: [CAShapeLayer] = []
+    private let indicatorLayer = CALayer()
+    private var indicatorRadius: CGFloat = 5.0
+    private var intervalLayers: [CAShapeLayer] = []
     
     //Labels
-    let timeLabel = UILabel()
-    let descriptionLabel = UILabel()
+    private let timeLabel = UILabel()
+    private let descriptionLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -266,7 +264,7 @@ class VisualTimer: UIView {
     
     
     // MARK: - Animation Functions
-    func beginAnimation(from time: Double) {
+    func animate(with time: Double) {
         let countdownStrokeEnd = (time / countdown) >= 1 ? 1.0 : (time / countdown)
         let primaryStrokeEnd = countdownStrokeEnd == 1.0  ? (time - countdown) / primary : 0.0
         let cooldownStrokeEnd = primaryStrokeEnd == 1.0 ? (time - countdown - primary) / cooldown : 0.0
@@ -281,8 +279,6 @@ class VisualTimer: UIView {
     }
     
     func clearVisualTimer() {
-        started = false
-        paused = false
         updateTimeLabel(with: self.time.timeString)
         updateDescriptionLabel(with: "Meditation")
         clearAnimations()
@@ -313,11 +309,6 @@ class VisualTimer: UIView {
         animation.isRemovedOnCompletion = false
         
         layer.add(animation, forKey: "animateCircle")
-    }
-    
-    func animationsActive() -> Bool {
-        //countdown is the last one to run
-        return countdownLayer.animationKeys() != nil
     }
     
     //Label Functions

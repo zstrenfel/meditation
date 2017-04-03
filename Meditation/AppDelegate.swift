@@ -55,7 +55,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.debug("application entering background")
         if let session = sessionTimer {
             if session.isActive() && !session.isPaused() {
-                visualTimer?.pauseAnimation()
                 session.stopTimer()
                 notificationCenter.scheduleNotification(title: "Lotus Timer Has Been Stopped", body: "Reopen the app to restart your meditation. 😌")
             }
