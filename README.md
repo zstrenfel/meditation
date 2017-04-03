@@ -18,7 +18,7 @@ Future iterations will (hopefully) include:
 
 ## Build
 
-Built with Swift and love :)
+Built with Swift and love :^)
 
 Frameworks used include: 
 * CoreData
