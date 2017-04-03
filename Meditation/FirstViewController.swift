@@ -131,9 +131,9 @@ class FirstViewController: UIViewController, TimerDelegate {
         }
         if (sessionTimer?.isActive())! {
             sessionTimer?.resumeTimer()
-            visualTimer.resumeAnimation()
+//            visualTimer.resumeAnimation()
         } else {
-            visualTimer.beginAnimation()
+//            visualTimer.beginAnimation()
             sessionTimer?.startTimer()
         }
         stopButton.setTitle("Pause", for: .normal)
@@ -198,10 +198,8 @@ class FirstViewController: UIViewController, TimerDelegate {
     func handleTimerChange(value: Any) {
         if value is Double {
             visualTimer.updateTimeLabel(with: (value as! Double).timeString)
-            if !visualTimer.animationsActive() {
-                let time = ((timer?.countdown)! + (timer?.primary)! + (timer?.cooldown)!) - (value as! Double)
-                visualTimer.setTime(with: time , animate: true)
-            }
+            let time = ((timer?.countdown)! + (timer?.primary)! + (timer?.cooldown)!) - (value as! Double)
+            visualTimer.setTime(with: time , animate: false)
         } else if value is String {
             visualTimer.updateDescriptionLabel(with: value as! String)
         }
