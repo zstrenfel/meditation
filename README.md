@@ -20,6 +20,13 @@ Future iterations will (hopefully) include:
 
 Built with Swift and love :)
 
+Frameworks used include: 
+* Core Data
+* QuartzCore
+* UserNotifications
+* AVFoundation
+* Cocoapods
+
 ## Screen Shots
 
 ![ScreenShot 1](./ScreenShots/TableEmpty.png)
