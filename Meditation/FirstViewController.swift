@@ -26,6 +26,7 @@ class FirstViewController: UIViewController, TimerDelegate {
     
     // MARK: - Initialization
     override func viewDidLoad() {
+        log.debug("view did load")
         super.viewDidLoad()
         
         let waveBG = UIImage(named: "white-wave")
@@ -43,13 +44,13 @@ class FirstViewController: UIViewController, TimerDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if sessionTimer != nil  && (sessionTimer?.isActive())! {
-            _stopTimer(clear: false)
+            _stopTimer(clear: true)
         }
     }
     
     func updateTimer(_ timer: MeditationTimer?) {
         guard timer != nil else {
-            _ = navigationController?.popViewController(animated: true)
+            returnToHome()
             return
         }
         self.timer = timer
@@ -60,6 +61,7 @@ class FirstViewController: UIViewController, TimerDelegate {
     
     // MARK: - State Restoration
     override func encodeRestorableState(with coder: NSCoder) {
+        log.debug("encoding restorable state")
         if let t = timer {
             let timerURI = t.objectID.uriRepresentation()
             coder.encode(timerURI, forKey: "timer_uri")
@@ -74,13 +76,14 @@ class FirstViewController: UIViewController, TimerDelegate {
     }
     
     override func decodeRestorableState(with coder: NSCoder) {
+        log.debug("decoding restorable state")
         let timerURI = coder.decodeObject(forKey: "timer_uri") as! URL
         let timerID = context.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: timerURI)
         if let timer = fetchTimerWithID(timerID!) {
             self.timer = timer
             self.updateTimer(timer)
         } else {
-            //navigate back to the table
+            returnToHome()
         }
         
         if let timeRemaining = coder.decodeObject(forKey: "time_remaining") {
@@ -146,7 +149,7 @@ class FirstViewController: UIViewController, TimerDelegate {
     }
 
     @IBAction func stopTimer(_ sender: UIButton) {
-        _stopTimer()
+        return (sessionTimer?.isPaused())! ? _stopTimer(clear: true) : _stopTimer()
     }
     
     func _stopTimer(clear: Bool = false) {
@@ -155,7 +158,7 @@ class FirstViewController: UIViewController, TimerDelegate {
             return
         }
         
-        if ((sessionTimer?.isPaused())! || clear) {
+        if (clear) {
             //create new meditation entity with uncompleted status
             let remaining = sessionTimer?.timeRemaining()
             if remaining! > 0.0 {
@@ -209,6 +212,10 @@ class FirstViewController: UIViewController, TimerDelegate {
     }
     
     // MARK: - Navigation
+    func returnToHome() {
+        _ = navigationController?.popViewController(animated: true)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {        
         switch segue.identifier! {
         case "showEditModal":
