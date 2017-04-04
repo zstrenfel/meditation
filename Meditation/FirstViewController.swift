@@ -43,7 +43,7 @@ class FirstViewController: UIViewController, TimerDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if sessionTimer != nil  && (sessionTimer?.isActive())! {
-            _stopTimer(clear: true)
+            _stopTimer(clear: false)
         }
     }
     
@@ -79,9 +79,18 @@ class FirstViewController: UIViewController, TimerDelegate {
         if let timer = fetchTimerWithID(timerID!) {
             self.timer = timer
             self.updateTimer(timer)
+        } else {
+            //navigate back to the table
         }
         
-//        let timeRemaining = coder.decodeObject(forKey: "time_remaining")
+        if let timeRemaining = coder.decodeObject(forKey: "time_remaining") {
+            if timeRemaining as! Double != 0.0 {
+                log.debug(timeRemaining)
+                sessionTimer?.setTimeCombleted(with: timeRemaining as! Double)
+                visualTimer.setTime(with: timeRemaining as! Double, animate: false)
+            }
+        }
+        
         
         super.decodeRestorableState(with: coder)
     }
@@ -192,7 +201,7 @@ class FirstViewController: UIViewController, TimerDelegate {
     func handleTimerChange(value: Any) {
         if value is Double {
             visualTimer.updateTimeLabel(with: (value as! Double).timeString)
-            let time = ((timer?.countdown)! + (timer?.primary)! + (timer?.cooldown)!) - (value as! Double)
+            let time = ((timer?.countdown)! + (timer?.primary)! + (timer?.cooldown)!) - (value as! Double)//hax0r skills
             visualTimer.animate(with: time)
         } else if value is String {
             visualTimer.updateDescriptionLabel(with: value as! String)

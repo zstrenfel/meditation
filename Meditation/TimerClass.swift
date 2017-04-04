@@ -134,6 +134,8 @@ class TimerWrapper {
         
         timer = Timer()
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(TimerWrapper.countdown), userInfo: nil, repeats: true)
+        //get the visual timer started
+        delegate?.handleTimerChange(value: totalTime)
     }
     
     func stopTimer() {
@@ -202,6 +204,18 @@ class TimerWrapper {
     }
     
     // MARK: - Outside Accessible
+    func setTimeCombleted(with time: Double) {
+        currentTime = time
+        startTime = CFAbsoluteTimeGetCurrent() - currentTime
+        paused = false
+        completed = false
+        active = true
+    }
+    
+    func timeCompleted() -> Double {
+        return currentTime
+    }
+    
     //returns total amount of time remaining
     func timeRemaining() -> Double {
         return totalTime - currentTime

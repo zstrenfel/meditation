@@ -269,8 +269,11 @@ class VisualTimer: UIView {
         let primaryStrokeEnd = countdownStrokeEnd == 1.0  ? (time - countdown) / primary : 0.0
         let cooldownStrokeEnd = primaryStrokeEnd == 1.0 ? (time - countdown - primary) / cooldown : 0.0
         
+        log.debug(time)
         if countdownStrokeEnd < 1.0 {
-            animateCircle(fromValue: countdownStrokeEnd - (1 / countdown), toValue: countdownStrokeEnd, layer: countdownLayer)
+            log.debug(countdownStrokeEnd - (1 / self.countdown))
+            log.debug(countdownStrokeEnd)
+            animateCircle(fromValue: countdownStrokeEnd, toValue: countdownStrokeEnd + (1 / countdown), layer: countdownLayer)
         } else if primaryStrokeEnd < 1.0 {
             animateCircle(fromValue: primaryStrokeEnd - (1 / primary), toValue: primaryStrokeEnd, layer: primaryLayer)
         } else if cooldownStrokeEnd < 1.0 {
