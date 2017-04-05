@@ -39,6 +39,8 @@
 		92B61B1D1E85A12A00672165 /* RoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B61B1C1E85A12A00672165 /* RoundView.swift */; };
 		92B61B201E85E6CF00672165 /* UIColor+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B61B1F1E85E6CF00672165 /* UIColor+HexString.swift */; };
 		92B61B221E85F5CC00672165 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92B61B211E85F5CC00672165 /* Media.xcassets */; };
+		92BF36EE1E949A440026E88C /* Meditations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92BF36ED1E949A440026E88C /* Meditations.storyboard */; };
+		92BF36F01E949B1F0026E88C /* AnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF36EF1E949B1F0026E88C /* AnalyticsViewController.swift */; };
 		92C092C31E2F73E9006EBB01 /* TimerPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C092C21E2F73E9006EBB01 /* TimerPickerView.swift */; };
 		92C3FC0C1E7AF5ED006FBB2A /* MeditationDisplayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C3FC0B1E7AF5ED006FBB2A /* MeditationDisplayTableViewCell.swift */; };
 		92C732BF1E519C4E0040C859 /* SoundSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C732BE1E519C4E0040C859 /* SoundSelectionViewController.swift */; };
@@ -116,6 +118,8 @@
 		92B61B1E1E85E1AD00672165 /* Model 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 7.xcdatamodel"; sourceTree = "<group>"; };
 		92B61B1F1E85E6CF00672165 /* UIColor+HexString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+HexString.swift"; sourceTree = "<group>"; };
 		92B61B211E85F5CC00672165 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		92BF36ED1E949A440026E88C /* Meditations.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Meditations.storyboard; sourceTree = "<group>"; };
+		92BF36EF1E949B1F0026E88C /* AnalyticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsViewController.swift; sourceTree = "<group>"; };
 		92C092C21E2F73E9006EBB01 /* TimerPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerPickerView.swift; sourceTree = "<group>"; };
 		92C3FC0B1E7AF5ED006FBB2A /* MeditationDisplayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeditationDisplayTableViewCell.swift; sourceTree = "<group>"; };
 		92C732BE1E519C4E0040C859 /* SoundSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundSelectionViewController.swift; sourceTree = "<group>"; };
@@ -185,6 +189,7 @@
 				921A90B31E5559C400F7F6AE /* EditModalViewController.swift */,
 				92C732BE1E519C4E0040C859 /* SoundSelectionViewController.swift */,
 				92F9239F1E79B9530043476C /* AdminViewController.swift */,
+				92BF36EF1E949B1F0026E88C /* AnalyticsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -193,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				9230BE951E0E0B5A001A12CE /* Main.storyboard */,
+				92BF36ED1E949A440026E88C /* Meditations.storyboard */,
 				921A90AB1E55587100F7F6AE /* EditModal.storyboard */,
 			);
 			name = Storyboards;
@@ -437,6 +443,7 @@
 			files = (
 				92CB01551E8D603400A13139 /* Info.plist in Resources */,
 				9230BE9C1E0E0B5A001A12CE /* LaunchScreen.storyboard in Resources */,
+				92BF36EE1E949A440026E88C /* Meditations.storyboard in Resources */,
 				9230BE991E0E0B5A001A12CE /* Assets.xcassets in Resources */,
 				92B61B221E85F5CC00672165 /* Media.xcassets in Resources */,
 				9230BE971E0E0B5A001A12CE /* Main.storyboard in Resources */,
@@ -616,6 +623,7 @@
 				92C092C31E2F73E9006EBB01 /* TimerPickerView.swift in Sources */,
 				928E32B51E770C87006D6DB3 /* Model.xcdatamodeld in Sources */,
 				928E332E1E77126C006D6DB3 /* TimerTableViewController.swift in Sources */,
+				92BF36F01E949B1F0026E88C /* AnalyticsViewController.swift in Sources */,
 				92AB37361E2E01BC004BCC3F /* DoubleExt+StringFormatting.swift in Sources */,
 				92001A311E5F260E00E70A0C /* ToggleTableViewCell.swift in Sources */,
 				92B61B1D1E85A12A00672165 /* RoundView.swift in Sources */,
