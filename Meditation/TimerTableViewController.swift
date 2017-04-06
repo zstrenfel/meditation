@@ -18,6 +18,8 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
     var timers: [MeditationTimer] = []
     var placeholder: Int = 0
     
+    private let IS_ADMIN = false
+    
     // MARK: - Initialization
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -171,7 +173,9 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     // MARK: - Actions
     override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
-        self.performSegue(withIdentifier: "showAdmin", sender: nil)
+        if IS_ADMIN {
+            self.performSegue(withIdentifier: "showAdmin", sender: nil)
+        }
     }
     
     //MARK: - Navigation
