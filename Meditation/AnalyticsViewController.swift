@@ -10,14 +10,14 @@ import UIKit
 
 enum TimeFilter: String {
     case all = "All"
+    case daily = "By Day"
     case weekly = "By Week"
     case monthly = "By Month"
 }
 
 class AnalyticsViewController: UIViewController {
-
-    // MARK: - Properties
     
+    // MARK: - Properties
     @IBOutlet weak var timeFilterButton: UIButton!
     @IBOutlet weak var streakCount: UILabel!
     @IBOutlet weak var streakLabel: UILabel!
@@ -29,6 +29,7 @@ class AnalyticsViewController: UIViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var meditations: [Meditation] = []
     
+    // MARK: - Initialization
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -36,10 +37,48 @@ class AnalyticsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchMeditations()
-        meditations = meditations.sorted { $0.created_at?.compare($1.created_at! as Date) == ComparisonResult.orderedDescending }
+        filterMeditations()
+        sortMeditations()
         
         createTimeCount()
         createStreakCount()
+    }
+    
+    
+    //get meditations from the store
+    func fetchMeditations() {
+        do {
+            meditations = try context.fetch(Meditation.fetchRequest())
+        } catch {
+            log.error("Fetching Failed")
+        }
+    }
+    
+    func filterMeditations() {
+        var title = ""
+        switch filter {
+        case .daily:
+            //filter by day
+            title = TimeFilter.daily.rawValue
+            break
+        case .weekly:
+            //filter by week
+            title = TimeFilter.weekly.rawValue
+            break
+        case .monthly:
+            title = TimeFilter.monthly.rawValue
+            //filter by month
+            break
+        default:
+            title = TimeFilter.all.rawValue
+            //do nothing, show all meditations
+            break
+        }
+        timeFilterButton.setTitle(title, for: .normal)
+    }
+    
+    func sortMeditations() {
+        meditations = meditations.sorted { $0.created_at?.compare($1.created_at! as Date) == ComparisonResult.orderedDescending }
     }
     
     //create the text for hours count and label (total number of meditation hours sat)
@@ -69,15 +108,6 @@ class AnalyticsViewController: UIViewController {
         streakLabel.text = "Day Streak"
     }
     
-    //get meditations from the store
-    func fetchMeditations() {
-        do {
-            meditations = try context.fetch(Meditation.fetchRequest())
-        } catch {
-            log.error("Fetching Failed")
-        }
-    }
-
     // MARK: - Actions
     
     @IBAction func showTimeFilterOptions(_ sender: UIButton) {
