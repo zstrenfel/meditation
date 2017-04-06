@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum TimeFilter: String {
+    case all = "All"
+    case weekly = "By Week"
+    case monthly = "By Month"
+}
+
 class AnalyticsViewController: UIViewController {
 
     // MARK: - Properties
@@ -17,6 +23,8 @@ class AnalyticsViewController: UIViewController {
     @IBOutlet weak var streakLabel: UILabel!
     @IBOutlet weak var hoursCount: UILabel!
     @IBOutlet weak var hoursLabel: UILabel!
+    
+    private var filter: TimeFilter = .all
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var meditations: [Meditation] = []
@@ -28,10 +36,37 @@ class AnalyticsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchMeditations()
+        meditations = meditations.sorted { $0.created_at?.compare($1.created_at! as Date) == ComparisonResult.orderedDescending }
         
-        for m in self.meditations {
-            log.debug(m)
+        createTimeCount()
+        createStreakCount()
+    }
+    
+    //create the text for hours count and label (total number of meditation hours sat)
+    func createTimeCount() {
+        guard meditations.count > 0 else {
+            log.error("nothing to do here")
+            return
         }
+        let totalTime = meditations.reduce(0.0) { $0 + $1.time_completed }
+        hoursCount.text = String(describing: totalTime.hours)
+        let pluralize = totalTime.hours > 1.0 ? "Hours" : "Hour"
+        hoursLabel.text = "\(pluralize) Sat"
+    }
+    
+    func createStreakCount() {
+        guard meditations.count > 0 else {
+            log.error("nothing to do here")
+            return
+        }
+        let latest = meditations.first()
+        // for future, can i do this w/o having to iterate over all meditations?
+        let streak = meditations.reduce(0) {
+            return $1.created_at == latest?.created_at ? $0 + 1 : $0
+        }
+        
+        streakCount.text = String(describing: streak)
+        streakLabel.text = "Day Streak"
     }
     
     //get meditations from the store
@@ -43,16 +78,8 @@ class AnalyticsViewController: UIViewController {
         }
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    // MARK: - Actions
+    
     @IBAction func showTimeFilterOptions(_ sender: UIButton) {
         log.debug("should show time period picker")
     }
