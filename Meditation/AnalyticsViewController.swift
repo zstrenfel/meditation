@@ -10,6 +10,11 @@ import UIKit
 
 class AnalyticsViewController: UIViewController {
 
+    @IBOutlet weak var timeFilterButton: UIButton!
+    @IBOutlet weak var streakCount: UILabel!
+    @IBOutlet weak var streakLabel: UILabel!
+    @IBOutlet weak var hoursCount: UILabel!
+    @IBOutlet weak var hoursLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,4 +37,6 @@ class AnalyticsViewController: UIViewController {
     }
     */
 
+    @IBAction func showTimeFilterOptions(_ sender: UIButton) {
+    }
 }

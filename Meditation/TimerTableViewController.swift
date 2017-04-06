@@ -18,6 +18,7 @@ class TimerTableViewController: UIViewController, UITableViewDelegate, UITableVi
     var timers: [MeditationTimer] = []
     var placeholder: Int = 0
     
+    //find better way to do this
     private let IS_ADMIN = false
     
     // MARK: - Initialization

@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,9 +21,72 @@
                     <view key="view" contentMode="scaleToFill" id="i5S-Az-9jZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l3Y-9F-Pvm">
+                                <rect key="frame" x="32" y="36" width="30" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="All"/>
+                                <connections>
+                                    <action selector="showTimeFilterOptions:" destination="Y6O-hx-9th" eventType="touchUpInside" id="LES-aq-2zV"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="IF0-Rr-NAR">
+                                <rect key="frame" x="32" y="77" width="311" height="69.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Tih-mr-Zh4">
+                                        <rect key="frame" x="0.0" y="0.0" width="151.5" height="69.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Count" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wd7-B7-hbd">
+                                                <rect key="frame" x="0.0" y="0.0" width="151.5" height="41"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sZl-VT-BAH">
+                                                <rect key="frame" x="0.0" y="49" width="151.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Zgn-j7-Z8o">
+                                        <rect key="frame" x="159.5" y="0.0" width="151.5" height="69.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Count" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Gy-FH-osj">
+                                                <rect key="frame" x="0.0" y="0.0" width="151.5" height="41"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VX1-D8-91l">
+                                                <rect key="frame" x="0.0" y="49" width="151.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="l3Y-9F-Pvm" firstAttribute="leading" secondItem="i5S-Az-9jZ" secondAttribute="leadingMargin" constant="16" id="2PB-Ya-nBw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="IF0-Rr-NAR" secondAttribute="trailing" constant="16" id="CwC-Y0-k2y"/>
+                            <constraint firstItem="IF0-Rr-NAR" firstAttribute="leading" secondItem="i5S-Az-9jZ" secondAttribute="leadingMargin" constant="16" id="X9S-PQ-GZG"/>
+                            <constraint firstItem="l3Y-9F-Pvm" firstAttribute="top" secondItem="vcg-B0-vZX" secondAttribute="bottom" constant="16" id="tY9-VO-blh"/>
+                            <constraint firstItem="IF0-Rr-NAR" firstAttribute="top" secondItem="l3Y-9F-Pvm" secondAttribute="bottom" constant="8" id="yzn-Yp-oQu"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="6Na-yU-5Kx"/>
+                    <connections>
+                        <outlet property="hoursCount" destination="5Gy-FH-osj" id="7Dh-HE-rEf"/>
+                        <outlet property="hoursLabel" destination="VX1-D8-91l" id="OLt-5t-gr8"/>
+                        <outlet property="streakCount" destination="Wd7-B7-hbd" id="vQM-Ab-WFL"/>
+                        <outlet property="streakLabel" destination="sZl-VT-BAH" id="YeN-Wx-1UU"/>
+                        <outlet property="timeFilterButton" destination="l3Y-9F-Pvm" id="NmH-Nl-bVG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KAH-dz-nyQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -34,6 +98,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="hMF-Po-FBE" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="P1K-y8-Sro">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
