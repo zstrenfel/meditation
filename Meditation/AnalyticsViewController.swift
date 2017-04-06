@@ -88,7 +88,7 @@ class AnalyticsViewController: UIViewController {
             return
         }
         let totalTime = meditations.reduce(0.0) { $0 + $1.time_completed }
-        hoursCount.text = String(describing: totalTime.hours)
+        hoursCount.text = String(describing: Int(totalTime.hours))
         let pluralize = totalTime.hours > 1.0 ? "Hours" : "Hour"
         hoursLabel.text = "\(pluralize) Sat"
     }
