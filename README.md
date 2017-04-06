@@ -2,6 +2,8 @@
 
 # Lotus Meditation Timer
 
+#### Currently in beta testing on TestFlight. To be included, please email zwstrenfel@gmail.com
+
 ## Description
 
 Lotus timer is a simple meditation timer with integrated countdown, meditation, cooldown, and interval features. Users are able to store multiple different timers on their phone as well as customize tones, and start, pause, resume, and restart timers. 
