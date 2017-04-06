@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--Analytics-->
         <scene sceneID="00N-9q-yW4">
             <objects>
                 <viewController storyboardIdentifier="Analytics" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6O-hx-9th" customClass="AnalyticsViewController" customModule="Meditation" customModuleProvider="target" sceneMemberID="viewController">
@@ -79,7 +79,7 @@
                             <constraint firstItem="IF0-Rr-NAR" firstAttribute="top" secondItem="l3Y-9F-Pvm" secondAttribute="bottom" constant="8" id="yzn-Yp-oQu"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="6Na-yU-5Kx"/>
+                    <tabBarItem key="tabBarItem" title="Analytics" image="second" selectedImage="second" id="6Na-yU-5Kx"/>
                     <connections>
                         <outlet property="hoursCount" destination="5Gy-FH-osj" id="7Dh-HE-rEf"/>
                         <outlet property="hoursLabel" destination="VX1-D8-91l" id="OLt-5t-gr8"/>
@@ -115,7 +115,7 @@
         <scene sceneID="uSO-Nq-QjE">
             <objects>
                 <viewControllerPlaceholder storyboardIdentifier="TimerNavigationController" storyboardName="Meditations" referencedIdentifier="TimerNavigationController" id="Rue-ri-ouF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="jHX-le-6Ac"/>
+                    <tabBarItem key="tabBarItem" title="Meditations" selectedImage="first" id="jHX-le-6Ac"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kRu-hF-vRl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -138,5 +138,9 @@
             <point key="canvasLocation" x="1864.8" y="-321.58920539730138"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="first" width="30" height="30"/>
+        <image name="second" width="30" height="30"/>
+    </resources>
     <color key="tintColor" red="0.0" green="0.70588235294117641" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -97,7 +101,6 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics">
                         <color key="tintColor" red="0.0" green="0.70588235294117641" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </simulatedTabBarMetrics>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4_7.fullscreen"/>
                     <connections>
                         <outlet property="startButton" destination="9ap-eI-AM6" id="KaX-kd-yla"/>
                         <outlet property="stopButton" destination="pq6-KU-vX3" id="PbX-hA-I33"/>
@@ -109,16 +112,15 @@
             </objects>
             <point key="canvasLocation" x="2628" y="-320.68965517241384"/>
         </scene>
-        <!--First-->
+        <!--Meditations-->
         <scene sceneID="7xb-CR-OG1">
             <objects>
                 <navigationController storyboardIdentifier="TimerNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="w93-4V-mJz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="First" image="tabBarItem:acW-dT-cKf:image" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Meditations" image="first" selectedImage="first" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics">
                         <color key="tintColor" red="0.0" green="0.70588235294117641" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </simulatedTabBarMetrics>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4_7.fullscreen"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZIx-Ok-rmL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -262,7 +264,6 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics">
                         <color key="tintColor" red="0.0" green="0.70588235294117641" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </simulatedTabBarMetrics>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4_7.fullscreen"/>
                     <connections>
                         <outlet property="tableView" destination="CW2-vp-5Ka" id="9oy-LX-3Gp"/>
                         <segue destination="9pv-A4-QxB" kind="show" identifier="showTimer" id="xfm-iE-x0I"/>
@@ -336,66 +337,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="tabBarItem:acW-dT-cKf:image" width="30" height="30">
-            <mutableData key="keyedArchiveRepresentation">
-YnBsaXN0MDDUAQIDBAUGU1RYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK8QEgcI
-ERYbHCgpKi41OT1CRUhNUFUkbnVsbNQJCgsMDQ4PEFYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVwc1dO
-U0NvbG9ygBESAMAAAIACgA/SEgkTFVpOUy5vYmplY3RzoRSAA4AO0hIJFxqiGBmABIAFgA0QANcdCR4f
-ICEiIyQlJhsbJ1ZOU1NpemVZTlNQREZEYXRhXxAQTlNDb2xvclNwYWNlTmFtZV8QGU5TSW50ZXJuYWxM
-YXlvdXREaXJlY3Rpb25fEA9OU0JpdHNQZXJTYW1wbGVcTlNDb2xvclNwYWNlgAaADIAKgAeACFh7MzAs
-IDMwfV8QGU5TQ2FsaWJyYXRlZFJHQkNvbG9yU3BhY2XSKwksLVROU0lEEAGACdIvMDEyWiRjbGFzc25h
-bWVYJGNsYXNzZXNcTlNDb2xvclNwYWNlojM0XE5TQ29sb3JTcGFjZVhOU09iamVjdNI2CTc4V05TLmRh
-dGFPEQmhJVBERi0xLjMKJcTl8uXrp/Og0MTGCjQgMCBvYmoKPDwgL0xlbmd0aCA1IDAgUiAvRmlsdGVy
-IC9GbGF0ZURlY29kZSA+PgpzdHJlYW0KeAErVAhUKFTQdy42VEguVjAAw+JkBSNTBUNThVwQbWSgZ2Jh
-amGCxABLAqWSFSz1TA1NDM2MgAq5kJSCFSQrmCLk4QrBUiCtcHOB+pAUgm3mSlbIUEjTUggEADPfH8UK
-ZW5kc3RyZWFtCmVuZG9iago1IDAgb2JqCjk1CmVuZG9iagoyIDAgb2JqCjw8IC9UeXBlIC9QYWdlIC9Q
-YXJlbnQgMyAwIFIgL1Jlc291cmNlcyA2IDAgUiAvQ29udGVudHMgNCAwIFIgPj4KZW5kb2JqCjYgMCBv
-YmoKPDwgL1Byb2NTZXQgWyAvUERGIF0gL0NvbG9yU3BhY2UgPDwgL0NzMSA3IDAgUiA+PiA+PgplbmRv
-YmoKOCAwIG9iago8PCAvTGVuZ3RoIDkgMCBSIC9OIDMgL0FsdGVybmF0ZSAvRGV2aWNlUkdCIC9GaWx0
-ZXIgL0ZsYXRlRGVjb2RlID4+CnN0cmVhbQp4AYVV32/bVBQ+iW9SpBY/IFhHh4rFr1VTW7kbGq3GBkmT
-pe1KFqXp2Cok5Do3iakbB9vptqpPe4E3BvwBQNkDD0g8IQ0GYnvZ9sC0SVOHKqpJSHvoxA8hJu0FVeG7
-dmInU8Rc9frLOd855zvnXttEPV9ptZoZVYiWq66dzySVk6cWlJ5NitKz1EsD1KvpTi2Ry80SLsEV987r
-4R2KCMvtke7+TvYjv3qL3NGJIk/AbhUdfRn4DFHM1Gu2SxS/B/v4abcG3PMc8NM2BAKrApd9nBJ40ccn
-PU4hPwmO0CrrFa0IvAY8vNhmL7dhXwMYyJPhVW4buiJmkbOtkmFyz+Evj3G3Mf8PLpt19Oxdg1j7nKW5
-Y7gPid4r9lS+iT/XtfQc8EuwX6+5SWF/BfiP+tJ8AngfUfSpkn103udHX1+tFN4G3gV70XCnC037anUx
-exwYsdH1JeuYyCM413VnErOkF4DvVvi02GPokajIU2ngYeDBSn2qmV+acVbmhN3Ls1qZzAIjj2S/p83k
-gAeAP7StvKgFzdI6NzOiFvJLV2turqlB2q6aWVEL/TKZO16PyCltu5XClB/LDrp2oRnLFkrG0ekmf61m
-emcR2tgFu54X2pCf3dLsdAYYedg/vDov5gYc213UUmK2o8BH6EREI04WLWLVqUo7pFCeMpTEvUY2PCUy
-yISFw8thMSJP0hJs3Xk5j+PHhIyyF70tolGlO8evcL/JsVg/U9kB/B9is+wwG2cTpLA32JvsCEvBOsEO
-BQpybToVKtN9KPXzvE91VBY6TlDy/EB9KIhRztnvGvrNj/6GmrBLK/QjT9AxNFvtEyAHE2h1N9I+p2tr
-P+wOPMoGu/jO7b5ra3T8cfON3Yttxzawbsa2wvjYr7Et/G1SAjtgeoqWocrwdsIJeCMdPVwB0yUN62/g
-WdDaUtqxo6Xq+YHQIybBP8g+zNK54dCq/qL+qW6oX6gX1N87aoQZO6YkfSp9K/0ofSd9L/1MinRZuiL9
-JF2VvpEuBTm7772fJdh7r19hE92KXWjVa581J1NOynvkF+WU/Lz8sjwbsBS5Xx6Tp+S98OwJ9s0M/R29
-GHQKs2pNtXst8QQYNA8lBp0G18ZUxYSrdBZZ25+TplI2yMbY9COndlyc5ZaKeDqeiidIie+LT8TH4jMC
-t568+F74JrCmA/X+kxMwOjrgbSxMJcgz4p06cVZF9Ap0m9DNXX4G3w6iSat21jbKFVfZr6qvKQl8yrgy
-XdVHhxXNNBXP5Sg2d7i9woujJL6DIo7oQd77vkV23Qxt7ltEh//CO+tWaFuoE33tEPW/GtqG8E585jOi
-iwf1ur3i56NI5AaRUzqw3/sd6Uvi3XS30XiA91XPJ0Q7Hzca/643GjtfIv8W0WXzP1kAcXgKZW5kc3Ry
-ZWFtCmVuZG9iago5IDAgb2JqCjEwNDcKZW5kb2JqCjcgMCBvYmoKWyAvSUNDQmFzZWQgOCAwIFIgXQpl
-bmRvYmoKMyAwIG9iago8PCAvVHlwZSAvUGFnZXMgL01lZGlhQm94IFswIDAgMzAgMzBdIC9Db3VudCAx
-IC9LaWRzIFsgMiAwIFIgXSA+PgplbmRvYmoKMTAgMCBvYmoKPDwgL1R5cGUgL0NhdGFsb2cgL1BhZ2Vz
-IDMgMCBSID4+CmVuZG9iagoxMSAwIG9iagooTmV3IEltYWdlKQplbmRvYmoKMTIgMCBvYmoKKE1hYyBP
-UyBYIDEwLjEwIFF1YXJ0eiBQREZDb250ZXh0KQplbmRvYmoKMTMgMCBvYmoKKEFsZXggUmFmdGlzKQpl
-bmRvYmoKMTQgMCBvYmoKKE9wYWNpdHkpCmVuZG9iagoxNSAwIG9iagooRDoyMDE0MDczMTIzMjg1MVow
-MCcwMCcpCmVuZG9iagoxIDAgb2JqCjw8IC9UaXRsZSAxMSAwIFIgL0F1dGhvciAxMyAwIFIgL1Byb2R1
-Y2VyIDEyIDAgUiAvQ3JlYXRvciAxNCAwIFIgL0NyZWF0aW9uRGF0ZQoxNSAwIFIgL01vZERhdGUgMTUg
-MCBSID4+CmVuZG9iagp4cmVmCjAgMTYKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAxODY4IDAwMDAw
-IG4gCjAwMDAwMDAyMDkgMDAwMDAgbiAKMDAwMDAwMTU2MCAwMDAwMCBuIAowMDAwMDAwMDIyIDAwMDAw
-IG4gCjAwMDAwMDAxOTEgMDAwMDAgbiAKMDAwMDAwMDI4OSAwMDAwMCBuIAowMDAwMDAxNTI1IDAwMDAw
-IG4gCjAwMDAwMDAzNTcgMDAwMDAgbiAKMDAwMDAwMTUwNSAwMDAwMCBuIAowMDAwMDAxNjQxIDAwMDAw
-IG4gCjAwMDAwMDE2OTEgMDAwMDAgbiAKMDAwMDAwMTcxOSAwMDAwMCBuIAowMDAwMDAxNzcwIDAwMDAw
-IG4gCjAwMDAwMDE4MDAgMDAwMDAgbiAKMDAwMDAwMTgyNiAwMDAwMCBuIAp0cmFpbGVyCjw8IC9TaXpl
-IDE2IC9Sb290IDEwIDAgUiAvSW5mbyAxIDAgUiAvSUQgWyA8YzcxOTIwYzU5MWIwMmVlMjk3YWU4M2Zj
-YjE0NmQ1NTE+CjxjNzE5MjBjNTkxYjAyZWUyOTdhZTgzZmNiMTQ2ZDU1MT4gXSA+PgpzdGFydHhyZWYK
-MTk4OAolJUVPRgqAC9IvMDo7XU5TTXV0YWJsZURhdGGjOjw0Vk5TRGF0YdIvMD4/XU5TUERGSW1hZ2VS
-ZXCjQEE0XU5TUERGSW1hZ2VSZXBaTlNJbWFnZVJlcNIvMENEV05TQXJyYXmiQzTSLzBGR15OU011dGFi
-bGVBcnJheaNGQzTTSSIJSktMV05TV2hpdGVEMCAwABADgBDSLzBOT1dOU0NvbG9yok400i8wUVJXTlNJ
-bWFnZaJRNF8QD05TS2V5ZWRBcmNoaXZlctFVVlRyb290gAEACAARABoAIwAtADIANwBMAFIAWwBiAG8A
-dgB+AIAAhQCHAIkAjgCZAJsAnQCfAKQApwCpAKsArQCvAL4AxQDPAOIA/gEQAR0BHwEhASMBJQEnATAB
-TAFRAVYBWAFaAV8BagFzAYABgwGQAZkBngGmC0sLTQtSC2ALZAtrC3ALfguCC5ALmwugC6gLqwuwC78L
-wwvKC9IL1wvZC9sL4AvoC+sL8Av4C/sMDQwQDBUAAAAAAAACAQAAAAAAAABXAAAAAAAAAAAAAAAAAAAM
-Fw
-</mutableData>
-        </image>
+        <image name="first" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Ytw-Q3-8E3"/>
